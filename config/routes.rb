@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
-  root to: 'pages#home'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  root to: 'itineraries#home'
+  resources :itineraries do
+    resources :activities, only: :create
+  end
+
+  resources :activities, except: [:create, :new, :edit, :show] do
+  collection do
+    get :featured
+  end
+  end
+
+  resources :friends, except: [:new, :edit, :update]
+
 end
+
+
