@@ -5,7 +5,7 @@ class CreateActivities < ActiveRecord::Migration[6.0]
       t.datetime :end_time
       t.string :name
       t.text :description
-      t.references :activityable, polymorphic: true, null: false, index: true
+      t.references :activityable, polymorphic: true, null:false, index: true
       t.references :itinerary, null: false, foreign_key: true
 
       t.timestamps
