@@ -1,8 +1,4 @@
 Rails.application.routes.draw do
-
-  get 'activities/create'
-  get 'activities/update'
-  root to: 'itineraries#home'
   resources :itineraries do
     resources :activities, only: :create
   end
