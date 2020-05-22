@@ -18,7 +18,7 @@ class ItinerariesController < ApplicationController
 
    def new
     @itinerary = Itinerary.new()
-    authorize @itinerary
+    #authorize @itinerary
   end
 
   def create
@@ -32,13 +32,10 @@ class ItinerariesController < ApplicationController
     end
   end
 
-  def edit
-    @itinerary = Itinerary.find(params[:id])
-    authorize @meal
-  end
+
 
   def update
-    authorize @itinerary
+    #authorize @itinerary
     if @itinerary.update(itinerary_params)
       redirect_to itinerary_path(@itinerary)
     else
