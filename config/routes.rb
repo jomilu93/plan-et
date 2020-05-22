@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-
-  root to: 'itineraries#home'
   resources :itineraries do
     resources :activities, only: :create
   end

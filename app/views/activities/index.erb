@@ -1,0 +1,11 @@
+<div class="d-flex flex-row justify-content-around ">
+  <div class="card-container">
+    <% @activities.each do |activity| %>
+   <div>
+    <div class="card-text">
+     <h4><%= activity.name %></h4>
+      <p><%= activity.description %></p>
+    </div>
+  </div>
+  <% end %>
+</div>
