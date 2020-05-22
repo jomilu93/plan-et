@@ -3,8 +3,8 @@
     <% @activities.each do |activity| %>
    <div>
     <div class="card-text">
-     <h4><%= link_to activity.name, activity_path(activity), class: "adress-link" %></h4>
-      <p><%= activity.name %></p>
+     <h4><%= activity.name %></h4>
+      <p><%= activity.description %></p>
     </div>
   </div>
   <% end %>
