@@ -34,6 +34,7 @@ User.create(
 
 Itinerary.create(
       trip_name: "Magical Mazatlán Weekend at David's Estate",
+      country: "Mexico",
       start_date: '05/05/2020',
       end_date: '10/05/2020',
       id: 1,
@@ -42,6 +43,7 @@ Itinerary.create(
 
 Itinerary.create(
       trip_name: "Parisian Paradise with Lou Malta",
+      country: "Paris",
       start_date: '10/06/2020',
       end_date: '11/06/2020',
       id: 2,
@@ -50,12 +52,12 @@ Itinerary.create(
 
 Itinerary.create(
       trip_name: "Tepito Travesuras with Luis and Jose",
+      country: "Tepito",
       start_date: '15/07/2020',
       end_date: '15/07/2020',
       id: 3,
       user_id: 3
       )
-
 
 Restaurant.create(
       id: 1,
@@ -135,7 +137,7 @@ Activity.create(
       end_time: '09/05/2020 18:00:00',
       activityable_type: 'Other',
       activityable_id: 2,
-      itinerary_id: 2
+      itinerary_id: 1
       )
 
 Activity.create(

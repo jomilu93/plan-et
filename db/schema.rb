@@ -62,6 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_053125) do
 
   create_table "itineraries", force: :cascade do |t|
     t.string "trip_name"
+    t.string "country"
     t.date "start_date"
     t.date "end_date"
     t.bigint "user_id", null: false
