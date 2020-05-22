@@ -2,7 +2,7 @@ class Itinerary < ApplicationRecord
   belongs_to :user
   has_many :activities
 
-  validates :trip_name, :start_date, :end_date, presence: true
+  validates :trip_name, :start_date, :end_date, :country, presence: true
   validate :end_date_after_start_date
 
   private
