@@ -1,0 +1,11 @@
+<div class="d-flex flex-row justify-content-around ">
+  <div class="card-container">
+    <% @activities.each do |activity| %>
+   <div>
+    <div class="card-text">
+     <h4><%= link_to activity.name, activity_path(activity), class: "adress-link" %></h4>
+      <p><%= activity.name %></p>
+    </div>
+  </div>
+  <% end %>
+</div>

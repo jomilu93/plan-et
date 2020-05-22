@@ -1,5 +1,10 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:update, :destroy]
+
+  def index
+    @activities = Activity.all
+  end
+
   def create
     @activity = Activity.new(activity_params)
     @itinerary = Itinerary.find(params[:itinerary_id])
