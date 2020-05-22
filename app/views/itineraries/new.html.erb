@@ -1,3 +1,5 @@
+<h1>Make Changes to your Itinerary for <%= @itinerary.name %></h1>
+
 <% if policy(Itinerary).create? %>
-  <%= render 'itinerariess/partials/create_edit_form' %>
+  <%= render 'itineraries/partials/create_edit_form' %>
 <% end %>
