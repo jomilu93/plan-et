@@ -1,6 +1,5 @@
 class Transit < ApplicationRecord
-  belongs_to :activity, as: :activityable
+  has_many :activities, :as => :activityable
 
   validates :transportation_type, :origin, :destination, presence: true
-
 end

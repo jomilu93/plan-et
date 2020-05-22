@@ -4,7 +4,7 @@ class CreateTransits < ActiveRecord::Migration[6.0]
       t.string :transportation_type
       t.string :origin
       t.string :destination
-      t.references :activity, null: false, foreign_key: true
+      t.references :activity, foreign_key: true
 
       t.timestamps
     end
