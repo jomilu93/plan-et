@@ -39,7 +39,7 @@ class ItinerariesController < ApplicationController
     if @itinerary.update(itinerary_params)
       redirect_to itinerary_path(@itinerary)
     else
-      render :edit
+      render :new
     end
   end
 
