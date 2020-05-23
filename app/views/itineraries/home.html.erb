@@ -1,0 +1,14 @@
+<h1>Welcome to Plan-Et</h1>
+
+<br>
+
+<h2>Here are the trips we offer:</h2>
+
+<br>
+
+
+<ol>
+  <% @itineraries.each do |itinerary| %>
+  <li><%=itinerary.trip_name%></li>
+  <% end %>
+</ol>
