@@ -4,4 +4,7 @@ class Restaurant < ApplicationRecord
   has_many :meals
 
   has_one_attached :photo
+
+  validates :name, :address, :phone_number, :rating, :avg_price, :business_hours, :cuisine, :photo, presence: true
+
 end

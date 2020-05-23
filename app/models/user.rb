@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :trips, dependent: :destroy
   belongs_to :city
 
-  validates :name, :city_id, presence: true
+  validates :name, presence: true
 
   has_one_attached :photo
 

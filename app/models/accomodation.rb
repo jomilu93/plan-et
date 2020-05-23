@@ -3,4 +3,7 @@ class Accomodation < ApplicationRecord
   belongs_to :hotel
 
   has_one :activity, as: :activityable
+
+  validates :name, :address, presence: true
+
 end

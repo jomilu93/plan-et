@@ -10,4 +10,7 @@ class City < ApplicationRecord
   has_many :others
   has_many :attractions
   has_many :restaurants
+
+  validates :name, presence: true
+
 end
