@@ -4,6 +4,10 @@ class ItinerariesController < ApplicationController
     #@itineraries = policy_scope(current_user.itineraries.all)
     @itineraries = Itinerary.all
   end
+    
+  def home
+    @itineraries = Itinerary.all
+  end
 
   def show
     @itinerary = Itinerary.find(params[:id])
