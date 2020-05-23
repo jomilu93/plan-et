@@ -1,6 +1,6 @@
 class Transportation < ApplicationRecord
-  belongs_to :city
-  #belongs_to :city
+  belongs_to :origin_city, class_name:"city"
+  belongs_to :destination_city, class_name: "city"
 
   has_one :activity, as: :activityable
 end

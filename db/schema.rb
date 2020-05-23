@@ -10,9 +10,164 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2020_05_23_224014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "accomodations", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.bigint "city_id", null: false
+    t.bigint "hotel_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_accomodations_on_city_id"
+    t.index ["hotel_id"], name: "index_accomodations_on_hotel_id"
+  end
+
+  create_table "activities", force: :cascade do |t|
+    t.date "start_time"
+    t.date "end_time"
+    t.bigint "part_id", null: false
+    t.string "activityable_type", null: false
+    t.bigint "activityable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["activityable_type", "activityable_id"], name: "index_activities_on_activityable_type_and_activityable_id"
+    t.index ["part_id"], name: "index_activities_on_part_id"
+  end
+
+  create_table "attractions", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "type"
+    t.bigint "city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_attractions_on_city_id"
+  end
+
+  create_table "cities", force: :cascade do |t|
+    t.string "name"
+    t.bigint "pais_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["pais_id"], name: "index_cities_on_pais_id"
+  end
+
+  create_table "hotels", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.string "phone_number"
+    t.integer "rating"
+    t.bigint "city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_hotels_on_city_id"
+  end
+
+  create_table "meals", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.bigint "city_id", null: false
+    t.bigint "restaurant_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_meals_on_city_id"
+    t.index ["restaurant_id"], name: "index_meals_on_restaurant_id"
+  end
+
+  create_table "others", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.bigint "city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_others_on_city_id"
+  end
+
+  create_table "pais", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "parts", force: :cascade do |t|
+    t.string "name"
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "city_id", null: false
+    t.bigint "trip_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_parts_on_city_id"
+    t.index ["trip_id"], name: "index_parts_on_trip_id"
+  end
+
+  create_table "restaurants", force: :cascade do |t|
+    t.string "name"
+    t.string "cuisine"
+    t.integer "rating"
+    t.integer "avg_price"
+    t.string "business_hours"
+    t.string "address"
+    t.string "phone_number"
+    t.bigint "city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_restaurants_on_city_id"
+  end
+
+  create_table "transportations", force: :cascade do |t|
+    t.string "type"
+    t.bigint "origin_city_id", null: false
+    t.bigint "destination_city_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["destination_city_id"], name: "index_transportations_on_destination_city_id"
+    t.index ["origin_city_id"], name: "index_transportations_on_origin_city_id"
+  end
+
+  create_table "trips", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.date "start_date"
+    t.date "end_date"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_trips_on_user_id"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.string "name"
+    t.bigint "city_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["city_id"], name: "index_users_on_city_id"
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "accomodations", "cities"
+  add_foreign_key "accomodations", "hotels"
+  add_foreign_key "activities", "parts"
+  add_foreign_key "attractions", "cities"
+  add_foreign_key "cities", "pais", column: "pais_id"
+  add_foreign_key "hotels", "cities"
+  add_foreign_key "meals", "cities"
+  add_foreign_key "meals", "restaurants"
+  add_foreign_key "others", "cities"
+  add_foreign_key "parts", "cities"
+  add_foreign_key "parts", "trips"
+  add_foreign_key "restaurants", "cities"
+  add_foreign_key "transportations", "cities", column: "destination_city_id"
+  add_foreign_key "transportations", "cities", column: "origin_city_id"
+  add_foreign_key "trips", "users"
 end
