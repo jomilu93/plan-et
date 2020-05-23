@@ -1,0 +1,38 @@
+<h1>Welcome to Plan-Et</h1>
+
+<br>
+
+<div class="hero-image">
+
+    <div class="hero-text">
+      <h1>Start searching for your next adventure</h1>
+
+    <div class="card-container-search">
+      <div class="align-items-center">
+        <%= form_tag root_path, method: :get do %>
+        <%= text_field_tag :search, params[:search], placeholder: "Search for itineraries, trip inspirations or whatever else you like!", class:"form-control" %>
+      </div>
+      <div>
+        <%= submit_tag "Search", class: "search-button"%>
+      </div>
+      <% end %>
+       </div>
+  </div>
+
+</div>
+
+<div class="d-flex flex-row justify-content-around ">
+
+  <div class="card-container">
+    <% @itineraries.each do |itinerary| %>
+    <div class="card" id="itineraries">
+     <div>
+      <div class="card-text">
+       <h4><%= link_to itinerary.trip_name, itinerary_path(itinerary), class: "adress-link" %></h4>
+        <p><%= itinerary.country %></p>
+      </div>
+    </div>
+  </div>
+  <% end %>
+
+</div>

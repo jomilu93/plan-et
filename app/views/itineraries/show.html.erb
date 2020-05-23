@@ -1,1 +1,22 @@
-show.html.erb
+<h1> <%= @itinerary.trip_name %> </h1>
+<h3> <%= @itinerary_days %> days in <%= @itinerary.country %> </h3>
+
+<% @itinerary_dates.each do |date| %>
+
+<p> <%= date %> </p>
+
+  <% @activities.each do |activity| %>
+
+  <% if activity.start_time.day == date.day %>
+    <ul>
+      <li> <%= activity.start_time %> to <%= activity.end_time %> </li>
+      <li> <%= activity.name %> </li>
+      <li> <%= activity.description %> </li>
+    </ul>
+  <% else "" %>
+  <% end %>
+
+  <% end %>
+
+<% end %>
+

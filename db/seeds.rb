@@ -166,8 +166,8 @@ Activity.create(
       id: 6,
       name: "Wine and bread on the river with Lou's possy.",
       description: "If you though David was famous...",
-      start_time: '10/07/2020 20:00:00',
-      end_time: '10/07/2020 23:00:00',
+      start_time: '11/06/2020 20:00:00',
+      end_time: '11/06/2020 23:00:00',
       activityable_type: 'Other',
       activityable_id: 3,
       itinerary_id: 2
