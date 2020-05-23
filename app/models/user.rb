@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   has_many :trips, dependent: :destroy
   belongs_to :city
+
+  validates :name, :city_id, presence: true
+
 end
