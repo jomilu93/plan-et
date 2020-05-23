@@ -166,8 +166,8 @@ Activity.create(
       id: 6,
       name: "Wine and bread on the river with Lou's possy.",
       description: "If you though David was famous...",
-      start_time: '10/07/2020 20:00:00',
-      end_time: '10/07/2020 23:00:00',
+      start_time: '11/06/2020 20:00:00',
+      end_time: '11/06/2020 23:00:00',
       activityable_type: 'Other',
       activityable_id: 3,
       itinerary_id: 2
@@ -194,3 +194,12 @@ Activity.create(
       activityable_id: 4,
       itinerary_id: 3
       )
+
+
+
+#BODY_BLOCK_JQUERY_REFLOW > div.page > div > div.ui_container.main_wrap > div > div > div > div > div.content_column.ui_column.is-9-desktop.is-12-tablet.is-12-mobile > div > div.ui_columns.sections_wrapper > div > div:nth-child(5) > div > div.main_content.ui_column.is-12 > div > div:nth-child(2) > div > div > div:nth-child(6) > div > div > div > div.ui_column.is-9-desktop.is-8-mobile.is-9-tablet.content-block-column > div.location-meta-block > div.result-title
+
+
+
+
+
