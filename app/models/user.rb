@@ -9,4 +9,6 @@ class User < ApplicationRecord
 
   validates :name, :city_id, presence: true
 
+  has_one_attached :photo
+
 end

@@ -13,6 +13,8 @@ gem 'dotenv-rails', groups: [:development, :test]
 gem 'puma', '~> 4.1'
 # generate authenticatable user
 gem 'devise'
+#photo_cloud_storage
+gem 'cloudinary', '~> 1.12.0'
 # Use SCSS for stylesheets
 gem 'sass-rails', '>= 6'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
