@@ -1,6 +1,10 @@
 class Hotel < ApplicationRecord
-  belongs_to :activity, as: :activityable
+  belongs_to :city
 
-  validates :name, :address, :rating, :price, :phone_number, presence: true
+  has_many :meals
+
+  has_one_attached :photo
+
+  validates :name, :address, :phone_number, :rating, presence: true
 
 end

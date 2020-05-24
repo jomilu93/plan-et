@@ -2,12 +2,13 @@ class CreateRestaurants < ActiveRecord::Migration[6.0]
   def change
     create_table :restaurants do |t|
       t.string :name
-      t.string :address
       t.string :cuisine
       t.integer :rating
-      t.integer :price
+      t.integer :avg_price
+      t.string :business_hours
+      t.string :address
       t.string :phone_number
-      t.references :activity, foreign_key: true
+      t.references :city, null: false, foreign_key: true
 
       t.timestamps
     end

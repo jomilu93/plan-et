@@ -1,8 +1,8 @@
-class CreateItineraries < ActiveRecord::Migration[6.0]
+class CreateTrips < ActiveRecord::Migration[6.0]
   def change
-    create_table :itineraries do |t|
-      t.string :trip_name
-      t.string :country
+    create_table :trips do |t|
+      t.string :name
+      t.text :description
       t.date :start_date
       t.date :end_date
       t.references :user, null: false, foreign_key: true
