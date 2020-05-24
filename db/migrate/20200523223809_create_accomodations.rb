@@ -4,7 +4,7 @@ class CreateAccomodations < ActiveRecord::Migration[6.0]
       t.string :name
       t.string :address
       t.references :city, null: false, foreign_key: true
-      t.references :hotel, null: false, foreign_key: true
+      t.references :hotel, foreign_key: true
 
       t.timestamps
     end

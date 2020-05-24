@@ -12,6 +12,9 @@
   </head>
 
   <body>
+    <div class= "container">
+    <%= yield %>
+    </div>
 
     <% if notice %>
       <div class="alert alert-info alert-dismissible" role="alert">
@@ -26,6 +29,5 @@
       </div>
     <% end %>
 
-    <%= yield %>
   </body>
 </html>

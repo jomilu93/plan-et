@@ -5,6 +5,6 @@ class Hotel < ApplicationRecord
 
   has_one_attached :photo
 
-  validates :name, :address, :phone_number, :rating, :photo, presence: true
+  validates :name, :address, :phone_number, :rating, presence: true
 
 end

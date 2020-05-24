@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_230816) do
     t.string "name"
     t.string "address"
     t.bigint "city_id", null: false
-    t.bigint "hotel_id", null: false
+    t.bigint "hotel_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["city_id"], name: "index_accomodations_on_city_id"
@@ -48,8 +48,8 @@ ActiveRecord::Schema.define(version: 2020_05_23_230816) do
   end
 
   create_table "activities", force: :cascade do |t|
-    t.date "start_time"
-    t.date "end_time"
+    t.datetime "start_time"
+    t.datetime "end_time"
     t.bigint "part_id", null: false
     t.string "activityable_type", null: false
     t.bigint "activityable_id", null: false
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_230816) do
   create_table "attractions", force: :cascade do |t|
     t.string "name"
     t.string "address"
-    t.string "type"
+    t.string "attraction_type"
     t.bigint "city_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -92,7 +92,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_230816) do
     t.string "name"
     t.string "address"
     t.bigint "city_id", null: false
-    t.bigint "restaurant_id", null: false
+    t.bigint "restaurant_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["city_id"], name: "index_meals_on_city_id"
@@ -141,7 +141,7 @@ ActiveRecord::Schema.define(version: 2020_05_23_230816) do
   end
 
   create_table "transportations", force: :cascade do |t|
-    t.string "type"
+    t.string "transportation_type"
     t.bigint "origin_city_id", null: false
     t.bigint "destination_city_id", null: false
     t.datetime "created_at", precision: 6, null: false

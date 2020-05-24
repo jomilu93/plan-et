@@ -4,6 +4,6 @@ class Transportation < ApplicationRecord
 
   has_one :activity, as: :activityable
 
-  validates :type, presence: true
+  validates :transportation_type, presence: true
 
 end
