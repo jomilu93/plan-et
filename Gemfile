@@ -38,8 +38,9 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'country_select'
-gem 'countries'
+#gem 'countries'
 gem 'countries', require: 'countries/global'
+gem 'date_wrapper'
 
 group :development, :test do
   gem 'pry-byebug'

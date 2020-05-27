@@ -1,19 +1,19 @@
-class ItinerariesController < ApplicationController
+class TripsController < ApplicationController
 
     def index
     #@itineraries = policy_scope(current_user.itineraries.all)
-    @itineraries = Itinerary.all
+    @trips = Trip.all
   end
-    
+
   def home
-    @itineraries = Itinerary.all
+    @trips = Trip.all
   end
 
   def show
-    @itinerary = Itinerary.find(params[:id])
+    @trip = Trip.find(params[:id])
     #authorize @itinerary
-    @itinerary_owner = @itinerary.user
-    @itinerary_activities = @itinerary.activities
+    @trip_owner = @trip.user
+    @trip_activities = @trip.activities
     # if user_itineraries.empty? or user_itineraries.last.date < Date.today
     #   @itinerary= Itinerary.new
     # else
@@ -23,19 +23,19 @@ class ItinerariesController < ApplicationController
 
 
    def new
-    @itinerary = Itinerary.new()
+    @trip = Trip.new()
     #authorize @itinerary
   end
 
   def create
-    @itinerary = Itinerary.new(itinerary_params)
-    @itinerary.user = current_user
+    @trip = Trip.new(trip_params)
+    @trip.user = current_user
     #authorize @itinerary
-  #   if @itinerary.save
-  #     redirect_to itinerary_path(@itinerary)
-  #   else
-  #     render :new
-  #   end
+     if @trip.save
+       redirect_to trip_path(@trip)
+     else
+       render :new
+     end
    end
 
 
@@ -49,14 +49,14 @@ class ItinerariesController < ApplicationController
   #   end
   # end
 
-  def itinerary_params
-    params[:itinerary].parse_date_select! :start_date
-    params[:itinerary].parse_date_select! :end_date
-    params.require(:itinerary).permit(:trip_name,
-                                      :country,
+  def trip_params
+    #params[:trip].parse_date_select! :start_date
+    #params[:trip].parse_date_select! :end_date
+    params.require(:trip).permit(:name,
+
                                       :start_date,
                                       :end_date,
-                                      #photos: []
+                                      photos: []
                                      )
   end
 
