@@ -18,26 +18,22 @@ class TripsController < ApplicationController
     #   @trip= trip.new
     # else
     #   @trip = @trip.where(user: current_user).first
-    # end
   end
 
 
-   def new
-    @trip = Trip.new()
-    #authorize @trip
+  def new
   end
 
   def create
     @trip = Trip.new(trip_params)
     @trip.user = current_user
-    #authorize @trip
-  #   if @trip.save
-  #     redirect_to trip_path(@trip)
-  #   else
-  #     render :new
-  #   end
+    #authorize @itinerary
+     if @trip.save
+       redirect_to trip_path(@trip)
+     else
+       render :new
+     end
    end
-
 
 
   # def update

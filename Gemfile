@@ -10,7 +10,7 @@ gem 'pg', '>= 0.18', '< 2.0'
 #private_key_storage
 gem 'dotenv-rails', groups: [:development, :test]
 # Use Puma as the app server
-gem 'puma', '~> 4.1'
+gem 'puma', '~> 4.3'
 # generate authenticatable user
 gem 'devise'
 #photo_cloud_storage
@@ -38,8 +38,9 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'country_select'
-gem 'countries'
+#gem 'countries'
 gem 'countries', require: 'countries/global'
+gem 'date_wrapper'
 
 group :development, :test do
   gem 'pry-byebug'
