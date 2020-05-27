@@ -1,7 +1,7 @@
 
   <div class="hero-image">
     <div class="hero-text">
-      <h1>You've dreamt it, now Plan-et</h1>
+      <h1>You've dreamt it, now Plan-et!</h1>
       <div class="card-container-search">
         <div class="align-items-center">
           <%= form_tag root_path, method: :get do %>
@@ -18,10 +18,10 @@
 
   <div class="trip-card-container">
     <% @trips.each do |trip| %>
-    <div class="card border-light bg-dark color-white ml-3 mr-3 mb-3">
+    <div class="card m-3">
       <%= cl_image_tag trip.photos.first.key, height: 200, width: 300, crop: :fill, class: "trip-img"%>
-      <div class="card-img-overlay d-flex align-items-end">
-        <h5 class="card-title text-white"><%= link_to "#{trip.name}", trip_path(trip), class: "text-white"%></h5>
+      <div class="card-img-overlay d-flex flex-wrap justify-content-center">
+        <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "text-white"%></h5>
       </div>
     </div>
     <%end%>

@@ -96,10 +96,55 @@ Trip.create!(
       user_id: 3
       )
 
+Trip.create!(
+      id: 4,
+      name: "Xochimilco Shenanigans",
+      start_date: '19/07/2020',
+      end_date: '19/07/2020',
+      user_id: 1
+      )
+
+Trip.create!(
+      id: 5,
+      name: "Adventures in the Amazon",
+      start_date: '01/08/2020',
+      end_date: '10/08/2020',
+      user_id: 2
+      )
+
+Trip.create!(
+      id: 6,
+      name: "Veracruz Vacations with Nacho",
+      start_date: '12/10/2020',
+      end_date: '15/10/2020',
+      user_id: 3
+      )
+
+Trip.create!(
+      id: 7,
+      name: "Thanksgiving Turkey...in Turkey!",
+      start_date: '20/11/2020',
+      end_date: '30/11/2020',
+      user_id: 1
+      )
+
+Trip.create!(
+      id: 8,
+      name: "Kickass Kenyan Kwanza",
+      start_date: '24/12/2020',
+      end_date: '31/12/2020',
+      user_id: 2
+      )
+
 trip_photo = [
   "https://rinconesdemexico.com/wp-content/uploads/shutterstock_1073392151-1.jpg",
   "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/newsletter/eiffel-tower-in-paris-151-medium.jpg?1564742900",
-  "https://149361004.v2.pressablecdn.com/wp-content/uploads/2018/10/TepitoGaleria3.jpg"
+  "https://149361004.v2.pressablecdn.com/wp-content/uploads/2018/10/TepitoGaleria3.jpg",
+  "https://learnspanishinmexicocity.com/wp-content/uploads/2018/08/Xochimilco-1100-x-621.jpg",
+  "https://s.france24.com/media/display/cbb598a4-f2e6-11e8-bb99-005056a964fe/w:1240/p:16x9/amazonia_brasilea.webp",
+  "https://www.viajejet.com/wp-content/viajes/el-baile-de-los-viejitos-una-danza-mexicana-de-la-epoca-prehispanica.jpg",
+  "https://www.worldatlas.com/r/w1200-h701-c1200x701/upload/2e/37/8a/shutterstock-291252509.jpg",
+  "https://www.andbeyond.com/wp-content/uploads/sites/5/guest-area-with-golden-sunrise-at-andbeyond-bateleur-camp-on-a-luxury-kenya-safari-1920x1080.jpg"
 ]
 
 Trip.all.each do |trip|

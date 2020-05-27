@@ -35,15 +35,27 @@ body, html {
 }
 
 .trip-card{
+  margin: 10px 10px 10px;
+  color: white;
+  background-color: dark;
+}
 
+.card:hover .trip-card-text{
+  display:block;
 }
 
 .trip-img{
-  opacity:0.8;
+  opacity:1;
 }
 
-.trip-img:hover{
-  opacity:0.5;
+.card:hover .trip-img{
+  filter: brightness(50%);;
+}
+
+.trip-card-text {
+  display:none;
+  text-align: center;
+  text-align: middle;
 }
 
 
