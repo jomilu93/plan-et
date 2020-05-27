@@ -59,17 +59,16 @@ User.create!(
       city_id: 2
       )
 
-user_photos = [
-  "https://ca.slack-edge.com/T02NE0241-USJN29P37-b5e12ae43732-512",
-  "https://ca.slack-edge.com/T02NE0241-USLQMFXQW-d75b7fa57d68-512",
-  "https://ca.slack-edge.com/T02NE0241-USJ56UJRJ-168b78fa1838-512"
+user_photo = [
+  "https://yt3.ggpht.com/a/AGF-l7-P-saR-nR4ly5s5KL_VIQL3lhb5FHJ8A2Kug=s900-c-k-c0xffffffff-no-rj-mo",
+  "https://format-com-cld-res.cloudinary.com/image/private/s--pqOVfyT1--/c_crop,h_950,w_713,x_0,y_0/c_fill,g_center,h_506,w_380/fl_keep_iptc.progressive,q_95/v1/181a169d94261ee7ef97a047ede4ebc5/2653SBF7_010_2.jpg",
+  "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/06/15/14975546611983.jpg"
 ]
 
-User.first.photos.attach(io: user_photos[0], filename: 'david.png', content_type: 'image/png')
-
-User.second.photos.attach(io: user_photos[1], filename: 'luis.png', content_type: 'image/png')
-
-User.third.photos.attach(io: user_photos[2], filename: 'lou.png', content_type: 'image/png')
+User.all.each do |user|
+  file = URI.open(user_photo[user.id - 1])
+  user.photo.attach(io: file, filename: 'user.png', content_type: 'image/png')
+end
 
 puts "Creating trips..."
 
@@ -97,17 +96,16 @@ Trip.create!(
       user_id: 3
       )
 
-trip_photos = [
+trip_photo = [
   "https://rinconesdemexico.com/wp-content/uploads/shutterstock_1073392151-1.jpg",
   "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/newsletter/eiffel-tower-in-paris-151-medium.jpg?1564742900",
   "https://149361004.v2.pressablecdn.com/wp-content/uploads/2018/10/TepitoGaleria3.jpg"
 ]
 
-Trip.first.photos.attach(io: trip_photos[0], filename: 'mazatlan.jpg', content_type: 'image/jpg')
-
-Trip.second.photos.attach(io: trip_photos[1], filename: 'paris.jpg', content_type: 'image/jpg')
-
-Trip.third.photos.attach(io: trip_photos[2], filename: 'tepito.jpg', content_type: 'image/jpg')
+Trip.all.each do |trip|
+  file = URI.open(trip_photo[trip.id - 1])
+  trip.photos.attach(io: file, filename: 'trip.png', content_type: 'image/png')
+end
 
 puts "Creating restaurants..."
 
@@ -123,11 +121,14 @@ Restaurant.create!(
       city_id: 1
   )
 
-restaurant_photos = [
+restaurant_photo = [
 "https://culinarybackstreets-com.exactdn.com/wp-content/uploads/cb_mc_fonda_margarita_pjr_final.jpg?lossy=1&ssl=1"
 ]
 
-Restaurant.first.photos.attach(io: restaurant_photos[0], filename: 'fonda.jpg', content_type: 'image/jpg')
+Restaurant.all.each do |restaurant|
+  file = URI.open(restaurant_photo[restaurant.id - 1])
+  restaurant.photo.attach(io: file, filename: 'restaurant.png', content_type: 'image/png')
+end
 
 puts "Creating meals..."
 
@@ -147,12 +148,15 @@ Meal.create!(
     city_id: 1
     )
 
-#Transportation.create!(
-#      id: 1,
-#      transportation_type: "Flight",
-#      origin_city_id: 1,
-#      destination_city_id: 2
-#      )
+puts "Creating transportations..."
+
+
+Transportation.create!(
+      id: 1,
+      transportation_type: "Flight",
+      origin_city_id: 1,
+      destination_city_id: 2
+      )
 
 puts "Creating others..."
 
@@ -195,12 +199,14 @@ Attraction.create!(
       city_id: 2
       )
 
-attraction_photos = [
+attraction_photo = [
 "https://i1.wp.com/thehappening.com/wp-content/uploads/2019/11/museo-louvre.jpg?fit=1024%2C694&ssl=1"
 ]
 
-Attraction.first.photos.attach(io: attraction_photos[0], filename: 'louvre.jpg', content_type: 'image/jpg')
-
+Attraction.all.each do |attraction|
+  file = URI.open(attraction_photo[attraction.id - 1])
+  attraction.photo.attach(io: file, filename: 'attraction.png', content_type: 'image/png')
+end
 
 puts "Creating hotels..."
 
@@ -214,12 +220,14 @@ Hotel.create!(
     city_id: 1
     )
 
-hotel_photos = [
+hotel_photo = [
 "https://res.cloudinary.com/wagon/image/upload/v1574889737/zmaoco0qgyhwqf4lngp2.jpg"
 ]
 
-Hotel.first.photos.attach(io: hotel_photos[0], filename: 'lewagon.jpg', content_type: 'image/jpg')
-
+Hotel.all.each do |hotel|
+  file = URI.open(hotel_photo[hotel.id - 1])
+  hotel.photo.attach(io: file, filename: 'hotel.png', content_type: 'image/png')
+end
 
 puts "Creating accomodations..."
 
@@ -297,14 +305,14 @@ Part.create!(
     trip_id: 2,
     city_id: 2)
 
-#Activity.create!(
-#      id: 4,
-#      start_time: '10/06/2020 08:00:00',
-#      end_time: '10/06/2020 15:00:00',
-#      activityable_type: 'Transportation',
-#      activityable_id: 1,
-#      part_id: 3
-#      )
+Activity.create!(
+      id: 4,
+      start_time: '10/06/2020 08:00:00',
+      end_time: '10/06/2020 15:00:00',
+      activityable_type: 'Transportation',
+      activityable_id: 1,
+      part_id: 3
+      )
 
 Activity.create!(
       id: 5,

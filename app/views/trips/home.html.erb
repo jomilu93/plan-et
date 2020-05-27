@@ -10,5 +10,6 @@
 <ol>
   <% @trips.each do |trip| %>
   <li><%=trip.name%></li>
+  <%= cl_image_tag trip.photos.first.key, height: 300, width: 400, crop: :fill %>
   <% end %>
 </ol>
