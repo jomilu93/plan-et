@@ -1,1 +1,74 @@
 // Specific CSS for your home-page
+
+body, html {
+    height: 100%;
+}
+
+.hero-image{
+
+  justify-content: center;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("travel.jpg");
+  height: 70%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text{
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+.trip-card-container{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 8px;
+  margin: 8px;
+}
+
+.trip-card{
+
+}
+
+.trip-card:hover{
+
+}
+
+
+.search-button{
+  border-radius: 2px;
+  background-color: white;
+  padding-top: 6px;
+  padding-bottom: 6px;
+  padding-left: 8px;
+  padding-right: 8px;
+  color: grey;
+  margin-left: 5px;
+}
+
+.card-container-search {
+  bottom: 0px;
+  display: flex;
+  justify-content: center;
+  padding: 5px;
+  margin: 20px;
+  width: 600px;
+}
+
+
+
+.align-items-center{
+  width: 160%;
+}
+
+.adress-link{
+  color: black;
+}
