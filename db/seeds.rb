@@ -6,6 +6,10 @@
 #   movies = Movie.create!([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create!(name: 'Luke', movie: movies.first)
 
+puts "Getting started..."
+
+puts "Adding countries and cities..."
+
 Pais.create!(
   id: 1,
   name: "Mexico")
@@ -29,6 +33,7 @@ City.create!(
   name: "Mazatlan",
   pais_id: 1)
 
+puts "Creating users..."
 
 User.create!(
       id: 1,
@@ -54,6 +59,19 @@ User.create!(
       city_id: 2
       )
 
+user_photos = [
+  "https://ca.slack-edge.com/T02NE0241-USJN29P37-b5e12ae43732-512",
+  "https://ca.slack-edge.com/T02NE0241-USLQMFXQW-d75b7fa57d68-512",
+  "https://ca.slack-edge.com/T02NE0241-USJ56UJRJ-168b78fa1838-512"
+]
+
+User.first.photos.attach(io: user_photos[0], filename: 'david.png', content_type: 'image/png')
+
+User.second.photos.attach(io: user_photos[1], filename: 'luis.png', content_type: 'image/png')
+
+User.third.photos.attach(io: user_photos[2], filename: 'lou.png', content_type: 'image/png')
+
+puts "Creating trips..."
 
 Trip.create!(
       id: 1,
@@ -79,6 +97,20 @@ Trip.create!(
       user_id: 3
       )
 
+trip_photos = [
+  "https://rinconesdemexico.com/wp-content/uploads/shutterstock_1073392151-1.jpg",
+  "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/newsletter/eiffel-tower-in-paris-151-medium.jpg?1564742900",
+  "https://149361004.v2.pressablecdn.com/wp-content/uploads/2018/10/TepitoGaleria3.jpg"
+]
+
+Trip.first.photos.attach(io: trip_photos[0], filename: 'mazatlan.jpg', content_type: 'image/jpg')
+
+Trip.second.photos.attach(io: trip_photos[1], filename: 'paris.jpg', content_type: 'image/jpg')
+
+Trip.third.photos.attach(io: trip_photos[2], filename: 'tepito.jpg', content_type: 'image/jpg')
+
+puts "Creating restaurants..."
+
 Restaurant.create!(
       id: 1,
       name: "La Fonda Golosa",
@@ -90,6 +122,14 @@ Restaurant.create!(
       business_hours: "11:00am to 5:00pm",
       city_id: 1
   )
+
+restaurant_photos = [
+"https://culinarybackstreets-com.exactdn.com/wp-content/uploads/cb_mc_fonda_margarita_pjr_final.jpg?lossy=1&ssl=1"
+]
+
+Restaurant.first.photos.attach(io: restaurant_photos[0], filename: 'fonda.jpg', content_type: 'image/jpg')
+
+puts "Creating meals..."
 
 Meal.create!(
     id: 1,
@@ -113,6 +153,9 @@ Meal.create!(
 #      origin_city_id: 1,
 #      destination_city_id: 2
 #      )
+
+puts "Creating others..."
+
 
 Other.create!(
       id: 1,
@@ -142,6 +185,7 @@ Other.create!(
       city_id: 1
       )
 
+puts "Creating attractions..."
 
 Attraction.create!(
       id: 1,
@@ -150,6 +194,16 @@ Attraction.create!(
       attraction_type: "Museum",
       city_id: 2
       )
+
+attraction_photos = [
+"https://i1.wp.com/thehappening.com/wp-content/uploads/2019/11/museo-louvre.jpg?fit=1024%2C694&ssl=1"
+]
+
+Attraction.first.photos.attach(io: attraction_photos[0], filename: 'louvre.jpg', content_type: 'image/jpg')
+
+
+puts "Creating hotels..."
+
 
 Hotel.create!(
     id: 1,
@@ -160,6 +214,16 @@ Hotel.create!(
     city_id: 1
     )
 
+hotel_photos = [
+"https://res.cloudinary.com/wagon/image/upload/v1574889737/zmaoco0qgyhwqf4lngp2.jpg"
+]
+
+Hotel.first.photos.attach(io: hotel_photos[0], filename: 'lewagon.jpg', content_type: 'image/jpg')
+
+
+puts "Creating accomodations..."
+
+
 Accomodation.create!(
     id: 1,
     name: "Stay at CDMX",
@@ -167,6 +231,9 @@ Accomodation.create!(
     hotel_id: 1,
     city_id: 1
     )
+
+puts "Creating first trip..."
+
 
 Part.create!(
     id: 1,
@@ -211,6 +278,9 @@ Activity.create!(
       part_id: 2
       )
 
+puts "Creating second trip..."
+
+
 Part.create!(
     id: 3,
     start_date: '10/06/2020',
@@ -253,6 +323,9 @@ Activity.create!(
       activityable_id: 3,
       part_id: 4
       )
+
+puts "Creating third trip..."
+
 
 Part.create!(
     id: 5,
