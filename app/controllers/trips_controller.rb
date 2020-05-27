@@ -8,9 +8,12 @@ class TripsController < ApplicationController
 
   def home
 
-    if params[:search].present?
-      sql_query = "name ILIKE :search OR description ILIKE :search"
-      @trips = Trip.where(sql_query, search: "%#{params[:search]}%")
+   if params[:query].present?
+
+    sql_query = "name ILIKE :query OR description ILIKE :query"
+    @trips = Trip.where(sql_query, query: "%#{params[:query]}%")
+
+    #@trips = Trip.search_by_trip("%#{params[:query]}%")
 
     else
       @trips = Trip.all
