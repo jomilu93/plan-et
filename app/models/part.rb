@@ -8,4 +8,12 @@ class Part < ApplicationRecord
 
   validates :name, :start_date, :end_date, presence: true
 
+  def part_dates_array
+    part_days = (self.end_date - self.start_date).to_i
+    part_dates = [self.start_date]
+    until part_dates.length == part_days
+      part_dates << self.start_date += 1
+    end
+    part_dates
+  end
 end

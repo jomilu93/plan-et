@@ -12,11 +12,6 @@ class TripsController < ApplicationController
 
   def show
     @trip_owner = @trip.user
-    @trip_days = (@trip.end_date - @trip.start_date).to_i
-    @trip_dates = [@trip.start_date]
-    until @trip_dates.length == @trip_days
-      @trip_dates << @trip.start_date += 1
-    end
     @parts = @trip.parts
     @part = Part.find(params[:id])
     @activities = @part.activities.all
