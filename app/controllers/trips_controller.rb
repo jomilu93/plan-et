@@ -1,38 +1,38 @@
 class TripsController < ApplicationController
+  before_action :set_trip, only: %i[edit update destroy show]
 
-    def index
-    #@itineraries = policy_scope(current_user.itineraries.all)
-    @itineraries = Itinerary.all
+  def index
+  #@trips = policy_scope(current_user.trips.all)
+  @trips = Trip.all
   end
 
   def home
-    @itineraries = Itinerary.all
+    @trips = Trip.all
   end
 
   def show
-    @itinerary = Itinerary.find(params[:id])
-    #authorize @itinerary
-    @itinerary_owner = @itinerary.user
-    @itinerary_activities = @itinerary.activities
-    # if user_itineraries.empty? or user_itineraries.last.date < Date.today
-    #   @itinerary= Itinerary.new
+    #authorize @trip
+    @trip_owner = @trip.user
+    @trip_activities = @trip.activities
+    # if user_trips.empty? or user_trips.last.date < Date.today
+    #   @trip= trip.new
     # else
-    #   @itinerary = @itinerary.where(user: current_user).first
+    #   @trip = @trip.where(user: current_user).first
     # end
   end
 
 
    def new
-    @itinerary = Itinerary.new()
-    #authorize @itinerary
+    @trip = Trip.new()
+    #authorize @trip
   end
 
   def create
-    @itinerary = Itinerary.new(itinerary_params)
-    @itinerary.user = current_user
-    #authorize @itinerary
-  #   if @itinerary.save
-  #     redirect_to itinerary_path(@itinerary)
+    @trip = Trip.new(trip_params)
+    @trip.user = current_user
+    #authorize @trip
+  #   if @trip.save
+  #     redirect_to trip_path(@trip)
   #   else
   #     render :new
   #   end
@@ -41,19 +41,25 @@ class TripsController < ApplicationController
 
 
   # def update
-  #   #authorize @itinerary
-  #   if @itinerary.update(itinerary_params)
-  #     redirect_to itinerary_path(@itinerary)
+  #   #authorize @trip
+  #   if @trip.update(trip_params)
+  #     redirect_to trip_path(@trip)
   #   else
   #     render :new
   #   end
   # end
 
-  def itinerary_params
-    params[:itinerary].parse_date_select! :start_date
-    params[:itinerary].parse_date_select! :end_date
-    params.require(:itinerary).permit(:trip_name,
-                                      :country,
+  private
+
+  def set_meal
+    @trip = Trip.find(params[:id])
+  end
+
+  def trip_params
+    params[:trip].parse_date_select! :start_date
+    params[:trip].parse_date_select! :end_date
+    params.require(:trip).permit(:name,
+                                      :description,
                                       :start_date,
                                       :end_date,
                                       #photos: []
