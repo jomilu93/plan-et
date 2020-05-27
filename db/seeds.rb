@@ -6,6 +6,10 @@
 #   movies = Movie.create!([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create!(name: 'Luke', movie: movies.first)
 
+puts "Getting started..."
+
+puts "Adding countries and cities..."
+
 Pais.create!(
   id: 1,
   name: "Mexico")
@@ -29,6 +33,7 @@ City.create!(
   name: "Mazatlan",
   pais_id: 1)
 
+puts "Creating users..."
 
 User.create!(
       id: 1,
@@ -54,6 +59,18 @@ User.create!(
       city_id: 2
       )
 
+user_photo = [
+  "https://yt3.ggpht.com/a/AGF-l7-P-saR-nR4ly5s5KL_VIQL3lhb5FHJ8A2Kug=s900-c-k-c0xffffffff-no-rj-mo",
+  "https://format-com-cld-res.cloudinary.com/image/private/s--pqOVfyT1--/c_crop,h_950,w_713,x_0,y_0/c_fill,g_center,h_506,w_380/fl_keep_iptc.progressive,q_95/v1/181a169d94261ee7ef97a047ede4ebc5/2653SBF7_010_2.jpg",
+  "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/06/15/14975546611983.jpg"
+]
+
+User.all.each do |user|
+  file = URI.open(user_photo[user.id - 1])
+  user.photo.attach(io: file, filename: 'user.png', content_type: 'image/png')
+end
+
+puts "Creating trips..."
 
 Trip.create!(
       id: 1,
@@ -79,6 +96,19 @@ Trip.create!(
       user_id: 3
       )
 
+trip_photo = [
+  "https://rinconesdemexico.com/wp-content/uploads/shutterstock_1073392151-1.jpg",
+  "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/newsletter/eiffel-tower-in-paris-151-medium.jpg?1564742900",
+  "https://149361004.v2.pressablecdn.com/wp-content/uploads/2018/10/TepitoGaleria3.jpg"
+]
+
+Trip.all.each do |trip|
+  file = URI.open(trip_photo[trip.id - 1])
+  trip.photos.attach(io: file, filename: 'trip.png', content_type: 'image/png')
+end
+
+puts "Creating restaurants..."
+
 Restaurant.create!(
       id: 1,
       name: "La Fonda Golosa",
@@ -90,6 +120,17 @@ Restaurant.create!(
       business_hours: "11:00am to 5:00pm",
       city_id: 1
   )
+
+restaurant_photo = [
+"https://culinarybackstreets-com.exactdn.com/wp-content/uploads/cb_mc_fonda_margarita_pjr_final.jpg?lossy=1&ssl=1"
+]
+
+Restaurant.all.each do |restaurant|
+  file = URI.open(restaurant_photo[restaurant.id - 1])
+  restaurant.photo.attach(io: file, filename: 'restaurant.png', content_type: 'image/png')
+end
+
+puts "Creating meals..."
 
 Meal.create!(
     id: 1,
@@ -107,12 +148,18 @@ Meal.create!(
     city_id: 1
     )
 
-#Transportation.create!(
-#      id: 1,
-#      transportation_type: "Flight",
-#      origin_city_id: 1,
-#      destination_city_id: 2
-#      )
+puts "Creating transportations..."
+
+
+Transportation.create!(
+      id: 1,
+      transportation_type: "Flight",
+      origin_city_id: 1,
+      destination_city_id: 2
+      )
+
+puts "Creating others..."
+
 
 Other.create!(
       id: 1,
@@ -142,6 +189,7 @@ Other.create!(
       city_id: 1
       )
 
+puts "Creating attractions..."
 
 Attraction.create!(
       id: 1,
@@ -150,6 +198,18 @@ Attraction.create!(
       attraction_type: "Museum",
       city_id: 2
       )
+
+attraction_photo = [
+"https://i1.wp.com/thehappening.com/wp-content/uploads/2019/11/museo-louvre.jpg?fit=1024%2C694&ssl=1"
+]
+
+Attraction.all.each do |attraction|
+  file = URI.open(attraction_photo[attraction.id - 1])
+  attraction.photo.attach(io: file, filename: 'attraction.png', content_type: 'image/png')
+end
+
+puts "Creating hotels..."
+
 
 Hotel.create!(
     id: 1,
@@ -160,6 +220,18 @@ Hotel.create!(
     city_id: 1
     )
 
+hotel_photo = [
+"https://res.cloudinary.com/wagon/image/upload/v1574889737/zmaoco0qgyhwqf4lngp2.jpg"
+]
+
+Hotel.all.each do |hotel|
+  file = URI.open(hotel_photo[hotel.id - 1])
+  hotel.photo.attach(io: file, filename: 'hotel.png', content_type: 'image/png')
+end
+
+puts "Creating accomodations..."
+
+
 Accomodation.create!(
     id: 1,
     name: "Stay at CDMX",
@@ -167,6 +239,9 @@ Accomodation.create!(
     hotel_id: 1,
     city_id: 1
     )
+
+puts "Creating first trip..."
+
 
 Part.create!(
     id: 1,
@@ -211,6 +286,9 @@ Activity.create!(
       part_id: 2
       )
 
+puts "Creating second trip..."
+
+
 Part.create!(
     id: 3,
     start_date: '10/06/2020',
@@ -227,14 +305,14 @@ Part.create!(
     trip_id: 2,
     city_id: 2)
 
-#Activity.create!(
-#      id: 4,
-#      start_time: '10/06/2020 08:00:00',
-#      end_time: '10/06/2020 15:00:00',
-#      activityable_type: 'Transportation',
-#      activityable_id: 1,
-#      part_id: 3
-#      )
+Activity.create!(
+      id: 4,
+      start_time: '10/06/2020 08:00:00',
+      end_time: '10/06/2020 15:00:00',
+      activityable_type: 'Transportation',
+      activityable_id: 1,
+      part_id: 3
+      )
 
 Activity.create!(
       id: 5,
@@ -253,6 +331,9 @@ Activity.create!(
       activityable_id: 3,
       part_id: 4
       )
+
+puts "Creating third trip..."
+
 
 Part.create!(
     id: 5,

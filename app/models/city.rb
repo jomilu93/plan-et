@@ -1,5 +1,6 @@
 class City < ApplicationRecord
   belongs_to :pais
+  #belongs_to :transportations
 
   has_many :parts
   has_many :users

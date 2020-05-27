@@ -3,7 +3,6 @@
       <h1>My Trips</h1>
   </div>
 
-
 <h2 class="text-center m-3">Your Trip</h2>
 
    <div class="d-flex flex-row flex-wrap justify-content-center pb-4">
@@ -15,7 +14,6 @@
         <!-- <div class="card-img-overlay d-flex flex-column justify-content-end"> -->
           <h5 class="card-title text-black m-3"><%= link_to "#{trip.name}", trip_path(trip), class: "text-black font-weight-bold"%></h5>
           <p class="card-title text-center"><%= trip.start_date%> to <%= trip.end_date%> </p>
-
         <!-- </div> -->
       </div>
     <%end%>
@@ -44,7 +42,6 @@
 
 
   <h2 class="text-center m-3">Previous Trips</h2>
-
    <div class="d-flex flex-row flex-wrap justify-content-around pb-4">
     <% @trips.each do |trip| %>
     <%if trip.start_date < Date.today %>
@@ -53,11 +50,8 @@
         <!-- <div class="card-img-overlay d-flex flex-column justify-content-end"> -->
           <h5 class="card-title text-black m-3"><%= link_to "#{trip.name}", trip_path(trip), class: "text-black font-weight-bold"%></h5>
           <p class="card-title text-center"><%= trip.start_date%> to <%= trip.end_date%></p>
-
         <!-- </div> -->
       </div>
     <%end%>
     <%end%>
   </div>
-
-
