@@ -16,13 +16,13 @@
 </div>
 
 
-  <div class="trip-card-container">
-    <% @trips.each do |trip| %>
-    <div class="card m-3">
-      <%= cl_image_tag trip.photos.first.key, height: 200, width: 300, crop: :fill, class: "trip-img"%>
-      <div class="card-img-overlay d-flex flex-wrap justify-content-center">
-        <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "text-white"%></h5>
-      </div>
+<div class="trip-card-container">
+  <% @trips.each do |trip| %>
+  <div class="card d-flex m-3">
+    <%= cl_image_tag trip.photos.first.key, height: 200, width: 300, crop: :fill, class: "trip-img"%>
+    <div class="card-img-overlay">
+      <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "text-white"%></h5>
     </div>
-    <%end%>
   </div>
+  <%end%>
+</div>
