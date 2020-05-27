@@ -36,7 +36,6 @@ City.create!(
 puts "Creating users..."
 
 User.create!(
-      id: 1,
       name: "David Osuna Azcona",
       email: "davidoad@gmail.com",
       password: "Caioloveforever",
@@ -44,7 +43,6 @@ User.create!(
       )
 
 User.create!(
-      id: 2,
       name: "Luis César",
       email: "lucszz@hotmail.com",
       password: "Daniisthebest",
@@ -52,7 +50,6 @@ User.create!(
       )
 
 User.create!(
-      id: 3,
       name: "Lou Malta",
       email: "lou@loumalta.com",
       password: "Iamanenterprise",
