@@ -8,7 +8,7 @@ body, html {
 
   justify-content: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("travel.jpg");
-  height: 70%;
+  height: 65%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -28,7 +28,7 @@ body, html {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   padding: 8px;
   margin: 8px;
@@ -38,8 +38,12 @@ body, html {
 
 }
 
-.trip-card:hover{
+.trip-img{
+  opacity:0.8;
+}
 
+.trip-img:hover{
+  opacity:0.5;
 }
 
 

@@ -7,7 +7,12 @@ class TripsController < ApplicationController
   end
 
   def home
-    @trips = Trip.all
+
+    if params[:search].present?
+      @trips = Trip.where("name ILIKE ?", "%#{params[:search]}%")
+    else
+      @trips = Trip.all
+    end
   end
 
   def show
