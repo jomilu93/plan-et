@@ -1,10 +1,10 @@
-class ItinerariesController < ApplicationController
+class TripsController < ApplicationController
 
     def index
     #@itineraries = policy_scope(current_user.itineraries.all)
     @itineraries = Itinerary.all
   end
-    
+
   def home
     @itineraries = Itinerary.all
   end
