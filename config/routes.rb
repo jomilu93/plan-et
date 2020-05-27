@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
   devise_for :users
-  root to: 'itineraries#home'
-  resources :itineraries do
+  root to: 'trips#home'
+  resources :trips do
     resources :activities, only: :create
   end
 
