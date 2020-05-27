@@ -4,11 +4,11 @@ Rails.application.routes.draw do
 
   root to: 'trips#home'
 
-  resources :trips, only: [:new, :create, :index, :show, :update, :delete]
+  resources :trips, only: [:new, :create, :index, :show, :update, :delete] do
     resources :parts, only: [:create]
   end
 
-  resources :parts [:update, :delete] do
+  resources :parts, only: [:update, :delete] do
     resources :activities, only: [:create]
   end
 
