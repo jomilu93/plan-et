@@ -1,5 +1,6 @@
 class PartsController < ApplicationController
-  before_action :set_activity, only: [:update, :destroy]before_action :set_activity, only: [:update, :destroy]
+  before_action :set_activity, only: [:update, :destroy]
+  
   def index
   end
 
