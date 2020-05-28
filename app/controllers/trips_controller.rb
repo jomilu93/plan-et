@@ -11,15 +11,12 @@ class TripsController < ApplicationController
   end
 
   def show
-    #authorize @trip
     @trip_owner = @trip.user
-    @trip_activities = @trip.activities
-    # if user_trips.empty? or user_trips.last.date < Date.today
-    #   @trip= trip.new
-    # else
-    #   @trip = @trip.where(user: current_user).first
+    @parts = @trip.parts
+    @part = Part.find(params[:id])
+    @activities = @part.activities.all
+    @activity = Activity.new
   end
-
 
   def new
   end
@@ -47,7 +44,7 @@ class TripsController < ApplicationController
 
   private
 
-  def set_meal
+  def set_trip
     @trip = Trip.find(params[:id])
   end
 

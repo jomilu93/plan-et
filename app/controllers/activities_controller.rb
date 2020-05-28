@@ -1,5 +1,5 @@
 class ActivitiesController < ApplicationController
-  before_action :set_activity, only: [:update, :destroy]
+  before_action :set_part, only: [:update, :destroy]
 
   def index
     @activities = Activity.all
@@ -7,10 +7,10 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(activity_params)
-    @itinerary = Itinerary.find(params[:itinerary_id])
-    @activity.itinerary = @itinerary
+    @part = Part.find(params[:part_id])
+    @activity.part = @part
     if @activity.save
-      redirect_to itinerary_path(@activity)
+      redirect_to part_path(@activity)
     else
       render :new
     end
@@ -18,7 +18,7 @@ class ActivitiesController < ApplicationController
 
   def update
     if @activity.save
-      redirect_to itinerary_path(@activity)
+      redirect_to trip_path(@part)
     else
       render :new
     end
@@ -26,7 +26,7 @@ class ActivitiesController < ApplicationController
 
   def destroy
     @activity.destroy
-    redirect_to itinerary_path(@activity)
+    redirect_to trip_path(@part)
   end
 
   private
