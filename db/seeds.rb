@@ -44,8 +44,8 @@ User.create!(
 
 User.create!(
       name: "Luis César",
-      email: "lucszz@hotmail.com",
-      password: "Daniisthebest",
+      email: "luis@gmail.com",
+      password: "contrasena",
       city_id: 1
       )
 
