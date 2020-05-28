@@ -1,0 +1,9 @@
+<div>
+  <%= simple_form_for [@trip, @part] do |f| %>
+    <%= f.input :name, required: true %>
+    <%= f.input :start_date, required: true %>
+    <%= f.input :end_date, required: true %>
+    <%= f.button :submit, class: 'btn btn-success' %>
+  <%end%>
+</div>
+
