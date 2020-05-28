@@ -11,6 +11,8 @@ gem 'pg', '>= 0.18', '< 2.0'
 gem 'dotenv-rails', groups: [:development, :test]
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
+#pg_search
+gem 'pg_search', '~> 2.3.0'
 # generate authenticatable user
 gem 'devise'
 #photo_cloud_storage

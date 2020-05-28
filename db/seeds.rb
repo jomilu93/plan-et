@@ -72,6 +72,7 @@ puts "Creating trips..."
 Trip.create!(
       id: 1,
       name: "Magical Mazatlán Weekend at David's Estate",
+      description: "Imagine if the Queen showed you around England...then multiply it by 10. David is both a Mazatlan local and a travel expert. He will take you to the beach, to a climb a cerro, eat seafood and even go dancing at night.",
       start_date: '05/05/2020',
       end_date: '10/05/2020',
       user_id: 1
@@ -80,6 +81,7 @@ Trip.create!(
 Trip.create!(
       id: 2,
       name: "Parisian Paradise with Lou Malta",
+      description: "There's class and then there is Paris with Lou Malta. She will take you on a tour of the river, she will show you the best and most chic spots to eat, she knows every walking tour there is and...to top it all off, she owns most art galleries in Paris so you are ready for an art treat.",
       start_date: '10/06/2020',
       end_date: '11/06/2020',
       user_id: 2
@@ -88,15 +90,66 @@ Trip.create!(
 Trip.create!(
       id: 3,
       name: "Tepito Travesuras with Luis and Jose",
+      description: "Do you think danger is exciting? Do you believe in la santa muerte? Folklor, street food, traditions, insecurity, this much and more with Luis and Jose in Tepito.",
       start_date: '15/07/2020',
       end_date: '15/07/2020',
       user_id: 3
       )
 
+Trip.create!(
+      id: 4,
+      name: "Xochimilco Shenanigans",
+      description: "Tequila, beer and dirty water -- what can be better than this? Singing, dancing, swimming (at your own risk) and a great chance to spend time with friends.",
+      start_date: '19/07/2020',
+      end_date: '19/07/2020',
+      user_id: 1
+      )
+
+Trip.create!(
+      id: 5,
+      name: "Adventures in the Amazon",
+      description: "Nature, adventure, indigenous tribes...this trip is not for the faint of heart but it will change the way you look at the mundane, concrete jungle you call a home.",
+      start_date: '01/08/2020',
+      end_date: '10/08/2020',
+      user_id: 2
+      )
+
+Trip.create!(
+      id: 6,
+      name: "Veracruz Vacations with Nacho",
+      description: "It is rumored that Nacho's family invented the old man dance...must I say more? Tons of seafood, traditions, culture and history to be found here.",
+      start_date: '12/10/2020',
+      end_date: '15/10/2020',
+      user_id: 3
+      )
+
+Trip.create!(
+      id: 7,
+      name: "Thanksgiving Turkey...in Turkey!",
+      description: "Literally no one celebrates Thanksgiving in Turkey, but you can! Visit mosques and then go have some bacon. Explore the bazaar only to go eat some stuffing after. No one has done it before, you're welcome.",
+      start_date: '20/11/2020',
+      end_date: '30/11/2020',
+      user_id: 1
+      )
+
+Trip.create!(
+      id: 8,
+      name: "Kickass Kenyan Kwanza",
+      description: "Cultural misappropriation at its finest. Go celebrate Kwanza instead of boring old Christmas. Africa's finest safaris, wild animals, nature and lots of heat no matter what time of the year it is -- but who doesn't love a grey, hot Christmas? Kwazna...sorry.",
+      start_date: '24/12/2020',
+      end_date: '31/12/2020',
+      user_id: 2
+      )
+
 trip_photo = [
   "https://rinconesdemexico.com/wp-content/uploads/shutterstock_1073392151-1.jpg",
   "https://images.adsttc.com/media/images/5d44/14fa/284d/d1fd/3a00/003d/newsletter/eiffel-tower-in-paris-151-medium.jpg?1564742900",
-  "https://149361004.v2.pressablecdn.com/wp-content/uploads/2018/10/TepitoGaleria3.jpg"
+  "https://149361004.v2.pressablecdn.com/wp-content/uploads/2018/10/TepitoGaleria3.jpg",
+  "https://learnspanishinmexicocity.com/wp-content/uploads/2018/08/Xochimilco-1100-x-621.jpg",
+  "https://s.france24.com/media/display/cbb598a4-f2e6-11e8-bb99-005056a964fe/w:1240/p:16x9/amazonia_brasilea.webp",
+  "https://www.viajejet.com/wp-content/viajes/el-baile-de-los-viejitos-una-danza-mexicana-de-la-epoca-prehispanica.jpg",
+  "https://www.worldatlas.com/r/w1200-h701-c1200x701/upload/2e/37/8a/shutterstock-291252509.jpg",
+  "https://www.andbeyond.com/wp-content/uploads/sites/5/guest-area-with-golden-sunrise-at-andbeyond-bateleur-camp-on-a-luxury-kenya-safari-1920x1080.jpg"
 ]
 
 Trip.all.each do |trip|

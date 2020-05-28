@@ -1,15 +1,28 @@
-<h1>Welcome to Plan-Et</h1>
 
-<br>
+  <div class="hero-image">
+    <div class="hero-text">
+      <h1>You've dreamt it, now Plan-et!</h1>
+      <div class="card-container-search">
+        <div class="align-items-center">
+          <%= form_tag root_path, method: :get do %>
+          <%= text_field_tag :query, params[:query], placeholder: "Find existing trips or find inspiration to create your own ones...", class:"form-control" %>
+        </div>
+        <div>
+          <%= submit_tag "Search", class: "search-button"%>
+        </div>
+          <% end %>
+      </div>
+    </div>
+</div>
 
-<h2>Here are the trips we offer:</h2>
 
-<br>
-
-
-<ol>
+<div class="trip-card-container">
   <% @trips.each do |trip| %>
-  <li><%=trip.name%></li>
-  <%= cl_image_tag trip.photos.first.key, height: 300, width: 400, crop: :fill %>
-  <% end %>
-</ol>
+  <div class="card d-flex m-3">
+    <%= cl_image_tag trip.photos.first.key, height: 200, width: 300, crop: :fill, class: "trip-img"%>
+    <div class="card-img-overlay">
+      <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "text-white"%></h5>
+    </div>
+  </div>
+  <%end%>
+</div>
