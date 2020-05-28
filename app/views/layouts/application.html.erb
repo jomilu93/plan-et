@@ -14,6 +14,16 @@
   </head>
 
   <body>
+    <!-- navbar -->
+      <%= render 'shared/navbar' %>
+    <!-- navbar -->
+
+
+    <!-- flash messages for authentication -->
+      <%= render 'shared/flashes' %>
+    <!-- flash messages for authentication -->
+
+    <div class= "container">
     <%= yield %>
     </div>
 
