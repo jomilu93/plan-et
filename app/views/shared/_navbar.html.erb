@@ -19,12 +19,7 @@
 
           <!-- checks id the user has a provile photo. If not it display a generic image in the navbar -->
           <% if current_user.photo.attached? %>
-            <%= cl_image_tag current_user.photo.key,
-                class: "avatar dropdown-toggle",
-                id: "navbarDropdown",
-                data: { toggle: "dropdown" },
-                'aria-haspopup': true,
-                'aria-expanded': false %>
+            <%= cl_image_tag(current_user.photo.key, transformation: {width: 70, height: 70, gravity: "face", radius: "max", crop: "thumb"}) %>
           <% else %>
             <%= image_tag image_path 'user.png',
                 class: "avatar dropdown-toggle",
