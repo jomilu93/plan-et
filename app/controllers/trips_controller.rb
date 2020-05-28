@@ -1,5 +1,5 @@
 class TripsController < ApplicationController
-  before_action :set_trip, only: %i[edit update destroy show]
+  #before_action :set_trip, only: %i[edit update destroy show]
 
   def index
   #@trips = policy_scope(current_user.trips.all)
@@ -21,14 +21,21 @@ class TripsController < ApplicationController
   end
 
   def show
+    @trip = Trip.find(params[:id])
     @trip_owner = @trip.user
     @parts = @trip.parts
-    @part = Part.find(params[:id])
-    @activities = @part.activities.all
+    #@part = Part.find(params[:id])
+    @activities = []
+    @parts.each do |part|
+      part.activities.all.each do |activity|
+        @activities << activity
+      end
+    end
     @activity = Activity.new
   end
 
   def new
+    @trip = Trip.new
   end
 
   def create
@@ -54,13 +61,13 @@ class TripsController < ApplicationController
 
   private
 
-  def set_trip
-    @trip = Trip.find(params[:id])
-  end
+  #def set_trip
+  #  @trip = Trip.find(params[:id])
+  #end
 
   def trip_params
-    params[:trip].parse_date_select! :start_date
-    params[:trip].parse_date_select! :end_date
+    #params[:trip].parse_date_select! :start_date
+    #params[:trip].parse_date_select! :end_date
     params.require(:trip).permit(:name,
                                       :description,
                                       :start_date,
