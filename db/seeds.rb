@@ -38,7 +38,7 @@ puts "Creating users..."
 User.create!(
       name: "David Osuna Azcona",
       email: "davidoad@gmail.com",
-      password: "Caioloveforever",
+      password: "contrasena",
       city_id: 3
       )
 
@@ -52,7 +52,7 @@ User.create!(
 User.create!(
       name: "Lou Malta",
       email: "lou@loumalta.com",
-      password: "Iamanenterprise",
+      password: "contrasena",
       city_id: 2
       )
 
