@@ -24,8 +24,13 @@ class TripsController < ApplicationController
     @trip = Trip.find(params[:id])
     @trip_owner = @trip.user
     @parts = @trip.parts
-    @part = Part.find(params[:id])
-    @activities = @part.activities.all
+    #@part = Part.find(params[:id])
+    @activities = []
+    @parts.each do |part|
+      part.activities.all.each do |activity|
+        @activities << activity
+      end
+    end
     @activity = Activity.new
   end
 
