@@ -21,8 +21,8 @@
           <% if current_user.photo.attached? %>
             <%= cl_image_tag(
                             current_user.photo.key,
-                            transformation: {width: 70, height: 70, gravity: "face", radius: "max", crop: "thumb"},
-                            class: "dropdown-toggle",
+                            transformation: {width: 70, height: 70, gravity: "face", crop: "thumb"},
+                            class: "dropdown-toggle avatar",
                             id: "navbarDropdown",
                             data: { toggle: "dropdown" },
                             'aria-haspopup': true,
