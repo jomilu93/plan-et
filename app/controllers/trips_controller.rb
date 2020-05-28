@@ -7,7 +7,17 @@ class TripsController < ApplicationController
   end
 
   def home
-    @trips = Trip.all
+
+   if params[:query].present?
+
+    sql_query = "name ILIKE :query OR description ILIKE :query"
+    @trips = Trip.where(sql_query, query: "%#{params[:query]}%")
+
+    #@trips = Trip.search_by_trip("%#{params[:query]}%")
+
+    else
+      @trips = Trip.all
+    end
   end
 
   def show
