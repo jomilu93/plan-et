@@ -1,5 +1,5 @@
 <div class="navbar sticky-top navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "Plan-ET", root_path, class: "navbar-brand" %>
+  <%= link_to "Plan-et", root_path, class: "navbar-brand" %>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -24,7 +24,7 @@
           <% if current_user.photo.attached? %>
             <%= cl_image_tag(
                             current_user.photo.key,
-                            transformation: {width: 70, height: 70, gravity: "face", crop: "thumb"},
+                            transformation: {width: 50, height: 50, gravity: "face", crop: "thumb"},
                             class: "dropdown-toggle avatar",
                             id: "navbarDropdown",
                             data: { toggle: "dropdown" },
