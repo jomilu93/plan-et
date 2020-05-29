@@ -1,13 +1,13 @@
 class PartsController < ApplicationController
   before_action :set_part, only: [:update, :destroy]
-  
+
   def index
   end
 
   def create
     @part = Part.new(part_params)
-    @trip = Trip.find(params[:itinerary_id])
-    @part.itinerary = @itinerary
+    @trip = Trip.find(params[:trip_id])
+    @part.trip = @trip
     if @part.save
       redirect_to trip_path(@part)
     else

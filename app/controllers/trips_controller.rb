@@ -32,6 +32,7 @@ class TripsController < ApplicationController
       end
     end
     @activity = Activity.new
+    @part = Part.new
   end
 
   def new
