@@ -31,8 +31,9 @@ class TripsController < ApplicationController
         @activities << activity
       end
     end
+    @part_new = Part.new
+    @part = Part.find(params[:id])
     @activity = Activity.new
-    @part = Part.new
   end
 
   def new

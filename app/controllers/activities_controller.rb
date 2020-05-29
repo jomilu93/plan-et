@@ -6,8 +6,10 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    @activity = Activity.new(activity_params)
+
     @part = Part.find(params[:part_id])
+    @activity = Activity.new(activity_params)
+
     @activity.part = @part
     if @activity.save
       redirect_to part_path(@activity)

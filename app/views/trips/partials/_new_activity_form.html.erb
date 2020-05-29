@@ -1,6 +1,6 @@
 <div>
   <%= simple_form_for [@part, @activity] do |f| %>
-    <%= f.input :activityable_type, required: true, collection: %w[Meal Accomodation Transportation Attraction ], %
+    <%= f.input :activityable_type, required: true, collection: %w[Meal Accomodation Transportation Attraction ] %>
     <%= f.input :start_time, required: true %>
     <%= f.input :end_time, required: true %>
     <%= f.button :submit, class: 'btn btn-success' %>

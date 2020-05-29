@@ -15,36 +15,136 @@
                 <% else "" %>
                 <% end %>
             <% end %>
+            <div class= 'container'>
+              <span><p type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#activityModal"> + </p></span>
+            </div>
           <br />
-          <% end %>
-        </div>
+        <% end %>
+      </div>
     <% end %>
+    <button type="button" class="btn btn-secondary btn" data-toggle="modal" data-target="#partModal">
+      + Part
+    </button>
   </div>
-
-
-
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-  + Part
-</button>
-
 </div>
 
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+
+
+
+<div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
+      <%= simple_form_for [@trip, @part_new] do |f| %>
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalCenterTitle">Add New Part</h5>
+        <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <%=  render 'trips/partials/new_part_form' %>
+          <%= f.input :name, required: true %>
+          <%= f.input :start_date, required: true %>
+          <%= f.input :end_date, required: true %>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+        <%= f.button :submit, class: 'btn btn-primary' %>
       </div>
+    <%end%>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+<!--Modal: Activity-->
+<div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+
+      <!--Modal cascading tabs-->
+      <div class="modal-c-tabs">
+
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i>
+              Meal</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-user-plus mr-1"></i>
+              Attraction</a>
+          </li>
+        </ul>
+
+        <!-- Tab panels -->
+        <div class="tab-content">
+          <!--Meal-->
+          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+
+            <%= simple_form_for [@part, @activity] do |f| %>
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">New Activity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= f.input :activityable_type, required: true, collection: %w[Meal Accomodation Transportation Attraction ] %>
+                <%= f.input :start_time, required: true %>
+                <%= f.input :end_time, required: true %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <%= f.button :submit, class: 'btn btn-primary' %>
+              </div>
+            <%end%>
+          </div>
+          <!--/.Meal-->
+
+          <!--Attraction -->
+          <div class="tab-pane fade" id="panel8" role="tabpanel">
+
+            <%= simple_form_for [@part, @activity] do |f| %>
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">New Activity</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <%= f.input :activityable_type, required: true, collection: %w[Meal Accomodation Transportation Attraction ] %>
+                <%= f.input :start_time, required: true %>
+                <%= f.input :end_time, required: true %>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+                <%= f.button :submit, class: 'btn btn-primary' %>
+              </div>
+            <%end%>
+          </div>
+          <!--/.Attraction-->
+
+        </div>
+
+      </div>
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login / Register Form-->
+
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#activityModal">New Activity</a>
+</div>
+
