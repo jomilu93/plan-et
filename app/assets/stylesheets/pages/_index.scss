@@ -1,2 +1,11 @@
 // Import page-specific CSS files here.
 @import "home";
+
+.text-title{
+  align-item: start;
+  margin-left: 50px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+}
