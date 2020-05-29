@@ -72,7 +72,7 @@ class TripsController < ApplicationController
                                       :description,
                                       :start_date,
                                       :end_date,
-                                      #photos: []
+                                      photos: []
                                      )
   end
 
