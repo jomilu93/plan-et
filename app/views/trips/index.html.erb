@@ -1,57 +1,71 @@
-
-  <div class= "text-center m-5">
+<div>
+<div class="d-flex flex-row flex-wrap justify-content-around">
+  <div class="card border-secondary color-white ml-3 mr-3 mb-3 mt-5">
+  <div class= "text-center ml-5 mr-5 mb-3 mt-3">
       <h1>My Trips</h1>
   </div>
+   </div>
+     </div>
 
-<h2 class="text-center m-3">Your Trip</h2>
 
-   <div class="d-flex flex-row flex-wrap justify-content-center pb-4">
+  <h3 class="text-title"> CurrentTrips</h3>
+  <div class="d-flex flex-row justify-content-start ">
 
-    <% @trips.each do |trip| %>
+ <div class="card-container ml-5 mb-4">
+   <% @trips.each do |trip| %>
     <%if trip.end_date >= Date.today and trip.start_date <= Date.today %>
-      <div class="card border-secondary color-white ml-3 mr-3 mb-3 ">
-        <%#= cl_image_tag trip.photos.first.key, height: 300, width: 400, crop: :lfill, class: 'card-img' %>
-        <!-- <div class="card-img-overlay d-flex flex-column justify-content-end"> -->
-          <h5 class="card-title text-black m-3"><%= link_to "#{trip.name}", trip_path(trip), class: "text-black font-weight-bold"%></h5>
-          <p class="card-title text-center"><%= trip.start_date%> to <%= trip.end_date%> </p>
-        <!-- </div> -->
+    <div class="card-trip" id="trips">
+      <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle mb-3"%>
+     <div>
+      <div class="card-text">
+        <h5><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h5>
+          <p><%= trip.start_date%> to <%= trip.end_date%></p>
       </div>
-    <%end%>
-    <%end%>
-
-  </div>
-
-
-  <h2 class="text-center m-3">Upcoming Trips</h2>
-
-  <div class="d-flex flex-row flex-wrap justify-content-around pb-4">
-    <% @trips.each do |trip| %>
-    <%if trip.start_date > Date.today %>
-      <div class="card border-secondary color-white ml-3 mr-3 mb-3">
-          <%#= #cl_image_tag itinerary.photos.first.key, height: 300, width: 400, crop: :lfill, class: 'card-img' %>
-        <!-- <div class="card-img-overlay d-flex flex-column justify-content-end"> -->
-          <h5 class="card-title text-black m-3"><%= link_to "#{trip.name}", trip_path(trip), class: "text-black font-weight-bold"%></h5>
-          <p class="card-title text-center"><%= trip.start_date%> to <%= trip.end_date%> </p>
-
-        <!-- </div> -->
-      </div>
-    <%end%>
+        <%end%>
     <%end%>
   </div>
+</div>
+</div>
+</div>
 
 
+  <h3 class="text-title">Upcoming Trips</h3>
+  <div class="d-flex flex-row justify-content-start ">
 
-  <h2 class="text-center m-3">Previous Trips</h2>
-   <div class="d-flex flex-row flex-wrap justify-content-around pb-4">
-    <% @trips.each do |trip| %>
+ <div class="card-container  ml-5 mb-4">
+   <% @trips.each do |trip| %>
     <%if trip.start_date < Date.today %>
-      <div class="card border-secondary color-white ml-3 mr-3 mb-3">
-        <%#= #cl_image_tag itinerary.photos.first.key, height: 300, width: 400, crop: :lfill, class: 'card-img' %>
-        <!-- <div class="card-img-overlay d-flex flex-column justify-content-end"> -->
-          <h5 class="card-title text-black m-3"><%= link_to "#{trip.name}", trip_path(trip), class: "text-black font-weight-bold"%></h5>
-          <p class="card-title text-center"><%= trip.start_date%> to <%= trip.end_date%></p>
-        <!-- </div> -->
+    <div class="card-trip" id="trips">
+      <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle mb-3"%>
+     <div>
+      <div class="card-text">
+        <h5><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h5>
+          <p><%= trip.start_date%> to <%= trip.end_date%></p>
       </div>
-    <%end%>
+        <%end%>
     <%end%>
   </div>
+</div>
+</div>
+</div>
+
+
+  <h3 class="text-title">Previous Trips</h3>
+ <div class="card-container ml-5 mb-5">
+   <% @trips.each do |trip| %>
+    <%if trip.start_date > Date.today %>
+    <div class="card-trip" id="trips">
+      <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle mb-3"%>
+     <div>
+      <div class="card-text">
+        <h5><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h5>
+          <p><%= trip.start_date%> to <%= trip.end_date%></p>
+      </div>
+        <%end%>
+    <%end%>
+  </div>
+</div>
+</div>
+ </div>
+
+ </div>
