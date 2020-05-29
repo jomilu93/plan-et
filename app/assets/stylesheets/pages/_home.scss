@@ -58,6 +58,15 @@ body, html {
   margin-top: 23%;
 }
 
+.link-text {
+  color: white;
+    &:hover {
+      color:white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+}
+
 
 .search-button{
   border-radius: 2px;
