@@ -3,7 +3,7 @@
     <div class="hero-text">
       <h1>You dream it...now Plan-et!</h1>
       <div class="card-container-search">
-        <div class="align-items-center">
+        <div class="align-items-center" id="search-bar">
           <%= form_tag root_path, method: :get do %>
           <%= text_field_tag :query, params[:query], placeholder: "Find existing trips or find inspiration to create your own ones...", class:"form-control" %>
         </div>
