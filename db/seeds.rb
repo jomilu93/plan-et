@@ -1,3 +1,7 @@
+require 'json'
+require "open-uri"
+require 'restcountry'
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or create!d alongside the database with db:setup).
 #
@@ -8,25 +12,36 @@
 
 puts "Getting started..."
 
-puts "Adding countries and cities..."
+puts "Adding countries..."
 
-Pais.create!(
-  name: "Mexico")
+#url = "https://restcountries.eu/rest/v2/all"
+#serialized_countries = open(url).read
+#countries = JSON.parse(serialized_countries)
 
-City.create!(
-  name: "CDMX",
-  pais_id: 1)
+#countries.each do |country|
+#  Pais.create!(
+#    name: "#{country["name"]}"
+#    )
+#end
 
-Pais.create!(
-  name: "France")
+Restcountry::Country.all.each do |country|
+  Pais.create!(
+    name: "#{country.name}"
+    )
+end
 
-City.create!(
-  name: "Paris",
-  pais_id: 2)
+puts "Adding cities..."
 
-City.create!(
-  name: "Mazatlan",
-  pais_id: 1)
+Restcountry::Country.all.each do |country|
+  if country.capital == ""
+    next
+  else
+  City.create!(
+    name: "#{country.capital}",
+    pais_id: Pais.where(name: "#{country.name}").ids[0]
+    )
+  end
+end
 
 puts "Creating users..."
 
