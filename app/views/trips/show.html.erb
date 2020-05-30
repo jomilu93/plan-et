@@ -18,7 +18,7 @@
     <% end %>
     <div class='container'>
       <span>
-        <p type="button" class="btn btn-light btn-sm" data-toggle="modal" data-target="#activityModal" data-part-id="x"> + </p>
+        <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id %>
       </span>
     </div>
     <br />
@@ -105,11 +105,11 @@
         <!-- Nav tabs -->
         <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fas fa-user mr-1"></i>
+            <a class="nav-link active" data-toggle="tab" href="#meal" role="tab"><i class="fas fa-user mr-1"></i>
               Meal</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fas fa-user-plus mr-1"></i>
+            <a class="nav-link" data-toggle="tab" href="#attraction" role="tab"><i class="fas fa-user-plus mr-1"></i>
               Attraction</a>
           </li>
         </ul>
@@ -118,7 +118,7 @@
         <div class="tab-content">
 
           <!--Meal-->
-          <div class="tab-pane fade in show active" id="panel7" role="tabpanel">
+          <div class="tab-pane fade in show active" id="meal" role="tabpanel">
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalCenterTitle">New Meal</h5>
               <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -128,14 +128,18 @@
             <div class="modal-body">
               <!-- TODO: Mandatory start_date, end_date fields -->
               <!-- TODO: Custom Attraction fields fields -->
-              <%= label_tag(:start_date, "Start date:") %>
-              <%= date_field_tag(:start_date) %>
+              <%= label_tag(:start_time, "Start Time:") %>
+              <%= date_field_tag(:start_time) %>
               <br>
-              <%= label_tag(:end_date, "end date:") %>
-              <%= date_field_tag(:end_date) %>
+              <%= label_tag(:end_time, "End Time:") %>
+              <%= date_field_tag(:end_time) %>
               <br>
               <%= label_tag(:name, "Name:") %>
               <%= text_field_tag(:name) %>
+              <br>
+              <%= label_tag(:address, "Address:") %>
+              <%= text_field_tag(:address) %>
+              <% hidden_field(:activityable_type, 'meal') %>
             </div>
             <div class="modal-footer">
               <!-- TODO: You MUST have a type=submit button -->
@@ -147,7 +151,7 @@
           <!--/.Meal-->
 
           <!--Attraction -->
-          <div class="tab-pane fade" id="panel8" role="tabpanel">
+          <div class="tab-pane fade" id="attraction" role="tabpanel">
 
             <div class="modal-header">
               <h5 class="modal-title" id="exampleModalCenterTitle">New Attraction</h5>

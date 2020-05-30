@@ -6,7 +6,7 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    raise
+    # raise
     # TODO: We need to get the following information in the request: (accessible through params)
     # PartID [MANDATORY]
     # Activity Type [MANDATORY]
@@ -37,11 +37,13 @@ class ActivitiesController < ApplicationController
     case @activity.activityable_type
     when 'meal'
       @meal = Meal.new(meal_params)
-
-    if @activity.save
+      @meal.city_id = 1
+    if @activity.save!
+      raise
       redirect_to part_path(@activity)
     else
-      render :new
+      raise
+    end
     end
   end
 
@@ -66,6 +68,10 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :end_time, :start_time, :activityable_type)
+    params.require(:activity).permit(:end_time, :start_time, :activityable_type, :part_id)
+  end
+
+  def meal_params
+    params.require(:meal).permit(:name, :address)
   end
 end
