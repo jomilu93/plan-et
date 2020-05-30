@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   #before_action :set_trip, only: %i[edit update destroy show]
 
   def index
-  #@trips = policy_scope(current_user.trips.all)
+  #@trips = current_user.trips.all #policy_scope(current_user.trips.all)
   @trips = Trip.all
   end
 
@@ -72,7 +72,7 @@ class TripsController < ApplicationController
                                       :description,
                                       :start_date,
                                       :end_date,
-                                      #photos: []
+                                      photos: []
                                      )
   end
 
