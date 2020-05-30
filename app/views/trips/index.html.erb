@@ -1,71 +1,48 @@
-<div>
-<div class="d-flex flex-row flex-wrap justify-content-around">
-  <div class="card border-secondary color-white ml-3 mr-3 mb-3 mt-5">
-  <div class= "text-center ml-5 mr-5 mb-3 mt-3">
+
+  <div class= "hero-image-index">
+    <div class="hero-text">
       <h1>My Trips</h1>
+    </div>
   </div>
-   </div>
-     </div>
 
-
-  <h3 class="text-title"> CurrentTrips</h3>
-  <div class="d-flex flex-row justify-content-start ">
-
- <div class="card-container ml-5 mb-4">
-   <% @trips.each do |trip| %>
-    <%if trip.end_date >= Date.today and trip.start_date <= Date.today %>
-    <div class="card-trip" id="trips">
-      <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle mb-3"%>
-     <div>
-      <div class="card-text">
-        <h5><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h5>
-          <p><%= trip.start_date%> to <%= trip.end_date%></p>
-      </div>
-        <%end%>
+<h4 class="text-title"> CurrentTrip</h4>
+<div class="d-flex flex-row justify-content-start align-items-center">
+  <% @trips.each do |trip| %>
+     <%if trip.end_date >= Date.today and trip.start_date <= Date.today %>
+  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+    <div class="card-text">
+      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
+      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+    </div>
     <%end%>
-  </div>
-</div>
+    <%end%>
 </div>
 </div>
 
-
-  <h3 class="text-title">Upcoming Trips</h3>
-  <div class="d-flex flex-row justify-content-start ">
-
- <div class="card-container  ml-5 mb-4">
-   <% @trips.each do |trip| %>
+<h4 class="text-title">Upcoming Trips</h4>
+ <div class="d-flex flex-row justify-content-start align-items-center">
+  <% @trips.each do |trip| %>
     <%if trip.start_date < Date.today %>
-    <div class="card-trip" id="trips">
-      <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle mb-3"%>
-     <div>
-      <div class="card-text">
-        <h5><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h5>
-          <p><%= trip.start_date%> to <%= trip.end_date%></p>
-      </div>
-        <%end%>
+  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+    <div class="card-text">
+      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
+      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+    </div>
     <%end%>
-  </div>
-</div>
-</div>
-</div>
-
-
-  <h3 class="text-title">Previous Trips</h3>
- <div class="card-container ml-5 mb-5">
-   <% @trips.each do |trip| %>
-    <%if trip.start_date > Date.today %>
-    <div class="card-trip" id="trips">
-      <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle mb-3"%>
-     <div>
-      <div class="card-text">
-        <h5><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h5>
-          <p><%= trip.start_date%> to <%= trip.end_date%></p>
-      </div>
-        <%end%>
     <%end%>
-  </div>
-</div>
-</div>
- </div>
 
- </div>
+</div>
+
+<h4 class="text-title ">Previous Trips</h4>
+<div class="d-flex flex-row justify-content-start align-items-center">
+  <% @trips.each do |trip| %>
+  <%if trip.start_date > Date.today %>
+  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+    <div class="card-text">
+      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
+      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+    </div>
+    <%end%>
+    <%end%>
+</div>
+
