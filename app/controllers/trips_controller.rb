@@ -32,7 +32,8 @@ class TripsController < ApplicationController
       end
     end
     @part_new = Part.new
-    @part = Part.find(params[:id])
+    # FIXME: The following line is incorrect. The params[:id] means the Trip ID/
+    # @part = Part.find(params[:id])
     @activity = Activity.new
   end
 

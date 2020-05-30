@@ -8,7 +8,10 @@ class PartsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @part = Part.new(part_params)
     @part.trip = @trip
-    if @part.save
+    # FIXME: Add a City or update the schema. Next line is temporary. Please REMOVE IT.
+    @part.city = City.first
+    
+    if @part.save!
       redirect_to trip_path(@trip)
     else
       render 'trips/show'
