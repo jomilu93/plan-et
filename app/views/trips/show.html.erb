@@ -46,6 +46,7 @@
           <%= f.input :name, required: true %>
           <%= f.input :start_date, required: true %>
           <%= f.input :end_date, required: true %>
+          <%= f.association :city, collection: City.all %>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
@@ -101,12 +102,13 @@
                 </button>
               </div>
               <div class="modal-body">
-                <% f.input :activityable_type, required: true, default: 'Meal' %>  %>
-                <%= f.input :start_time, required: true %>
-                <%= f.input :end_time, required: true %>
+                <% f.input :activityable_type, required: true, default: 'Meal' %>
                     <%= f.simple_fields_for :activityable do |m| %>
                       <%= m.input :name %>
-                  <% end %>
+                      <%= m.input :address %>
+                    <% end %>
+                <%= f.input :start_time, required: true %>
+                <%= f.input :end_time, required: true %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>

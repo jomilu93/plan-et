@@ -8,7 +8,7 @@ class PartsController < ApplicationController
     @trip = Trip.find(params[:trip_id])
     @part = Part.new(part_params)
     @part.trip = @trip
-    if @part.save
+    if @part.save!
       redirect_to trip_path(@trip)
     else
       render 'trips/show'
@@ -37,7 +37,7 @@ class PartsController < ApplicationController
   end
 
   def part_params
-    params.require(:part).permit(:name, :start_date, :end_date)
+    params.require(:part).permit(:name, :start_date, :end_date, :city_id)
   end
 
 end
