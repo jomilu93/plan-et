@@ -27,8 +27,9 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
+    @activity = Activity.find(params[:part_id])
     @activity.destroy
-    redirect_to trip_path(@part)
+    redirect_to trip_path(@trip)
   end
 
   private

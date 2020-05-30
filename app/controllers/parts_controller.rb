@@ -5,24 +5,24 @@ class PartsController < ApplicationController
   end
 
   def create
-    @part = Part.new(part_params)
     @trip = Trip.find(params[:trip_id])
+    @part = Part.new(part_params)
     @part.trip = @trip
-    @part.save
-    # if @part.save
-    #   redirect_to trip_path(@part)
-    # else
-    #   redirect_to trip_path(@part)
-    # end
+    if @part.save
+      redirect_to trip_path(@trip)
+    else
+      render 'trips/show'
+    end
   end
 
   def update
+    @trip = Trip.find(params[:trip_id])
     @part.save
-    # if @part.save
-    #   redirect_to trip_path(@part)
-    # else
-    #   redirect_to trip_path(@part)
-    # end
+    if @part.save
+      redirect_to trip_path(@trip)
+    else
+      render 'trips/show'
+    end
   end
 
   def destroy

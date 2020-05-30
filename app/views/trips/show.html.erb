@@ -2,7 +2,7 @@
   <h4><%= @trip.name %></h4>
   <h6>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %> </h6>
   <br />
-    <% @parts.each do |part|%>
+    <% @trip.parts.each do |part|%>
       <h5> <%= part.name %> </h5>
         <div class= 'container'>
         <% part.part_dates_array.each do |date|%>
@@ -10,7 +10,8 @@
             <% @activities.each do |act| %>
                 <% if act.start_time.day == date.day %>
                     <div class= 'container'>
-                      <span><b><%= act.start_time.strftime("%H:%M") %></b></span>  <span><%= act.activityable.name %></span>
+                      <span><b><%= act.start_time.strftime("%H:%M") %></b></span>  <span><%= act.activityable_type %></span>
+                      <%= link_to "Delete", act, method: :delete, remote: true %>
                     </div>
                 <% else "" %>
                 <% end %>
@@ -34,7 +35,7 @@
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <%= simple_form_for [@trip, @part_new] do |f| %>
+      <%= simple_form_for([@trip, @part_new], remote: true) do |f| %>
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -50,7 +51,7 @@
         <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
         <%= f.button :submit, class: 'btn btn-primary' %>
       </div>
-    <%end%>
+      <%end%>
     </div>
   </div>
 </div>
@@ -100,9 +101,12 @@
                 </button>
               </div>
               <div class="modal-body">
-                <%= f.input :activityable_type, required: true, collection: %w[Meal Accomodation Transportation Attraction ] %>
+                <% f.input :activityable_type, required: true, default: 'Meal' %>  %>
                 <%= f.input :start_time, required: true %>
                 <%= f.input :end_time, required: true %>
+                    <%= f.simple_fields_for :activityable do |m| %>
+                      <%= m.input :name %>
+                  <% end %>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
