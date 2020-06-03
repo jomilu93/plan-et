@@ -1,48 +1,73 @@
+<head>
+   <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-  <div class= "hero-image-index">
-    <div class="hero-text">
-      <h1>My Trips</h1>
-    </div>
+</head>
+
+
+<div class= "hero-image-index">
+  <div class="hero-text">
+    <h1>My Trips</h1>
   </div>
+</div>
 
-<h4 class="text-title"> CurrentTrip</h4>
-<div class="d-flex flex-row justify-content-start align-items-center">
-  <% @trips.each do |trip| %>
-     <%if trip.end_date >= Date.today and trip.start_date <= Date.today %>
-  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-    <div class="card-text">
-      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
-      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+<!-- Tabs -->
+<section id="tabs">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-12 md-4">
+        <nav>
+          <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Upcoming Trips </a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Previous Trips</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Current Trip</a>
+          </div>
+        </nav>
+        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+          <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <div class="d-flex flex-row justify-content-start align-items-center">
+              <% @trips.each do |trip| %>
+                <%if trip.start_date < Date.today %>
+                  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+                  <div class="card-text">
+                    <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
+                    <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+                  </div>
+                <%end%>
+              <%end%>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <div class="d-flex flex-row justify-content-start align-items-center">
+              <% @trips.each do |trip| %>
+                <%if trip.start_date > Date.today %>
+                  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+                  <div class="card-text">
+                    <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
+                    <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+                  </div>
+                <%end%>
+              <%end%>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+           <div class="d-flex flex-row justify-content-start align-items-center">
+          <% @trips.each do |trip| %>
+            <%if trip.end_date >= Date.today and trip.start_date <= Date.today %>
+              <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+              <div class="card-text">
+                <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
+                <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+              </div>
+            <%end%>
+          <%end%>
+        </div>
+          </div>
+        </div>
     </div>
-    <%end%>
-    <%end%>
-</div>
-</div>
+</section>
 
-<h4 class="text-title">Upcoming Trips</h4>
- <div class="d-flex flex-row justify-content-start align-items-center">
-  <% @trips.each do |trip| %>
-    <%if trip.start_date < Date.today %>
-  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-    <div class="card-text">
-      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
-      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
-    </div>
-    <%end%>
-    <%end%>
 
-</div>
 
-<h4 class="text-title ">Previous Trips</h4>
-<div class="d-flex flex-row justify-content-start align-items-center">
-  <% @trips.each do |trip| %>
-  <%if trip.start_date > Date.today %>
-  <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-    <div class="card-text">
-      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
-      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
-    </div>
-    <%end%>
-    <%end%>
-</div>
 
