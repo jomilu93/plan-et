@@ -2,26 +2,24 @@ class TripsController < ApplicationController
   #before_action :set_trip, only: %i[edit update destroy show]
 
   def index
-  #@trips = current_user.trips.all #policy_scope(current_user.trips.all)
-  @trips = Trip.all
+  @trips = policy_scope(Trip)
   end
 
   def home
+    if params[:query].present?
 
-   if params[:query].present?
-
-    sql_query = "name ILIKE :query OR description ILIKE :query"
-    @trips = Trip.where(sql_query, query: "%#{params[:query]}%")
-
-    #@trips = Trip.search_by_trip("%#{params[:query]}%")
+      sql_query = "name ILIKE :query OR description ILIKE :query"
+      @trips = policy_scope(Trip.where(sql_query, query: "%#{params[:query]}%"))
+      #@trips = Trip.search_by_trip("%#{params[:query]}%")
 
     else
-      @trips = Trip.all
+      @trips = policy_scope(Trip)
     end
   end
 
   def show
     @trip = Trip.find(params[:id])
+    authorize @trip
     @trip_owner = @trip.user
     @parts = @trip.parts
     #@part = Part.find(params[:id])
@@ -36,10 +34,12 @@ class TripsController < ApplicationController
 
   def new
     @trip = Trip.new
+    authorize @trip
   end
 
   def create
     @trip = Trip.new(trip_params)
+    authorize @trip
     @trip.user = current_user
     #authorize @itinerary
      if @trip.save
