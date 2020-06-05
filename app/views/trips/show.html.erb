@@ -98,7 +98,7 @@
     <div class="modal-content">
       <!-- TODO: Your form will start here -->
       <!-- TODO: Add hidden fields for Activity type HERE -->
-      <%= form_with(url: "/parts/2/activities", method: "post") do %>
+      <%= form_with(url: "2", method: "post", class: "activity_form") do %>
       <input type="hidden" name="activity_type" value="meal">
       <!--Modal cascading tabs-->
       <div class="modal-c-tabs">
@@ -145,7 +145,7 @@
             </div>
             <div class="modal-footer">
               <!-- TODO: You MUST have a type=submit button -->
-              <%= submit_tag("Submit") %>
+              <%= submit_tag("Submit", class: "submit-form") %>
 
               <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
             </div>
