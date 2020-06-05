@@ -31,6 +31,9 @@ class TripsController < ApplicationController
         @activities << activity
       end
     end
+    @part_new = Part.new
+    # FIXME: The following line is incorrect. The params[:id] means the Trip ID/
+    # @part = Part.find(params[:id])
     @activity = Activity.new
   end
 

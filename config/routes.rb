@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'others/show'
+  get 'others/destroy'
+  get 'transportations/show'
+  get 'transportations/destroy'
+  get 'attractions/show'
+  get 'attractions/destroy'
+  get 'accomodations/show'
+  get 'accomodations/destroy'
+  get 'meals/show'
+  get 'meals/destroy'
   get 'parts/index'
   devise_for :users
 
