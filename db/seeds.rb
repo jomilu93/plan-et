@@ -13,13 +13,12 @@ require 'nokogiri'
 
 puts "Getting started..."
 
-def variable_test(scrape, variable)
+def variable_test(scrape)
   begin
-    variable = scrape
+    scrape
   rescue NoMethodError
-    variable = "No data"
+    "No data"
   end
-  p variable
 end
 
 puts "Adding hotels..."
@@ -36,10 +35,10 @@ html_doc.css("div.listing.collapsed").each do |listing|
   html_file_sub = open(url_sub).read
   html_doc_sub = Nokogiri::HTML(html_file_sub)
 
-  name = variable_test(listing.css(".listing_title a").text, name)
-  address = variable_test(html_doc_sub.css("span.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html, address)
-  phone_number = variable_test(html_doc_sub.css("span.public-business-listing-ContactInfo__nonWebLinkText--nGymU.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html, phone_number)
-  rating = variable_test(listing.css("div.prw_rup.prw_common_rating_and_review_count_with_popup.linespace.is-shown-at-mobile")[0].children[0]["alt"].chars[0..2].join.to_f, rating)
+  name = variable_test(listing.css(".listing_title a").text)
+  address = variable_test(html_doc_sub.css("span.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html)
+  phone_number = variable_test(html_doc_sub.css("span.public-business-listing-ContactInfo__nonWebLinkText--nGymU.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html)
+  rating = variable_test(listing.css("div.prw_rup.prw_common_rating_and_review_count_with_popup.linespace.is-shown-at-mobile")[0].children[0]["alt"].chars[0..2].join.to_f)
 
   Hotel.create!(
     name: "#{name}",
