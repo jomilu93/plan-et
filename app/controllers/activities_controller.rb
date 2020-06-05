@@ -30,21 +30,21 @@ class ActivitiesController < ApplicationController
     # 5. Assign the Activityable to the Activity
     # 6. Save the Activityable to the DB
     # 7. Save the Activity to the DB
-    @part = Part.find(params[:part_id])
-    @activity = Activity.new(activity_params)
-    # @activity.part = @part
-    @activity.activityable_type = params[:activity_type].capitalize
-    case @activity.activityable_type.gsub(/[\[\]"\\]/,"")
-    when 'Meal'
+
+    case params[:activity_type]
+    when 'meal'
       @meal = Meal.new(meal_params)
       @meal.city_id = 1
       @meal.restaurant_id = 1
-    if @meal.save!
-      @activity.activityable_id = @meal.id
-      @activity.save!
-    else
-      raise
-    end
+      if @meal.save!
+        @activity = Activity.new(activity_params)
+        @activity.activityable = @meal
+        @activity.save!
+      else
+        raise
+      end
+    # when 'attraction'
+    #   @attraction = Attraction.new
     end
   end
 
