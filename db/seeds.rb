@@ -1,6 +1,7 @@
 require 'json'
 require "open-uri"
 require 'restcountry'
+require 'nokogiri'
 
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rails db:seed command (or create!d alongside the database with db:setup).
@@ -13,16 +14,6 @@ require 'restcountry'
 puts "Getting started..."
 
 puts "Adding countries..."
-
-#url = "https://restcountries.eu/rest/v2/all"
-#serialized_countries = open(url).read
-#countries = JSON.parse(serialized_countries)
-
-#countries.each do |country|
-#  Pais.create!(
-#    name: "#{country["name"]}"
-#    )
-#end
 
 Restcountry::Country.all.each do |country|
   Pais.create!(
@@ -43,7 +34,412 @@ Restcountry::Country.all.each do |country|
   end
 end
 
-puts "Creating users..."
+City.create!(
+    name: "Mazatlán",
+    pais_id: Pais.where(name: "Mexico").ids[0]
+    )
+
+
+def variable_test
+  begin
+    yield
+  rescue
+    "No data"
+  end
+end
+
+puts "Adding Mexico City hotels..."
+
+url = "http://www.tripadvisor.com/Hotels-g150800-Mexico_City_Central_Mexico_and_Gulf_Coast-Hotels.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+
+html_doc.css("div.listing.collapsed").each do |listing|
+
+  url_sub = "http://www.tripadvisor.com/#{listing.children[0]["data-url"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  name = variable_test {listing.css(".listing_title a").text}
+  address = variable_test {html_doc_sub.css("span.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+  phone_number = variable_test{html_doc_sub.css("span.public-business-listing-ContactInfo__nonWebLinkText--nGymU.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+  rating = variable_test{listing.css("div.prw_rup.prw_common_rating_and_review_count_with_popup.linespace.is-shown-at-mobile")[0].children[0]["alt"].chars[0..2].join.to_f}
+  # photo_url = variable_test {html_doc_sub.css("div.ZVAUHZqh")[0]["style"].to_s}
+  # photo_url = photo_url.scan(/((https).*(\\))/)
+  # p photo_url
+  # photo = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+
+  Hotel.create!(
+    name: "#{name}",
+    address:"#{address}",
+    phone_number: "#{phone_number}",
+    rating: rating,
+    city_id: 145)
+
+  puts "Hotel #{Hotel.last.id} complete"
+  # #average_price
+  # puts listing.css("div.premium_offer_container")[0].children[0]["data-pernight"].to_i
+end
+
+puts "Adding Paris hotels..."
+
+url = "http://www.tripadvisor.com/Hotels-g187147-Paris_Ile_de_France-Hotels.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+
+html_doc.css("div.listing.collapsed").each do |listing|
+
+  url_sub = "http://www.tripadvisor.com/#{listing.children[0]["data-url"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  name = variable_test {listing.css(".listing_title a").text}
+  address = variable_test {html_doc_sub.css("span.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+  phone_number = variable_test{html_doc_sub.css("span.public-business-listing-ContactInfo__nonWebLinkText--nGymU.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+  rating = variable_test{listing.css("div.prw_rup.prw_common_rating_and_review_count_with_popup.linespace.is-shown-at-mobile")[0].children[0]["alt"].chars[0..2].join.to_f}
+  # photo_url = variable_test {html_doc_sub.css("div.ZVAUHZqh")[0]["style"].to_s}
+  # photo_url = photo_url.scan(/((https).*(\\))/)
+  # p photo_url
+  # photo = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+
+  Hotel.create!(
+    name: "#{name}",
+    address:"#{address}",
+    phone_number: "#{phone_number}",
+    rating: rating,
+    city_id: 78)
+
+  puts "Hotel #{Hotel.last.id} complete"
+  # #average_price
+  # puts listing.css("div.premium_offer_container")[0].children[0]["data-pernight"].to_i
+end
+
+puts "Adding Mazatlán hotels..."
+
+url = "http://www.tripadvisor.com/Hotels-g150792-Mazatlan_Pacific_Coast-Hotels.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+
+html_doc.css("div.listing.collapsed").each do |listing|
+
+  url_sub = "http://www.tripadvisor.com/#{listing.children[0]["data-url"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  name = variable_test {listing.css(".listing_title a").text}
+  address = variable_test {html_doc_sub.css("span.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+  phone_number = variable_test{html_doc_sub.css("span.public-business-listing-ContactInfo__nonWebLinkText--nGymU.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+  rating = variable_test{listing.css("div.prw_rup.prw_common_rating_and_review_count_with_popup.linespace.is-shown-at-mobile")[0].children[0]["alt"].chars[0..2].join.to_f}
+  # photo_url = variable_test {html_doc_sub.css("div.ZVAUHZqh")[0]["style"].to_s}
+  # photo_url = photo_url.scan(/((https).*(\\))/)
+  # p photo_url
+  # photo = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+
+  Hotel.create!(
+    name: "#{name}",
+    address:"#{address}",
+    phone_number: "#{phone_number}",
+    rating: rating,
+    city_id: City.last.id)
+
+  puts "Hotel #{Hotel.last.id} complete"
+  # #average_price
+  # puts listing.css("div.premium_offer_container")[0].children[0]["data-pernight"].to_i
+end
+
+
+
+# MULTI-PAGE SCRAPE
+# page_number = 30
+# is_next = true
+
+# while is_next
+
+#   begin
+
+#     url = "http://www.tripadvisor.com/Hotels-g150800-oa#{page_number}-Mexico_City_Central_Mexico_and_Gulf_Coast-Hotels.html"
+
+#     html_file = open(url).read
+#     html_doc = Nokogiri::HTML(html_file)
+
+#     html_doc.css("div.listing.collapsed").each do |listing|
+
+#       url_sub = "http://www.tripadvisor.com/#{listing.children[0]["data-url"]}"
+#       html_file_sub = open(url_sub).read
+#       html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+#       name = variable_test {listing.css(".listing_title a").text}
+#       address = variable_test {html_doc_sub.css("span.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+#       phone_number = variable_test{html_doc_sub.css("span.public-business-listing-ContactInfo__nonWebLinkText--nGymU.public-business-listing-ContactInfo__ui_link--1_7Zp.public-business-listing-ContactInfo__level_4--3JgmI")[0].inner_html}
+#       rating = variable_test{listing.css("div.prw_rup.prw_common_rating_and_review_count_with_popup.linespace.is-shown-at-mobile")[0].children[0]["alt"].chars[0..2].join.to_f}
+
+#       Hotel.create!(
+#         name: "#{name}",
+#         address:"#{address}",
+#         phone_number: "#{phone_number}",
+#         rating: rating,
+#         city_id: 145)
+#     end
+
+#     page_number += 30
+
+#   rescue
+
+#   is_next = false
+
+#   end
+
+# end
+
+puts "Adding Mexico City attractions..."
+
+url = "http://www.tripadvisor.com/Attractions-g150800-Activities-a_allAttractions.true-Mexico_City_Central_Mexico_and_Gulf_Coast.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div.attractions-attraction-filtered-main-index__listItem--3trCl.attractions-attraction-filtered-main-index__paddingDesktop--2kSx8").each do |listing|
+  name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+  attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
+
+  url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css(".attractions-contact-card-ContactCard__contactRow--3Ih6v").children[1].inner_html}
+  #phone_number
+  #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+
+  Attraction.create!(
+        name: "#{name}",
+        address:"#{address}",
+        attraction_type: "#{attraction_type}",
+        city_id: 145)
+
+  puts "Attraction #{Attraction.last.id} complete"
+
+end
+
+# puts "Adding Paris attractions..."
+
+# url = "http://www.tripadvisor.com/Attractions-g187147-Activities-Paris_Ile_de_France.html"
+
+# html_file = open(url).read
+# html_doc = Nokogiri::HTML(html_file)
+
+# puts html_doc.css("li.attractions-attraction-overview-pois-PoiCard__item--3UzYK")[0]
+
+# html_doc.css("li.attractions-attraction-overview-pois-PoiCard__item--3UzYK").each do |listing|
+
+#   url_sub = "http://www.tripadvisor.com.mx/#{listing.css("a.attractions-attraction-overview-pois-PoiInfo__name--SJ0a4")["href"]}"
+#   html_file_sub = open(url_sub).read
+#   html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+#   name = variable_test {html_doc_sub.css("h1.ui_header.h1").inner_html}
+#   p name
+#   attraction_type = variable_test {html_doc_sub.css("a.attractions-attraction-review-header-AttractionLinks__dotted_link--Pt2MP").inner_html}
+#   p attraction_type
+#   address = variable_test {html_doc_sub.css("div.attractions-contact-card-ContactCard__contactRow--3Ih6v").children[1].inner_html}
+#   p address
+#   #phone_number
+#   #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+
+#   Attraction.create!(
+#         name: "#{name}",
+#         address:"#{address}",
+#         attraction_type: "#{attraction_type}",
+#         city_id: 78)
+
+#   puts "Attraction #{Attraction.last.id} complete"
+
+# end
+
+# puts "Adding Mazatlán attractions..."
+
+# url = "http://www.tripadvisor.com/Attractions-g150792-Activities-Mazatlan_Pacific_Coast.html"
+
+# html_file = open(url).read
+# html_doc = Nokogiri::HTML(html_file)
+
+# html_doc.css("div.attractions-attraction-filtered-main-index__listItem--3trCl.attractions-attraction-filtered-main-index__paddingDesktop--2kSx8").each do |listing|
+#   name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+#   attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
+
+#   url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+#   html_file_sub = open(url_sub).read
+#   html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+#   address = variable_test {html_doc_sub.css(".attractions-contact-card-ContactCard__contactRow--3Ih6v").children[1].inner_html}
+#   #phone_number
+#   #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+
+#   Attraction.create!(
+#         name: "#{name}",
+#         address:"#{address}",
+#         attraction_type: "#{attraction_type}",
+#         city_id: City.last.id)
+
+#   puts "Attraction #{Attraction.last.id} complete"
+
+# end
+
+# MULTI-PAGE SCRAPE
+# page_number = 30
+# is_next = true
+
+# while is_next
+
+#   begin
+
+#     url = "http://www.tripadvisor.com/Attractions-g150800-Activities-oa#{page_number}-a_allAttractions.true-Mexico_City_Central_Mexico_and_Gulf_Coast.html"
+
+#     html_file = open(url).read
+#     html_doc = Nokogiri::HTML(html_file)
+
+#     puts "html read successfully!"
+
+#     html_doc.css("div.attractions-attraction-filtered-main-index__listItem--3trCl.attractions-attraction-filtered-main-index__paddingDesktop--2kSx8").each do |listing|
+#       name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+#       attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
+
+#       url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+#       html_file_sub = open(url_sub).read
+#       html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+#       address = variable_test {html_doc_sub.css(".attractions-contact-card-ContactCard__contactRow--3Ih6v").children[1].inner_html}
+#       #phone_number
+#       #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+
+#       Attraction.create!(
+#             name: "#{name}",
+#             address:"#{address}",
+#             attraction_type: "#{attraction_type}",
+#             city_id: 145)
+
+#       puts "Attraction #{Attraction.last.id}complete"
+
+#     end
+
+#     page_number += 30
+
+#   rescue
+
+#   is_next = false
+
+#   end
+
+# end
+
+puts "Adding Mexico City restaurants..."
+
+url = "http://www.tripadvisor.com/Restaurants-g150800-Mexico_City_Central_Mexico_and_Gulf_Coast.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._1llCuDZj").each do |listing|
+  name = variable_test { listing.css("a._15_ydu6b").inner_html.gsub(/[.!\d<>-]/, '').strip}
+  cuisine = variable_test {listing.css("span._1p0FLy4t")[2].inner_html}
+  avg_price = variable_test {listing.css("span._1p0FLy4t")[3].inner_html }
+
+  url_sub = "http://www.tripadvisor.com/#{listing.css("a._15_ydu6b")[0]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("a.restaurants-detail-top-info-TopInfo__infoCellLink--2ZRPG")[1].inner_html.strip}
+  phone_number = variable_test {html_doc_sub.css("a._3S6pHEQs")[1].inner_html.strip}
+  rating = variable_test {html_doc_sub.css("span.restaurants-detail-overview-cards-RatingsOverviewCard__overallRating--nohTl").inner_html.gsub(/[!<>-]/, '').strip.to_f}
+
+  Restaurant.create!(
+    name: "#{name}",
+    cuisine: "#{cuisine}",
+    avg_price: avg_price,
+    rating: rating,
+    business_hours: "No data",
+    address: "#{address}",
+    phone_number: "#{phone_number}",
+    city_id: 145)
+
+  puts "Restaurant #{Restaurant.last.id} complete"
+
+end
+
+puts "Adding Paris restaurants..."
+
+url = "http://www.tripadvisor.com/Restaurants-g187147-Paris_Ile_de_France.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._1llCuDZj").each do |listing|
+  name = variable_test { listing.css("a._15_ydu6b").inner_html.gsub(/[.!\d<>-]/, '').strip}
+  cuisine = variable_test {listing.css("span._1p0FLy4t")[2].inner_html}
+  avg_price = variable_test {listing.css("span._1p0FLy4t")[3].inner_html }
+
+  url_sub = "http://www.tripadvisor.com/#{listing.css("a._15_ydu6b")[0]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("a.restaurants-detail-top-info-TopInfo__infoCellLink--2ZRPG")[1].inner_html.strip}
+  phone_number = variable_test {html_doc_sub.css("a._3S6pHEQs")[1].inner_html.strip}
+  rating = variable_test {html_doc_sub.css("span.restaurants-detail-overview-cards-RatingsOverviewCard__overallRating--nohTl").inner_html.gsub(/[!<>-]/, '').strip.to_f}
+
+  Restaurant.create!(
+    name: "#{name}",
+    cuisine: "#{cuisine}",
+    avg_price: avg_price,
+    rating: rating,
+    business_hours: "No data",
+    address: "#{address}",
+    phone_number: "#{phone_number}",
+    city_id: 78)
+
+  puts "Restaurant #{Restaurant.last.id} complete"
+
+end
+
+puts "Adding Mazatlán restaurants..."
+
+url = "http://www.tripadvisor.com/Restaurants-g150792-Mazatlan_Pacific_Coast.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._1llCuDZj").each do |listing|
+  name = variable_test { listing.css("a._15_ydu6b").inner_html.gsub(/[.!\d<>-]/, '').strip}
+  cuisine = variable_test {listing.css("span._1p0FLy4t")[2].inner_html}
+  avg_price = variable_test {listing.css("span._1p0FLy4t")[3].inner_html }
+
+  url_sub = "http://www.tripadvisor.com/#{listing.css("a._15_ydu6b")[0]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("a.restaurants-detail-top-info-TopInfo__infoCellLink--2ZRPG")[1].inner_html.strip}
+  phone_number = variable_test {html_doc_sub.css("a._3S6pHEQs")[1].inner_html.strip}
+  rating = variable_test {html_doc_sub.css("span.restaurants-detail-overview-cards-RatingsOverviewCard__overallRating--nohTl").inner_html.gsub(/[!<>-]/, '').strip.to_f}
+
+  Restaurant.create!(
+    name: "#{name}",
+    cuisine: "#{cuisine}",
+    avg_price: avg_price,
+    rating: rating,
+    business_hours: "No data",
+    address: "#{address}",
+    phone_number: "#{phone_number}",
+    city_id: City.last.id)
+
+  puts "Restaurant #{Restaurant.last.id} complete"
+
+end
+
+# MULTI-PAGE SCRAPE
+# puts "Creating users..."
 
 User.create!(
       name: "David Osuna Azcona",
@@ -159,27 +555,14 @@ Trip.all.each do |trip|
   trip.photos.attach(io: file, filename: 'trip.png', content_type: 'image/png')
 end
 
-puts "Creating restaurants..."
+# restaurant_photo = [
+# "https://culinarybackstreets-com.exactdn.com/wp-content/uploads/cb_mc_fonda_margarita_pjr_final.jpg?lossy=1&ssl=1"
+# ]
 
-Restaurant.create!(
-      name: "La Fonda Golosa",
-      address: "Atrasito de la Lagunilla.",
-      cuisine: "Mexican Streetfood",
-      rating: 5,
-      avg_price: 50,
-      phone_number: "5542132416",
-      business_hours: "11:00am to 5:00pm",
-      city_id: 1
-  )
-
-restaurant_photo = [
-"https://culinarybackstreets-com.exactdn.com/wp-content/uploads/cb_mc_fonda_margarita_pjr_final.jpg?lossy=1&ssl=1"
-]
-
-Restaurant.all.each do |restaurant|
-  file = URI.open(restaurant_photo[restaurant.id - 1])
-  restaurant.photo.attach(io: file, filename: 'restaurant.png', content_type: 'image/png')
-end
+# Restaurant.all.each do |restaurant|
+#   file = URI.open(restaurant_photo[restaurant.id - 1])
+#   restaurant.photo.attach(io: file, filename: 'restaurant.png', content_type: 'image/png')
+# end
 
 puts "Creating meals..."
 
@@ -233,43 +616,25 @@ Other.create!(
       city_id: 1
       )
 
-puts "Creating attractions..."
 
-Attraction.create!(
-      name: "Lou's Louvre",
-      address: "Next to the river.",
-      attraction_type: "Museum",
-      city_id: 2
-      )
+# attraction_photo = [
+# "https://i1.wp.com/thehappening.com/wp-content/uploads/2019/11/museo-louvre.jpg?fit=1024%2C694&ssl=1"
+# ]
 
-attraction_photo = [
-"https://i1.wp.com/thehappening.com/wp-content/uploads/2019/11/museo-louvre.jpg?fit=1024%2C694&ssl=1"
-]
-
-Attraction.all.each do |attraction|
-  file = URI.open(attraction_photo[attraction.id - 1])
-  attraction.photo.attach(io: file, filename: 'attraction.png', content_type: 'image/png')
-end
-
-puts "Creating hotels..."
+# Attraction.all.each do |attraction|
+#   file = URI.open(attraction_photo[attraction.id - 1])
+#   attraction.photo.attach(io: file, filename: 'attraction.png', content_type: 'image/png')
+# end
 
 
-Hotel.create!(
-    name: "LeWagon AKA Andrea and Nacho's Mansion",
-    address: "Chihuahua no se que",
-    phone_number: "5555555",
-    rating: 7,
-    city_id: 1
-    )
+# hotel_photo = [
+# "https://res.cloudinary.com/wagon/image/upload/v1574889737/zmaoco0qgyhwqf4lngp2.jpg"
+# ]
 
-hotel_photo = [
-"https://res.cloudinary.com/wagon/image/upload/v1574889737/zmaoco0qgyhwqf4lngp2.jpg"
-]
-
-Hotel.all.each do |hotel|
-  file = URI.open(hotel_photo[hotel.id - 1])
-  hotel.photo.attach(io: file, filename: 'hotel.png', content_type: 'image/png')
-end
+# Hotel.all.each do |hotel|
+#   file = URI.open(hotel_photo[hotel.id - 1])
+#   hotel.photo.attach(io: file, filename: 'hotel.png', content_type: 'image/png')
+# end
 
 puts "Creating accomodations..."
 
