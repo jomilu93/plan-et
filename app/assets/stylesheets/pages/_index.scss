@@ -14,7 +14,7 @@
 .hero-image-index{
   justify-content: center;
   background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url("https://source.unsplash.com/1600x900/?travel");
-  height: 25%;
+  height: 30%;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -23,15 +23,36 @@
 }
 
 
-.card-text{
-  margin-left: 15px;
-  margin-top: 5px;
-  align-items: center;
 
+
+.card-product {
+  overflow: hidden;
+  height: 120px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  margin-bottom: 35px;
 
 }
 
+.card-product h6 {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
 
+.card-product p {
+  font-size: 12px;
+  line-height: 1.4;
+  opacity: .7;
+  margin-bottom: 0;
+  margin-top: 8px;
+}
+
+.card-product .card-product-infos {
+  padding: 16px;
+}
 
 .index {
   margin-bottom: 330px;

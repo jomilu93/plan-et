@@ -1,5 +1,5 @@
 <head>
-<!--    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
+<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -18,58 +18,77 @@
 <div class= "index">
 <section id="tabs">
   <div class="container">
-    <div class="row">
-      <div class="col-sm-12 md-4">
+
         <nav>
           <div class="nav nav-tabs nav-fill" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Upcoming Trips </a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Previous Trips</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Current Trip</a>
+            <a class="nav-item nav-link active text-reset" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Upcoming Trips </a>
+            <a class="nav-item nav-link text-reset" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Previous Trips</a>
+            <a class="nav-item nav-link text-reset" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact" aria-selected="false">Current Trip</a>
           </div>
         </nav>
         <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-            <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
-              <% @trips.each do |trip| %>
+            <div class="d-flex flex-row justify-content-start align-items-center">
+              <div class="row">
+                <% @trips.each do |trip| %>
+                <div class="col-sm-12 col-md-6">
                 <%if trip.start_date > Date.today %>
+                <div class="card-product">
                   <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-                  <div class="card-text">
+                  <div class="card-product-infos">
                     <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
                     <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
                   </div>
+                  </div>
                 <%end%>
+               </div>
               <%end%>
+              </div>
             </div>
           </div>
+
           <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
             <div class="d-flex flex-row justify-content-start align-items-center">
+              <div class="row">
               <% @trips.each do |trip| %>
+              <div class="col-sm-12 col-md-6">
                  <%if trip.start_date < Date.today %>
+                 <div class="card-product">
                   <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-                  <div class="card-text">
+                  <div class="card-product-infos">
                     <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
                     <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
                   </div>
+                  </div>
                 <%end%>
+                </div>
               <%end%>
             </div>
           </div>
-          <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-           <div class="d-flex flex-row justify-content-start align-items-center">
+          </div>
+
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+          <div class="d-flex flex-row justify-content-start align-items-center">
+             <div class="row">
           <% @trips.each do |trip| %>
+          <div class="col-sm-12 col-md-6">
             <%if trip.end_date >= Date.today and trip.start_date <= Date.today %>
+            <div class="card-product">
               <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-              <div class="card-text">
+              <div class="card-product-infos">
                 <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
                 <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
               </div>
+              </div>
             <%end%>
+            </div>
           <%end%>
-        </div>
-          </div>
-        </div>
-    </div>
+      </div>
+      </div>
+   </div>
 </section>
+</div>
 </div>
 
 
