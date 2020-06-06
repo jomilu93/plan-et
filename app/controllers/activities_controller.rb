@@ -36,7 +36,7 @@ class ActivitiesController < ApplicationController
       @meal = Meal.new(meal_params)
       authorize @meal
       @meal.city_id = 1
-      @meal.restaurant_id = 1
+      @meal.restaurant_id = @meal.restaurant_id
       if @meal.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
@@ -84,7 +84,7 @@ class ActivitiesController < ApplicationController
   end
 
   def meal_params
-    params.permit(:name, :address, :city_id)
+    params.permit(:name, :address, :city_id, :restaurant_id)
   end
 
   def attraction_params

@@ -122,7 +122,7 @@
                   <%= time_field_tag(:end_time) %>
                   <br>
                   <%= label_tag(:restaurant, "Restaurant (optional):") %>
-                  <%= text_field_tag(:restaurant) %>
+                  <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name) %>
                   <br>
                   <%= label_tag(:address, "Address:") %>
                   <%= text_field_tag(:address) %>
