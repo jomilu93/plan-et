@@ -1,6 +1,6 @@
 class Accomodation < ApplicationRecord
   belongs_to :city
-  belongs_to :hotel
+  belongs_to :hotel, optional: true
 
   has_one :activity, as: :activityable
 

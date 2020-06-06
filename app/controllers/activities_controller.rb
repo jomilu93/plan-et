@@ -90,4 +90,5 @@ class ActivitiesController < ApplicationController
   def attraction_params
     params.permit(:name, :address, :city_id, :attraction_type)
   end
+
 end

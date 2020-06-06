@@ -112,14 +112,17 @@
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
                 <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                  <%= label_tag(:name, "Title:") %>
+                  <%= text_field_tag(:name) %>
+                  <br>
                   <%= label_tag(:start_time, "Start Time:") %>
                   <%= time_field_tag(:start_time) %>
                   <br>
                   <%= label_tag(:end_time, "End Time:") %>
                   <%= time_field_tag(:end_time) %>
                   <br>
-                  <%= label_tag(:name, "Name:") %>
-                  <%= text_field_tag(:name) %>
+                  <%= label_tag(:restaurant, "Restaurant (optional):") %>
+                  <%= text_field_tag(:restaurant) %>
                   <br>
                   <%= label_tag(:address, "Address:") %>
                   <%= text_field_tag(:address) %>
