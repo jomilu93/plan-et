@@ -82,7 +82,6 @@
     <div class="modal-content">
       <!-- TODO: Your form will start here -->
       <!-- TODO: Add hidden fields for Activity type HERE -->
-      <% #form_with(url: "", method: "post", class: "activity_form") do %>
         <!--Modal cascading tabs-->
         <div class="modal-c-tabs">
 
@@ -128,7 +127,7 @@
               </div>
               <div class="modal-footer">
                 <!-- TODO: You MUST have a type=submit button -->
-                <%= submit_tag("Submit") %>
+                <%= submit_tag("Submit", class: 'submitActivity') %>
                 <% end %>
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
               </div>
@@ -165,7 +164,7 @@
                   <%= hidden_field_tag 'activity_type', "Attraction" %>
               </div>
               <div class="modal-footer">
-                <%= submit_tag("Submit") %>
+                <%= submit_tag("Submit", class: 'submitActivity') %>
                 <% end %>
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
               </div>
@@ -174,7 +173,6 @@
           </div>
         </div>
         <!-- TODO: Your form must end here -->
-      <% #end %>
     </div>
     <!--/.Content-->
   </div>

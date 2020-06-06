@@ -8,4 +8,12 @@ document.querySelectorAll('.plus-sign').forEach(item => {
   item.addEventListener('click', () => {
     changeUrl(item.getAttribute("data-part-id"));
   });
-})
+});
+
+
+
+document.querySelectorAll('.submitActivity').forEach(btn => {
+  btn.addEventListener('click', () => {
+    $('#activityModal').modal('hide');
+  });
+});
