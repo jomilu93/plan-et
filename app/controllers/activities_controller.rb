@@ -1,8 +1,9 @@
 class ActivitiesController < ApplicationController
-  before_action :set_part, only: [:update, :destroy]
+  before_action :set_activity, only: [:update, :destroy]
+  before_action :set_trip
 
   def index
-    @activities = Activity.all
+    @activities = policy_scope(Activity)
   end
 
   def create
@@ -30,21 +31,23 @@ class ActivitiesController < ApplicationController
     # 5. Assign the Activityable to the Activity
     # 6. Save the Activityable to the DB
     # 7. Save the Activity to the DB
-
     case params[:activity_type]
     when 'Meal'
       @meal = Meal.new(meal_params)
+      authorize @meal
       @meal.city_id = 1
-      @meal.restaurant_id = 1
+      @meal.restaurant_id = params[:meal][:restaurant_id]
       if @meal.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
         @activity.save!
+        redirect_to trip_path(@trip)
       else
         raise
       end
     when 'Attraction'
       @attraction = Attraction.new(attraction_params)
+      authorize @attraction
       @attraction.city_id = 1
       if @attraction.save!
         @activity = Activity.new(activity_params)
@@ -57,6 +60,7 @@ class ActivitiesController < ApplicationController
   end
 
   def update
+    authorize @activity
     if @activity.save
       redirect_to trip_path(@part)
     else
@@ -65,7 +69,7 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    @activity = Activity.find(params[:part_id])
+    authorize @activity
     @activity.destroy
     redirect_to trip_path(@trip)
   end
@@ -76,15 +80,26 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
   end
 
+  def set_trip
+    @trip = Trip.find(params[:trip_id])
+  end
+
   def activity_params
+    params[:start_time] = DateTime.strptime(params[:date] + params[:start_time], '%Y-%m-%d%H:%M')
+    params[:end_time] = DateTime.strptime(params[:date] + params[:end_time], '%Y-%m-%d%H:%M')
     params.permit(:end_time, :start_time, :part_id)
   end
 
   def meal_params
-    params.permit(:name, :address, :city_id)
+    params.permit(:name, :address, :city_id, :restaurant_id)
+  end
+
+  def restaurant_params
+    params.permit(:restaurant_id)
   end
 
   def attraction_params
     params.permit(:name, :address, :city_id, :attraction_type)
   end
+
 end

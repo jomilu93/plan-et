@@ -7,6 +7,7 @@ class PartsController < ApplicationController
   def create
     @trip = Trip.find(params[:trip_id])
     @part = Part.new(part_params)
+    authorize @part
     @part.trip = @trip
     if @part.save!
       redirect_to trip_path(@trip)
@@ -17,6 +18,7 @@ class PartsController < ApplicationController
 
   def update
     @trip = Trip.find(params[:trip_id])
+    authorize @part
     @part.save
     if @part.save
       redirect_to trip_path(@trip)
@@ -26,6 +28,7 @@ class PartsController < ApplicationController
   end
 
   def destroy
+    authorize @part
     @part.destroy
     redirect_to trip_path(@part)
   end

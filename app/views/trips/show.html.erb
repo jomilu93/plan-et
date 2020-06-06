@@ -17,6 +17,7 @@
         <% @activities.each do |act| %>
           <% if act.start_time.day == date.day %>
             <div class='container'>
+
               <div class="card-producto">
                 <% if act.activityable.try(:photos).nil? %>
                 <img src="https://source.unsplash.com/40x40/?travel" class= "rounded-circle m-1" alt="" >
@@ -129,19 +130,26 @@
               <div class="modal-body">
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                
+                <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
+                  <%= label_tag(:name, "Title:") %>
+                  <%= text_field_tag(:name) %>
+                  <br>
                   <%= label_tag(:start_time, "Start Time:") %>
-                  <%= date_field_tag(:start_time) %>
+                  <%= time_field_tag(:start_time) %>
                   <br>
                   <%= label_tag(:end_time, "End Time:") %>
-                  <%= date_field_tag(:end_time) %>
+                  <%= time_field_tag(:end_time) %>
                   <br>
-                  <%= label_tag(:name, "Name:") %>
-                  <%= text_field_tag(:name) %>
+                  <%= label_tag(:restaurant, "Restaurant (optional):") %>
+                  <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name) %>
                   <br>
                   <%= label_tag(:address, "Address:") %>
                   <%= text_field_tag(:address) %>
+
+
                   <%= hidden_field_tag 'activity_type', "Meal" %>
+                  <%= hidden_field_tag 'trip_id', @trip.id %>
               </div>
               <div class="modal-footer">
                 <!-- TODO: You MUST have a type=submit button -->
@@ -166,10 +174,10 @@
                 <!-- TODO: Custom Attraction fields fields -->
                 <%= form_with(url: "", method: "post", class: "activity_form") do %>
                   <%= label_tag(:start_time, "Start Time:") %>
-                  <%= date_field_tag(:start_time) %>
+                  <%= time_field_tag(:start_time) %>
                   <br>
                   <%= label_tag(:end_time, "End Time:") %>
-                  <%= date_field_tag(:end_time) %>
+                  <%= time_field_tag(:end_time) %>
                   <br>
                   <%= label_tag(:name, "Name:") %>
                   <%= text_field_tag(:name) %>
