@@ -1,8 +1,8 @@
 class ActivitiesController < ApplicationController
-  before_action :set_part, only: [:update, :destroy]
+  before_action :set_activity, only: [:update, :destroy]
 
   def index
-    @activities = Activity.all
+    @activities = policy_scope(Activity)
   end
 
   def create
@@ -34,6 +34,7 @@ class ActivitiesController < ApplicationController
     case params[:activity_type]
     when 'Meal'
       @meal = Meal.new(meal_params)
+      authorize @meal
       @meal.city_id = 1
       @meal.restaurant_id = 1
       if @meal.save!
@@ -45,6 +46,7 @@ class ActivitiesController < ApplicationController
       end
     when 'Attraction'
       @attraction = Attraction.new(attraction_params)
+      authorize @attraction
       @attraction.city_id = 1
       if @attraction.save!
         @activity = Activity.new(activity_params)
@@ -57,6 +59,7 @@ class ActivitiesController < ApplicationController
   end
 
   def update
+    authorize @activity
     if @activity.save
       redirect_to trip_path(@part)
     else
@@ -65,7 +68,7 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
-    @activity = Activity.find(params[:part_id])
+    authorize @activity
     @activity.destroy
     redirect_to trip_path(@trip)
   end

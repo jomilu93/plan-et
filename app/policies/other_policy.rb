@@ -1,4 +1,4 @@
-class TripPolicy < ApplicationPolicy
+class OtherPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
       scope.all
@@ -28,4 +28,5 @@ class TripPolicy < ApplicationPolicy
   def destroy?
     @user = user
   end
+
 end
