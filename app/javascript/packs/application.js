@@ -11,7 +11,6 @@ require("channels");
 require ("trip_show/get_part_id");
 
 
-
 //require date_wrapper
 
 
