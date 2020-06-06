@@ -8,7 +8,8 @@ class TripsController < ApplicationController
   def home
     if params[:query].present?
 
-      sql_query = "name ILIKE :query OR description ILIKE :query"
+      sql_query = " \ trips.name ILIKE :query OR trips.description ILIKE :query\ "
+
       @trips = policy_scope(Trip.where(sql_query, query: "%#{params[:query]}%"))
       #@trips = Trip.search_by_trip("%#{params[:query]}%")
 
@@ -29,6 +30,9 @@ class TripsController < ApplicationController
         @activities << activity
       end
     end
+    @part_new = Part.new
+    # FIXME: The following line is incorrect. The params[:id] means the Trip ID/
+    # @part = Part.find(params[:id])
     @activity = Activity.new
   end
 

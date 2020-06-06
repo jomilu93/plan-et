@@ -1,22 +1,65 @@
 class ActivitiesController < ApplicationController
-  before_action :set_part, only: [:update, :destroy]
+  before_action :set_activity, only: [:update, :destroy]
 
   def index
-    @activities = Activity.all
+    @activities = policy_scope(Activity)
   end
 
   def create
-    @activity = Activity.new(activity_params)
-    @part = Part.find(params[:part_id])
-    @activity.part = @part
-    if @activity.save
-      redirect_to part_path(@activity)
-    else
-      render :new
+    # raise
+    # TODO: We need to get the following information in the request: (accessible through params)
+    # PartID [MANDATORY]
+    # Activity Type [MANDATORY]
+    # Activity attributes [MANDATORY] (start_time, end_time)
+    # The selected Activity attributes (e.g. Meal attributes)
+    #
+    # Then we need to follow this logic:
+    # 1. We get the Part instance with the PartID from the request
+    # 2. We create an Activity instance (Activity.new)
+    # 3. We assign the Part to the Activity
+    # 4. We do a case statement with the Acitvity type value.
+    # e.g.
+    # case ACTIVITY_TYPE
+    # when 'meal'
+    #   Meal.create
+    # when 'attraction'
+    #   Attraction.create
+    # end
+    #
+    # We need to store the instance of any of those activities in a variable, to later assign it to the Activity
+    # 5. Assign the Activityable to the Activity
+    # 6. Save the Activityable to the DB
+    # 7. Save the Activity to the DB
+
+    case params[:activity_type]
+    when 'Meal'
+      @meal = Meal.new(meal_params)
+      authorize @meal
+      @meal.city_id = 1
+      @meal.restaurant_id = 1
+      if @meal.save!
+        @activity = Activity.new(activity_params)
+        @activity.activityable = @meal
+        @activity.save!
+      else
+        raise
+      end
+    when 'Attraction'
+      @attraction = Attraction.new(attraction_params)
+      authorize @attraction
+      @attraction.city_id = 1
+      if @attraction.save!
+        @activity = Activity.new(activity_params)
+        @activity.activityable = @attraction
+        @activity.save!
+      else
+        raise
+      end
     end
   end
 
   def update
+    authorize @activity
     if @activity.save
       redirect_to trip_path(@part)
     else
@@ -25,8 +68,9 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
+    authorize @activity
     @activity.destroy
-    redirect_to trip_path(@part)
+    redirect_to trip_path(@trip)
   end
 
   private
@@ -36,6 +80,14 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:name, :description, :end_time, :start_time, :activityable_type)
+    params.permit(:end_time, :start_time, :part_id)
+  end
+
+  def meal_params
+    params.permit(:name, :address, :city_id)
+  end
+
+  def attraction_params
+    params.permit(:name, :address, :city_id, :attraction_type)
   end
 end

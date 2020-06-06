@@ -1,31 +1,184 @@
-<div class= 'container' style='list-style-type:none'>
+<div class='container' style='list-style-type:none'>
+
   <h4><%= @trip.name %></h4>
   <h6>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %> </h6>
   <br />
-    <% @parts.each do |part|%>
-      <h5> <%= part.name %> </h5>
-        <div class= 'container'>
-        <% part.part_dates_array.each do |date|%>
-          <h6> <%= date.strftime("%A, %b %e") %> </h6>
-            <% @activities.each do |act| %>
-              <li>
-                <% if act.start_time.day == date.day %>
-                  <li>
-                  <a><span><b><%= act.start_time.strftime("%H:%M") %></b></span>  <span><%= act.activityable_type %></span></a>
-                  </li>
-                <% else "" %>
-                <% end %>
-              </li>
-            <% end %>
-          <br />
+  <% @trip.parts.each do |part|%>
+    <h5> <%= part.name %> </h5>
+    <div class='container'>
+      <% part.part_dates_array.each do |date|%>
+        <h6><%= date.strftime("%A, %b %e") %></h6>
+        <% @activities.each do |act| %>
+          <% if act.start_time.day == date.day %>
+            <div class='container'>
+              <span><b><%= act.start_time.strftime("%H:%M") %></b></span> <span><%= act.activityable_type %></span>
+              <%= link_to "Delete", act, method: :delete, remote: true %>
+            </div>
+          <% else "" %>
           <% end %>
+        <% end %>
+        <div class='container'>
+          <span>
+            <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
+          </span>
         </div>
-    <% end %>
-  </div>
-
-  <div class= 'container' style='list-style-type:none'>
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    +
-  </button>
+       <br />
+      <% end %>
+    </div>
+  <% end %>
+  <button type="button" class="btn btn-secondary btn" data-toggle="modal" data-target="#partModal">+ Part</button>
 </div>
 
+<!-- modal begins -->
+<div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= simple_form_for([@trip, @part_new], remote: true) do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= f.input :name, required: true %>
+          <%= f.input :start_date, required: true %>
+          <%= f.input :end_date, required: true %>
+          <%= f.association :city, collection: City.all %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<!--
+  TODO: Form explanation:
+  1. We need to pass the mandatory fields: PartID, Activity Type and dates for Activity
+  2. To get the PartID we will add an eventListener in JS to the "+" buttons on each day.
+    The eventListener will change the URL the form points to set the PartID. eg. /parts/2/activitiesn
+  3. To get the ActivityType we will add an eventListener to the Tabs in the modal.
+    The eventListener will change a hidden field value in the form to set the Activity Type.
+    !! The type needs to match the ones in the ActivitiesController case statement.
+  4. We will have the start_date and end_date input fields in all the different forms.
+  5. We will have custom input fields for all the different activities
+  6. The form MUST to do a POST request to the activities#create route.
+
+  PS: For the form you could either use plain HTML or the Rails helper 👇
+  https://guides.rubyonrails.org/form_helpers.html#dealing-with-basic-forms
+
+  I'd advice you to use the helper cause it handles the Authenticity Token of the form.
+  Read the Dealing with Basic Forms for more info on that.
+
+-->
+
+<!--Modal: Activity-->
+<div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog cascading-modal" role="document">
+    <!--Content-->
+    <div class="modal-content">
+      <!-- TODO: Your form will start here -->
+      <!-- TODO: Add hidden fields for Activity type HERE -->
+        <!--Modal cascading tabs-->
+        <div class="modal-c-tabs">
+
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link active" data-toggle="tab" href="#meal" role="tab"><i class="fas fa-user mr-1"></i>
+                Meal</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="tab" href="#attraction" role="tab"><i class="fas fa-user-plus mr-1"></i>
+                Attraction</a>
+            </li>
+          </ul>
+
+          <!-- Tab panels -->
+          <div class="tab-content">
+
+            <!--Meal-->
+            <div class="tab-pane fade in show active" id="meal" role="tabpanel">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">New Meal</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- TODO: Mandatory start_date, end_date fields -->
+                <!-- TODO: Custom Attraction fields fields -->
+                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                  <%= label_tag(:start_time, "Start Time:") %>
+                  <%= date_field_tag(:start_time) %>
+                  <br>
+                  <%= label_tag(:end_time, "End Time:") %>
+                  <%= date_field_tag(:end_time) %>
+                  <br>
+                  <%= label_tag(:name, "Name:") %>
+                  <%= text_field_tag(:name) %>
+                  <br>
+                  <%= label_tag(:address, "Address:") %>
+                  <%= text_field_tag(:address) %>
+                  <%= hidden_field_tag 'activity_type', "Meal" %>
+              </div>
+              <div class="modal-footer">
+                <!-- TODO: You MUST have a type=submit button -->
+                <%= submit_tag("Submit", class: 'submitActivity') %>
+                <% end %>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!--/.Meal-->
+
+            <!--Attraction -->
+            <div class="tab-pane fade" id="attraction" role="tabpanel">
+
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">New Attraction</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- TODO: Mandatory start_date, end_date fields -->
+                <!-- TODO: Custom Attraction fields fields -->
+                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                  <%= label_tag(:start_time, "Start Time:") %>
+                  <%= date_field_tag(:start_time) %>
+                  <br>
+                  <%= label_tag(:end_time, "End Time:") %>
+                  <%= date_field_tag(:end_time) %>
+                  <br>
+                  <%= label_tag(:name, "Name:") %>
+                  <%= text_field_tag(:name) %>
+                  <br>
+                  <%= label_tag(:address, "Address:") %>
+                  <%= text_field_tag(:address) %>
+                  <br>
+                  <%= label_tag(:type, "Type:") %>
+                  <%= text_field_tag(:attraction_type) %>
+                  <%= hidden_field_tag 'activity_type', "Attraction" %>
+              </div>
+              <div class="modal-footer">
+                <%= submit_tag("Submit", class: 'submitActivity') %>
+                <% end %>
+                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+              </div>
+            </div>
+            <!--/.Attraction-->
+          </div>
+        </div>
+        <!-- TODO: Your form must end here -->
+    </div>
+    <!--/.Content-->
+  </div>
+</div>
+<!--Modal: Login / Register Form-->
+
+<div class="text-center">
+  <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#activityModal">New Activity</a>
+</div>
