@@ -1,5 +1,7 @@
 let changeUrl = (id) => {
-  document.querySelector('.activity_form').action = `/parts/${id}/activities`;
+  document.querySelectorAll('.activity_form').forEach(form => {
+    form.action = `/parts/${id}/activities`;
+  });
 }
 
 document.querySelectorAll('.plus-sign').forEach(item => {

@@ -59,7 +59,7 @@
   TODO: Form explanation:
   1. We need to pass the mandatory fields: PartID, Activity Type and dates for Activity
   2. To get the PartID we will add an eventListener in JS to the "+" buttons on each day.
-    The eventListener will change the URL the form points to set the PartID. eg. /parts/2/activities
+    The eventListener will change the URL the form points to set the PartID. eg. /parts/2/activitiesn
   3. To get the ActivityType we will add an eventListener to the Tabs in the modal.
     The eventListener will change a hidden field value in the form to set the Activity Type.
     !! The type needs to match the ones in the ActivitiesController case statement.
@@ -82,8 +82,7 @@
     <div class="modal-content">
       <!-- TODO: Your form will start here -->
       <!-- TODO: Add hidden fields for Activity type HERE -->
-      <%= form_with(url: "", method: "post", class: "activity_form") do %>
-        <input type="hidden" name="activity_type" value="meal">
+      <% #form_with(url: "", method: "post", class: "activity_form") do %>
         <!--Modal cascading tabs-->
         <div class="modal-c-tabs">
 
@@ -113,23 +112,24 @@
               <div class="modal-body">
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
-                <%= label_tag(:start_time, "Start Time:") %>
-                <%= date_field_tag(:start_time) %>
-                <br>
-                <%= label_tag(:end_time, "End Time:") %>
-                <%= date_field_tag(:end_time) %>
-                <br>
-                <%= label_tag(:name, "Name:") %>
-                <%= text_field_tag(:name) %>
-                <br>
-                <%= label_tag(:address, "Address:") %>
-                <%= text_field_tag(:address) %>
-                <% hidden_field(:activityable_type, 'meal') %>
-                <% hidden_field(:city_id, '1') %>
+                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                  <%= label_tag(:start_time, "Start Time:") %>
+                  <%= date_field_tag(:start_time) %>
+                  <br>
+                  <%= label_tag(:end_time, "End Time:") %>
+                  <%= date_field_tag(:end_time) %>
+                  <br>
+                  <%= label_tag(:name, "Name:") %>
+                  <%= text_field_tag(:name) %>
+                  <br>
+                  <%= label_tag(:address, "Address:") %>
+                  <%= text_field_tag(:address) %>
+                  <%= hidden_field_tag 'activity_type', "Meal" %>
               </div>
               <div class="modal-footer">
                 <!-- TODO: You MUST have a type=submit button -->
-                <%= submit_tag("Submit", class: "submit-form") %>
+                <%= submit_tag("Submit") %>
+                <% end %>
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -147,9 +147,26 @@
               <div class="modal-body">
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
+                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                  <%= label_tag(:start_time, "Start Time:") %>
+                  <%= date_field_tag(:start_time) %>
+                  <br>
+                  <%= label_tag(:end_time, "End Time:") %>
+                  <%= date_field_tag(:end_time) %>
+                  <br>
+                  <%= label_tag(:name, "Name:") %>
+                  <%= text_field_tag(:name) %>
+                  <br>
+                  <%= label_tag(:address, "Address:") %>
+                  <%= text_field_tag(:address) %>
+                  <br>
+                  <%= label_tag(:type, "Type:") %>
+                  <%= text_field_tag(:attraction_type) %>
+                  <%= hidden_field_tag 'activity_type', "Attraction" %>
               </div>
               <div class="modal-footer">
-                <!-- TODO: You MUST have a type=submit button -->
+                <%= submit_tag("Submit") %>
+                <% end %>
                 <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
               </div>
             </div>
@@ -157,7 +174,7 @@
           </div>
         </div>
         <!-- TODO: Your form must end here -->
-      <% end %>
+      <% #end %>
     </div>
     <!--/.Content-->
   </div>

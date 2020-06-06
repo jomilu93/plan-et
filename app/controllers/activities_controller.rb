@@ -32,7 +32,7 @@ class ActivitiesController < ApplicationController
     # 7. Save the Activity to the DB
 
     case params[:activity_type]
-    when 'meal'
+    when 'Meal'
       @meal = Meal.new(meal_params)
       @meal.city_id = 1
       @meal.restaurant_id = 1
@@ -43,8 +43,16 @@ class ActivitiesController < ApplicationController
       else
         raise
       end
-    # when 'attraction'
-    #   @attraction = Attraction.new
+    when 'Attraction'
+      @attraction = Attraction.new(attraction_params)
+      @attraction.city_id = 1
+      if @attraction.save!
+        @activity = Activity.new(activity_params)
+        @activity.activityable = @attraction
+        @activity.save!
+      else
+        raise
+      end
     end
   end
 
@@ -70,10 +78,13 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     params.permit(:end_time, :start_time, :part_id)
-    # params.permit(:end_time, :start_time, :activity_type, :name, :address, :city_id, :authenticity_token, :commit, :part_id)
   end
 
   def meal_params
     params.permit(:name, :address, :city_id)
+  end
+
+  def attraction_params
+    params.permit(:name, :address, :city_id, :attraction_type)
   end
 end
