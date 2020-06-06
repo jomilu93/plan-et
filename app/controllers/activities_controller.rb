@@ -85,7 +85,6 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    byebug
     params[:start_time] = DateTime.strptime(params[:date] + params[:start_time], '%Y-%m-%d%H:%M')
     params[:end_time] = DateTime.strptime(params[:date] + params[:end_time], '%Y-%m-%d%H:%M')
     params.permit(:end_time, :start_time, :part_id)
