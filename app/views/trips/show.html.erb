@@ -11,7 +11,7 @@
         <% @activities.each do |act| %>
           <% if act.start_time.day == date.day %>
             <div class='container'>
-              <span><b><%= act.start_time.strftime("%H:%M") %></b></span> <span><%= act.activityable_type %></span>
+              <span><b><%= act.start_time.strftime("%H:%M") %></b></span><span><%= act.activityable_type %></span>
               <%= link_to "Delete", act, method: :delete, remote: true %>
             </div>
           <% else "" %>
@@ -112,14 +112,17 @@
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
                 <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                  <%= label_tag(:name, "Title:") %>
+                  <%= text_field_tag(:name) %>
+                  <br>
                   <%= label_tag(:start_time, "Start Time:") %>
-                  <%= date_field_tag(:start_time) %>
+                  <%= time_field_tag(:start_time) %>
                   <br>
                   <%= label_tag(:end_time, "End Time:") %>
-                  <%= date_field_tag(:end_time) %>
+                  <%= time_field_tag(:end_time) %>
                   <br>
-                  <%= label_tag(:name, "Name:") %>
-                  <%= text_field_tag(:name) %>
+                  <%= label_tag(:restaurant, "Restaurant (optional):") %>
+                  <%= text_field_tag(:restaurant) %>
                   <br>
                   <%= label_tag(:address, "Address:") %>
                   <%= text_field_tag(:address) %>
@@ -148,10 +151,10 @@
                 <!-- TODO: Custom Attraction fields fields -->
                 <%= form_with(url: "", method: "post", class: "activity_form") do %>
                   <%= label_tag(:start_time, "Start Time:") %>
-                  <%= date_field_tag(:start_time) %>
+                  <%= time_field_tag(:start_time) %>
                   <br>
                   <%= label_tag(:end_time, "End Time:") %>
-                  <%= date_field_tag(:end_time) %>
+                  <%= time_field_tag(:end_time) %>
                   <br>
                   <%= label_tag(:name, "Name:") %>
                   <%= text_field_tag(:name) %>
