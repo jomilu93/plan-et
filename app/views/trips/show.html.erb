@@ -111,7 +111,7 @@
               <div class="modal-body">
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
                   <%= label_tag(:name, "Title:") %>
                   <%= text_field_tag(:name) %>
                   <br>
@@ -126,7 +126,10 @@
                   <br>
                   <%= label_tag(:address, "Address:") %>
                   <%= text_field_tag(:address) %>
+
+
                   <%= hidden_field_tag 'activity_type', "Meal" %>
+                  <%= hidden_field_tag 'trip_id', @trip.id %>
               </div>
               <div class="modal-footer">
                 <!-- TODO: You MUST have a type=submit button -->
