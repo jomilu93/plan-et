@@ -1,5 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:update, :destroy]
+  before_action :set_trip
 
   def index
     @activities = policy_scope(Activity)
@@ -30,17 +31,17 @@ class ActivitiesController < ApplicationController
     # 5. Assign the Activityable to the Activity
     # 6. Save the Activityable to the DB
     # 7. Save the Activity to the DB
-
     case params[:activity_type]
     when 'Meal'
       @meal = Meal.new(meal_params)
       authorize @meal
       @meal.city_id = 1
-      @meal.restaurant_id = 1
+      @meal.restaurant_id = params[:meal][:restaurant_id]
       if @meal.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
         @activity.save!
+        redirect_to trip_path(@trip)
       else
         raise
       end
@@ -79,6 +80,10 @@ class ActivitiesController < ApplicationController
     @activity = Activity.find(params[:id])
   end
 
+  def set_trip
+    @trip = Trip.find(params[:trip_id])
+  end
+
   def activity_params
     byebug
     params[:start_time] = DateTime.strptime(params[:date] + params[:start_time], '%Y-%m-%d%H:%M')
@@ -87,10 +92,15 @@ class ActivitiesController < ApplicationController
   end
 
   def meal_params
-    params.permit(:name, :address, :city_id)
+    params.permit(:name, :address, :city_id, :restaurant_id)
+  end
+
+  def restaurant_params
+    params.permit(:restaurant_id)
   end
 
   def attraction_params
     params.permit(:name, :address, :city_id, :attraction_type)
   end
+
 end
