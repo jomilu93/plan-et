@@ -11,6 +11,8 @@ class Part < ApplicationRecord
   def part_dates_array
     part_days = (self.end_date - self.start_date).to_i
     part_dates = [self.start_date]
+    return part_dates if part_days == 0
+
     until part_dates.length == part_days
       part_dates << self.start_date += 1
     end
