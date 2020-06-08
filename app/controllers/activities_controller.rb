@@ -41,7 +41,7 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
         @activity.save!
-        redirect_to trip_path(@trip)
+        redirect_to trip_path(@activity.part.trip)
       else
         raise
       end
@@ -53,6 +53,7 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         @activity.activityable = @attraction
         @activity.save!
+        redirect_to trip_path(@activity.part.trip)
       else
         raise
       end
@@ -62,7 +63,7 @@ class ActivitiesController < ApplicationController
   def update
     authorize @activity
     if @activity.save
-      redirect_to trip_path(@part)
+      redirect_to trip_path(@activity.part.trip)
     else
       render :new
     end
@@ -70,6 +71,7 @@ class ActivitiesController < ApplicationController
 
   def destroy
     authorize @activity
+    @trip = @ctivity.part.trip
     @activity.destroy
     redirect_to trip_path(@trip)
   end
