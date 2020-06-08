@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:update, :destroy]
-  before_action :set_trip
+  before_action :set_trip, except: :create
 
   def index
     @activities = policy_scope(Activity)
