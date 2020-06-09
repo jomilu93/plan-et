@@ -6,12 +6,18 @@ class TripsController < ApplicationController
   end
 
   def home
-    if params[:query].present?
+    if params[:search].present?
 
-      sql_query = " \ trips.name ILIKE :query OR trips.description ILIKE :query\ "
+      # sql_query = " \ trips.name ILIKE :query OR trips.description ILIKE :query\ "
 
-      @trips = policy_scope(Trip.where(sql_query, query: "%#{params[:query]}%"))
-      #@trips = Trip.search_by_trip("%#{params[:query]}%")
+      # @trips = policy_scope(Trip.where(sql_query, query: "%#{params[:query]}%"))
+      @parts = policy_scope(Part.search_for_parts("%#{params[:search]}%"))
+      @trips_all = []
+      @parts.each do |part|
+        @trips_all << part.trip
+      end
+
+    @trips = @trips_all.uniq
 
     else
       @trips = policy_scope(Trip)
