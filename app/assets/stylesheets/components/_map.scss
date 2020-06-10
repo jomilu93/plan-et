@@ -9,3 +9,12 @@
   top: 0;
   right: 0;
 }
+
+.mapboxgl-popup {
+  max-width: 200px;
+}
+
+.mapboxgl-popup-content {
+  text-align: center;
+  font-family: 'Ubuntu', sans-serif;
+}

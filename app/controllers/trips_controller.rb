@@ -61,10 +61,11 @@ class TripsController < ApplicationController
       @cities << part.city
     end
 
-    @markers = @cities.map do |city|
+    @markers = @parts.map do |part|
       {
-        lat: city.latitude,
-        lng: city.longitude
+        lat: part.city.latitude,
+        lng: part.city.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { part: part })
       }
     end
 
