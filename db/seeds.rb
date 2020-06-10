@@ -31,6 +31,8 @@ Restcountry::Country.all.each do |country|
     name: "#{country.capital}",
     pais_id: Pais.where(name: "#{country.name}").ids[0]
     )
+  puts "City #{City.last.id} complete"
+
   end
 end
 
