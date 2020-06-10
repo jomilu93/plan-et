@@ -16,22 +16,42 @@
         <h6><%= date.strftime("%A, %b %e") %></h6>
         <% @activities.each do |act| %>
           <% if act.start_time.day == date.day %>
-            <div class='container'>
 
-              <div class="card-producto">
-                <% if act.activityable.try(:photos).nil? %>
-                <img src="https://source.unsplash.com/40x40/?travel" class= "rounded-circle m-1" alt="" >
-                <% else %>
-              <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+      <div class='container'>
+        <div class="card-trip">
+          <% if act.activityable.try(:photos).nil? %>
+           <img src="<%= image_url('carreGris.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:35px;height:35px;">
+            <% else %>
+            <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle m-1"%>
+          <% end %>
+          <div class="card-trip-infos">
+            <div>
+              <h1>
+              <% if act.activityable_type == "Meal"%>
+               <i class="fas fa-utensils"></i>
               <% end %>
-              <div class="card-producto-infos">
-              <h5><%= act.activityable.name %></h5>
-              <p><b><%= act.start_time.strftime("%H:%M") %></b></p>
-              <p><%= act.activityable_type %></p>
-              <p><%= link_to "Delete", act, method: :delete, remote: true %></p>
-              </div>
-              </div>
+
+              <% if act.activityable_type == "Other"%>
+               <i class="far fa-dot-circle"></i>
+              <% end %>
+
+              <% if act.activityable_type == "Accomodation"%>
+               <i class="fas fa-bed"></i>
+              <% end %>
+
+              <% if act.activityable_type == "Transportation"%>
+               <i class="fas fa-suitcase"></i>
+              <% end %>
+
+              <% if act.activityable_type == "Attraction"%>
+               <i class="fas fa-camera"></i>
+              <% end %>
+              <%= act.activityable.name %></h1>
+              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete"><%= link_to "Delete", act, method: :delete, remote: true %></b> </p>
             </div>
+          </div>
+        </div>
+      </div>
 
           <% else "" %>
           <% end %>
@@ -130,7 +150,7 @@
               <div class="modal-body">
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
-                
+
                 <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
                   <%= label_tag(:name, "Title:") %>
                   <%= text_field_tag(:name) %>
