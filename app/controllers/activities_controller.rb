@@ -80,7 +80,7 @@ class ActivitiesController < ApplicationController
   def destroy
     trip = @activity.part.trip
     authorize @activity
-    @trip = @ctivity.part.trip
+    @trip = @activity.part.trip
     @activity.destroy
     redirect_to trip_path(trip)
   end
@@ -114,3 +114,4 @@ class ActivitiesController < ApplicationController
   end
 
 end
+
