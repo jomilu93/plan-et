@@ -46,7 +46,11 @@
                         <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
                       <% end %>
                       <div class="card-producto-infos">
-                      <h5><%= act.activityable.name %></h5>
+                      <% if act.activityable_type == 'Transportation'%>
+                        <h5><%= act.activityable.transportation_type %></h5>
+                      <% else %>
+                        <h5><%= act.activityable.name %></h5>
+                      <% end %>
                       <p><b><%= act.start_time.strftime("%H:%M") %></b></p>
                       <p><%= act.activityable_type %></p>
                       <p><%= link_to "Delete", act, method: :delete, remote: true %></p>
