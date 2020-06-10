@@ -27,6 +27,10 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 #country and city gem
 gem 'restcountry'
+#geocoding
+gem 'geocoder'
+#mapbox gem
+gem 'mapbox-gl-rails'
 
 gem 'nokogiri'
 # Use Redis adapter to run Action Cable in production
