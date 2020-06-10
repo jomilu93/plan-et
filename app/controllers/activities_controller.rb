@@ -1,6 +1,6 @@
 class ActivitiesController < ApplicationController
   before_action :set_activity, only: [:update, :destroy]
-  before_action :set_trip, except: :create
+  before_action :set_trip, except: [:destroy, :create]
 
   def index
     @activities = policy_scope(Activity)
@@ -61,19 +61,28 @@ class ActivitiesController < ApplicationController
   end
 
   def update
-    authorize @activity
-    if @activity.save
-      redirect_to trip_path(@activity.part.trip)
-    else
-      render :new
+    case params[:activity_type]
+    when 'Meal'
+      @activity = Activity.find(params[:id])
+      @meal = Meal.find(params[:id])
+      authorize @activity
+      authorize @meal
+      @meal.city_id = 1
+      @meal.restaurant_id = params[:meal][:restaurant_id]
+      if @meal.update(meal_params) && @activity.update(activity_params)
+        redirect_to trip_path(@trip)
+      else
+        raise
+      end
     end
   end
 
   def destroy
+    trip = @activity.part.trip
     authorize @activity
     @trip = @ctivity.part.trip
     @activity.destroy
-    redirect_to trip_path(@trip)
+    redirect_to trip_path(trip)
   end
 
   private
