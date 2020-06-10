@@ -23,11 +23,22 @@ class TripsController < ApplicationController
         @trips_all << part.trip
       end
 
+      @countries = Pais.search_for_countries("%#{params[:search]}%")
+
+      @countries.each do |country|
+        country.cities.each do |city|
+          city.parts.each do |part|
+            @trips_all << part.trip
+          end
+        end
+      end
+
     @trips = @trips_all.uniq
 
     else
       @trips = policy_scope(Trip)
     end
+
   end
 
   def show
