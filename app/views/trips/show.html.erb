@@ -120,6 +120,12 @@
   <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
     <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
       <!-- TODO: Your form will start here -->
       <!-- TODO: Add hidden fields for Activity type HERE -->
         <!--Modal cascading tabs-->
@@ -142,40 +148,41 @@
 
             <!--Meal-->
             <div class="tab-pane fade in show active" id="meal" role="tabpanel">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">New Meal</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
               <div class="modal-body">
-                <!-- TODO: Mandatory start_date, end_date fields -->
-                <!-- TODO: Custom Attraction fields fields -->
-
                 <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
-                  <%= label_tag(:name, "Title:") %>
-                  <%= text_field_tag(:name) %>
+                  <div class='form group'>
+                    <%= label_tag(:name, "Title:") %>
+                    </label><%= text_field_tag :name, '', :class => "form-control" %>
+                  </div>
                   <br>
-                  <%= label_tag(:start_time, "Start Time:") %>
-                  <%= time_field_tag(:start_time) %>
+                  <div class='form row'>
+                    <div class='form-group col-md-6'>
+                      <%= label_tag(:name, "Start Time:") %>
+                      <%= time_field_tag :start_time, '', :class => "form-control" %>
+                    </div>
+                    <div class='form-group col-md-6'>
+                      <%= label_tag(:end_time, "End Time:") %>
+                      <%= time_field_tag :end_time, '', :class => "form-control" %>
+                    </div>
+                  </div>
+                  <div class='form group'>
+                    <%= label_tag(:restaurant, "Restaurant (optional):") %>
+                    <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, {:option_selected => "Select a Restaurant"}, {:class => 'form-control'})%>
+                  </div>
                   <br>
-                  <%= label_tag(:end_time, "End Time:") %>
-                  <%= time_field_tag(:end_time) %>
-                  <br>
-                  <%= label_tag(:restaurant, "Restaurant (optional):") %>
-                  <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name) %>
-                  <br>
-                  <%= label_tag(:address, "Address:") %>
-                  <%= text_field_tag(:address) %>
-
+                  <div class='form group'>
+                    <%= label_tag(:name, "Address:") %>
+                    </label><%= text_field_tag :address, '', :class => "form-control" %>
+                  </div>
                   <%= hidden_field_tag 'activity_type', "Meal" %>
                   <%= hidden_field_tag 'trip_id', @trip.id %>
-              </div>
-              <div class="modal-footer">
-                <!-- TODO: You MUST have a type=submit button -->
-                <%= submit_tag("Submit", class: 'submitActivity') %>
+                  <br>
+                  <div class='form group float-right mb-4'>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+                    <%= submit_tag("Create Meal", class: 'submitActivity btn btn-secondary') %>
+                  </div>
+                  <br>
                 <% end %>
-                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
               </div>
             </div>
             <!--/.Meal-->
