@@ -15,15 +15,15 @@ Rails.application.routes.draw do
 
   root to: 'trips#home'
 
-  resources :trips, only: [:new, :create, :index, :show, :update, :delete] do
+  resources :trips, only: [:new, :create, :index, :show, :update, :destroy] do
     resources :parts, only: [:create]
   end
 
-  resources :parts, only: [:update, :delete] do
+  resources :parts, only: [:update, :destroy] do
     resources :activities, only: [:create]
   end
 
-  resources :activities, only: [:update, :delete]
+  resources :activities, only: [:update, :destroy]
 
 
   #resources :activities, except: [:create, :new, :edit, :show] do
