@@ -1,3 +1,9 @@
+<div class= "hero-image-index">
+  <div class="hero-text">
+    <h1>Create your Itineray</h1>
+  </div>
+</div>
+
 <div class='container' style='list-style-type:none'>
 
   <h4><%= @trip.name %></h4>
@@ -11,9 +17,22 @@
         <% @activities.each do |act| %>
           <% if act.start_time.day == date.day %>
             <div class='container'>
-              <span><b><%= act.start_time.strftime("%H:%M") %></b></span><span><%= act.activityable_type %></span>
-              <%= link_to "Delete", act, method: :delete, remote: true %>
+
+              <div class="card-producto">
+                <% if act.activityable.try(:photos).nil? %>
+                <img src="https://source.unsplash.com/40x40/?travel" class= "rounded-circle m-1" alt="" >
+                <% else %>
+              <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+              <% end %>
+              <div class="card-producto-infos">
+              <h5><%= act.activityable.name %></h5>
+              <p><b><%= act.start_time.strftime("%H:%M") %></b></p>
+              <p><%= act.activityable_type %></p>
+              <p><%= link_to "Delete", act, method: :delete, remote: true %></p>
+              </div>
+              </div>
             </div>
+
           <% else "" %>
           <% end %>
         <% end %>
