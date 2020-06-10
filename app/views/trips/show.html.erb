@@ -8,43 +8,64 @@
 
   <h4><%= @trip.name %></h4>
   <h6>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %> </h6>
-  <br />
-  <% @trip.parts.each do |part|%>
-    <h5> <%= part.name %> </h5>
-    <div class='container'>
-      <% part.part_dates_array.each do |date|%>
-        <h6><%= date.strftime("%A, %b %e") %></h6>
-        <% @activities.each do |act| %>
-          <% if act.start_time.day == date.day %>
-            <div class='container'>
+  <br/>
 
-              <div class="card-producto">
-                <% if act.activityable.try(:photos).nil? %>
-                <img src="https://source.unsplash.com/40x40/?travel" class= "rounded-circle m-1" alt="" >
-                <% else %>
-              <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-              <% end %>
-              <div class="card-producto-infos">
-              <h5><%= act.activityable.name %></h5>
-              <p><b><%= act.start_time.strftime("%H:%M") %></b></p>
-              <p><%= act.activityable_type %></p>
-              <p><%= link_to "Delete", act, method: :delete, remote: true %></p>
-              </div>
-              </div>
-            </div>
+  <div class="accordion" id="accordionExample">
+    <% card_index = 1 %>
+    <% @trip.parts.each do |part|%>
 
-          <% else "" %>
-          <% end %>
-        <% end %>
-        <div class='container'>
-          <span>
-            <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
-          </span>
+      <div class="card">
+        <div class="card-header" id="headingOne">
+          <h5 class="mb-0">
+            <button class="btn btn-link" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
+              <h5> <%= part.name %> </h5>
+            </button>
+          </h5>
         </div>
-       <br />
-      <% end %>
-    </div>
-  <% end %>
+
+        <div id=<%= "collapse#{card_index}" %> class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div class="card-body">
+
+            <% part.part_dates_array.each do |date|%>
+
+              <h6><%= date.strftime("%A, %b %e") %></h6>
+              <% @activities.each do |act| %>
+
+                <% if act.start_time.day == date.day %>
+                  <div class='container'>
+                    <div class="card-producto">
+                      <% if act.activityable.try(:photos).nil? %>
+                        <img src="https://source.unsplash.com/40x40/?travel" class= "rounded-circle m-1" alt="" >
+                      <% else %>
+                        <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+                      <% end %>
+                      <div class="card-producto-infos">
+                      <h5><%= act.activityable.name %></h5>
+                      <p><b><%= act.start_time.strftime("%H:%M") %></b></p>
+                      <p><%= act.activityable_type %></p>
+                      <p><%= link_to "Delete", act, method: :delete, remote: true %></p>
+                      </div>
+                    </div>
+                  </div>
+                <% end %>
+
+              <% end %>
+
+              <div class='container'>
+                <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
+              </div>
+              <br/>
+
+            <% end %>
+
+          </div>
+        </div>
+      </div>
+      <% card_index += 1 %>
+
+    <% end %>
+
+  </div>
   <button type="button" class="btn btn-secondary btn" data-toggle="modal" data-target="#partModal">+ Part</button>
 </div>
 
@@ -130,7 +151,7 @@
               <div class="modal-body">
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
-                
+
                 <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
                   <%= label_tag(:name, "Title:") %>
                   <%= text_field_tag(:name) %>
@@ -204,7 +225,3 @@
   </div>
 </div>
 <!--Modal: Login / Register Form-->
-
-<div class="text-center">
-  <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#activityModal">New Activity</a>
-</div>
