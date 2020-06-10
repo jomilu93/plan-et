@@ -10,9 +10,6 @@ class PartsController < ApplicationController
     authorize @part
     @part.trip = @trip
     if @part.save!
-      @trip.cities << @part.city.name
-      @trip.countries << @part.city.pais.name
-      @trip.save!
       redirect_to trip_path(@trip)
     else
       render 'trips/show'

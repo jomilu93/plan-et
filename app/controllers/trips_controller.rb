@@ -11,8 +11,14 @@ class TripsController < ApplicationController
       # sql_query = " \ trips.name ILIKE :query OR trips.description ILIKE :query\ "
 
       # @trips = policy_scope(Trip.where(sql_query, query: "%#{params[:query]}%"))
-      @parts = policy_scope(Part.search_for_parts("%#{params[:search]}%"))
       @trips_all = []
+      @trips_search = policy_scope(Trip.search_for_trips("%#{params[:search]}%"))
+
+      @trips_search.each do |trip|
+        @trips_all <<  trip
+      end
+
+      @parts = policy_scope(Part.search_for_parts("%#{params[:search]}%"))
       @parts.each do |part|
         @trips_all << part.trip
       end
