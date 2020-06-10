@@ -1,3 +1,6 @@
+ <!-- javascript_pack_tag 'home_screen', defer: true %> -->
+
+
 
   <div class="hero-image">
     <div class="hero-text">
@@ -5,10 +8,10 @@
       <div class="card-container-search">
         <div class="align-items-center" id="search-bar">
           <%= form_tag root_path, method: :get do %>
-          <%= text_field_tag :query, params[:query], placeholder: "Find existing trips or find inspiration to create your own ones...", class:"form-control" %>
+          <%= text_field_tag :search, params[:search], placeholder: "Find existing trips or find inspiration to create your own ones...", class:"form-control" %>
         </div>
         <div>
-          <%= submit_tag "Search", class: "search-button"%>
+          <%= submit_tag "Search", class: "search-button", id: "search_button"%>
         </div>
           <% end %>
       </div>
@@ -20,9 +23,9 @@
   <% @trips.each do |trip| %>
   <div class="card d-flex m-3">
     <% if trip.photos.empty? %>
-    <h3>No Image</h3>
+      <h3>No Image</h3>
     <% else %>
-    <%= cl_image_tag trip.photos.first.key, height: 200, width: 300, crop: :fill, class: "trip-img"%>
+      <%= cl_image_tag trip.photos.first.key, height: 200, width: 300, crop: :fill, class: "trip-img"%>
     <% end %>
     <div class="card-img-overlay">
       <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "link-text"%></h5>
