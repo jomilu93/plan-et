@@ -7,6 +7,7 @@
   <div class="accordion" id="accordionExample">
     <% card_index = 1 %>
     <% @trip.parts.each do |part|%>
+
       <div class="card">
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
@@ -20,39 +21,47 @@
           <div class="card-body">
 
             <% part.part_dates_array.each do |date|%>
+
               <h6><%= date.strftime("%A, %b %e") %></h6>
               <% @activities.each do |act| %>
+
                 <% if act.start_time.day == date.day %>
                   <div class='container'>
-                    <span><b><%= act.start_time.strftime("%H:%M") %></b></span><span><%= act.activityable_type %></span>
-                    <%= link_to "Delete", act, method: :delete, remote: true %>
+                    <div class="card-producto">
+                      <% if act.activityable.try(:photos).nil? %>
+                        <img src="https://source.unsplash.com/40x40/?travel" class= "rounded-circle m-1" alt="" >
+                      <% else %>
+                        <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
+                      <% end %>
+                      <div class="card-producto-infos">
+                      <h5><%= act.activityable.name %></h5>
+                      <p><b><%= act.start_time.strftime("%H:%M") %></b></p>
+                      <p><%= act.activityable_type %></p>
+                      <p><%= link_to "Delete", act, method: :delete, remote: true %></p>
+                      </div>
+                    </div>
                   </div>
-                <% else "" %>
                 <% end %>
+
               <% end %>
+
               <div class='container'>
-                <span>
-                  <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
-                </span>
+                <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
               </div>
-             <br/>
+              <br/>
+
             <% end %>
+
           </div>
         </div>
       </div>
       <% card_index += 1 %>
-    <% end %>
-  </div>
 
+    <% end %>
+
+  </div>
   <button type="button" class="btn btn-secondary btn" data-toggle="modal" data-target="#partModal">+ Part</button>
 </div>
-
-
-
-
-
-
-
 
 <!-- modal begins -->
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
