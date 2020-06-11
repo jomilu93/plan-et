@@ -2,7 +2,7 @@ class TripsController < ApplicationController
   #before_action :set_trip, only: %i[edit update destroy show]
 
   def index
-  @trips = policy_scope(Trip)
+  @trips = policy_scope(current_user.trips.all)
   end
 
   def home
