@@ -14,8 +14,6 @@
 
     <div class='trip_container' style='list-style-type:none'>
 
-      <br/>
-
       <div class="accordion" id="accordionExample">
         <% card_index = 1 %>
         <% @trip.parts.each do |part|%>
@@ -23,7 +21,7 @@
           <div class="card">
             <div class="card-header" id="headingOne">
               <h5 class="mb-0">
-                <button class="btn btn-link" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
+                <button class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
                   <h5> <%= part.name %> </h5>
                 </button>
               </h5>
