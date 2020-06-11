@@ -1,4 +1,6 @@
 .navbar-lewagon {
+  display: flex;
+  flex-direction: row;
   justify-content: space-between;
   background: #f8f9fa;
   padding: 8px 16px;
@@ -22,3 +24,12 @@
   list-style: none;
 }
 
+.navbar-logo{
+  height: 50px;
+  width: 50px;
+  margin-right: 10px;
+}
+
+.navbar-brand{
+  font-weight: bold;
+}

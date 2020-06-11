@@ -1,5 +1,9 @@
 <div class="navbar sticky-top navbar-expand-sm navbar-light navbar-lewagon">
-  <%= link_to "Plan-et", root_path, class: "navbar-brand" %>
+
+  <div>
+    <%= image_tag(image_path('worldwide-location.png'), class: "navbar-logo")%>
+    <%= link_to "Plan-et", root_path, class: "navbar-brand" %>
+  </div>
 
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -57,4 +61,5 @@
       <% end %>
     </ul>
   </div>
+
 </div>
