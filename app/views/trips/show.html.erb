@@ -76,6 +76,10 @@
                       </div>
                     <% end %>
                   <% end %>
+                  <div class='container'>
+                    <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
+                  </div>
+                  <br/>
                 <% end %>
               </div>
             </div>
