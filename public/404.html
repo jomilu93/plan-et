@@ -3,65 +3,79 @@
 <head>
   <title>The page you were looking for doesn't exist (404)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
+  .plan-et-error-page {
+    background-color: white;
     color: #2E2F30;
     text-align: center;
-    font-family: arial, sans-serif;
+    font-family: 'Roboto', sans-serif;
     margin: 0;
   }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
+  .plan-et-error-page div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+    width: 700px;
   }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .plan-et-error-page a{
+    text-decoration: none;
+    font-size: 25px;
+    margin-top: 50px;
   }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
+  .plan-et-error-page a:hover {
+    text-decoration: underline;
   }
 
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  .plan-et-error-page img{
+    border-radius: 20px;
+    margin-right: 300px;
+    margin-left: 300px;
   }
+
+  .plan-et-error-page h5{
+    font-size: 20px;
+    margin-top: 0px;
+  }
+
+  .plan-et-error-page h1{
+    margin-bottom: 5px;
+  }
+
+  .overlay {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+  .overlay h1{
+    position: absolute;
+    top: 50%;
+    left: 62%;
+    transform: translate(-50%, -50%);
+    margin: 0px;
+    font-size: 70px;
+    opacity: 0.5;
+    font-style: normal;
+  }
+
   </style>
 </head>
 
-<body class="rails-default-error-page">
+<body class="plan-et-error-page">
   <!-- This file lives in public/404.html -->
-  <div class="dialog">
     <div>
-      <h1>The page you were looking for doesn't exist.</h1>
-      <p>You may have mistyped the address or the page may have moved.</p>
+      <h1>Oh no! It looks like you may be lost...</h1>
+      <h5>You may have mistyped the address or the page may have moved...</h5>
+      <div class = "overlay">
+        <img src="https://goingglobaltv.com/wp-content/uploads/lost-traveler1-copy.jpg" alt="Lost traveler">
+        <h1>404 Error</h1>
+      </div>
+      <a href="https://www.plan-et-travel.com" class = "plan-et-error-page"> But don't worry! Click here to find your way again - happy travels!</a>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
+
 </body>
 </html>
