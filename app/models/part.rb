@@ -1,8 +1,23 @@
 class Part < ApplicationRecord
   belongs_to :city
   belongs_to :trip
-
   has_many :activities #, dependent: :destroy
+  # geocoded_by :city_id
+  # after_validation :geocode
+
+  include PgSearch::Model
+
+  pg_search_scope :search_for_parts,
+    against: [ :name ],
+
+    associated_against: {
+      city: [ :name ],
+      trip: [ :name, :description],
+    },
+
+    using: {
+      tsearch: { prefix: true }
+    }
 
   #figure out how to ask user if they want to delete activities or not with part deletion.
 

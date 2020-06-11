@@ -1,5 +1,10 @@
 class Trip < ApplicationRecord
-  #include PgSearch::Model
+  include PgSearch::Model
+
+  pg_search_scope :search_for_trips, :against => [:name, :description],
+    using: {
+      :tsearch => {:prefix => true}
+    }
 
   belongs_to :user
 
@@ -9,14 +14,14 @@ class Trip < ApplicationRecord
 
   validates :name, :start_date, :end_date, presence: true
 
+  # def city_names
+  #   city_names = []
+  #   Trip.parts each do |part|
+  #     city_names << part.city.name
+  #   end
+  #   city_names
+  # end
 
-   #pg_search_scope :search_by_trip,
-    #against: [ :name, :description ],
-    #associated_against: {
-    #  part: [ :name, :city]
-    #},
-    #using: {
-    #  tsearch: { prefix: true }
-    #}
+
 
 end

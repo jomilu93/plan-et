@@ -31,6 +31,8 @@ Restcountry::Country.all.each do |country|
     name: "#{country.capital}",
     pais_id: Pais.where(name: "#{country.name}").ids[0]
     )
+  puts "City #{City.last.id} complete"
+
   end
 end
 
@@ -445,27 +447,27 @@ User.create!(
       name: "David Osuna Azcona",
       email: "davidoad@gmail.com",
       password: "contrasena",
-      city_id: 3
+      city_id: 246
       )
 
 User.create!(
       name: "Luis César",
       email: "luis@gmail.com",
       password: "contrasena",
-      city_id: 1
+      city_id: 140
       )
 
 User.create!(
       name: "Lou Malta",
       email: "lou@loumalta.com",
       password: "contrasena",
-      city_id: 2
+      city_id: 75
       )
 
 user_photo = [
   "https://yt3.ggpht.com/a/AGF-l7-P-saR-nR4ly5s5KL_VIQL3lhb5FHJ8A2Kug=s900-c-k-c0xffffffff-no-rj-mo",
+  "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/06/15/14975546611983.jpg",
   "https://format-com-cld-res.cloudinary.com/image/private/s--pqOVfyT1--/c_crop,h_950,w_713,x_0,y_0/c_fill,g_center,h_506,w_380/fl_keep_iptc.progressive,q_95/v1/181a169d94261ee7ef97a047ede4ebc5/2653SBF7_010_2.jpg",
-  "https://e00-marca.uecdn.es/assets/multimedia/imagenes/2017/06/15/14975546611983.jpg"
 ]
 
 User.all.each do |user|
@@ -570,14 +572,14 @@ Meal.create!(
     name: "Breakfast at Tiffany's (also known as David's)",
     address: "500 meters west of the paved road.",
     restaurant_id: 1,
-    city_id: 3
+    city_id: 246
     )
 
 Meal.create!(
     name: "Comida en Fonda Golosa",
     address: "Al ladito de la Lagunilla",
     restaurant_id: 1,
-    city_id: 1
+    city_id: 140
     )
 
 puts "Creating transportations..."
@@ -595,25 +597,25 @@ puts "Creating others..."
 Other.create!(
       name: "A walk down the malecón where David gets whistled at.",
       address: "Next to David's home.",
-      city_id: 3
+      city_id: 246
       )
 
 Other.create!(
       name: "Sailing overnight trip with Mr. Neto Osuna.",
       address: "On a boat",
-      city_id: 3
+      city_id: 246
       )
 
 Other.create!(
       name: "Wine and bread on the river with Lou's possy.",
       address: "River Senne",
-      city_id: 2
+      city_id: 75
       )
 
 Other.create!(
       name: "Get mugged by locals",
       address: "The heart of Tepito",
-      city_id: 1
+      city_id: 140
       )
 
 
@@ -643,7 +645,7 @@ Accomodation.create!(
     name: "Stay at CDMX",
     address: "See hotel address",
     hotel_id: 1,
-    city_id: 1
+    city_id: 140
     )
 
 puts "Creating first trip..."
@@ -654,14 +656,14 @@ Part.create!(
     end_date: '10/05/2020',
     name: "Get to know Mazatlán",
     trip_id: 1,
-    city_id: 3)
+    city_id: 246)
 
 Part.create!(
     start_date: '11/05/2020',
     end_date: '15/05/2020',
     name: "Get involved in the local gangs",
     trip_id: 1,
-    city_id: 3)
+    city_id: 140)
 
 Activity.create!(
       start_time: '05/05/2020 09:00:00',
@@ -695,14 +697,14 @@ Part.create!(
     end_date: '10/06/2020',
     name: "Travel from CDMX to Paris.",
     trip_id: 2,
-    city_id: 2)
+    city_id: 75)
 
 Part.create!(
     start_date: '11/06/2020',
     end_date: '11/06/2020',
     name: "Explore Paris, the Mexico City of Europe.",
     trip_id: 2,
-    city_id: 2)
+    city_id: 75)
 
 Activity.create!(
       start_time: '10/06/2020 08:00:00',
@@ -736,7 +738,7 @@ Part.create!(
     end_date: '15/07/2020',
     name: "Tepito Thursday",
     trip_id: 3,
-    city_id: 1)
+    city_id: 140)
 
 Activity.create!(
       start_time: '15/07/2020 15:00:00',

@@ -6,16 +6,36 @@ class TripsController < ApplicationController
   end
 
   def home
-    if params[:query].present?
+    if params[:search].present?
 
-      sql_query = " \ trips.name ILIKE :query OR trips.description ILIKE :query\ "
+      @trips_all = []
+      @trips_search = policy_scope(Trip.search_for_trips("%#{params[:search]}%"))
 
-      @trips = policy_scope(Trip.where(sql_query, query: "%#{params[:query]}%"))
-      #@trips = Trip.search_by_trip("%#{params[:query]}%")
+      @trips_search.each do |trip|
+        @trips_all <<  trip
+      end
+
+      @parts = policy_scope(Part.search_for_parts("%#{params[:search]}%"))
+      @parts.each do |part|
+        @trips_all << part.trip
+      end
+
+      @countries = Pais.search_for_countries("%#{params[:search]}%")
+
+      @countries.each do |country|
+        country.cities.each do |city|
+          city.parts.each do |part|
+            @trips_all << part.trip
+          end
+        end
+      end
+
+    @trips = @trips_all.uniq
 
     else
       @trips = policy_scope(Trip)
     end
+
   end
 
   def show
@@ -34,6 +54,21 @@ class TripsController < ApplicationController
     # FIXME: The following line is incorrect. The params[:id] means the Trip ID/
     # @part = Part.find(params[:id])
     @activity = Activity.new
+
+    @cities = []
+
+    @parts.each do |part|
+      @cities << part.city
+    end
+
+    @markers = @parts.map do |part|
+      {
+        lat: part.city.latitude,
+        lng: part.city.longitude,
+        infoWindow: render_to_string(partial: "info_window", locals: { part: part })
+      }
+    end
+
   end
 
   def new

@@ -18,7 +18,7 @@ class ActivityPolicy < ApplicationPolicy
   end
 
   def update?
-    @user = user
+    @user == user
   end
 
   def edit?
@@ -26,7 +26,8 @@ class ActivityPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user = user
+    #@user == user >> this should be the default
+    true
   end
 
 end

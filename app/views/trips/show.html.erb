@@ -1,71 +1,98 @@
+
 <div class= "hero-image-index">
   <div class="hero-text">
-    <h1>Create your Itineray</h1>
+    <h1><%= @trip.name %></h1>
   </div>
 </div>
 
-<div class='container' style='list-style-type:none'>
-
+<div class="trip_title">
   <h4><%= @trip.name %></h4>
   <h6>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %> </h6>
-  <br />
-  <% @trip.parts.each do |part|%>
-    <h5> <%= part.name %> </h5>
-    <div class='container'>
-      <% part.part_dates_array.each do |date|%>
-        <h6><%= date.strftime("%A, %b %e") %></h6>
-        <% @activities.each do |act| %>
-          <% if act.start_time.day == date.day %>
+</div>
 
-      <div class='container'>
-        <div class="card-trip">
-          <% if act.activityable.try(:photos).nil? %>
-           <img src="<%= image_url('carreGris.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:35px;height:35px;">
-            <% else %>
-            <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle m-1"%>
-          <% end %>
-          <div class="card-trip-infos">
-            <div>
-              <h1>
-              <% if act.activityable_type == "Meal"%>
-               <i class="fas fa-utensils"></i>
-              <% end %>
+<div class="page_container">
 
-              <% if act.activityable_type == "Other"%>
-               <i class="far fa-dot-circle"></i>
-              <% end %>
+    <div class='trip_container' style='list-style-type:none'>
 
-              <% if act.activityable_type == "Accomodation"%>
-               <i class="fas fa-bed"></i>
-              <% end %>
+      <br/>
 
-              <% if act.activityable_type == "Transportation"%>
-               <i class="fas fa-suitcase"></i>
-              <% end %>
+      <div class="accordion" id="accordionExample">
+        <% card_index = 1 %>
+        <% @trip.parts.each do |part|%>
 
-              <% if act.activityable_type == "Attraction"%>
-               <i class="fas fa-camera"></i>
-              <% end %>
-              <%= act.activityable.name %></h1>
-              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete"><%= link_to "Delete", act, method: :delete, remote: true %></b> </p>
+          <div class="card">
+            <div class="card-header" id="headingOne">
+              <h5 class="mb-0">
+                <button class="btn btn-link" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
+                  <h5> <%= part.name %> </h5>
+                </button>
+              </h5>
+            </div>
+
+            <div id=<%= "collapse#{card_index}" %> class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <% part.part_dates_array.each do |date|%>
+                  <h6><%= date.strftime("%A, %b %e") %></h6>
+                  <% @activities.each do |act| %>
+                    <% if act.start_time.day == date.day %>
+
+                      <div class='container'>
+                        <div class="card-trip">
+
+                          <% if act.activityable.try(:photos).nil? %>
+                            <img src="<%= image_url('carreGris.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:35px;height:35px;">
+                          <% else %>
+                            <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle m-1"%>
+                          <% end %>
+
+                          <div class="card-trip-infos">
+                            <div>
+                              <h1>
+                              <% if act.activityable_type == "Meal"%>
+                               <i class="fas fa-utensils"></i>
+                              <% end %>
+
+                              <% if act.activityable_type == "Other"%>
+                               <i class="far fa-dot-circle"></i>
+                              <% end %>
+
+                              <% if act.activityable_type == "Accomodation"%>
+                               <i class="fas fa-bed"></i>
+                              <% end %>
+
+                              <% if act.activityable_type == "Transportation"%>
+                               <i class="fas fa-suitcase"></i>
+                              <% end %>
+
+                              <% if act.activityable_type == "Attraction"%>
+                               <i class="fas fa-camera"></i>
+                              <% end %>
+                              <%= act.activityable.name %></h1>
+                              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete"><%= link_to "Delete", act, method: :delete, remote: true %></b> </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+          <% card_index += 1 %>
 
-          <% else "" %>
-          <% end %>
         <% end %>
-        <div class='container'>
-          <span>
-            <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
-          </span>
-        </div>
-       <br />
-      <% end %>
-    </div>
-  <% end %>
-  <button type="button" class="btn btn-secondary btn" data-toggle="modal" data-target="#partModal">+ Part</button>
+
+      </div>
+    <button type="button" class="btn btn-secondary btn" data-toggle="modal" data-target="#partModal">+ Part</button>
+  </div>
+
+  <div id="map"
+         style="width: 100%; height: 700px; padding-top:15px;"
+         data-markers="<%= @markers.to_json %>"
+         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+
 </div>
 
 <!-- modal begins -->
@@ -119,6 +146,12 @@
   <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
     <div class="modal-content">
+      <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
       <!-- TODO: Your form will start here -->
       <!-- TODO: Add hidden fields for Activity type HERE -->
         <!--Modal cascading tabs-->
@@ -141,41 +174,45 @@
 
             <!--Meal-->
             <div class="tab-pane fade in show active" id="meal" role="tabpanel">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">New Meal</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
               <div class="modal-body">
+
                 <!-- TODO: Mandatory start_date, end_date fields -->
                 <!-- TODO: Custom Attraction fields fields -->
 
                 <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
-                  <%= label_tag(:name, "Title:") %>
-                  <%= text_field_tag(:name) %>
+                  <div class='form group'>
+                    <%= label_tag(:name, "Title:") %>
+                    </label><%= text_field_tag :name, '', :class => "form-control" %>
+                  </div>
                   <br>
-                  <%= label_tag(:start_time, "Start Time:") %>
-                  <%= time_field_tag(:start_time) %>
+                  <div class='form row'>
+                    <div class='form-group col-md-6'>
+                      <%= label_tag(:name, "Start Time:") %>
+                      <%= time_field_tag :start_time, '', :class => "form-control" %>
+                    </div>
+                    <div class='form-group col-md-6'>
+                      <%= label_tag(:end_time, "End Time:") %>
+                      <%= time_field_tag :end_time, '', :class => "form-control" %>
+                    </div>
+                  </div>
+                  <div class='form group'>
+                    <%= label_tag(:restaurant, "Restaurant (optional):") %>
+                    <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, {:option_selected => "Select a Restaurant"}, {:class => 'form-control'})%>
+                  </div>
                   <br>
-                  <%= label_tag(:end_time, "End Time:") %>
-                  <%= time_field_tag(:end_time) %>
-                  <br>
-                  <%= label_tag(:restaurant, "Restaurant (optional):") %>
-                  <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name) %>
-                  <br>
-                  <%= label_tag(:address, "Address:") %>
-                  <%= text_field_tag(:address) %>
-
-
+                  <div class='form group'>
+                    <%= label_tag(:name, "Address:") %>
+                    </label><%= text_field_tag :address, '', :class => "form-control" %>
+                  </div>
                   <%= hidden_field_tag 'activity_type', "Meal" %>
                   <%= hidden_field_tag 'trip_id', @trip.id %>
-              </div>
-              <div class="modal-footer">
-                <!-- TODO: You MUST have a type=submit button -->
-                <%= submit_tag("Submit", class: 'submitActivity') %>
+                  <br>
+                  <div class='form group float-right mb-4'>
+                    <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+                    <%= submit_tag("Create Meal", class: 'submitActivity btn btn-secondary') %>
+                  </div>
+                  <br>
                 <% end %>
-                <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
               </div>
             </div>
             <!--/.Meal-->
@@ -225,6 +262,3 @@
 </div>
 <!--Modal: Login / Register Form-->
 
-<div class="text-center">
-  <a href="" class="btn btn-default btn-rounded my-3" data-toggle="modal" data-target="#activityModal">New Activity</a>
-</div>
