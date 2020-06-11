@@ -1,5 +1,6 @@
 <div class="container mt-3">
-  <h5><%= part.name %></h5>
+  <%= cl_image_tag part.trip.photos.first.key, height: 110, width: 150, crop: :fill, class: "map-img"%>
+  <h5 class = "font-weight-bold"><%= part.name %></h5>
   <p><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e, %Y") %></p>
   <p class="font-italic"><%= part.city.name %></p>
 </div>
