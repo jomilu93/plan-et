@@ -45,6 +45,19 @@ class ActivitiesController < ApplicationController
       else
         raise
       end
+    when 'Accomodation'
+      @accomodation = Accomodation.new(meal_params)
+      authorize @accomodation
+      @accomodation.city_id = 1
+      @accomodation.hotel_id = params[:accomodation][:hotel_id]
+      if @accomodation.save!
+        @activity = Activity.new(activity_params)
+        @activity.activityable = @accomodation
+        @activity.save!
+        redirect_to trip_path(@activity.part.trip)
+      else
+        raise
+      end
     when 'Attraction'
       @attraction = Attraction.new(attraction_params)
       authorize @attraction
@@ -107,6 +120,14 @@ class ActivitiesController < ApplicationController
 
   def restaurant_params
     params.permit(:restaurant_id)
+  end
+
+  def accomodation_params
+    params.permit(:name, :address, :city_id, :hotel_id)
+  end
+
+  def hotel_params
+    params.permit(:hotel_id)
   end
 
   def attraction_params
