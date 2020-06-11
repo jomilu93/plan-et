@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   resources :activities, only: [:update, :destroy]
 
+  resources :users, only: [:show, :edit, :update]
 
   #resources :activities, except: [:create, :new, :edit, :show] do
   #  collection do

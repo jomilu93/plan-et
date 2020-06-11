@@ -1,0 +1,5 @@
+meta_product_name: "Plan-et"
+meta_title: "Plan-et - You dream it, now Plan-et!"
+meta_description: "With Plan-et, you can create, manage and share your travel itineraries from around the world."
+meta_image: "travel.jpg" # should exist in `app/assets/images/`
+# twitter_account: "@product_twitter_account"   # required for Twitter Cards

@@ -8,6 +8,9 @@ class ApplicationController < ActionController::Base
   after_action :verify_policy_scoped, only: [:index, :home], unless: :skip_pundit?
 
 
+  def default_url_options
+    { host: ENV["DOMAIN"] || "localhost:3000" }
+  end
 
   private
 
