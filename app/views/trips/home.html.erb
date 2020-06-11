@@ -5,20 +5,20 @@
   <div class="hero-image">
     <div class="hero-text">
       <h1>You dream it...now Plan-et!</h1>
+      </br>
       <div class="card-container-search">
         <div class="align-items-center" id="search-bar">
           <%= form_tag root_path, method: :get do %>
           <%= text_field_tag :search, params[:search], placeholder: "Explore other people's trips to find inspiration for your own ones...", class:"form-control", id:"search-bar" %>
         </div>
         <div>
-          <%= submit_tag "Search", class: "btn btn-light mr-3", id: "search_button"%>
+          <%= submit_tag "Search", class: "btn btn-light mr-4", id: "search_button"%>
         </div>
         <div>
-        <%= link_to "Plan Your Trip!", new_trip_path, class: "btn btn-light" %>
+        <%= link_to "Plan Your Trip!", new_trip_path, class: "btn btn-info" %>
         </div>
           <% end %>
       </div>
-    </br>
     </br>
       <h4>Create, manage and share your travel itineraries from around the world.</h4>
     </div>
