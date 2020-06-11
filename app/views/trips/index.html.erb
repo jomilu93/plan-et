@@ -1,9 +1,7 @@
-<head>
-<!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css"> -->
-<!-- <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script> -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
-</head>
+<% content_for :meta_title, "#{@trips.sample.name} is on is on Plan-et" %>
+<% content_for :meta_description, @trips.sample.description %>
+<% content_for :meta_image, cl_image_path(@trip.photos.first) %>
 
 
 <div class= "hero-image-trips" style='background-image: url("https://source.unsplash.com/1600x900/?<%=@trips.sample.name%>")'>
