@@ -36,5 +36,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { initMapbox } from '../plugins/init_mapbox';
 // import { initSelect2 } from '../components/init_select2';
 
-initMapbox();
+document.addEventListener('turbolinks:load', () => {
+  initMapbox();
+});
 
