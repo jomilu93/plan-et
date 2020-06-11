@@ -13,7 +13,8 @@ class City < ApplicationRecord
   has_many :restaurants
 
   geocoded_by :name
-  after_validation :geocode, if: :will_save_change_to_name?
+  after_validation :geocode
+  # , if: :will_save_change_to_name?
 
   validates :name, presence: true
 

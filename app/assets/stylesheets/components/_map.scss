@@ -8,7 +8,17 @@
   position: sticky;
   top: 0;
   right: 0;
+  padding-top: 15px;
 }
+
+// .map_container{
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// .map_margin{
+//   height: 15px;
+// }
 
 .mapboxgl-popup {
   max-width: 200px;
