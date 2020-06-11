@@ -57,44 +57,11 @@
 
 }
 
-.card-trip {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
-.card-trip h1 {
-  font-size: 16px;
-  // font-weight: bold;
-  margin: 0;
-}
-.card-trip h2 {
-  font-size: 12px;
-  // font-weight: bold;
-  margin: 0;
-  opacity: .7;
-}
-
-.card-trip p {
-  font-size: 12px;
-  opacity: .7;
-  margin: 0;
-}
-
-
-.card-trip .card-trip-infos {
-  padding: 16px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  position: relative;
-
-}
-
-.delete {
-  margin-left: 12px;
-
+.container-new {
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-top: 180px;
+  margin-bottom: 180px;
 }
 
 

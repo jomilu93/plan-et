@@ -38,11 +38,28 @@
                       <div class='container'>
                         <div class="card-trip">
 
-                          <% if act.activityable.try(:photos).nil? %>
-                            <img src="<%= image_url('carreGris.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:35px;height:35px;">
-                          <% else %>
-                            <%= cl_image_tag act.activityable.try(:photos)&.first&.key, height: 100, width: 100, class: "rounded-circle m-1"%>
-                          <% end %>
+                            <% if act.activityable_type == "Meal"%>
+                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                              <% end %>
+
+                              <% if act.activityable_type == "Other"%>
+                               <img src="<%= image_url('flower.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
+                              <% end %>
+
+                              <% if act.activityable_type == "Accomodation"%>
+                               <img src="<%= image_url('hotel.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                              <% end %>
+
+                              <% if act.activityable_type == "Transportation"%>
+                               <img src="<%= image_url('plane.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                              <% end %>
+
+                              <% if act.activityable_type == "Attraction"%>
+                               <img src="<%= image_url('louvre.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                              <% end %>
+
+
+
 
                           <div class="card-trip-infos">
                             <div>
