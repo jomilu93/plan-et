@@ -37,7 +37,6 @@ class ActivitiesController < ApplicationController
       authorize @meal
       @meal.city_id = 1
       @meal.restaurant_id = params[:meal][:restaurant_id]
-      raise
       if @meal.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
@@ -49,7 +48,6 @@ class ActivitiesController < ApplicationController
     when 'Attraction'
       @activity = Activity.new(activity_params)
       @attraction = params[:attraction]
-      authorize @attraction
       @activity.activityable = @attraction
       if @activity.save!
         redirect_to trip_path(@activity.part.trip)
@@ -84,8 +82,8 @@ class ActivitiesController < ApplicationController
     when 'Transportation'
       @transportation = Transportation.new(transportation_params)
       authorize @transportation
-      @transportation.origin_city_id = params[:transportation][:city_id]
-      @transportation.destination_city_id = params[:transportation][:city_id]
+      @transportation.origin_city_id = params[:transportation][:origin_city_id]
+      @transportation.destination_city_id = params[:transportation][:destination_city_id]
       if @transportation.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @transportation
@@ -163,7 +161,7 @@ class ActivitiesController < ApplicationController
   end
 
   def transportation_params
-    params.permit(:origin_city_id, :destination_city_id, :transportation_type)
+    params.permit(:transportation, :transportation_type)
   end
 
 end
