@@ -10,7 +10,6 @@ let changeUrl = (id, date) => {
 document.querySelectorAll('.plus-sign').forEach(item => {
   item.addEventListener('click', () => {
     changeUrl(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
-    changeUrl
   });
 });
 
