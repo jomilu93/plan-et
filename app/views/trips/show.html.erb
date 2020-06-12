@@ -89,7 +89,9 @@
                                <i class="fas fa-camera"></i>
                               <% end %>
                               <% if act.activityable_type == 'Transportation'%>
-                                <%= act.activityable.transportation_type %>
+                                <%= act.activityable.transportation_type %> from <%= City.find(act.activityable.origin_city_id).name %> to <%= City.find(act.activityable.destination_city_id).name %>
+                              <% elsif act.activityable_type == 'Accomodation'%>
+                                <%= act.activityable.hotel.name %>
                               <% else %>
                                 <%= act.activityable.name %>
                               <% end %>

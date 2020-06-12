@@ -17,15 +17,20 @@ Rails.application.routes.draw do
 
   resources :trips, only: [:new, :create, :index, :show, :update, :destroy] do
     resources :parts, only: [:create]
+    # resources :meals, only: [:create]
+    # resources :accomodations, only: [:create]
   end
 
   resources :parts, only: [:update, :destroy] do
     resources :activities, only: [:create]
   end
 
-  resources :activities, only: [:update, :destroy]
+  resources :activities, only: [:update, :destroy] do |variable|
+  end
 
-  resources :users, only: [:show, :edit, :update]
+
+
+  # resources :users, only: [:show, :edit, :update]
 
   #resources :activities, except: [:create, :new, :edit, :show] do
   #  collection do
