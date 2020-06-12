@@ -59,6 +59,7 @@ class ActivitiesController < ApplicationController
       authorize @accomodation
       @accomodation.city_id = 1
       @accomodation.hotel_id = params[:accomodation][:hotel_id]
+      @accomodation.name = "Blank name"
       if @accomodation.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @accomodation
