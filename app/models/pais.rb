@@ -3,7 +3,7 @@ class Pais < ApplicationRecord
 
   include PgSearch::Model
 
-  pg_search_scope :search_for_countries, :against => [:name],
+  pg_search_scope :search_for_countries, :against => [:name, :region, :subregion],
     using: {
       :tsearch => {:prefix => true}
     }
