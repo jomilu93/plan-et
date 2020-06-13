@@ -1,6 +1,4 @@
 // change the url to add the part ID the activity belongs to
-console.log("JS loaded");
-
 let changeUrl = (id, date) => {
   document.querySelectorAll('.activity_form').forEach(form => {
     form.action = `/parts/${id}/activities?date=${date}`;
