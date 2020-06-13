@@ -91,14 +91,15 @@ class TripsController < ApplicationController
    end
 
 
-  # def update
-  #   #authorize @trip
-  #   if @trip.update(trip_params)
-  #     redirect_to trip_path(@trip)
-  #   else
-  #     render :new
-  #   end
-  # end
+  def update
+    @trip = Trip.find(params[:id])
+    authorize @trip
+    if @trip.update(trip_params)
+      redirect_to trip_path(@trip)
+    else
+      render :new
+    end
+  end
 
   private
 

@@ -11,8 +11,11 @@
 </div>
 
 <div class="trip_title">
-  <h4><%= @trip.name %></h4>
+  <h4> <%= @trip.name %></h4>
   <h6>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %> </h6>
+  <% if @trip.user = current_user %>
+    <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
+  <% end %>
 </div>
 
 <div class="page_container">
@@ -127,6 +130,9 @@
 </div>
 
 <!-- modal begins -->
+
+<!-- Part modal -->
+
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -142,6 +148,33 @@
           <%= f.input :start_date, required: true %>
           <%= f.input :end_date, required: true %>
           <%= f.association :city, collection: City.all %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<!-- Trip modal -->
+
+<div class="modal fade" id="tripModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= simple_form_for(@trip, remote: true) do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Edit trip</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= f.input :name, required: true %>
+          <%= f.input :description, required: true %>
+          <%= f.input :start_date, required: true %>
+          <%= f.input :end_date, required: true %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
