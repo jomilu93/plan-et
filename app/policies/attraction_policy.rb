@@ -18,7 +18,7 @@ class AttractionPolicy < ApplicationPolicy
   end
 
   def update?
-    @user == user
+    @user == record.user
   end
 
   def edit?

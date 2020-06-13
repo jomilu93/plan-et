@@ -13,7 +13,7 @@
 <div class="trip_title">
   <h4> <%= @trip.name %></h4>
   <h6>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %> </h6>
-  <% if @trip.user = current_user %>
+  <% if policy(@trip).update? %>
     <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
   <% end %>
 </div>
