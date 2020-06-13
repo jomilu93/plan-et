@@ -15,9 +15,9 @@ class Part < ApplicationRecord
       trip: [ :name, :description],
     },
 
-    using: {
-      tsearch: { prefix: true }
-    }
+    using: [
+      :trigram
+    ]
 
   #figure out how to ask user if they want to delete activities or not with part deletion.
 
