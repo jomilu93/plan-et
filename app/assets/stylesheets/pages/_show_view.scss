@@ -65,5 +65,69 @@
 
 }
 
+.card-tripo {
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  border-radius:5px;
+}
+
+.card-tripo > img {
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+
+  align: center
+}
+
+.card-tripo h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 4px;
+}
+
+.card-tripo h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin: 0;
+  margin-bottom: 8px;
+}
+
+.card-tripo p {
+  font-size: 14px;
+  opacity: .7;
+  margin: 0;
+}
 
 
+.card-tripo .card-tripo-infos {
+  padding: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  position: relative;
+}
+
+.card-tripo-infos .card-tripo-user {
+  position: absolute;
+  right: 16px;
+  top: -20px;
+  width: 40px;
+  height:40px;
+}
+
+
+.btn-secondary{
+
+background: #86918E;
+margin-top: 16px;
+padding: 4px 12px 4px 12px;
+border-radius:2px;
+border:none;
+}
+
+.show-container{
+  padding: 20px;
+
+}
