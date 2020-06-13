@@ -11,26 +11,33 @@ class TripsController < ApplicationController
       @trips_all = []
       @trips_search = policy_scope(Trip.search_for_trips("%#{params[:search]}%"))
 
-      @trips_search.each do |trip|
-        @trips_all <<  trip
+      if @trips_search
+        @trips_search.each do |trip|
+          @trips_all <<  trip
+        end
       end
 
       @parts = policy_scope(Part.search_for_parts("%#{params[:search]}%"))
-      @parts.each do |part|
-        @trips_all << part.trip
+
+      if @parts
+        @parts.each do |part|
+          @trips_all << part.trip
+        end
       end
 
       @countries = Pais.search_for_countries("%#{params[:search]}%")
 
-      @countries.each do |country|
-        country.cities.each do |city|
-          city.parts.each do |part|
-            @trips_all << part.trip
+      if @countries
+        @countries.each do |country|
+          country.cities.each do |city|
+            city.parts.each do |part|
+              @trips_all << part.trip
+            end
           end
         end
       end
 
-    @trips = @trips_all.uniq
+      @trips = @trips_all.uniq
 
     redirect_to "/?search=#{params[:search]}"
 

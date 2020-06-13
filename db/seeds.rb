@@ -17,7 +17,9 @@ puts "Adding countries..."
 
 Restcountry::Country.all.each do |country|
   Pais.create!(
-    name: "#{country.name}"
+    name: "#{country.name}",
+    region: "#{country.region}",
+    subregion: "#{country.subregion}"
     )
 end
 

@@ -3,12 +3,18 @@
 <% content_for :meta_description, @trip.description %>
 <% content_for :meta_image, cl_image_path(@trip.photos.first) %>
 
-
-<div class= "hero-image-show" style='background-image: url("https://source.unsplash.com/1600x900/?<%=@trip.name%>")'>
-  <div class="hero-text">
-    <h1><%= @trip.name %></h1>
+<div class="show-container">
+<div class="card-tripo">
+   <%= cl_image_tag @trip.photos.first.key %>
+  <div class="card-tripo-infos">
+    <div>
+      <h2><%= @trip.name %></h2>
+      <h3>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %></h3>
+      <p> <%= @trip.description %></p>
+    </div>
+    <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered" %>
   </div>
-</div>
+ </div>
 
 <div class="trip_title">
   <h4> <%= @trip.name %></h4>
@@ -17,6 +23,7 @@
     <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
   <% end %>
 </div>
+
 
 <div class="page_container">
 
@@ -46,8 +53,12 @@
                       <div class='container'>
                         <div class="card-trip">
 
-                            <% if act.activityable_type == "Meal"%>
-                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                              <% if act.activityable_type == "Restaurant"%>
+                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
+                              <% end %>
+
+                              <% if act.activityable_type == "Meal"%>
+                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
                               <% end %>
 
                               <% if act.activityable_type == "Other"%>
@@ -76,6 +87,10 @@
                                <i class="fas fa-utensils"></i>
                               <% end %>
 
+                               <% if act.activityable_type == "Restaurant"%>
+                               <i class="fas fa-utensils"></i>
+                              <% end %>
+
                               <% if act.activityable_type == "Other"%>
                                <i class="far fa-dot-circle"></i>
                               <% end %>
@@ -99,7 +114,8 @@
                                 <%= act.activityable.name %>
                               <% end %>
                               </h1>
-                              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete"><%= link_to "Delete", act, method: :delete, remote: true %></b> </p>
+                              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete"><%= link_to "Delete", act, method: :delete, remote: true %></b>  </p>
+
                             </div>
                           </div>
                         </div>
@@ -107,7 +123,7 @@
                     <% end %>
                   <% end %>
                   <div class='container'>
-                    <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
+                    <%= link_to '+',"" , type: "button", id: "day-#{date}", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
                   </div>
                   <br/>
                 <% end %>
@@ -119,7 +135,7 @@
         <% end %>
 
       </div>
-    <button type="button" class="btn btn-secondary btn mt-3" data-toggle="modal" data-target="#partModal">+ Part</button>
+    <button type="button" class="btn-secondary" data-toggle="modal" data-target="#partModal">+ Part</button>
   </div>
 
   <div id="map"
@@ -252,7 +268,7 @@
             <div class="tab-pane fade in show active" id="meal" role="tabpanel">
               <div class="modal-body">
 
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
                   <div class='form group'>
                     <%= label_tag(:name, "Title:") %>
                     </label><%= text_field_tag :name, '', :class => "form-control" %>

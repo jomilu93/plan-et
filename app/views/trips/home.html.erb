@@ -1,7 +1,7 @@
  <!-- javascript_pack_tag 'home_screen', defer: true %> -->
-<% content_for :meta_title, "#{@trips.sample.name} is on Plan-et" %>
-<% content_for :meta_description, @trips.sample.description %>
-<% content_for :meta_image, cl_image_path(@trips.sample.photos.first) %>
+<% content_for :meta_title, "Plan all tour trips on Plan-et" %>
+<% content_for :meta_description, "Create, manage and share your travel trip itineraries from around the world." %>
+<% content_for :meta_image, cl_image_path("travel.jpg") %>
 
 
   <div class="hero-image">
@@ -29,11 +29,11 @@
 
 <div class="trip-card-container">
   <% @trips.each do |trip| %>
-  <div class="card d-flex m-3">
+  <div class="card d-flex m-2">
     <% if trip.photos.empty? %>
       <h3>No Image</h3>
     <% else %>
-      <%= cl_image_tag trip.photos.first.key, height: 200, width: 300, crop: :fill, class: "trip-img"%>
+      <%= cl_image_tag trip.photos.first.key, height: 250, width: 370, crop: :fill, class: "trip-img"%>
     <% end %>
     <div class="card-img-overlay">
       <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "link-text"%></h5>
