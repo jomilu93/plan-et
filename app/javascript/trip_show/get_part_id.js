@@ -7,20 +7,24 @@ let changeUrl = (id, date) => {
   });
 }
 
-// retireve part ID when clicking a '+' sign
-document.querySelectorAll('.plus-sign').forEach(item => {
-  item.addEventListener('click', () => {
-    console.log("click detected");
-    changeUrl(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
+const initModifyURL = () => {
+  // retireve part ID when clicking a '+' sign
+  document.querySelectorAll('.plus-sign').forEach(item => {
+    item.addEventListener('click', () => {
+      console.log("click detected");
+      changeUrl(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
+    });
   });
-});
+};
 
-// hide modal when submitting form
-document.querySelectorAll('.submitActivity').forEach(btn => {
-  btn.addEventListener('click', () => {
-    $('#activityModal').modal('hide');
+const initHideModal =() => {
+  // hide modal when submitting form
+  document.querySelectorAll('.submitActivity').forEach(btn => {
+    btn.addEventListener('click', () => {
+      $('#activityModal').modal('hide');
+    });
   });
-});
+};
 
-// retrieve date from the '+' sign
+export {initHideModal, initModifyURL};
 

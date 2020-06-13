@@ -35,8 +35,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // Internal imports, e.g:
 import { initMapbox } from '../plugins/init_mapbox';
 // import { initSelect2 } from '../components/init_select2';
+import { initModifyURL } from '../trip_show/get_part_id'
+import { initHideModal } from '../trip_show/get_part_id'
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
+  initHideModal();
+  initModifyURL();
 });
 

@@ -41,7 +41,7 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
         @activity.save!
-        redirect_to trip_path(@activity.part.trip)
+        redirect_to trip_path(@activity.part.trip, anchor: "day-2020-06-13")
       else
         raise
       end
