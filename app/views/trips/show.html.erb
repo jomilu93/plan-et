@@ -33,7 +33,7 @@
             <div class="card-header" id="headingOne">
               <h5 class="d-flex flex-row justify-content-between align-items-center mb-0">
                 <button class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
-                  <h5> <%= part.name %> </h5>
+                  <h5><%= part.name %><h5>
                 </button>
                 <% if policy(part.trip).update? %>
                  <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data_part_id" => part.id %>
@@ -76,9 +76,6 @@
                                <img src="<%= image_url('louvre.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
                               <% end %>
 
-
-
-
                           <div class="card-trip-infos">
                             <div>
                               <h1>
@@ -113,8 +110,13 @@
                                 <%= act.activityable.name %>
                               <% end %>
                               </h1>
-                              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete"><%= link_to "Delete", act, method: :delete, remote: true %></b>  </p>
-
+                              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
+                                <%= link_to "Delete",
+                                    act,
+                                    method: :delete,
+                                    data: {confirm: "Are you sure to delete this Activity?"},
+                                    remote: true %></b>
+                              </p>
                             </div>
                           </div>
                         </div>
@@ -144,31 +146,13 @@
 
 </div>
 
-<!-- modal begins -->
 
 <!-- New part modal -->
 
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <%= simple_form_for([@trip, @part_new], remote: true) do |f| %>
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <%= f.input :name, required: true %>
-          <%= f.input :start_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
-          <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
-          <%= f.association :city, collection: City.all %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <%= f.button :submit, class: 'btn btn-primary' %>
-        </div>
-      <%end%>
+      <%= render 'trips/partials/part_form' %>
     </div>
   </div>
 </div>
@@ -227,25 +211,6 @@
   </div>
 </div>
 
-<!--
-  TODO: Form explanation:
-  1. We need to pass the mandatory fields: PartID, Activity Type and dates for Activity
-  2. To get the PartID we will add an eventListener in JS to the "+" buttons on each day.
-    The eventListener will change the URL the form points to set the PartID. eg. /parts/2/activitiesn
-  3. To get the ActivityType we will add an eventListener to the Tabs in the modal.
-    The eventListener will change a hidden field value in the form to set the Activity Type.
-    !! The type needs to match the ones in the ActivitiesController case statement.
-  4. We will have the start_date and end_date input fields in all the different forms.
-  5. We will have custom input fields for all the different activities
-  6. The form MUST to do a POST request to the activities#create route.
-
-  PS: For the form you could either use plain HTML or the Rails helper 👇
-  https://guides.rubyonrails.org/form_helpers.html#dealing-with-basic-forms
-
-  I'd advice you to use the helper cause it handles the Authenticity Token of the form.
-  Read the Dealing with Basic Forms for more info on that.
-
--->
 
 <!--Modal: Activity-->
 <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -258,9 +223,6 @@
           </button>
       </div>
 
-      <!-- TODO: Your form will start here -->
-      <!-- TODO: Add hidden fields for Activity type HERE -->
-        <!--Modal cascading tabs-->
         <div class="modal-c-tabs">
 
           <!-- Nav tabs -->
@@ -488,6 +450,5 @@
     <!--/.Content-->
   </div>
 </div>
-<!--Modal: Login / Register Form-->
 
 

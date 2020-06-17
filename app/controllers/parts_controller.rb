@@ -19,10 +19,7 @@ class PartsController < ApplicationController
   def update
     @trip = Trip.find(params[:trip_id])
     authorize @part
-    @part.save
     if @part.save
-      @trip.cities << @part.city.name
-      @trip.countries << @part.city.pais.name
       redirect_to trip_path(@trip)
     else
       render 'trips/show'

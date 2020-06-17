@@ -7,30 +7,6 @@ class ActivitiesController < ApplicationController
   end
 
   def create
-    # raise
-    # TODO: We need to get the following information in the request: (accessible through params)
-    # PartID [MANDATORY]
-    # Activity Type [MANDATORY]
-    # Activity attributes [MANDATORY] (start_time, end_time)
-    # The selected Activity attributes (e.g. Meal attributes)
-    #
-    # Then we need to follow this logic:
-    # 1. We get the Part instance with the PartID from the request
-    # 2. We create an Activity instance (Activity.new)
-    # 3. We assign the Part to the Activity
-    # 4. We do a case statement with the Acitvity type value.
-    # e.g.
-    # case ACTIVITY_TYPE
-    # when 'meal'
-    #   Meal.create
-    # when 'attraction'
-    #   Attraction.create
-    # end
-    #
-    # We need to store the instance of any of those activities in a variable, to later assign it to the Activity
-    # 5. Assign the Activityable to the Activity
-    # 6. Save the Activityable to the DB
-    # 7. Save the Activity to the DB
     case params[:activity_type]
     when 'Meal'
       @meal = Meal.new(meal_params)
