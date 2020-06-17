@@ -3,17 +3,23 @@
 <% content_for :meta_description, @trip.description %>
 <% content_for :meta_image, cl_image_path(@trip.photos.first) %>
 
-
-<div class= "hero-image-show" style='background-image: url("https://source.unsplash.com/1600x900/?<%=@trip.name%>")'>
-  <div class="hero-text">
-    <h1><%= @trip.name %></h1>
+<div class="show-container">
+<div class="card-tripo">
+   <%= cl_image_tag @trip.photos.first.key %>
+  <div class="card-tripo-infos">
+    <div>
+      <h2><%= @trip.name %></h2>
+      <h3>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %></h3>
+      <p> <%= @trip.description %></p>
+    </div>
+    <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered" %>
   </div>
-</div>
+ </div>
 
-<div class="trip_title">
-  <h4><%= @trip.name %></h4>
-  <h6>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %> </h6>
-</div>
+<% if policy(@trip).update? %>
+ <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
+<% end %>
+
 
 <div class="page_container">
 
@@ -25,10 +31,13 @@
 
           <div class="card">
             <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
+              <h5 class="d-flex flex-row justify-content-between align-items-center mb-0">
                 <button class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
                   <h5><%= part.name %><h5>
                 </button>
+                <% if policy(part.trip).update? %>
+                 <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data_part_id" => part.id %>
+                <% end %>
               </h5>
             </div>
 
@@ -43,8 +52,12 @@
                       <div class='container'>
                         <div class="card-trip">
 
-                            <% if act.activityable_type == "Meal"%>
-                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                              <% if act.activityable_type == "Restaurant"%>
+                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
+                              <% end %>
+
+                              <% if act.activityable_type == "Meal"%>
+                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
                               <% end %>
 
                               <% if act.activityable_type == "Other"%>
@@ -67,6 +80,10 @@
                             <div>
                               <h1>
                               <% if act.activityable_type == "Meal"%>
+                               <i class="fas fa-utensils"></i>
+                              <% end %>
+
+                               <% if act.activityable_type == "Restaurant"%>
                                <i class="fas fa-utensils"></i>
                               <% end %>
 
@@ -107,7 +124,7 @@
                     <% end %>
                   <% end %>
                   <div class='container'>
-                    <%= link_to '+',"" , type: "button", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
+                    <%= link_to '+',"" , type: "button", id: "day-#{date}", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
                   </div>
                   <br/>
                 <% end %>
@@ -119,7 +136,7 @@
         <% end %>
 
       </div>
-    <button type="button" class="btn btn-secondary btn mt-3" data-toggle="modal" data-target="#partModal">+ Part</button>
+    <button type="button" class="btn-secondary" data-toggle="modal" data-target="#partModal">+ Part</button>
   </div>
 
   <div id="map"
@@ -129,11 +146,67 @@
 
 </div>
 
-<!-- Part add modal begins -->
+
+<!-- New part modal -->
+
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <%= render 'trips/partials/part_form' %>
+    </div>
+  </div>
+</div>
+
+<!-- Edit part modal -->
+
+<div class="modal fade" id="editPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= simple_form_for([@trip.parts.sample], remote: true) do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= f.input :name, required: true %>
+          <%= f.input :start_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
+          <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
+          <%= f.association :city, collection: City.all %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>  `
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<!-- Trip modal -->
+
+<div class="modal fade" id="tripModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= simple_form_for(@trip, remote: true) do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">Edit trip</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= f.input :name, required: true %>
+          <%= f.input :description, required: true %>
+          <%= f.input :start_date, required: true %>
+          <%= f.input :end_date, required: true %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+      <%end%>
     </div>
   </div>
 </div>
@@ -183,7 +256,7 @@
             <div class="tab-pane fade in show active" id="meal" role="tabpanel">
               <div class="modal-body">
 
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
+                <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
                   <div class='form group'>
                     <%= label_tag(:name, "Title:") %>
                     </label><%= text_field_tag :name, '', :class => "form-control" %>
@@ -377,6 +450,5 @@
     <!--/.Content-->
   </div>
 </div>
-<!--Modal: Login / Register Form-->
 
 
