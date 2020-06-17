@@ -31,10 +31,13 @@
 
           <div class="card">
             <div class="card-header" id="headingOne">
-              <h5 class="mb-0">
+              <h5 class="d-flex flex-row justify-content-between align-items-center mb-0">
                 <button class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
                   <h5> <%= part.name %> </h5>
                 </button>
+                <% if policy(part.trip).update? %>
+                 <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data_part_id" => part.id %>
+                <% end %>
               </h5>
             </div>
 
@@ -143,12 +146,39 @@
 
 <!-- modal begins -->
 
-<!-- Part modal -->
+<!-- New part modal -->
 
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <%= simple_form_for([@trip, @part_new], remote: true) do |f| %>
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <%= f.input :name, required: true %>
+          <%= f.input :start_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
+          <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
+          <%= f.association :city, collection: City.all %>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+          <%= f.button :submit, class: 'btn btn-primary' %>
+        </div>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<!-- Edit part modal -->
+
+<div class="modal fade" id="editPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <%= simple_form_for([@trip.parts.sample], remote: true) do |f| %>
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
