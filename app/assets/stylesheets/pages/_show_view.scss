@@ -130,14 +130,35 @@ background: #86918E;
 margin-top: 16px;
 padding: 4px 12px 4px 12px;
 border-radius:2px;
-border:none;
+border: none;
+}
+.btn-secondary:hover{
+background:#5A929E;
 }
 
-.btn-light{
+.btn-light-2{
   margin-bottom: -15px;
   margin-right: 5px;
   padding-top: 3px;
   padding-bottom: 3px;
+  background: #86918E;
+  color: white;
+}
+.btn-light{
+
+  border: none;
+  color:#86918E;
+  padding-top:7px;
+  padding-bottom:7px;
+
+}
+
+
+
+.btn-light-2:hover{
+  color: white;
+  background:#5A929E;
+
 }
 
 .show-container{
@@ -150,4 +171,10 @@ border:none;
 
 .nav-item a{
   color: #5A929E;
+}
+
+.modal-footer{
+  margin-bottom: 30px;
+  padding-top: 0px;
+  border-color: white;
 }
