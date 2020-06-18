@@ -12,7 +12,7 @@
       <h3>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %></h3>
       <p> <%= @trip.description %></p>
     </div>
-    <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered" %>
+    <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
   </div>
 </div>
 </div>
@@ -424,6 +424,7 @@
     </div>
     <!--/.Content-->
   </div>
+</div>
 </div>
 <!--Modal: Login / Register Form-->
 

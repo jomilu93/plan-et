@@ -63,6 +63,12 @@
 .delete {
   margin-left: 12px;
 
+
+}
+
+.delete a {
+  color: #5A929E;
+
 }
 
 .card-tripo {
@@ -127,7 +133,21 @@ border-radius:2px;
 border:none;
 }
 
-.show-container{
-  padding: 20px;
+.btn-light{
+  margin-bottom: -15px;
+  margin-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
 
+.show-container{
+  padding-bottom: 20px;
+  padding-top: 0px;
+  padding-left: 30px;
+  padding-right: 30px;
+
+}
+
+.nav-item a{
+  color: #5A929E;
 }
