@@ -61,7 +61,7 @@ class TripsController < ApplicationController
     @part_new = Part.new
 
     # FIXME: The following line is incorrect. The params[:id] means the Trip ID/
-    @part = Part.find(params[:data_part_id])
+    # @part = Part.find(params[:data_part_id])
     @activity = Activity.new
 
     @cities = []
