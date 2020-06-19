@@ -1,7 +1,7 @@
  <!-- javascript_pack_tag 'home_screen', defer: true %> -->
-<% content_for :meta_title, "#{@trips.sample.name} is on Plan-et" %>
-<% content_for :meta_description, @trips.sample.description %>
-<% content_for :meta_image, cl_image_path(@trips.sample.photos.first) %>
+<% content_for :meta_title, "Plan all tour trips on Plan-et" %>
+<% content_for :meta_description, "Create, manage and share your travel trip itineraries from around the world." %>
+<% content_for :meta_image, cl_image_path("travel.jpg") %>
 
 
   <div class="hero-image">
@@ -10,7 +10,7 @@
       </br>
       <div class="card-container-search">
         <div class="align-items-center" id="search-bar">
-          <%= form_tag root_path, method: :get do %>
+          <%= form_tag root_path, method: :get, remote: true do %>
           <%= text_field_tag :search, params[:search], placeholder: "Explore other people's trips to find inspiration for your own ones...", class:"form-control", id:"search-bar" %>
         </div>
         <div>

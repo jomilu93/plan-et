@@ -11,26 +11,35 @@ class TripsController < ApplicationController
       @trips_all = []
       @trips_search = policy_scope(Trip.search_for_trips("%#{params[:search]}%"))
 
-      @trips_search.each do |trip|
-        @trips_all <<  trip
+      if @trips_search
+        @trips_search.each do |trip|
+          @trips_all <<  trip
+        end
       end
 
       @parts = policy_scope(Part.search_for_parts("%#{params[:search]}%"))
-      @parts.each do |part|
-        @trips_all << part.trip
+
+      if @parts
+        @parts.each do |part|
+          @trips_all << part.trip
+        end
       end
 
       @countries = Pais.search_for_countries("%#{params[:search]}%")
 
-      @countries.each do |country|
-        country.cities.each do |city|
-          city.parts.each do |part|
-            @trips_all << part.trip
+      if @countries
+        @countries.each do |country|
+          country.cities.each do |city|
+            city.parts.each do |part|
+              @trips_all << part.trip
+            end
           end
         end
       end
 
-    @trips = @trips_all.uniq
+      @trips = @trips_all.uniq
+
+    redirect_to "/?search=#{params[:search]}"
 
     else
       @trips = policy_scope(Trip)
@@ -43,7 +52,6 @@ class TripsController < ApplicationController
     authorize @trip
     @trip_owner = @trip.user
     @parts = @trip.parts
-    #@part = Part.find(params[:id])
     @activities = []
     @parts.each do |part|
       part.activities.all.each do |activity|
@@ -51,8 +59,9 @@ class TripsController < ApplicationController
       end
     end
     @part_new = Part.new
+
     # FIXME: The following line is incorrect. The params[:id] means the Trip ID/
-    # @part = Part.find(params[:id])
+    @part = Part.find(params[:data_part_id])
     @activity = Activity.new
 
     @cities = []
@@ -89,14 +98,15 @@ class TripsController < ApplicationController
    end
 
 
-  # def update
-  #   #authorize @trip
-  #   if @trip.update(trip_params)
-  #     redirect_to trip_path(@trip)
-  #   else
-  #     render :new
-  #   end
-  # end
+  def update
+    @trip = Trip.find(params[:id])
+    authorize @trip
+    if @trip.update(trip_params)
+      redirect_to trip_path(@trip)
+    else
+      render :new
+    end
+  end
 
   private
 
