@@ -87,5 +87,21 @@ body{
   margin-bottom: 180px;
 }
 
-
-
+a#nav-home-tab.nav-item.nav-link.active.text-reset{
+  color: #86918E!important;
+}
+a#nav-home-tab.nav-item.nav-link.active.text-reset:hover{
+  color:#5A929E!important;
+}
+a#nav-profile-tab.nav-item.nav-link.text-reset:hover{
+  color: #5A929E !important;
+}
+a#nav-profile-tab.nav-item.nav-link.text-reset{
+  color: #86918E!important;
+}
+a#nav-contact-tab.nav-item.nav-link.text-reset:hover{
+  color: #5A929E !important;
+}
+a#nav-contact-tab.nav-item.nav-link.text-reset{
+  color: #86918E!important;
+}
