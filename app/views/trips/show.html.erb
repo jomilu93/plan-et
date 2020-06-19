@@ -12,7 +12,7 @@
       <h3>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %></h3>
       <p> <%= @trip.description %></p>
     </div>
-    <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered" %>
+    <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
   </div>
  </div>
 
@@ -176,9 +176,11 @@
           <%= f.association :city, collection: City.all %>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <%= f.button :submit, class: 'btn btn-primary' %>
-        </div>  `
+
+          <button type="button" class="btn btn-light-2" data-dismiss="modal">Close</button>
+          <%= f.button :submit, class: 'btn-light-2' %>
+        </div>
+
       <%end%>
     </div>
   </div>
@@ -285,7 +287,7 @@
                   <%= hidden_field_tag 'trip_id', @trip.id %>
                   <br>
                   <div class='form group float-right mb-4'>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+                    <button type="button" class=" btn btn-light-2" data-dismiss="modal">Discard</button>
                     <%= submit_tag("Add Meal", class: 'submitActivity btn btn-secondary') %>
                   </div>
                   <br>
@@ -450,5 +452,9 @@
     <!--/.Content-->
   </div>
 </div>
+
+</div>
+<!--Modal: Login / Register Form-->
+
 
 
