@@ -78,6 +78,7 @@ class TripsController < ApplicationController
       }
     end
 
+
   end
 
   def new
@@ -108,7 +109,10 @@ class TripsController < ApplicationController
     end
   end
 
-  private
+  # private
+
+  # def private
+  # end
 
   #def set_trip
   #  @trip = Trip.find(params[:id])

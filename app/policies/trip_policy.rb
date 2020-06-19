@@ -10,7 +10,11 @@ class TripPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+  # if record.private
+  # record.user == user
+  # else
+  true
+end
   end
 
   def new?
@@ -28,4 +32,4 @@ class TripPolicy < ApplicationPolicy
   def destroy?
     @user == record.user
   end
-end
+# end
