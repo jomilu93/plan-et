@@ -76,6 +76,8 @@
                                <img src="<%= image_url('louvre.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
                               <% end %>
 
+
+
                           <div class="card-trip-infos">
                             <div>
                               <h1>
@@ -135,8 +137,16 @@
 
         <% end %>
 
-      </div>
+  </div>
     <button type="button" class="btn-secondary" data-toggle="modal" data-target="#partModal">+ Part</button>
+
+    <div class="checkbox">
+      <p>Would you like to make your trip public?</p>
+      <form action="" method="post">
+        <input type="radio" name="joke" value="yes" /> Yes
+        <input type="radio" name="joke" value="no" /> No
+      </form>
+    </div>
   </div>
 
   <div id="map"
@@ -145,6 +155,7 @@
          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 </div>
+
 
 
 <!-- New part modal -->
@@ -162,7 +173,7 @@
 <div class="modal fade" id="editPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <%= simple_form_for([@trip.parts.sample], remote: true, action: part_path(part.id)) do |f| %>
+      <%= simple_form_for([@trip.parts.sample], remote: true) do |f| %>
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -446,17 +457,13 @@
             </div>
             <!--/.Transit-->
           </div>
+
         </div>
         <!-- TODO: Your form must end here -->
     </div>
     <!--/.Content-->
   </div>
 </div>
-
-<input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-<label for="vehicle1"> I have a bike</label><br>
-<input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
-<label for="vehicle2"> I have a car</label><br>
 
 </div>
 <!--Modal: Login / Register Form-->

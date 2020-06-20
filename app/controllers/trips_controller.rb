@@ -109,14 +109,11 @@ class TripsController < ApplicationController
     end
   end
 
-  # private
+  private
 
-  # def private
-  # end
-
-  #def set_trip
-  #  @trip = Trip.find(params[:id])
-  #end
+  def set_trip
+   @trip = Trip.find(params[:id])
+  end
 
   def trip_params
     #params[:trip].parse_date_select! :start_date

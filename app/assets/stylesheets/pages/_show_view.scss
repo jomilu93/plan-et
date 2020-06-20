@@ -2,7 +2,10 @@
   display: flex;
   justify-content: space-around;
   flex-direction: row;
-  padding: 30px;
+  // padding: 30px;
+  padding-top: 30px;
+  // padding-left: 30px;
+  // padding-right: 30px;
 }
 
 .trip_title{
@@ -162,7 +165,7 @@ background:#5A929E;
 }
 
 .show-container{
-  padding-bottom: 20px;
+  // padding-bottom: 20px;
   padding-top: 0px;
   padding-left: 30px;
   padding-right: 30px;
@@ -178,3 +181,54 @@ background:#5A929E;
   padding-top: 0px;
   border-color: white;
 }
+
+p,
+label {
+    font-weight: bold;
+    font-size: 12px;
+}
+
+input {
+    margin: .4rem;
+
+}
+
+
+form{
+font-size: 12px;
+font-weight: bold;
+}
+
+
+.checkbox{
+  margin-top: 50px;
+
+
+}
+
+input[type='radio']:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        // position: relative;
+        background-color: white;
+        content: '';
+        visibility: visible;
+        // border: 2px solid white;
+    }
+
+    input[type='radio']:checked:after {
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
+        top: -2px;
+        left: -1px;
+        position: relative;
+        background-color: white;
+        content: '';
+        display: inline-block;
+        visibility: visible;
+        border: 5px solid #5A929E;
+
+    }
+
