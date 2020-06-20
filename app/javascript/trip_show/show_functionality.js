@@ -60,6 +60,27 @@ const initHideModal =() => {
   });
 };
 
+// change the url to add the activity ID to edit
+let changeActivityUrl = actId => {
+  document.querySelectorAll('.activity_edit_form').forEach(form => {
+    form.action = `/activities/${actId}`;
+    console.log(form.action);
+  });
+}
+
+// retrieve activity ID when clicking a 'edit link' sign
+document.querySelectorAll('.edit-link').forEach(item => {
+  item.addEventListener('click', () => {
+    changeUrl(item.getAttribute("data-act-id"));
+      console.log('test')
+    window.history.pushState('', 'Test1', `${window.location.pathname}?activity=${item.getAttribute("data-act-id")}`); 
+    location.reload();
+    $( document ).ready(function() {
+       console.log("prueba")
+     });
+  });
+});
+
 
 export {initHideModal, initModifyActionURL};
 
