@@ -51,11 +51,11 @@
                         <div class="card-trip">
                           <% if act.activityable_type == "Meal"%>
                              <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
-                             <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit-link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id %>
+                             <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit-link", id: "edit_activity_button", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id, "data-trip-id" => act.part.trip.id %>
                             <% end %>
                             <% if act.activityable_type == "Other"%>
                              <img src="<%= image_url('flower.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
-                             <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit-link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id %>
+                             <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit-link", id: "edit_activity_button", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id,  %>
                             <% end %>
                             <% if act.activityable_type == "Accomodation"%>
                              <img src="<%= image_url('hotel.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
@@ -148,7 +148,7 @@
   </div>
 </div>
 
-<!-- Add Part modal -->
+<!-- Edit Part modal -->
 
 <div class="modal fade" id="editPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
