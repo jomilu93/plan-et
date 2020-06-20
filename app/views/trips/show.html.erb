@@ -11,14 +11,13 @@
       <h2><%= @trip.name %></h2>
       <h3>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %></h3>
       <p> <%= @trip.description %></p>
+      <% if @trip.user == current_user %>
+       <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
+      <% end %>
     </div>
     <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
   </div>
  </div>
-
-<% if policy(@trip).update? %>
- <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
-<% end %>
 
 
 <div class="page_container">
@@ -35,8 +34,8 @@
                 <button class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
                   <h5><%= part.name %><h5>
                 </button>
-                <% if policy(part.trip).update? %>
-                 <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", id: "edit_part_button", data-toggle=>"modal", "data-target"=> "#editPartModal", "data_part_id" => part.id %>
+                <% if part.trip.user == current_user %>
+                 <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", id: "edit_part_button", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data-part-id" => part.id %>
                 <% end %>
               </h5>
             </div>
@@ -162,26 +161,7 @@
 <div class="modal fade" id="editPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <%= simple_form_for([@trip.parts.sample], remote: true, class: "edit_part_form") do |f| %>
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <%= f.input :name, required: true %>
-          <%= f.input :start_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
-          <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
-          <%= f.association :city, collection: City.all %>
-        </div>
-        <div class="modal-footer">
-
-          <button type="button" class="btn btn-light-2" data-dismiss="modal">Close</button>
-          <%= f.button :submit, class: 'btn-light-2', id: "submit_part_edits"%>
-        </div>
-
-      <%end%>
+      <%= render 'trips/partials/edit_part_form' %>
     </div>
   </div>
 </div>
