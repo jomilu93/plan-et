@@ -1,0 +1,29 @@
+<div class="container">
+  <%= form_with(model: @part, url: "", method: "put", class: "edit_part_form", remote: true) do %>
+    <button type="button" class=" btn btn-light-2" data-dismiss="modal">X</button>
+    <div class='form group'>
+      <%= label_tag(:name, "Name:") %>
+      </label><%= text_field_tag :name, '', :class => "form-control" %>
+    </div>
+    <br>
+    <div class='form row'>
+      <div class='form-group col-md-6'>
+        <%= label_tag(:name, "Start Date:") %>
+        <%= date_field_tag :start_date, '', :class => "form-control", as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
+      </div>
+      <div class='form-group col-md-6'>
+        <%= label_tag(:end_time, "End Date:") %>
+        <%= date_field_tag :end_date, '', :class => "form-control", as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
+      </div>
+    </div>
+    <div class='form group'>
+      <%= label_tag(:city, "City:") %>
+      <%= collection_select(:city, :city_id, City.all, :id, :name, {:option_selected => "Select a City"}, {:class => 'form-control'})%>
+    </div>
+    <br>
+    <div class='form group float-right mb-4'>
+      <%= submit_tag("Edit Part", class: 'submit_part_edits') %>
+    </div>
+    <br>
+  <% end %>
+</div>

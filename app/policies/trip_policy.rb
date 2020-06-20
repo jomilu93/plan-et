@@ -14,7 +14,8 @@ class TripPolicy < ApplicationPolicy
   # record.user == user
   # else
   true
-end
+  end
+
   end
 
   def new?
@@ -22,7 +23,7 @@ end
   end
 
   def update?
-    @user == record.user
+    user == record.user
   end
 
   def edit?
@@ -30,6 +31,6 @@ end
   end
 
   def destroy?
-    @user == record.user
+    user == record.user
   end
 # end
