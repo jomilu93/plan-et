@@ -14,9 +14,7 @@ let changeActionPart = (id) => {
 
 let changeURLPart = (id) => {
   document.querySelectorAll('#edit_part_button').forEach(item => {
-  item.addEventListener('click', () => {
     window.history.pushState('', 'Edit_Part', `${window.location.pathname}?part_id=${id}`);
-    });
   });
   console.log("URL Changed");
 }
@@ -33,10 +31,22 @@ const initModifyActionURL = () => {
   // retireve part ID when clicking a 'Edit Part' button
   document.querySelectorAll('#edit_part_button').forEach(item => {
     item.addEventListener('click', () => {
+      $('#editPartModal').modal('hide');
       console.log("edit part request detected");
+      var part_id = item.getAttribute("data-part-id");
+      var trip_id = item.getAttribute("data-trip-id");
       changeActionPart(item.getAttribute("data-part-id"));
       changeURLPart(item.getAttribute("data-part-id"));
       console.log(item.getAttribute("data-part-id"));
+      // $.ajax({
+      //     type: "GET",
+      //     url: `${window.location.pathname}?part_id=${id}`,
+      //     success: function() {
+      //         location.reload();
+      //     }
+      // });
+      $("#editPartModal .modal-content").load(`http://localhost:3000/trips/${trip_id}?part_id=${part_id} #editPartModal .modal-content`)
+      $('#editPartModal').modal('show');
     });
   });
 
