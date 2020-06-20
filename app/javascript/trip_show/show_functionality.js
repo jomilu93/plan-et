@@ -38,19 +38,10 @@ const initModifyActionURL = () => {
       changeActionPart(item.getAttribute("data-part-id"));
       changeURLPart(item.getAttribute("data-part-id"));
       console.log(item.getAttribute("data-part-id"));
-      // $.ajax({
-      //     type: "GET",
-      //     url: `${window.location.pathname}?part_id=${id}`,
-      //     success: function() {
-      //         location.reload();
-      //     }
-      // });
-      $("#editPartModal .modal-content").load(`http://localhost:3000/trips/${trip_id}?part_id=${part_id} #editPartModal .modal-content`)
+      $("#editPartModal .modal-content").load(`/trips/${trip_id}?part_id=${part_id} #editPartModal .modal-content`)
       $('#editPartModal').modal('show');
     });
   });
-
-
 };
 
 
