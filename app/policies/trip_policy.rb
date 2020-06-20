@@ -14,7 +14,8 @@ class TripPolicy < ApplicationPolicy
   # record.user == user
   # else
   true
-end
+  end
+
   end
 
   def new?

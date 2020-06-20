@@ -36,7 +36,7 @@
                   <h5><%= part.name %><h5>
                 </button>
                 <% if policy(part.trip).update? %>
-                 <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data_part_id" => part.id %>
+                 <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", id: "edit_part_button", data-toggle=>"modal", "data-target"=> "#editPartModal", "data_part_id" => part.id %>
                 <% end %>
               </h5>
             </div>
@@ -162,7 +162,7 @@
 <div class="modal fade" id="editPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <%= simple_form_for([@trip.parts.sample], remote: true, action: part_path(part.id)) do |f| %>
+      <%= simple_form_for([@trip.parts.sample], remote: true, class: "edit_part_form") do |f| %>
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -178,7 +178,7 @@
         <div class="modal-footer">
 
           <button type="button" class="btn btn-light-2" data-dismiss="modal">Close</button>
-          <%= f.button :submit, class: 'btn-light-2' %>
+          <%= f.button :submit, class: 'btn-light-2', id: "submit_part_edits"%>
         </div>
 
       <%end%>
