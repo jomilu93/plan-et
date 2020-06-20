@@ -1,23 +1,32 @@
 // change the url to add the part ID the activity belongs to
-let changeUrlActivity = (id, date) => {
+let changeActionActivity = (id, date) => {
   document.querySelectorAll('.activity_form').forEach(form => {
     form.action = `/parts/${id}/activities?date=${date}`;
   });
 }
 
-let changeUrlPart = (id) => {
+let changeActionPart = (id) => {
   document.querySelectorAll('.edit_part_form').forEach(form => {
     form.action = `/parts/${id}/`;
-    console.log("URL Changed!");
+    console.log("Action changed!");
   });
 }
 
-const initModifyURL = () => {
+let changeURLPart = (id) => {
+  document.querySelectorAll('#edit_part_button').forEach(item => {
+  item.addEventListener('click', () => {
+    window.history.pushState('', 'Edit_Part', `${window.location.pathname}?part_id=${id}`);
+    });
+  });
+  console.log("URL Changed");
+}
+
+const initModifyActionURL = () => {
   // retireve part ID when clicking a '+' sign
   document.querySelectorAll('.plus-sign').forEach(item => {
     item.addEventListener('click', () => {
       console.log("click detected");
-      changeUrlActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
+      changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
       console.log(item.getAttribute("data-part-id"));
     });
   });
@@ -25,10 +34,13 @@ const initModifyURL = () => {
   document.querySelectorAll('#edit_part_button').forEach(item => {
     item.addEventListener('click', () => {
       console.log("edit part request detected");
-      changeUrlPart(item.getAttribute("data-part-id"));
+      changeActionPart(item.getAttribute("data-part-id"));
+      changeURLPart(item.getAttribute("data-part-id"));
       console.log(item.getAttribute("data-part-id"));
     });
   });
+
+
 };
 
 
@@ -47,5 +59,6 @@ const initHideModal =() => {
   });
 };
 
-export {initHideModal, initModifyURL};
+
+export {initHideModal, initModifyActionURL};
 
