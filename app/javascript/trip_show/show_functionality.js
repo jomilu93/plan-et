@@ -1,9 +1,3 @@
-// change the url to add the part ID the activity belongs to
-let changeActionActivity = (id, date) => {
-  document.querySelectorAll('.activity_form').forEach(form => {
-    form.action = `/parts/${id}/activities?date=${date}`;
-  });
-}
 
 let changeActionPart = (id) => {
   document.querySelectorAll('.edit_part_form').forEach(form => {
@@ -33,6 +27,47 @@ const initModifyActionURL = () => {
     item.addEventListener('click', () => {
       $('#editPartModal').modal('hide');
       console.log("edit part request detected");
+      var act_id = item.getAttribute("data-activity-id");
+      var trip_id = item.getAttribute("data-trip-id");
+      changeActionActvity(item.getAttribute("data-activity-id"));
+      changeActivityUrl(item.getAttribute("data-activity-id"));
+      console.log(item.getAttribute("data-activity-id"));
+      $("#activityEditModal .modal-content").load(`/trips/${trip_id}?activity_id=${act_id} #activityEditModal .modal-content`)
+      $('#activityEditModal').modal('show');
+    });
+  });
+};
+
+
+// change the url to add the part ID the activity belongs to
+let changeActionActivity = (id, date) => {
+  document.querySelectorAll('.activity_form').forEach(form => {
+    form.action = `/parts/${id}/activities?date=${date}`;
+  });
+}
+
+// change the url to add the activity ID to edit
+let changeActivityUrl = actId => {
+  document.querySelectorAll('.activity_edit_form').forEach(form => {
+    form.action = `/activities/${actId}`;
+    console.log(form.action);
+  });
+}
+
+const initModifyActivityActionURL = () => {
+  // retireve activity Id when clicking a '+' sign
+  document.querySelectorAll('.edit-link').forEach(item => {
+    item.addEventListener('click', () => {
+      console.log("click detected");
+      changeActionActivity(item.getAttribute("data-act-id"));
+      console.log(item.getAttribute("data-act-id"));
+    });
+  });
+  // retireve part ID when clicking a 'Edit Activity' button
+  document.querySelectorAll('#edit_activity_button').forEach(item => {
+    item.addEventListener('click', () => {
+      $('#activityEditModal').modal('hide');
+      console.log("edit activity request detected");
       var part_id = item.getAttribute("data-part-id");
       var trip_id = item.getAttribute("data-trip-id");
       changeActionPart(item.getAttribute("data-part-id"));
@@ -59,6 +94,21 @@ const initHideModal =() => {
     });
   });
 };
+
+
+
+// retrieve activity ID when clicking a 'edit link' sign
+document.querySelectorAll('.edit-link').forEach(item => {
+  item.addEventListener('click', () => {
+    changeUrl(item.getAttribute("data-act-id"));
+      console.log('test')
+    window.history.pushState('', 'Test1', `${window.location.pathname}?activity=${item.getAttribute("data-act-id")}`); 
+    location.reload();
+    $( document ).ready(function() {
+       console.log("prueba")
+     });
+  });
+});
 
 
 export {initHideModal, initModifyActionURL};
