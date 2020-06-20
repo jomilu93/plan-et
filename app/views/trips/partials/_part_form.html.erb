@@ -7,8 +7,8 @@
   </div>
   <div class="modal-body">
     <%= f.input :name, required: true %>
-    <%= f.input :start_date, required: true %>
-    <%= f.input :end_date, required: true %>
+    <%= f.input :start_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
+    <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
     <%= f.association :city, collection: City.all %>
   </div>
   <div class="modal-footer">

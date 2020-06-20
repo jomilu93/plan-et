@@ -19,7 +19,6 @@ class PartsController < ApplicationController
     @part = Part.find(params[:id])
     authorize @part
     @trip = Trip.find(@part.trip.id)
-    raise
     if @part.update!(part_params_edit)
       redirect_to trip_path(@trip)
     else
@@ -49,6 +48,11 @@ class PartsController < ApplicationController
   end
 
   def part_params_create
+    params[:name]= params[:part][:name]
+    params[:start_date]= params[:part][:start_date]
+    params[:end_date]= params[:part][:end_date]
+    params[:city_id] = params[:part][:city_id]
+    params[:trip_id] = params[:part][:trip_id]
     params.permit(:name, :start_date, :end_date, :city_id, :trip_id)
   end
 
