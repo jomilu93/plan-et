@@ -172,6 +172,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <% if params[:activity] %>
+      <!--  <%= javascript_pack_tag modal_load%> -->
       <%= form_with(url: "", method: :patch, class: "activity_edit_form") do %>
       <% @activity =  Activity.find(params[:activity]) %>
         <div class='form group'>
