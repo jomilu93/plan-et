@@ -12,6 +12,7 @@ let changeActionPart = (id) => {
   });
 }
 
+
 let changeURLPart = (id) => {
   document.querySelectorAll('#edit_part_button').forEach(item => {
     window.history.pushState('', 'Edit_Part', `${window.location.pathname}?part_id=${id}`);
@@ -42,7 +43,57 @@ const initModifyActionURL = () => {
       $('#editPartModal').modal('show');
     });
   });
+  // retireve activity ID when clicking a 'Edit Activity' link
+  document.querySelectorAll('#edit_activity_link').forEach(item => {
+    item.addEventListener('click', () => {
+      $('#activityEditModal').modal('hide');
+      console.log("edit activity request detected");
+      var act_id = item.getAttribute("data-act-id");
+      var trip_id = item.getAttribute("data-trip-id");
+      changeActionEditActivity(item.getAttribute("data-act-id"));
+      changeActivityUrl(item.getAttribute("data-act-id"));
+      console.log(item.getAttribute("data-act-id"));
+      // $("#activityEditModal .modal-content").load(`${window.location.pathname}?activity_id=${item.getAttribute("data-act-id")} #activityEditModal .modal-content`)
+      $("#activityEditModal .modal-content").load(`/trips/${trip_id}?activity_id=${act_id} #activityEditModal .modal-content`)
+      $("#activityEditModal").modal('show');
+    });
+  });
 };
+
+let changeActionEditActivity = (actId) => {
+  document.querySelectorAll('.activity_edit_form').forEach(form => {
+    form.action = `/activities/${actId}/`;
+  });
+}
+
+let changeActivityUrl = (actId) => {
+  document.querySelectorAll('.edit_activity_link').forEach(item => {
+    window.history.pushState('', 'Edit Activity', `${window.location.pathname}?activity_id=${actId}`); 
+  });
+  console.log("Activity URL Changed");
+}
+
+// change the url to add the activity ID to edit
+// let changeActivityUrl = actId => {
+  // document.querySelectorAll('#edit_activity_link').forEach(form => {
+    // form.action = `/activities/${actId}`;
+    // console.log(form.action);
+  // });
+// }
+
+
+// retrieve activity ID when clicking a 'edit link' sign (Luis + David)
+// document.querySelectorAll('.edit-link').forEach(item => {
+  // item.addEventListener('click', () => {
+    // changeUrl(item.getAttribute("data-act-id"));
+      // console.log('test')
+    // window.history.pushState('', 'Test1', `${window.location.pathname}?activity=${item.getAttribute("data-act-id")}`); 
+    //location.reload();
+    //$( document ).ready(function() {
+      // console.log("prueba")
+    // });
+
+
 
 
 const initHideModal =() => {
