@@ -51,29 +51,28 @@
                       <div class='container'>
                         <div class="card-trip">
 
-                              <% if act.activityable_type == "Restaurant"%>
-                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
-                              <% end %>
+                          <% if act.activityable_type == "Meal"%>
+                           <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                           <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
+                          <% end %>
 
-                              <% if act.activityable_type == "Meal"%>
-                               <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
-                              <% end %>
+                          <% if act.activityable_type == "Other"%>
+                           <img src="<%= image_url('flower.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
+                           <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit_activity_link",id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
+                          <% end %>
 
-                              <% if act.activityable_type == "Other"%>
-                               <img src="<%= image_url('flower.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
-                              <% end %>
+                          <% if act.activityable_type == "Accomodation"%>
+                           <img src="<%= image_url('hotel.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                          <% end %>
 
-                              <% if act.activityable_type == "Accomodation"%>
-                               <img src="<%= image_url('hotel.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
-                              <% end %>
+                          <% if act.activityable_type == "Transportation"%>
+                           <img src="<%= image_url('plane.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                          <% end %>
 
-                              <% if act.activityable_type == "Transportation"%>
-                               <img src="<%= image_url('plane.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
-                              <% end %>
+                          <% if act.activityable_type == "Attraction"%>
+                           <img src="<%= image_url('louvre.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                          <% end %>
 
-                              <% if act.activityable_type == "Attraction"%>
-                               <img src="<%= image_url('louvre.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
-                              <% end %>
 
                           <div class="card-trip-infos">
                             <div>
@@ -167,6 +166,55 @@
     </div>
   </div>
 </div>
+
+<!-- Edit Activity Modal (Meal) -->
+<div class="modal fade" id="activityEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <% if params[:activity] %>
+      <!--  <%= javascript_pack_tag modal_load%> -->
+      <%= form_with(url: "", method: :patch, class: "activity_edit_form") do %>
+      <% @activity =  Activity.find(params[:activity]) %>
+        <div class='form group'>
+          <%= label_tag(:name, "Title:") %>
+          </label><%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
+        </div>
+        <br>
+        <div class='form row'>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:name, "Start Time:") %>
+            <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          </div>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:end_time, "End Time:") %>
+            <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          </div>
+        </div>
+        <div class='form group'>
+          <%= label_tag(:restaurant, "Restaurant:") %>
+          <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, {:option_selected => "Select a Restaurant"}, {:class => 'form-control'})%>
+        </div>
+        <br>
+        <div class='form group'>
+          <%= label_tag(:name, "Address:") %>
+          </label><%= text_field_tag :address, '', :class => "form-control" %>
+        </div>
+        <%= hidden_field_tag 'activity_type', "Meal" %>
+        <%= hidden_field_tag 'trip_id', @trip.id %>
+        <br>
+        <div class='form group float-right mb-4'>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+          <%= submit_tag("Add Meal", class: 'submitActivity btn btn-secondary') %>
+        </div>
+        <br>
+      <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<!-- Ends Edit Activity Modal -->
+
 
 <!-- Trip modal -->
 
