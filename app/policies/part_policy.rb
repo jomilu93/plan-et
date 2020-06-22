@@ -18,7 +18,7 @@ class PartPolicy < ApplicationPolicy
   end
 
   def update?
-    @user == record.user
+    true
   end
 
   def edit?
@@ -26,7 +26,7 @@ class PartPolicy < ApplicationPolicy
   end
 
   def destroy?
-    @user == record.user
+    user == record.user
   end
 
 end

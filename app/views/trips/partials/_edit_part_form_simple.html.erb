@@ -1,6 +1,6 @@
-<%= simple_form_for([@trip, @part_new], remote: true) do |f| %>
+<%= simple_form_for([Part.find(params[:part_id])], method: :patch, :action => 'update', :controller => 'parts', remote: true, class: "edit_part_form") do |f| %>
   <div class="modal-header">
-    <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
+    <h5 class="modal-title" id="exampleModalCenterTitle">Edit Part</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
       <span aria-hidden="true">&times;</span>
     </button>
@@ -12,7 +12,9 @@
     <%= f.association :city, collection: City.all %>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-    <%= f.button :submit, class: 'btn btn-primary' %>
+
+    <button type="button" class="btn btn-light-2" data-dismiss="modal">Close</button>
+    <%= f.button :submit, class: 'btn-light-2', id: "submit_part_edits"%>
   </div>
+
 <%end%>

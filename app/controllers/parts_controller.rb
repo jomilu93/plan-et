@@ -1,12 +1,11 @@
 class PartsController < ApplicationController
-  before_action :set_part, only: [:update, :destroy]
 
   def index
   end
 
   def create
     @trip = Trip.find(params[:trip_id])
-    @part = Part.new(part_params)
+    @part = Part.new(part_params_create)
     authorize @part
     @part.trip = @trip
     if @part.save!
@@ -17,9 +16,10 @@ class PartsController < ApplicationController
   end
 
   def update
-    @trip = Trip.find(params[:trip_id])
+    @part = Part.find(params[:id])
     authorize @part
-    if @part.save
+    @trip = Trip.find(@part.trip.id)
+    if @part.update!(part_params_edit)
       redirect_to trip_path(@trip)
     else
       render 'trips/show'
@@ -27,6 +27,7 @@ class PartsController < ApplicationController
   end
 
   def destroy
+    @part = Part.find(params[:id])
     authorize @part
     @part.destroy
     redirect_to trip_path(@part)
@@ -38,8 +39,21 @@ class PartsController < ApplicationController
     @part = Part.find(params[:id])
   end
 
-  def part_params
-    params.require(:part).permit(:name, :start_date, :end_date, :city_id)
+  def part_params_edit
+    params[:name]= params[:part][:name]
+    params[:start_date]= params[:part][:start_date]
+    params[:end_date]= params[:part][:end_date]
+    params[:city_id] = params[:part][:city_id]
+    params.permit(:name, :start_date, :end_date, :city_id)
+  end
+
+  def part_params_create
+    params[:name]= params[:part][:name]
+    params[:start_date]= params[:part][:start_date]
+    params[:end_date]= params[:part][:end_date]
+    params[:city_id] = params[:part][:city_id]
+    params[:trip_id] = params[:part][:trip_id]
+    params.permit(:name, :start_date, :end_date, :city_id, :trip_id)
   end
 
 end
