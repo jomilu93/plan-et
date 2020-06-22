@@ -45,6 +45,16 @@ class TripsController < ApplicationController
       @trips = policy_scope(Trip)
     end
 
+    @trips = @trips.reject do |trip|
+    trip.private
+    end
+ end
+
+ def turnprivate
+  trip = Trip.find(params[:id])
+  trip.private = true
+  trip.save
+  render :show
   end
 
   def show
@@ -109,14 +119,11 @@ class TripsController < ApplicationController
     end
   end
 
-  # private
+  private
 
-  # def private
-  # end
-
-  #def set_trip
-  #  @trip = Trip.find(params[:id])
-  #end
+  def set_trip
+   @trip = Trip.find(params[:id])
+  end
 
   def trip_params
     #params[:trip].parse_date_select! :start_date
