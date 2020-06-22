@@ -15,7 +15,10 @@
        <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
       <% end %>
     </div>
-    </%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
+
+    <%= cl_image_tag current_user.try(:photos)&.first&.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
+
+ 
   </div>
  </div>
 
