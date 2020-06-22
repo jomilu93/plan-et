@@ -12,7 +12,7 @@
       <h3>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %></h3>
       <p> <%= @trip.description %></p>
     </div>
-    <%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
+    </%= cl_image_tag current_user.photo.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
   </div>
  </div>
 
@@ -142,11 +142,13 @@
 
     <div class="checkbox">
       <p>Would you like to make your trip public?</p>
-      <form action="" method="post">
+      <form action="trips/<%= @trip.id %>/private" method="post">
         <input type="radio" name="joke" value="yes" /> Yes
         <input type="radio" name="joke" value="no" /> No
+        <input type="submit" value="Make Private">
       </form>
     </div>
+
   </div>
 
   <div id="map"

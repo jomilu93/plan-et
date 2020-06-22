@@ -10,9 +10,6 @@ class TripPolicy < ApplicationPolicy
   end
 
   def show?
-  # if record.private
-  # record.user == user
-  # else
   true
 end
   end

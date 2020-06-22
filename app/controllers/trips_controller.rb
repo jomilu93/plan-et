@@ -45,6 +45,16 @@ class TripsController < ApplicationController
       @trips = policy_scope(Trip)
     end
 
+    @trips = @trips.reject do |trip|
+    trip.private
+    end
+ end
+
+ def turnprivate
+  trip = Trip.find(params[:id])
+  trip.private = true
+  trip.save
+  render :show
   end
 
   def show
