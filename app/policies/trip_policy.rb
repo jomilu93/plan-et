@@ -10,9 +10,11 @@ class TripPolicy < ApplicationPolicy
   end
 
   def show?
-  true
+    true
   end
 
+  def privatise?
+    true
   end
 
   def new?
@@ -30,4 +32,4 @@ class TripPolicy < ApplicationPolicy
   def destroy?
     user == record.user
   end
-# end
+end

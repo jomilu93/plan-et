@@ -50,12 +50,13 @@ class TripsController < ApplicationController
     end
  end
 
- def turnprivate
-  trip = Trip.find(params[:id])
-  trip.private = true
-  trip.save
-  render :show
-  end
+def privatise
+  @trip = Trip.find(params[:id])
+  authorize @trip
+  @trip.private = !@trip.private
+  @trip.save
+  redirect_to trip_path(@trip)
+end
 
   def show
     @trip = Trip.find(params[:id])
@@ -132,7 +133,9 @@ class TripsController < ApplicationController
                                       :description,
                                       :start_date,
                                       :end_date,
+                                      :private,
                                       photos: []
+
                                      )
   end
 

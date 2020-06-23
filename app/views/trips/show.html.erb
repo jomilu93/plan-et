@@ -18,7 +18,7 @@
 
     <%= cl_image_tag current_user.try(:photos)&.first&.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
 
- 
+
   </div>
  </div>
 
@@ -142,12 +142,17 @@
     <button type="button" class="btn-secondary" data-toggle="modal" data-target="#partModal">+ Part</button>
 
     <div class="checkbox">
-      <p>Would you like to make your trip public?</p>
-      <form action="trips/<%= @trip.id %>/private" method="post">
+      <p>Would you like to keep your trip private?</p>
+      <!-- <form action="<%=privatise_trip_path(@trip.id)%>" method="post">
         <input type="radio" name="joke" value="yes" /> Yes
         <input type="radio" name="joke" value="no" /> No
         <input type="submit" value="Make Private">
-      </form>
+      </form> -->
+    <%= simple_form_for @trip, url: privatise_trip_path(@trip.id) do |f| %>
+      <%= f.input :private, as: :radio_buttons %>
+      <%= f.button :submit, "Change", class: 'btn btn-secondary' %>
+    <%end%>
+
     </div>
 
   </div>
