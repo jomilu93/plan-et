@@ -1,20 +1,14 @@
-let getSearchValue = () => {
-  var search = $('#search-bar').getAttribute("value");
-  console.log(search);
-}
+const ajaxHomeScreen = () => {
 
+  document.querySelectorAll('#search_button').forEach(item => {
+    item.addEventListener('click', () => {
+      var search = document.querySelector('#search_bar').value;
+      $(".trip-card-container").load(`/?search=${search} .trip-card-container`);
+    });
+  });
+};
 
-// const ajaxSearchResults = () => {
-//   // load search results without reloading page
-//   document.querySelectorAll('.searchButton').forEach(item => {
-//     item.addEventListener('click', () => {
-//       console.log("search initiated");
-//     });
-//   });
-
-// }
-
-export {getSearchValue};
+export {ajaxHomeScreen};
 
 
 
