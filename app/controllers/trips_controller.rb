@@ -39,8 +39,6 @@ class TripsController < ApplicationController
 
       @trips = @trips_all.uniq
 
-    redirect_to "/?search=#{params[:search]}"
-
     else
       @trips = policy_scope(Trip)
     end
