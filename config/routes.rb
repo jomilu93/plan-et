@@ -13,12 +13,15 @@ Rails.application.routes.draw do
   get 'parts/index'
   devise_for :users
 
-  post 'trips/:id/private' , to: 'trips#turnprivate', as: :privatise
 
   root to: 'trips#home'
 
   resources :trips, only: [:new, :create, :index, :show, :update, :destroy] do
     resources :parts, only: [:create]
+    member do
+      patch 'privatise'
+    end
+
     # resources :meals, only: [:create]
     # resources :accomodations, only: [:create]
   end
