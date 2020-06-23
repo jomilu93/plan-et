@@ -9,16 +9,16 @@
       <h1>You dream it...now Plan-et!</h1>
       </br>
       <div class="card-container-search">
-        <div class="align-items-center" id="search-bar">
+        <div class="align-items-center">
           <%= form_tag root_path, method: :get, remote: true do %>
-          <%= text_field_tag :search, params[:search], placeholder: "Explore other people's trips to find inspiration for your own ones...", class:"form-control", id:"search-bar" %>
+          <%= text_field_tag :search, params[:search], placeholder: "Explore other people's trips to find inspiration for your own ones...", class:"form-control", id:"search_bar" %>
         </div>
         <div>
-          <%= submit_tag "Search", class: "btn btn-light mr-4", id: "search_button"%>
+          <%= submit_tag "Search", class: "btn btn-light mr-4 ml-2", id: "search_button"%>
         </div>
-        <div>
-        <%= link_to "Plan Your Trip!", new_trip_path, class: "btn btn-info" %>
-        </div>
+
+        <%= link_to "Plan Your Trip!", new_trip_path, class: "btn btn-info ml-2", id: "plan_trip_button" %>
+
           <% end %>
       </div>
     </br>
