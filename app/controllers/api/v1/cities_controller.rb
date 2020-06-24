@@ -1,5 +1,6 @@
 class Api::V1::CitiesController < Api::V1::BaseController
-  before_action :set_city, only: [ :show ]
+  # acts_as_token_authentication_handler_for User, except: [ :index, :show ]
+  before_action :set_city, only: [ :show, :update]
 
   def index
     @cities = policy_scope(City)
@@ -8,6 +9,14 @@ class Api::V1::CitiesController < Api::V1::BaseController
   def show
   end
 
+  # def update
+  #   if @rcity.update(city_params)
+  #     render :show
+  #   else
+  #     render_error
+  #   end
+  # end
+
   private
 
   def set_city
@@ -15,5 +24,13 @@ class Api::V1::CitiesController < Api::V1::BaseController
     authorize @city  # For Pundit
   end
 
+  def city_params
+    params.require(:city).permit(:name, :pais)
+  end
+
+  def render_error
+    render json: { errors: @rcity.errors.full_messages },
+      status: :unprocessable_entity
+  end
 
 end
