@@ -193,10 +193,9 @@
 <div class="modal fade" id="activityEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <% if params[:activity] %>
-      <!--  <%= javascript_pack_tag modal_load%> -->
+      <% if params[:activity_id] %>
       <%= form_with(url: "", method: :patch, class: "activity_edit_form") do %>
-      <% @activity =  Activity.find(params[:activity]) %>
+      <% @activity =  Activity.find(params[:activity_id]) %>
         <div class='form group'>
           <%= label_tag(:name, "Title:") %>
           </label><%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
@@ -227,7 +226,7 @@
         <br>
         <div class='form group float-right mb-4'>
           <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-          <%= submit_tag("Add Meal", class: 'submitActivity btn btn-secondary') %>
+          <%= submit_tag("Modify Meal", class: 'submitActivity btn btn-secondary') %>
         </div>
         <br>
       <% end %>

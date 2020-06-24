@@ -77,6 +77,7 @@ class ActivitiesController < ApplicationController
     when 'Meal'
       @activity = Activity.find(params[:id])
       @meal = Meal.find(params[:id])
+      @trip = Trip.find(@activity.part.trip)
       authorize @activity
       authorize @meal
       @meal.city_id = 1
