@@ -9,7 +9,9 @@
     <%= f.input :name, required: true %>
     <%= f.input :start_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
     <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
-    <%= f.association :city, collection: City.all %>
+    <%= f.input :city, class: "city-selection"%>
+    <div class="d-flex flex-column results">
+    </div>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
