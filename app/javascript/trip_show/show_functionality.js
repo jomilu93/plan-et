@@ -55,7 +55,7 @@ const initModifyActionURL = () => {
       console.log(item.getAttribute("data-act-id"));
       // $("#activityEditModal .modal-content").load(`${window.location.pathname}?activity_id=${item.getAttribute("data-act-id")} #activityEditModal .modal-content`)
       $("#activityEditModal .modal-content").load(`/trips/${trip_id}?activity_id=${act_id} #activityEditModal .modal-content`)
-      $("#activityEditModal").modal('show');
+      $('#activityEditModal').modal('show');
     });
   });
 };
