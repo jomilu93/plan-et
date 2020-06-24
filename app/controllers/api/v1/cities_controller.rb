@@ -3,7 +3,11 @@ class Api::V1::CitiesController < Api::V1::BaseController
   before_action :set_city, only: [ :show, :update]
 
   def index
-    @cities = policy_scope(City)
+    if params[:query]
+      @cities = policy_scope(City.where('lower(name) LIKE ?', "%#{params[:query]}%"))
+    else
+      @cities = policy_scope(City)
+    end
   end
 
   def show
