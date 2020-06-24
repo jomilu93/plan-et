@@ -164,7 +164,7 @@
 
 </div>
 
-
+<!-- ALL MODAL STUFF (we should send all of this to partials) -------------------------------------------------------------------------------------->
 
 <!-- New part modal -->
 
@@ -190,51 +190,7 @@
 </div>
 
 <!-- Edit Activity Modal (Meal) -->
-<div class="modal fade" id="activityEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <% if params[:activity_id] %>
-      <%= form_with(url: "", method: :patch, class: "activity_edit_form") do %>
-      <% @activity =  Activity.find(params[:activity_id]) %>
-        <div class='form group'>
-          <%= label_tag(:name, "Title:") %>
-          </label><%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
-
-        </div>
-        <br>
-        <div class='form row'>
-          <div class='form-group col-md-6'>
-            <%= label_tag(:name, "Start Time:") %>
-            <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
-          </div>
-          <div class='form-group col-md-6'>
-            <%= label_tag(:end_time, "End Time:") %>
-            <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
-          </div>
-        </div>
-        <div class='form group'>
-          <%= label_tag(:restaurant, "Restaurant:") %>
-          <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, {:option_selected => "Select a Restaurant"}, {:class => 'form-control'})%>
-        </div>
-        <br>
-        <div class='form group'>
-          <%= label_tag(:name, "Address:") %>
-          </label><%= text_field_tag :address, '', :class => "form-control" %>
-        </div>
-        <%= hidden_field_tag 'activity_type', "Meal" %>
-        <%= hidden_field_tag 'trip_id', @trip.id %>
-        <br>
-        <div class='form group float-right mb-4'>
-          <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-          <%= submit_tag("Modify Meal", class: 'submitActivity btn btn-secondary') %>
-        </div>
-        <br>
-      <% end %>
-      <% end %>
-    </div>
-  </div>
-</div>
-
+<%= render 'trips/partials/edit_activity_meal' %>
 <!-- Ends Edit Activity Modal -->
 
 
