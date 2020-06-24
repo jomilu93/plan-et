@@ -33,6 +33,12 @@ Rails.application.routes.draw do
   resources :activities, only: [:update, :destroy] do |variable|
   end
 
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :cities, only: [ :index, :show]
+    end
+  end
+
 
 
   # resources :users, only: [:show, :edit, :update]
