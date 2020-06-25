@@ -35,14 +35,14 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // Internal imports, e.g:
 import { initMapbox } from '../plugins/init_mapbox';
 // import { initSelect2 } from '../components/init_select2';
-import { initModifyActionURL } from '../trip_show/show_functionality'
+import { initModifyURLs } from '../trip_show/show_functionality'
 import { initHideModal } from '../trip_show/show_functionality'
 import { ajaxHomeScreen } from '../packs/home_screen'
 
 document.addEventListener('turbolinks:load', () => {
   initMapbox();
   initHideModal();
-  initModifyActionURL();
+  initModifyURLs();
   ajaxHomeScreen();
 });
 

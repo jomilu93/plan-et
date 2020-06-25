@@ -1,30 +1,4 @@
-// retireve part ID when clicking a 'Edit Part' button
-document.querySelectorAll('#edit_part_button').forEach(item => {
-  item.addEventListener('click', () => {
-    $('#editPartModal').modal('hide');
-    var partId = item.getAttribute("data-part-id");
-    var tripId = item.getAttribute("data-trip-id");
-    changeActionPart(item.getAttribute("data-part-id"));
-    window.history.pushState('', 'Edit_Part', `${window.location.pathname}?part_id=${partId}`);
-    $("#editPartModal .modal-content").load(`/trips/${tripId}?part_id=${partId} #editPartModal .modal-content`)
-    $('#editPartModal').modal('show');
-  });
-});
 
-// retireve activity ID when clicking a 'Edit Activity' link
-document.querySelectorAll('#edit_activity_link').forEach(item => {
-  item.addEventListener('click', () => {
-    $('#activityEditModal').modal('hide');
-    var actId = item.getAttribute("data-act-id");
-    var tripId = item.getAttribute("data-trip-id");
-    $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`)
-    window.history.pushState('', 'Edit Activity', `${window.location.pathname}?activity_id=${actId}`); 
-    changeActionEditActivity(actId);
-    //$('#activityEditModal').modal('show');
-    let form = document.querySelector('.activity_edit_form');
-    console.log(form); // en este console log el action aparece como queremos que aparezca
-  });
-});
 
 let changeActionPart = (id) => {
   document.querySelectorAll('.edit_part_form').forEach(form => {
@@ -34,7 +8,7 @@ let changeActionPart = (id) => {
 
 let changeActionEditActivity = (actId) => {
   document.querySelectorAll('.activity_edit_form').forEach(form => {
-    form.action = `/activities/${actId}/`;
+    form.setAttribute("action", `/activities/${actId}/`);
   });
 }
 
@@ -45,14 +19,42 @@ let changeActionActivity = (id, date) => {
   });
 }
 
-const initModifyActionURL = () => {
+const initModifyURLs = () => {
   // retireve part ID when clicking a '+' sign
   document.querySelectorAll('.plus-sign').forEach(item => {
     item.addEventListener('click', () => {
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
     });
   });
-}
+
+  // retireve part ID when clicking a 'Edit Part' button
+  document.querySelectorAll('#edit_part_button').forEach(item => {
+    item.addEventListener('click', () => {
+      $('#editPartModal').modal('hide');
+      var partId = item.getAttribute("data-part-id");
+      var tripId = item.getAttribute("data-trip-id");
+      changeActionPart(item.getAttribute("data-part-id"));
+      window.history.pushState('', 'Edit_Part', `${window.location.pathname}?part_id=${partId}`);
+      $("#editPartModal .modal-content").load(`/trips/${tripId}?part_id=${partId} #editPartModal .modal-content`)
+      $('#editPartModal').modal('show');
+    });
+  });
+
+  // retireve activity ID when clicking a 'Edit Activity' link
+  document.querySelectorAll('#edit_activity_link').forEach(item => {
+    item.addEventListener('click', () => {
+      $('#activityEditModal').modal('hide');
+      var actId = item.getAttribute("data-act-id");
+      var tripId = item.getAttribute("data-trip-id");
+      $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`)
+      window.history.pushState('', 'Edit Activity', `${window.location.pathname}?activity_id=${actId}`); 
+      //changeActionEditActivity(actId);
+      //$('#activityEditModal').modal('show');
+      let form = document.querySelector('.activity_edit_form');
+      console.log(form); // en este console log el action aparece como queremos que aparezca
+    });
+  });
+};
 
 const initHideModal =() => {
   // hide modal when submitting activity form
@@ -69,4 +71,4 @@ const initHideModal =() => {
   });
 };
 
-export {initHideModal, initModifyActionURL};
+export {initHideModal, initModifyURLs};
