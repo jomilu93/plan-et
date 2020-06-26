@@ -1,43 +1,175 @@
-<div class="modal fade" id="activityEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <% if params[:activity_id] %>
-        <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
-          <% @activity =  Activity.find(params[:activity_id]) %>
-            <div class='form group'>
-              <%= label_tag(:name, "Title:") %>
-              <%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
-            </div>
-            <br>
-            <div class='form row'>
-              <div class='form-group col-md-6'>
-                <%= label_tag(:name, "Start Time:") %>
-                <%= time_field_tag :start_time, class: "form-control" %>
-              </div>
-              <div class='form-group col-md-6'>
-                <%= label_tag(:end_time, "End Time:") %>
-                <%= time_field_tag :end_time, class: "form-control" %>
-              </div>
-            </div>
-            <div class='form group'>
-              <%= label_tag(:restaurant, "Restaurant:") %>
-              <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, selected: @activity.activityable.restaurant_id, class: 'form-control')%>
-            </div>
-            <br>
-            <div class='form group'>
-              <%= label_tag(:name, "Address:") %>
-              <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
-            </div>
-            <%= hidden_field_tag 'activity_type', "Meal" %>
-            <%= hidden_field_tag 'date', @activity.start_time.to_date %>
-            <br>
-            <div class='form group float-right mb-4'>
-              <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-              <%= submit_tag("Modify Meal", class: 'submitActivity btn btn-secondary') %>
-            </div>
-            <br>
-        <% end %>
+<% @activity =  Activity.find(params[:activity_id]) %>
+<div class="modal-header">
+  <h5 class="modal-title">Edit <%= @activity.activityable_type.capitalize %></h5>
+  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+  <% if @activity.activityable_type == "Meal" %>
+    <div class="modal-body">
+      <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+        <div class='form group'>
+          <%= label_tag(:name, "Title:") %>
+          <%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
+        </div>
+        <br>
+        <div class='form row'>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:name, "Start Time:") %>
+            <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          </div>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:end_time, "End Time:") %>
+            <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          </div>
+        </div>
+        <div class='form group'>
+          <%= label_tag(:restaurant, "Restaurant:") %>
+          <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, selected: @activity.activityable.restaurant_id, :class => 'form-control')%>
+        </div>
+        <br>
+        <div class='form group'>
+          <%= label_tag(:name, "Address:") %>
+          <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+        </div>
+        <%= hidden_field_tag 'activity_type', "Meal" %>
+        <%= hidden_field_tag 'date', @activity.start_time.to_date %>
+        <br>
+        <div class='form group float-right mb-4'>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+          <%= submit_tag("Modify Meal", class: 'submitActivity btn btn-secondary') %>
+        </div>
+        <br>
       <% end %>
-    </div>
-  </div>
+    <% elsif @activity.activityable_type == "Attraction" %>
+    <div class="modal-body">
+      <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+        <div class='form group'>
+          <%= label_tag(:name, "Attraction:") %>
+          <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name, selected: @activity.activityable.attraction_id, :class => 'form-control')%>
+        </div>
+        <br>
+        <div class='form row'>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:name, "Start Time:") %>
+            <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          </div>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:end_time, "End Time:") %>
+            <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          </div>
+        </div>
+        <%= hidden_field_tag 'activity_type', "Attraction" %>
+        <%= hidden_field_tag 'date', @activity.start_time.to_date %>
+        <br>
+        <div class='form group float-right mb-4'>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+          <%= submit_tag("Modify Attraction", class: 'submitActivity btn btn-secondary') %>
+        </div>
+        <br>
+      <% end %>
+    <% elsif @activity.activityable_type == "Accomodation" %>
+    <div class="modal-body">
+      <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+        <div class='form group'>
+          <%= label_tag(:name, "Hotel:") %>
+          <%= collection_select(:accomodation, :hotel_id, Hotel.all, :id, :name, selected: @activity.activityable.hotel_id, :class => 'form-control')%>
+        </div>
+        <br>
+        <div class='form row'>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:name, "Start Time:") %>
+            <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          </div>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:end_time, "End Time:") %>
+            <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          </div>
+        </div>
+        <div class='form group'>
+          <%= label_tag(:name, "Address:") %>
+          <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+        </div>
+        <%= hidden_field_tag 'activity_type', "Accomodation" %>
+        <%= hidden_field_tag 'date', @activity.start_time.to_date %>
+        <br>
+        <div class='form group float-right mb-4'>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+          <%= submit_tag("Modify Stay", class: 'submitActivity btn btn-secondary') %>
+        </div>
+        <br>
+      <% end %>
+    <% elsif @activity.activityable_type == "Other" %>
+    <div class="modal-body">
+      <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+        <div class='form group'>
+          <%= label_tag(:name, "Title:") %>
+          <%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
+        </div>
+        <br>
+        <div class='form row'>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:name, "Start Time:") %>
+            <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          </div>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:end_time, "End Time:") %>
+            <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          </div>
+        </div>
+        <div class='form group'>
+          <%= label_tag(:name, "Address:") %>
+          <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+        </div>
+        <%= hidden_field_tag 'activity_type', "Other" %>
+        <%= hidden_field_tag 'date', @activity.start_time.to_date %>
+        <br>
+        <div class='form group float-right mb-4'>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+          <%= submit_tag("Modify Activity", class: 'submitActivity btn btn-secondary') %>
+        </div>
+        <br>
+      <% end %>
+    <% elsif @activity.activityable_type == "Transportation" %>
+    <div class="modal-body">
+      <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+        <div class='form group'>
+          <%= label_tag(:name, "Title:") %>
+          <%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
+        </div>
+        <div class='form row'>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:name, "From:") %>
+            <%= collection_select(:transportation, :origin_city_id, City.all, :id, :name, selected: @activity.activityable.origin_city_id, :class => 'form-control')%>
+          </div>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:end_time, "To:") %>
+            <%= collection_select(:transportation, :destination_city_id, City.all, :id, :name, selected: @activity.activityable.destination_city_id, :class => 'form-control')%>
+          </div>
+        </div>
+        <div class='form row'>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:name, "Departure:") %>
+            <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          </div>
+          <div class='form-group col-md-6'>
+            <%= label_tag(:end_time, "Arrival:") %>
+            <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          </div>
+        </div>
+        <div class='form group'>
+          <%= label_tag(:name, "Address:") %>
+          <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+        </div>
+        <%= hidden_field_tag 'activity_type', "Transportation" %>
+        <%= hidden_field_tag 'date', @activity.start_time.to_date %>
+        <br>
+        <div class='form group float-right mb-4'>
+          <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
+          <%= submit_tag("Modify Transit", class: 'submitActivity btn btn-secondary') %>
+        </div>
+        <br>
+      <% end %>
+    <% "hola" %>
+  <% end %>
 </div>

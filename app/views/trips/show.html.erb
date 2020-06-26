@@ -56,12 +56,10 @@
 
                           <% if act.activityable_type == "Meal"%>
                            <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
-                           <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
                           <% end %>
 
                           <% if act.activityable_type == "Other"%>
                            <img src="<%= image_url('flower.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
-                           <%= link_to 'edit',"" , type: "button", class: "btn btn-light btn-sm edit_activity_link",id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
                           <% end %>
 
                           <% if act.activityable_type == "Accomodation"%>
@@ -113,13 +111,16 @@
                                 <%= act.activityable.name %>
                               <% end %>
                               </h1>
-                              <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
-                                <%= link_to "Delete",
-                                    act,
-                                    method: :delete,
-                                    data: {confirm: "Are you sure to delete this Activity?"},
-                                    remote: true %></b>
-                              </p>
+                              <div class="Row">
+                                <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
+                                  <%= link_to "Delete",
+                                      act,
+                                      method: :delete,
+                                      data: {confirm: "Are you sure to delete this Activity?"},
+                                      remote: true %></b>
+                                  <%= link_to '  Edit',"  Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
+                                </p>
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -189,9 +190,17 @@
   </div>
 </div>
 
-<!-- Edit Activity Modal (Meal) -->
-<%= render 'trips/partials/edit_activity_meal' %>
-<!-- Ends Edit Activity Modal -->
+<!-- Edit Activities Modal -->
+<div class="modal fade" id="activityEditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <% if params[:activity_id] %>
+        <%= render 'trips/partials/edit_activity_meal' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+<!-- Ends Edit Activities Modal -->
 
 
 <!-- Trip modal -->
@@ -222,7 +231,7 @@
 </div>
 
 
-<!--Modal: Activity-->
+<!--Modal: New Activity-->
 <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
     <!--Content-->
@@ -340,10 +349,6 @@
             <!--Accomodation-->
             <div class="tab-pane fade" id="accomodation" role="tabpanel">
               <div class="modal-body">
-
-                <!-- TODO: Mandatory start_date, end_date fields -->
-                <!-- TODO: Custom Attraction fields fields -->
-
                 <%= form_with(url: "", method: "post", class: "activity_form") do %>
                   <div class='form group'>
                     <%= label_tag(:hotel, "Hotel:") %>
