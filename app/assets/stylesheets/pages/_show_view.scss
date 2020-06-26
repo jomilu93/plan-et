@@ -1,6 +1,22 @@
 .results {
   position: relative;
   top: 100%;
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  padding: 10px;
+  margin: 10px;
+  border-radius: 25px;
+}
+
+.result_item{
+  color: black;
+  background: white;
+}
+
+.result_item:hover{
+  color: white;
+  background: gray;
 }
 
 .page_container {

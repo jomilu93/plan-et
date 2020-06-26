@@ -6,19 +6,33 @@ const autoFill = () => {
   const drawResponseList = (data) => {
     results.innerHTML = '';
     data.forEach((city) => {
-      results.insertAdjacentHTML('beforeend', `<p>${city.name}</p>`);
+      results.insertAdjacentHTML('beforeend', `<p class="result_item">${city.name}</p>`);
+    });
+    document.querySelectorAll(".result_item").forEach(item => {
+      item.addEventListener('click', () => {
+          console.log("click detected");
+          query.value = item.innerHTML;
+          results.innerHTML = '';
+      });
     });
   };
 
   const autocomplete = (e) => {
-    results.innerHTML = '';
-    fetch(`http://localhost:3000/api/v1/cities/?query=${query.value}`)
-      .then(response => response.json())
-      .then(data => drawResponseList(data));
+    if (query.value){
+
+      results.innerHTML = '';
+      fetch(`/api/v1/cities/?query=${query.value}`)
+        .then(response => response.json())
+        .then(data => drawResponseList(data));
+
+    } else {
+      results.innerHTML = '';
+    }
+
   };
 
   query.addEventListener('keyup', autocomplete);
 
-  };
+};
 
 export {autoFill};
