@@ -92,7 +92,6 @@ end
 
   def new
     @trip = Trip.new
-
     authorize @trip
   end
 

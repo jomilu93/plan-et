@@ -28,5 +28,5 @@ def find_profile
 end
 
 def profile_params
-  params.require(:profile).permit(:id,:name, :summary, :birthday, :user_id)
+  params.require(:profile).permit(:id,:name, :summary, :birthday, :user_id, :city)
 end
