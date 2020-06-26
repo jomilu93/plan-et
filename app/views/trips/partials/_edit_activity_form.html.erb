@@ -5,6 +5,8 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
+<%= @activity.activityable_type %>
+<%= params[:activity_id] %>
 
 <!-- meal form -->
 <% if @activity.activityable_type == "Meal" %>
@@ -52,7 +54,7 @@
     <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
       <div class='form group'>
         <%= label_tag(:name, "Attraction:") %>
-        <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name, selected: @activity.activityable.attraction_id, :class => 'form-control')%>
+        <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name, selected: @activity.activityable_id, :class => 'form-control')%>
       </div>
       <br>
       <div class='form row'>
@@ -152,10 +154,6 @@
 <% if @activity.activityable_type == "Transportation" %>
   <div class="modal-body">
     <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
-      <div class='form group'>
-        <%= label_tag(:name, "Title:") %>
-        <%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
-      </div>
       <div class='form row'>
         <div class='form-group col-md-6'>
           <%= label_tag(:name, "From:") %>
@@ -177,8 +175,8 @@
         </div>
       </div>
       <div class='form group'>
-        <%= label_tag(:name, "Address:") %>
-        <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+        <%= label_tag(:name, "Transportation type:") %>
+        <%= text_field_tag :transportation_type, @activity.activityable.transportation_type, :class => "form-control" %>
       </div>
       <%= hidden_field_tag 'activity_type', "Transportation" %>
       <%= hidden_field_tag 'date', @activity.start_time.to_date %>
