@@ -29,7 +29,7 @@
               <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
             </div>
             <%= hidden_field_tag 'activity_type', "Meal" %>
-            <%= hidden_field_tag 'trip_id', @trip.id %>
+            <%= hidden_field_tag 'date', @activity.start_time.to_date %>
             <br>
             <div class='form group float-right mb-4'>
               <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
