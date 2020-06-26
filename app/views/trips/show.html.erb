@@ -143,11 +143,7 @@
 
     <div class="checkbox">
       <p>Would you like to keep your trip private?</p>
-      <!-- <form action="<%=privatise_trip_path(@trip.id)%>" method="post">
-        <input type="radio" name="joke" value="yes" /> Yes
-        <input type="radio" name="joke" value="no" /> No
-        <input type="submit" value="Make Private">
-      </form> -->
+
     <%= simple_form_for @trip, url: privatise_trip_path(@trip.id) do |f| %>
       <%= f.input :private, as: :radio_buttons %>
       <%= f.button :submit, "Change", class: 'btn btn-secondary' %>
