@@ -87,6 +87,26 @@ class ActivitiesController < ApplicationController
       else
         raise
       end
+    when 'Attraction'
+      @activity = Activity.find(params[:id])
+      @attraction = Attraction.find(params[:attraction][:attraction_id])
+      authorize @activity
+      @activity.activityable = @attraction
+      if @activity.update(activity_params)
+        redirect_to trip_path(@activity.part.trip)
+      else
+        raise
+      end
+    # when 'Accomodation' #This is almost done
+    #   @activity = Activity.find(params[:id])
+    #   @accomodation = @activity.activityable
+    #   authorize @activity
+    #   @accomodation.city_id = 1
+    #   if @accomodation.update(accomodation_params) && @activity.update(activity_params)
+    #     redirect_to trip_path(@activity.part.trip)
+    #   else
+    #     raise
+    #   end
     end
   end
 
