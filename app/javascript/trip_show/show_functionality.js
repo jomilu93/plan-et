@@ -9,6 +9,7 @@ let changeActionPart = (id) => {
 let changeActionEditActivity = (actId) => {
   document.querySelectorAll('.activity_edit_form').forEach(form => {
     form.setAttribute("action", `/activities/${actId}/`);
+    console.log("action changed");
   });
 }
 
@@ -46,12 +47,8 @@ const initModifyURLs = () => {
       $('#activityEditModal').modal('hide');
       var actId = item.getAttribute("data-act-id");
       var tripId = item.getAttribute("data-trip-id");
-      $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`)
-      window.history.pushState('', 'Edit Activity', `${window.location.pathname}?activity_id=${actId}`); 
-      //changeActionEditActivity(actId);
-      //$('#activityEditModal').modal('show');
-      let form = document.querySelector('.activity_edit_form');
-      console.log(form); // en este console log el action aparece como queremos que aparezca
+      $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`);
+      $('#activityEditModal').modal('show');
     });
   });
 };
