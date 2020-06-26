@@ -43,7 +43,7 @@ class PartsController < ApplicationController
     params[:name]= params[:part][:name]
     params[:start_date]= params[:part][:start_date]
     params[:end_date]= params[:part][:end_date]
-    params[:city_id] = params[:part][:city_id]
+    params[:city_id] = City.where(name:"#{params[:part][:city]}").ids[0]
     params.permit(:name, :start_date, :end_date, :city_id)
   end
 
@@ -51,7 +51,7 @@ class PartsController < ApplicationController
     params[:name]= params[:part][:name]
     params[:start_date]= params[:part][:start_date]
     params[:end_date]= params[:part][:end_date]
-    params[:city_id] = params[:part][:city_id]
+    params[:city_id] = City.where(name:"#{params[:part][:city]}").ids[0]
     params[:trip_id] = params[:part][:trip_id]
     params.permit(:name, :start_date, :end_date, :city_id, :trip_id)
   end

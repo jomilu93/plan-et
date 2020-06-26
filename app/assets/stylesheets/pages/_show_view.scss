@@ -1,3 +1,44 @@
+.autocomplete {
+  position: relative;
+  display: inline-block;
+  background-color: white;
+  z-index: 99;
+  width: 100%;
+}
+
+.results {
+  position: absolute;
+  top: 80%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  // border: 1px solid gray;
+  // border-color: black;
+  padding-top: 20px;
+  padding: 10px;
+  // margin: 10px;
+  // border-radius: 25px;
+  display: block;
+  z-index: -1;
+  width: 100%;
+}
+
+.result_item{
+  color: black;
+  background: white;
+  background-color: white;
+  padding: 0px;
+  margin: 0px;
+  font-size: 16px;
+  // border-bottom: 1px solid gray;
+}
+
+.result_item:hover{
+  // text-decoration: underline;
+  background: gray;
+  color: white;
+}
+
 .page_container {
   display: flex;
   justify-content: space-around;

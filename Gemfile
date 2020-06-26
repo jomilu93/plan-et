@@ -31,6 +31,8 @@ gem 'restcountry'
 gem 'geocoder'
 #mapbox gem
 gem 'mapbox-gl-rails'
+#API token
+gem 'simple_token_authentication'
 
 gem 'nokogiri'
 # Use Redis adapter to run Action Cable in production
