@@ -23,8 +23,9 @@ class ActivitiesController < ApplicationController
       end
     when 'Attraction'
       @activity = Activity.new(activity_params)
-      @attraction = params[:attraction]
+      @attraction = Attraction.find(params[:attraction][:attraction_id])
       @activity.activityable = @attraction
+      authorize @activity
       if @activity.save!
         redirect_to trip_path(@activity.part.trip)
       else
