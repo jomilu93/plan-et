@@ -113,12 +113,13 @@
                               </h1>
                               <div class="Row">
                                 <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
+                                  <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
+                                  <%= "|" %>
                                   <%= link_to "Delete",
                                       act,
                                       method: :delete,
                                       data: {confirm: "Are you sure to delete this Activity?"},
                                       remote: true %></b>
-                                  <%= link_to '  Edit',"  Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
                                 </p>
                               </div>
                             </div>
@@ -127,10 +128,11 @@
                       </div>
                     <% end %>
                   <% end %>
-                  <div class='container'>
-                    <%= link_to '+',"" , type: "button", id: "day-#{date}", class: "btn btn-light btn-sm plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
-                  </div>
-                  <br/>
+                  <% if part.trip.user == current_user %>
+                    <div class='container'>
+                      <%= link_to '+',"" , type: "button", id: "day-#{date}", class: "btn btn-circle-btn-gray mx-1 my-3 pt-2 plus-sign", "data-toggle"=>"modal", "data-target"=> "#activityModal", "data-part-id" => part.id, "data-date" => date %>
+                    </div>
+                  <% end %>
                 <% end %>
               </div>
             </div>
@@ -191,7 +193,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <% if params[:activity_id] %>
-        <%= render 'trips/partials/edit_activity_meal' %>
+        <%= render 'trips/partials/edit_activity' %>
       <% end %>
     </div>
   </div>
