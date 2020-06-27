@@ -38,6 +38,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       resources :cities, only: [ :index, :show, :update]
       resources :restaurants, only: [ :index, :show, :update]
+      resources :attractions, only: [ :index, :show, :update]
+      resources :hotels, only: [ :index, :show, :update]
     end
   end
 
