@@ -49,6 +49,7 @@ const initModifyURLs = () => {
       var tripId = item.getAttribute("data-trip-id");
       $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`);
       $('#activityEditModal').modal('show');
+      console.log(`/trips/${tripId}?activity_id=${actId}`)
     });
   });
 };

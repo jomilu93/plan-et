@@ -23,8 +23,9 @@ class ActivitiesController < ApplicationController
       end
     when 'Attraction'
       @activity = Activity.new(activity_params)
-      @attraction = params[:attraction]
+      @attraction = Attraction.find(params[:attraction][:attraction_id])
       @activity.activityable = @attraction
+      authorize @activity
       if @activity.save!
         redirect_to trip_path(@activity.part.trip)
       else
@@ -86,6 +87,48 @@ class ActivitiesController < ApplicationController
       else
         raise
       end
+    when 'Attraction'
+      @activity = Activity.find(params[:id])
+      @attraction = Attraction.find(params[:attraction][:attraction_id])
+      authorize @activity
+      @activity.activityable = @attraction
+      if @activity.update(activity_params)
+        redirect_to trip_path(@activity.part.trip)
+      else
+        raise
+      end
+    when 'Accomodation'
+      @activity = Activity.find(params[:id])
+      @accomodation = @activity.activityable
+      authorize @activity
+      @accomodation.city_id = 1
+      @accomodation.hotel_id = params[:accomodation][:hotel_id]
+      if @accomodation.update(accomodation_params) && @activity.update(activity_params)
+        redirect_to trip_path(@activity.part.trip)
+      else
+        raise
+      end
+    when 'Other'
+      @activity = Activity.find(params[:id])
+      @other = @activity.activityable
+      authorize @other
+      @other.city_id = 1
+      if @other.update(other_params) && @activity.update(activity_params)
+        redirect_to trip_path(@activity.part.trip)
+      else
+        raise
+      end
+    when 'Transportation'
+      @activity = Activity.find(params[:id])
+      @transportation = @activity.activityable
+      authorize @transportation
+      @transportation.origin_city_id = params[:transportation][:origin_city_id]
+      @transportation.destination_city_id = params[:transportation][:destination_city_id]
+      if @transportation.update(transportation_params) && @activity.update(activity_params)
+        redirect_to trip_path(@activity.part.trip)
+      else
+        raise
+      end
     end
   end
 
@@ -122,7 +165,7 @@ class ActivitiesController < ApplicationController
   end
 
   def accomodation_params
-    params.permit(:name, :address, :city_id, :hotel_id)
+    params.permit(:address, :city_id, :hotel_id)
   end
 
   def hotel_params

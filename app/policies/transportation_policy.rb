@@ -18,7 +18,7 @@ class TransportationPolicy < ApplicationPolicy
   end
 
   def update?
-    @user == record.user
+    @user == record.activity.part.trip.user
   end
 
   def edit?
