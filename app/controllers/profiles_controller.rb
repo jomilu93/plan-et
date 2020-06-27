@@ -1,32 +1,19 @@
 class ProfilesController < ApplicationController
-before_action :find_profile, only: [:show, :edit, :update, :destroy]
-before_action :authenticate_user!, except: [:index, :show]
 
+  def show
+    authorize current_user
+  end
 
-def index
-  @profile = Profile
+  def update  #to do validation feedback
+    authorize current_user
+    current_user.update(user_params)
+    redirect_to profile_path
+  end
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name)
+  end
 end
 
-def show
-  @profile = Profile.find(profile_params)
-end
-
-
-def edit
-  @profile = Profile.find(params[:id])
-end
-
-def update
-  @profile = Profile.find(params[:id])
-  @profile.update(profile_params)
-end
-
-private
-
-def find_profile
-  @profile = Profile.find(params[:id])
-end
-
-def profile_params
-  params.require(:profile).permit(:id,:name, :summary, :birthday, :user_id, :city)
-end
