@@ -1,66 +1,21 @@
 <div class="profile-container">
   <div class="info-container">
-    <!-- <p> > &ensp;&ensp;My Profile</p> -->
-<!--     <div class="card-profile">
-      <div class="card-profile-infos"> -->
+
        <%= cl_image_tag current_user.try(:photo)&.key, :width => 300, :height => 300 , :crop => :fill, class:"avatar-large" %>
-     <!--  </div>
-    </div> -->
 
-    <%= simple_form_for(current_user, url: profile_path ) do |f| %>
-      <%= f.input :name  %>
+    <%= simple_form_for(@user, url: profile_path ) do |f| %>
+      <%= f.input :name %>
       <%= f.input :email  %>
-       <%= f.association :city %>
-      <%= f.button :submit %>
+
+      <%= f.input :phone_number, :placeholder => 'Your phone number'%>
+      <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
+                              end_year: Date.today.year - 12, discard_day: true,
+                              order: [:month, :year] %>
+      <%= f.association :city %>
+      <%= f.input :description, as: :text, :placeholder => 'Tell us about yourself!' %>
+      <%= f.button :submit, "Update Profile",class: "btn btn-secondary" %>
     <% end %>
-
-
-    <div class="card-profile">
-      <div class="card-profile-infos">
-        <h3>Legal name</h3>
-        <p><%= current_user.name %>
-          <%#= link_to 'Edit',"  Edit" , class: "delete", id: "edit_name_link", "data-toggle"=>"modal", "data-target"=> "#nameEditModal", "data-name-id" => current_user.name %>
-        </p>
-      </div>
-    </div>
-
-    <div class="card-profile">
-      <div class="card-profile-infos">
-        <h3>Date of birth</h3>
-        <p>Not provided</p>
-      </div>
-    </div>
-
-    <div class="card-profile">
-      <div class="card-profile-infos">
-        <h3>Email adress</h3>
-        <p><%= current_user.email %></p>
-      </div>
-    </div>
-
-    <div class="card-profile">
-      <div class="card-profile-infos">
-        <h3>Phone number</h3>
-        <p>Not provided</p>
-      </div>
-    </div>
-
-    <div class="card-profile">
-      <div class="card-profile-infos">
-        <h3>City</h3>
-        <p><%= current_user.city.name %></p>
-      </div>
-    </div>
-
-    <div class="card-profile">
-      <div class="card-profile-infos">
-        <h3>About</h3>
-        <p>Description not provided</p>
-      </div>
-    </div>
-
   </div>
 </div>
-
 
 
