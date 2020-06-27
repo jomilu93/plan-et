@@ -142,16 +142,21 @@
         <% end %>
 
   </div>
-    <button type="button" class="btn-secondary" data-toggle="modal" data-target="#partModal">+ Part</button>
-
-    <div class="checkbox">
-      <p>Would you like to keep your trip private?</p>
-
-    <%= simple_form_for @trip, url: privatise_trip_path(@trip.id) do |f| %>
-      <%= f.input :private, as: :radio_buttons %>
-      <%= f.button :submit, "Change", class: 'btn btn-secondary' %>
+    <% if @trip.user == current_user %>
+      <button type="button" class="btn-secondary" data-toggle="modal" data-target="#partModal">+ Part</button>
     <%end%>
 
+
+    <div class="checkbox">
+      <% if @trip.user == current_user %>
+        <p>Would you like to keep your trip private?</p>
+
+
+        <%= simple_form_for @trip, url: privatise_trip_path(@trip.id) do |f| %>
+          <%= f.input :private, as: :radio_buttons %>
+          <%= f.button :submit, "Change", class: 'btn btn-secondary' %>
+        <%end%>
+      <%end%>
     </div>
 
   </div>
