@@ -113,12 +113,13 @@
                               </h1>
                               <div class="Row">
                                 <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
+                                  <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
+                                  <%= "|" %>
                                   <%= link_to "Delete",
                                       act,
                                       method: :delete,
                                       data: {confirm: "Are you sure to delete this Activity?"},
                                       remote: true %></b>
-                                  <%= link_to '  Edit',"  Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
                                 </p>
                               </div>
                             </div>
