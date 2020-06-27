@@ -197,7 +197,20 @@ background:#5A929E;
 
 }
 
-
+.btn-circle-btn-gray {
+  width: 40px;
+  height: 40px;
+  padding: 10px 10px;
+  font-size: 18px;
+  line-height: 1.33;
+  border-radius: 25px;
+  background: #D3D3D3;
+  color: white;
+}
+.btn-circle-btn-gray:hover{
+  background: #86918E;
+  color: white;
+}
 
 .btn-light-2:hover{
   color: white;
