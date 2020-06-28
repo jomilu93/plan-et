@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_27_211854) do
+ActiveRecord::Schema.define(version: 2020_06_28_001904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 2020_06_27_211854) do
     t.bigint "activityable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.text "notes"
     t.index ["activityable_type", "activityable_id"], name: "index_activities_on_activityable_type_and_activityable_id"
     t.index ["part_id"], name: "index_activities_on_part_id"
   end

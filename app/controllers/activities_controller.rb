@@ -11,8 +11,8 @@ class ActivitiesController < ApplicationController
     when 'Meal'
       @meal = Meal.new(meal_params)
       authorize @meal
-      @meal.city_id = 1
       @meal.restaurant_id = params[:meal][:restaurant_id]
+      @meal.city_id = @meal.restaurant.city_id
       if @meal.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
@@ -34,8 +34,8 @@ class ActivitiesController < ApplicationController
     when 'Accomodation'
       @accomodation = Accomodation.new(accomodation_params)
       authorize @accomodation
-      @accomodation.city_id = 1
       @accomodation.hotel_id = params[:accomodation][:hotel_id]
+      @accomodation.city_id = @accomodation.hotel.city_id
       @accomodation.name = "Blank name"
       if @accomodation.save!
         @activity = Activity.new(activity_params)
@@ -48,7 +48,7 @@ class ActivitiesController < ApplicationController
     when 'Other'
       @other = Other.new(other_params)
       authorize @other
-      @other.city_id = 1
+      @other.city_id = Part.find(params[:part_id]).city_id
       if @other.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @other
@@ -80,8 +80,8 @@ class ActivitiesController < ApplicationController
       @meal = @activity.activityable
       authorize @activity
       authorize @meal
-      @meal.city_id = 1
       @meal.restaurant_id = params[:meal][:restaurant_id]
+      @meal.city_id = @meal.restaurant.city_id
       if @meal.update(meal_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)
       else
@@ -101,8 +101,8 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
       @accomodation = @activity.activityable
       authorize @activity
-      @accomodation.city_id = 1
       @accomodation.hotel_id = params[:accomodation][:hotel_id]
+      @accomodation.city_id = @accomodation.hotel.city_id
       if @accomodation.update(accomodation_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)
       else
@@ -112,7 +112,7 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
       @other = @activity.activityable
       authorize @other
-      @other.city_id = 1
+      @other.city_id = Part.find(params[:part_id]).city_id
       if @other.update(other_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)
       else
@@ -153,7 +153,7 @@ class ActivitiesController < ApplicationController
   def activity_params
     params[:start_time] = DateTime.strptime(params[:date] + params[:start_time], '%Y-%m-%d%H:%M')
     params[:end_time] = DateTime.strptime(params[:date] + params[:end_time], '%Y-%m-%d%H:%M')
-    params.permit(:end_time, :start_time, :part_id)
+    params.permit(:end_time, :start_time, :part_id, :notes)
   end
 
   def meal_params
