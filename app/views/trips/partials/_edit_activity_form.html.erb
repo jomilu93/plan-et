@@ -57,12 +57,12 @@
       <br>
       <div class='form row'>
         <div class='form-group col-md-6'>
-          <%= label_tag(:start_time, "Start Time:") %>
-          <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          <%= label_tag(:name, "Start Time:") %>
+          <%= time_field_tag :start_time, @activity.start_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
         <div class='form-group col-md-6'>
           <%= label_tag(:end_time, "End Time:") %>
-          <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          <%= time_field_tag :end_time, @activity.end_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
       </div>
       <%= hidden_field_tag 'activity_type', "Attraction" %>
@@ -90,11 +90,11 @@
       <div class='form row'>
         <div class='form-group col-md-6'>
           <%= label_tag(:name, "Start Time:") %>
-          <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          <%= time_field_tag :start_time, @activity.start_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
         <div class='form-group col-md-6'>
           <%= label_tag(:end_time, "End Time:") %>
-          <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          <%= time_field_tag :end_time, @activity.end_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
       </div>
       <div class='form group'>
@@ -125,11 +125,11 @@
       <div class='form row'>
         <div class='form-group col-md-6'>
           <%= label_tag(:name, "Start Time:") %>
-          <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          <%= time_field_tag :start_time, @activity.start_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
         <div class='form-group col-md-6'>
           <%= label_tag(:end_time, "End Time:") %>
-          <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          <%= time_field_tag :end_time, @activity.end_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
       </div>
       <div class='form group'>
@@ -164,12 +164,12 @@
       </div>
       <div class='form row'>
         <div class='form-group col-md-6'>
-          <%= label_tag(:start_time, "Departure:") %>
-          <%= time_field_tag :start_time, @activity.start_time, :class => "form-control" %>
+          <%= label_tag(:name, "Start Time:") %>
+          <%= time_field_tag :start_time, @activity.start_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
         <div class='form-group col-md-6'>
-          <%= label_tag(:end_time, "Arrival:") %>
-          <%= time_field_tag :end_time, @activity.end_time, :class => "form-control" %>
+          <%= label_tag(:end_time, "End Time:") %>
+          <%= time_field_tag :end_time, @activity.end_time.strftime("%H:%M"), :class => "form-control" %>
         </div>
       </div>
       <div class='form group'>
