@@ -34,6 +34,10 @@
         <%= label_tag(:name, "Address:") %>
         <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
       </div>
+      <div class='form group'>
+        <%= label_tag(:notes, "Notes:") %>
+        <%= text_field_tag :notes, @activity.notes, :class => "form-control" %>
+      </div>
       <%= hidden_field_tag 'activity_type', "Meal" %>
       <%= hidden_field_tag 'date', @activity.start_time.to_date %>
       <br>
@@ -68,6 +72,10 @@
       <%= hidden_field_tag 'activity_type', "Attraction" %>
       <%= hidden_field_tag 'date', @activity.start_time.to_date %>
       <br>
+      <div class='form group'>
+        <%= label_tag(:notes, "Notes:") %>
+        <%= text_field_tag :notes, @activity.notes, :class => "form-control" %>
+      </div>
       <div class='form group float-right mb-4'>
         <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
         <%= submit_tag("Modify Attraction", class: 'submitActivity btn btn-secondary') %>
@@ -100,6 +108,10 @@
       <div class='form group'>
         <%= label_tag(:name, "Address:") %>
         <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+      </div>
+      <div class='form group'>
+        <%= label_tag(:notes, "Notes:") %>
+        <%= text_field_tag :notes, @activity.notes, :class => "form-control" %>
       </div>
       <%= hidden_field_tag 'activity_type', "Accomodation" %>
       <%= hidden_field_tag 'date', @activity.start_time.to_date %>
@@ -135,6 +147,10 @@
       <div class='form group'>
         <%= label_tag(:name, "Address:") %>
         <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+      </div>
+      <div class='form group'>
+        <%= label_tag(:notes, "Notes:") %>
+        <%= text_field_tag :notes, @activity.notes, :class => "form-control" %>
       </div>
       <%= hidden_field_tag 'activity_type', "Other" %>
       <%= hidden_field_tag 'date', @activity.start_time.to_date %>
@@ -175,6 +191,10 @@
       <div class='form group'>
         <%= label_tag(:name, "Transportation type:") %>
         <%= text_field_tag :transportation_type, @activity.activityable.transportation_type, :class => "form-control" %>
+      </div>
+      <div class='form group'>
+        <%= label_tag(:notes, "Notes:") %>
+        <%= text_field_tag :notes, @activity.notes, :class => "form-control" %>
       </div>
       <%= hidden_field_tag 'activity_type', "Transportation" %>
       <%= hidden_field_tag 'date', @activity.start_time.to_date %>

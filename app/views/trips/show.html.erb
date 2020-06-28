@@ -300,6 +300,10 @@
                     <%= label_tag(:name, "Address:") %>
                     </label><%= text_field_tag :address, '', :class => "form-control" %>
                   </div>
+                  <div class='form group'>
+                    <%= label_tag(:name, "Notes:") %>
+                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
+                  </div>
                   <%= hidden_field_tag 'activity_type', "Meal" %>
                   <%= hidden_field_tag 'trip_id', @trip.id %>
                   <br>
@@ -332,6 +336,10 @@
                       <%= label_tag(:end_time, "End Time:") %>
                       <%= time_field_tag :end_time, '', :class => "form-control" %>
                     </div>
+                  </div>
+                 <div class='form group'>
+                    <%= label_tag(:name, "Notes:") %>
+                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
                   </div>
                   <%= hidden_field_tag 'activity_type', "Attraction" %>
                   <%= hidden_field_tag 'trip_id', @trip.id %>
@@ -370,6 +378,10 @@
                     <%= label_tag(:name, "Address:") %>
                     </label><%= text_field_tag :address, '', :class => "form-control" %>
                   </div>
+                  <div class='form group'>
+                    <%= label_tag(:name, "Notes:") %>
+                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
+                  </div>
                   <%= hidden_field_tag 'activity_type', "Accomodation" %>
                   <%= hidden_field_tag 'trip_id', @trip.id %>
                   <br>
@@ -405,6 +417,10 @@
                   <div class='form group'>
                     <%= label_tag(:name, "Address:") %>
                     </label><%= text_field_tag :address, '', :class => "form-control" %>
+                  </div>
+                  <div class='form group'>
+                    <%= label_tag(:name, "Notes:") %>
+                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
                   </div>
                   <%= hidden_field_tag 'activity_type', "Other" %>
                   <%= hidden_field_tag 'trip_id', @trip.id %>
@@ -445,6 +461,10 @@
                   <div class='form group'>
                     <%= label_tag(:name, "Transportation Type:") %>
                     </label><%= text_field_tag :transportation_type, '', :class => "form-control" %>
+                  </div>
+                  <div class='form group'>
+                    <%= label_tag(:name, "Notes:") %>
+                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
                   </div>
                   <%= hidden_field_tag 'activity_type', "Transportation" %>
                   <%= hidden_field_tag 'trip_id', @trip.id %>
