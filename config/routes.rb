@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
 
   root to: 'trips#home'
-  get 'profile', to: 'pages#profile'
+  resource :profile, only: [:show, :update]
 
   resources :trips, only: [:new, :create, :index, :show, :update, :destroy] do
     resources :parts, only: [:create]

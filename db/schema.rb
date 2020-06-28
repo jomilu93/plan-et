@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_06_24_051800) do
+ActiveRecord::Schema.define(version: 2020_06_27_211854) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_trgm"
@@ -168,6 +168,7 @@ ActiveRecord::Schema.define(version: 2020_06_24_051800) do
     t.string "cities", default: [], array: true
     t.string "countries", default: [], array: true
     t.boolean "private"
+    t.boolean "public"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
@@ -182,6 +183,9 @@ ActiveRecord::Schema.define(version: 2020_06_24_051800) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "authentication_token", limit: 30
+    t.string "description"
+    t.date "date_of_birth"
+    t.string "phone_number"
     t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true
     t.index ["city_id"], name: "index_users_on_city_id"
     t.index ["email"], name: "index_users_on_email", unique: true

@@ -1,0 +1,21 @@
+<div class="profile-container">
+  <div class="info-container">
+
+       <%= cl_image_tag current_user.try(:photo)&.key, :width => 300, :height => 300 , :crop => :fill, class:"avatar-large" %>
+
+    <%= simple_form_for(@user, url: profile_path ) do |f| %>
+      <%= f.input :name %>
+      <%= f.input :email  %>
+
+      <%= f.input :phone_number, :placeholder => 'Your phone number'%>
+      <%= f.input :date_of_birth, as: :date, start_year: Date.today.year - 90,
+                              end_year: Date.today.year - 12, discard_day: true,
+                              order: [:month, :year] %>
+      <%= f.association :city %>
+      <%= f.input :description, as: :text, :placeholder => 'Tell us about yourself!' %>
+      <%= f.button :submit, "Update Profile",class: "btn btn-secondary" %>
+    <% end %>
+  </div>
+</div>
+
+
