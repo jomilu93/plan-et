@@ -16,7 +16,7 @@
       <% end %>
     </div>
 
-    <%= cl_image_tag current_user.try(:photos)&.first&.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
+    <%= cl_image_tag current_user.try(:photo)&.key, :width => 40, :height => 40 , :crop => :fill, class:"card-trip-user avatar-bordered ml-3 mb-5" %>
 
 
   </div>
@@ -150,7 +150,10 @@
     <div class="checkbox">
       <% if @trip.user == current_user %>
         <p>Would you like to keep your trip private?</p>
-
+    <%= simple_form_for @trip, url: privatise_trip_path(@trip.id) do |f| %>
+      <%= f.input :private, as: :radio_buttons, :label => '' %>
+      <%= f.button :submit, "Change", class: 'btn btn-secondary' %>
+    <%end%>
 
         <%= simple_form_for @trip, url: privatise_trip_path(@trip.id) do |f| %>
           <%= f.input :private, as: :radio_buttons %>
