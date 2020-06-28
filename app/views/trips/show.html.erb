@@ -168,8 +168,6 @@
 
 </div>
 
-<!-- ALL MODAL STUFF (we should send all of this to partials) -------------------------------------------------------------------------------------->
-
 <!-- New part modal -->
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -183,7 +181,6 @@
 <div class="modal fade" id="editPartModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-
       <% if params[:part_id] %>
         <%= render 'trips/partials/edit_part_form_simple' %>
       <% end %>
@@ -201,31 +198,13 @@
     </div>
   </div>
 </div>
-<!-- Ends Edit Activities Modal -->
 
 
 <!-- Trip modal -->
 <div class="modal fade" id="tripModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <%= simple_form_for(@trip, remote: true) do |f| %>
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalCenterTitle">Edit trip</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <%= f.input :name, required: true %>
-          <%= f.input :description, required: true %>
-          <%= f.input :start_date, required: true %>
-          <%= f.input :end_date, required: true %>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-          <%= f.button :submit, class: 'btn btn-primary' %>
-        </div>
-      <%end%>
+      <%= render 'trips/partials/edit_trip_form' %>
     </div>
   </div>
 </div>
@@ -234,261 +213,6 @@
 <!--Modal: New Activity-->
 <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog cascading-modal" role="document">
-    <!--Content-->
-    <div class="modal-content">
-      <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-      </div>
-
-        <div class="modal-c-tabs">
-
-          <!-- Nav tabs -->
-          <ul class="nav nav-tabs md-tabs tabs-2 light-blue darken-3" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link active" data-toggle="tab" href="#meal" role="tab"><i class="fas fa-utensils"></i>
-                Meal</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#attraction" role="tab"><i class="fas fa-camera"></i>
-                Attraction</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#accomodation" role="tab"><i class="fas fa-bed"></i>
-                Stay</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#other" role="tab"><i class="far fa-dot-circle"></i>
-                Other</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" data-toggle="tab" href="#transportation" role="tab"><i class="fas fa-suitcase"></i>
-                Transit</a>
-            </li>
-          </ul>
-
-          <!-- Tab panels -->
-          <div class="tab-content">
-
-            <!--Meal-->
-            <div class="tab-pane fade in show active" id="meal" role="tabpanel">
-              <div class="modal-body">
-
-                <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Title:") %>
-                    </label><%= text_field_tag :name, '', :class => "form-control" %>
-                  </div>
-                  <br>
-                  <div class='form row'>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:name, "Start Time:") %>
-                      <%= time_field_tag :start_time, '', :class => "form-control" %>
-                    </div>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:end_time, "End Time:") %>
-                      <%= time_field_tag :end_time, '', :class => "form-control" %>
-                    </div>
-                  </div>
-                  <div class='form group'>
-                    <%= label_tag(:restaurant, "Restaurant:") %>
-                    <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, {:option_selected => "Select a Restaurant"}, {:class => 'form-control'})%>
-                  </div>
-                  <br>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Address:") %>
-                    </label><%= text_field_tag :address, '', :class => "form-control" %>
-                  </div>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Notes:") %>
-                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
-                  </div>
-                  <%= hidden_field_tag 'activity_type', "Meal" %>
-                  <%= hidden_field_tag 'trip_id', @trip.id %>
-                  <br>
-                  <div class='form group float-right mb-4'>
-                    <button type="button" class=" btn btn-light-2" data-dismiss="modal">Discard</button>
-                    <%= submit_tag("Add Meal", class: 'submitActivity btn btn-secondary') %>
-                  </div>
-                  <br>
-                <% end %>
-              </div>
-            </div>
-            <!--/.Meal-->
-
-            <!--Attraction -->
-            <div class="tab-pane fade" id="attraction" role="tabpanel">
-              <div class="modal-body">
-
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
-                  <div class='form group'>
-                    <%= label_tag(:attraction, "Attraction:") %>
-                    <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name,  {:option_selected => "Select an Attraction"}, {:class => 'form-control'})%>
-                  </div>
-                  <br>
-                  <div class='form row'>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:name, "Start Time:") %>
-                      <%= time_field_tag :start_time, '', :class => "form-control" %>
-                    </div>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:end_time, "End Time:") %>
-                      <%= time_field_tag :end_time, '', :class => "form-control" %>
-                    </div>
-                  </div>
-                 <div class='form group'>
-                    <%= label_tag(:name, "Notes:") %>
-                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
-                  </div>
-                  <%= hidden_field_tag 'activity_type', "Attraction" %>
-                  <%= hidden_field_tag 'trip_id', @trip.id %>
-                  <br>
-                  <div class='form group float-right mb-4'>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-                    <%= submit_tag("Add Attraction", class: 'submitActivity btn btn-secondary') %>
-                  </div>
-                  <br>
-                <% end %>
-              </div>
-            </div>
-            <!--/.Attraction-->
-
-            <!--Accomodation-->
-            <div class="tab-pane fade" id="accomodation" role="tabpanel">
-              <div class="modal-body">
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
-                  <div class='form group'>
-                    <%= label_tag(:hotel, "Hotel:") %>
-                    <%= collection_select(:accomodation, :hotel_id, Hotel.all, :id, :name, {:option_selected => "Select a Hotel"}, {:class => 'form-control'})%>
-                  </div>
-                  <br>
-                  <div class='form row'>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:name, "Start Time:") %>
-                      <%= time_field_tag :start_time, '', :class => "form-control" %>
-                    </div>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:end_time, "End Time:") %>
-                      <%= time_field_tag :end_time, '', :class => "form-control" %>
-                    </div>
-                  </div>
-                  <br>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Address:") %>
-                    </label><%= text_field_tag :address, '', :class => "form-control" %>
-                  </div>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Notes:") %>
-                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
-                  </div>
-                  <%= hidden_field_tag 'activity_type', "Accomodation" %>
-                  <%= hidden_field_tag 'trip_id', @trip.id %>
-                  <br>
-                  <div class='form group float-right mb-4'>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-                    <%= submit_tag("Add Accomodation", class: 'submitActivity btn btn-secondary') %>
-                  </div>
-                  <br>
-                <% end %>
-              </div>
-            </div>
-            <!--/.Accomodation-->
-
-            <!--Other-->
-            <div class="tab-pane fade" id="other" role="tabpanel">
-              <div class="modal-body">
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Title:") %>
-                    </label><%= text_field_tag :name, '', :class => "form-control" %>
-                  </div>
-                  <br>
-                  <div class='form row'>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:name, "Start Time:") %>
-                      <%= time_field_tag :start_time, '', :class => "form-control" %>
-                    </div>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:end_time, "End Time:") %>
-                      <%= time_field_tag :end_time, '', :class => "form-control" %>
-                    </div>
-                  </div>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Address:") %>
-                    </label><%= text_field_tag :address, '', :class => "form-control" %>
-                  </div>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Notes:") %>
-                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
-                  </div>
-                  <%= hidden_field_tag 'activity_type', "Other" %>
-                  <%= hidden_field_tag 'trip_id', @trip.id %>
-                  <br>
-                  <div class='form group float-right mb-4'>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-                    <%= submit_tag("Add Activity", class: 'submitActivity btn btn-secondary') %>
-                  </div>
-                  <br>
-                <% end %>
-              </div>
-            </div>
-            <!--/.Other-->
-
-            <!--Transit-->
-            <div class="tab-pane fade" id="transportation" role="tabpanel">
-              <div class="modal-body">
-                <%= form_with(url: "", method: "post", class: "activity_form") do %>
-                  <div class='form row'>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:name, "From:") %>
-                      <%= collection_select(:transportation, :origin_city_id, City.all, :id, :name, {:option_selected => "Select a City"}, {:class => 'form-control'})%>
-                    </div>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:end_time, "To:") %>
-                      <%= collection_select(:transportation, :destination_city_id, City.all, :id, :name, {:option_selected => "Select a City"}, {:class => 'form-control'})%>                    </div>
-                  </div>
-                  <div class='form row'>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:name, "Departure:") %>
-                      <%= time_field_tag :start_time, '', :class => "form-control" %>
-                    </div>
-                    <div class='form-group col-md-6'>
-                      <%= label_tag(:end_time, "Arrival:") %>
-                      <%= time_field_tag :end_time, '', :class => "form-control" %>
-                    </div>
-                  </div>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Transportation Type:") %>
-                    </label><%= text_field_tag :transportation_type, '', :class => "form-control" %>
-                  </div>
-                  <div class='form group'>
-                    <%= label_tag(:name, "Notes:") %>
-                    </label><%= text_field_tag :notes, '', :class => "form-control" %>
-                  </div>
-                  <%= hidden_field_tag 'activity_type', "Transportation" %>
-                  <%= hidden_field_tag 'trip_id', @trip.id %>
-                  <br>
-                  <div class='form group float-right mb-4'>
-                    <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
-                    <%= submit_tag("Add Transit", class: 'submitActivity btn btn-secondary') %>
-                  </div>
-                  <br>
-                <% end %>
-              </div>
-            </div>
-            <!--/.Transit-->
-          </div>
-
-        </div>
-        <!-- TODO: Your form must end here -->
-    </div>
-    <!--/.Content-->
+    <%= render 'trips/partials/add_activity_form' %>
   </div>
 </div>
-
-</div>
-<!--Modal: Login / Register Form-->
-
-
-
