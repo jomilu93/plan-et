@@ -42,10 +42,10 @@ import { ajaxHomeScreen } from '../packs/home_screen'
 import { autoFill } from '../trip_show/autofill'
 
 document.addEventListener('turbolinks:load', () => {
+  autoFill();
   initHideModal();
   initModifyURLs();
   ajaxHomeScreen();
-  autoFill();
   initMapbox();
 });
 

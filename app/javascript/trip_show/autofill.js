@@ -19,7 +19,7 @@ const autoFill = () => {
 
   const autocomplete = (e) => {
     if (query.value){
-
+      console.log(query.value);
       results.innerHTML = '';
       fetch(`/api/v1/cities/?query=${query.value}`)
         .then(response => response.json())
@@ -32,8 +32,6 @@ const autoFill = () => {
   };
 
   query.addEventListener('keyup', autocomplete);
-
-  console.log("Finished loading");
 
 };
 
