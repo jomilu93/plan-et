@@ -13,6 +13,45 @@ require 'nokogiri'
 
 puts "Getting started..."
 
+puts "Adding countries..."
+
+Restcountry::Country.all.each do |country|
+  Pais.create!(
+    name: "#{country.name}",
+    region: "#{country.region}",
+    subregion: "#{country.subregion}"
+    )
+end
+
+puts "Adding cities..."
+
+Restcountry::Country.all.each do |country|
+  if country.capital == ""
+    next
+  else
+  City.create!(
+    name: "#{country.capital}",
+    pais_id: Pais.where(name: "#{country.name}").ids[0]
+    )
+  puts "City #{City.last.id} complete"
+
+  end
+end
+
+City.create!(
+    name: "Mazatlán",
+    pais_id: Pais.where(name: "Mexico").ids[0]
+    )
+
+
+def variable_test
+  begin
+    yield
+  rescue
+    "No data"
+  end
+end
+
 # puts "Adding countries and cities..."
 
 # CS.countries.each do |country|
