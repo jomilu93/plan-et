@@ -27,12 +27,15 @@
       </div>
       <div class='form group'>
         <%= label_tag(:restaurant, "Restaurant:") %>
-        <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, selected: @activity.activityable.restaurant_id, :class => 'form-control')%>
+        <div class="autocomplete" id="restaurants">
+          </label><%= text_field_tag :restaurant, @activity.activityable.restaurant.name, :class => "form-control", :id => "query" %>
+          <div class="results"></div>
+        </div>
       </div>
       <br>
       <div class='form group'>
         <%= label_tag(:name, "Address:") %>
-        <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+        <%= text_field_tag :address, @activity.activityable.restaurant.address, :class => "form-control" %>
       </div>
       <div class='form group'>
         <%= label_tag(:notes, "Notes:") %>
@@ -56,7 +59,10 @@
     <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
       <div class='form group'>
         <%= label_tag(:attraction, "Attraction:") %>
-        <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name, selected: @activity.activityable_id, :class => 'form-control')%>
+        <div class="autocomplete" id="attractions">
+          </label><%= text_field_tag :attraction, @activity.activityable.name, :class => "form-control", :id => "query" %>
+          <div class="results"></div>
+        </div>
       </div>
       <br>
       <div class='form row'>
@@ -92,7 +98,10 @@
     <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
       <div class='form group'>
         <%= label_tag(:name, "Hotel:") %>
-        <%= collection_select(:accomodation, :hotel_id, Hotel.all, :id, :name, selected: @activity.activityable.hotel_id, :class => 'form-control')%>
+        <div class="autocomplete" id="hotels">
+          </label><%= text_field_tag :hotel, @activity.activityable.hotel.name, :class => "form-control", :id => "query" %>
+          <div class="results"></div>
+        </div>
       </div>
       <br>
       <div class='form row'>
@@ -171,11 +180,17 @@
       <div class='form row'>
         <div class='form-group col-md-6'>
           <%= label_tag(:origin_city, "From:") %>
-          <%= collection_select(:transportation, :origin_city_id, City.all, :id, :name, selected: @activity.activityable.origin_city_id, :class => 'form-control')%>
+          <div class="autocomplete" id="cities">
+            </label><%= text_field_tag :origin_city, City.find(@activity.activityable.origin_city_id).name, :class => "form-control", :id => "query" %>
+            <div class="results"></div>
+          </div>
         </div>
         <div class='form-group col-md-6'>
           <%= label_tag(:destination_city, "To:") %>
-          <%= collection_select(:transportation, :destination_city_id, City.all, :id, :name, selected: @activity.activityable.destination_city_id, :class => 'form-control')%>
+          <div class="autocomplete" id="cities">
+            </label><%= text_field_tag :destination_city, City.find(@activity.activityable.destination_city_id).name, :class => "form-control", :id => "query" %>
+            <div class="results"></div>
+          </div>
         </div>
       </div>
       <div class='form row'>

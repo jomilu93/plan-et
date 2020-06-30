@@ -16,7 +16,9 @@ const autoFill = () => {
             query.value = result.innerHTML;
             if (autocomplete.id = "restaurants") {
               document.querySelector("#restaurant_address").value = result.title;
-            } else if (autocomplete.id = "hotels") {
+            }
+
+            if (autocomplete.id = "hotels") {
               document.querySelector("#hotel_address").value = result.title;
             }
             results.innerHTML = '';
