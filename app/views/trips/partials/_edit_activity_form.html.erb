@@ -9,7 +9,7 @@
 <!-- meal form -->
 <% if @activity.activityable_type == "Meal" %>
   <div class="modal-body">
-    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form", remote: true, data: { 'turbolinks-scroll': false }) do %>
       <div class='form group'>
         <%= label_tag(:name, "Title:") %>
         <%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
@@ -53,7 +53,7 @@
 <!-- attraction form -->
 <% if @activity.activityable_type == "Attraction" %>
   <div class="modal-body">
-    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form", remote: true, data: { 'turbolinks-scroll': false }) do %>
       <div class='form group'>
         <%= label_tag(:attraction, "Attraction:") %>
         <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name, selected: @activity.activityable_id, :class => 'form-control')%>
@@ -89,7 +89,7 @@
 <!-- accomodation form -->
 <% if @activity.activityable_type == "Accomodation" %>
   <div class="modal-body">
-    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form", remote: true, data: { 'turbolinks-scroll': false }) do %>
       <div class='form group'>
         <%= label_tag(:name, "Hotel:") %>
         <%= collection_select(:accomodation, :hotel_id, Hotel.all, :id, :name, selected: @activity.activityable.hotel_id, :class => 'form-control')%>
@@ -128,7 +128,7 @@
 <!-- other form -->
 <% if @activity.activityable_type == "Other" %>
   <div class="modal-body">
-    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form", remote: true, data: { 'turbolinks-scroll': false }) do %>
       <div class='form group'>
         <%= label_tag(:name, "Title:") %>
         <%= text_field_tag :name, @activity.activityable.name, :class => "form-control" %>
@@ -167,7 +167,7 @@
 <!-- transportation form -->
 <% if @activity.activityable_type == "Transportation" %>
   <div class="modal-body">
-    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form") do %>
+    <%= form_with(url: "/activities/#{params[:activity_id]}/", method: :patch, class: "activity_edit_form", remote: true, data: { 'turbolinks-scroll': false }) do %>
       <div class='form row'>
         <div class='form-group col-md-6'>
           <%= label_tag(:origin_city, "From:") %>

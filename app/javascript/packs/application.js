@@ -41,11 +41,31 @@ import { initHideModal } from '../trip_show/show_functionality'
 import { ajaxHomeScreen } from '../packs/home_screen'
 import { autoFill } from '../trip_show/autofill'
 
+Turbolinks.scroll = {};
+
 document.addEventListener('turbolinks:load', () => {
   autoFill();
   initHideModal();
   initModifyURLs();
   ajaxHomeScreen();
   initMapbox();
+
+  const elements = document.querySelectorAll("[data-turbolinks-scroll]");
+  elements.forEach(function(element){
+
+    element.addEventListener("click", ()=> {
+      Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
+    });
+
+    element.addEventListener("submit", ()=> {
+      Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
+    });
+  });
+
+  if (Turbolinks.scroll['top']) {
+    document.scrollingElement.scrollTo(0, Turbolinks.scroll['top']);
+  }
+
+  Turbolinks.scroll = {};
 });
 

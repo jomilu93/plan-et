@@ -9,7 +9,6 @@ let changeActionPart = (id) => {
 let changeActionEditActivity = (actId) => {
   document.querySelectorAll('.activity_edit_form').forEach(form => {
     form.setAttribute("action", `/activities/${actId}/`);
-    console.log("action changed");
   });
 }
 
@@ -49,7 +48,6 @@ const initModifyURLs = () => {
       var tripId = item.getAttribute("data-trip-id");
       $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`);
       $('#activityEditModal').modal('show');
-      console.log(`/trips/${tripId}?activity_id=${actId}`)
     });
   });
 };
