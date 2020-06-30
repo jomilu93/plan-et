@@ -35,7 +35,7 @@
       <br>
       <div class='form group'>
         <%= label_tag(:name, "Address:") %>
-        <%= text_field_tag :address, @activity.activityable.restaurant.address, :class => "form-control" %>
+        <%= text_field_tag :address, @activity.activityable.restaurant.address, :class => "form-control", :id => "restaurant_address" %>
       </div>
       <div class='form group'>
         <%= label_tag(:notes, "Notes:") %>
@@ -116,7 +116,7 @@
       </div>
       <div class='form group'>
         <%= label_tag(:name, "Address:") %>
-        <%= text_field_tag :address, @activity.activityable.address, :class => "form-control" %>
+        <%= text_field_tag :address, @activity.activityable.address, :class => "form-control", :id => "hotel_address" %>
       </div>
       <div class='form group'>
         <%= label_tag(:notes, "Notes:") %>

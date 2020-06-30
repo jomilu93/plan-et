@@ -3,7 +3,8 @@ const autoFill = () => {
   document.querySelectorAll(".autocomplete").forEach(autocomplete => {
     var query = autocomplete.querySelector("div input");
     var results = autocomplete.querySelector(".results");
-    console.log(autocomplete.id);
+    console.log(autocomplete);
+    console.log(query.value);
 
     const drawResponseList = (data) => {
       results.innerHTML = '';
