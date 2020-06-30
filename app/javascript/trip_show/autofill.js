@@ -33,6 +33,8 @@ const autoFill = () => {
 
   query.addEventListener('keyup', autocomplete);
 
+  console.log("Finished loading");
+
 };
 
 export {autoFill};
