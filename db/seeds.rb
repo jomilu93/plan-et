@@ -13,27 +13,27 @@ require 'nokogiri'
 
 puts "Getting started..."
 
-puts "Adding countries and cities..."
+# puts "Adding countries and cities..."
 
-CS.countries.each do |country|
-  region = Restcountry::Country.find_by_name("#{country[1]}").region
-  subregion = Restcountry::Country.find_by_name("#{country[1]}").subregion
-  Pais.create!(
-    name: "#{country[1]}",
-    region: "#{region}",
-    subregion: "#{subregion}"
-    )
-  puts "Country #{Pais.last.id} complete"
-  CS.states(country[0]).each do |state|
-    CS.cities(state[0], country[0]).each do |city|
-      City.create!(
-      name: "#{city}",
-      pais_id: Pais.where(name: "#{country[1]}").ids[0]
-      )
-      puts "City #{City.last.id} complete"
-    end
-  end
-end
+# CS.countries.each do |country|
+#   region = Restcountry::Country.find_by_name("#{country[1]}").region
+#   subregion = Restcountry::Country.find_by_name("#{country[1]}").subregion
+#   Pais.create!(
+#     name: "#{country[1]}",
+#     region: "#{region}",
+#     subregion: "#{subregion}"
+#     )
+#   puts "Country #{Pais.last.id} complete"
+#   CS.states(country[0]).each do |state|
+#     CS.cities(state[0], country[0]).each do |city|
+#       City.create!(
+#       name: "#{city}",
+#       pais_id: Pais.where(name: "#{country[1]}").ids[0]
+#       )
+#       puts "City #{City.last.id} complete"
+#     end
+#   end
+# end
 
 
 # def variable_test
