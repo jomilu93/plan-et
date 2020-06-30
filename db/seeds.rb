@@ -52,6 +52,37 @@ def variable_test
   end
 end
 
+# puts "Adding countries and cities..."
+
+# CS.countries.each do |country|
+#   region = Restcountry::Country.find_by_name("#{country[1]}").region
+#   subregion = Restcountry::Country.find_by_name("#{country[1]}").subregion
+#   Pais.create!(
+#     name: "#{country[1]}",
+#     region: "#{region}",
+#     subregion: "#{subregion}"
+#     )
+#   puts "Country #{Pais.last.id} complete"
+#   CS.states(country[0]).each do |state|
+#     CS.cities(state[0], country[0]).each do |city|
+#       City.create!(
+#       name: "#{city}",
+#       pais_id: Pais.where(name: "#{country[1]}").ids[0]
+#       )
+#       puts "City #{City.last.id} complete"
+#     end
+#   end
+# end
+
+
+# def variable_test
+#   begin
+#     yield
+#   rescue
+#     "No data"
+#   end
+# end
+
 puts "Adding Mexico City hotels..."
 
 url = "http://www.tripadvisor.com/Hotels-g150800-Mexico_City_Central_Mexico_and_Gulf_Coast-Hotels.html"

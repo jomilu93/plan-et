@@ -27,6 +27,10 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 #country and city gem
 gem 'restcountry'
+
+#country, state, city
+gem 'city-state'
+
 #geocoding
 gem 'geocoder'
 #mapbox gem

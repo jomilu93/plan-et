@@ -1,6 +1,7 @@
 const autoFill = () => {
 
   const query = document.querySelector("#part_city");
+  console.log(query);
   const results = document.querySelector('.results');
 
   const drawResponseList = (data) => {
