@@ -57,12 +57,15 @@
               </div>
               <div class='form group'>
                 <%= label_tag(:restaurant, "Restaurant:") %>
-                <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, {:option_selected => "Select a Restaurant"}, {:class => 'form-control'})%>
+                <div class="autocomplete" id="restaurants">
+                  </label><%= text_field_tag :restaurant, '', :class => "form-control", :id => "query" %>
+                  <div class="results"></div>
+                </div>
               </div>
               <br>
               <div class='form group'>
                 <%= label_tag(:name, "Address:") %>
-                </label><%= text_field_tag :address, '', :class => "form-control" %>
+                </label><%= text_field_tag :address, '', :class => "form-control", :id => "restaurant_address"%>
               </div>
               <div class='form group'>
                 <%= label_tag(:name, "Notes:") %>
@@ -88,7 +91,10 @@
             <%= form_with(url: "", method: "post", class: "activity_form") do %>
               <div class='form group'>
                 <%= label_tag(:attraction, "Attraction:") %>
-                <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name,  {:option_selected => "Select an Attraction"}, {:class => 'form-control'})%>
+                <div class="autocomplete" id="attractions">
+                  </label><%= text_field_tag :attraction, '', :class => "form-control", :id => "query" %>
+                  <div class="results"></div>
+                </div>
               </div>
               <br>
               <div class='form row'>
@@ -124,7 +130,10 @@
             <%= form_with(url: "", method: "post", class: "activity_form") do %>
               <div class='form group'>
                 <%= label_tag(:hotel, "Hotel:") %>
-                <%= collection_select(:accomodation, :hotel_id, Hotel.all, :id, :name, {:option_selected => "Select a Hotel"}, {:class => 'form-control'})%>
+                <div class="autocomplete" id="hotels">
+                  </label><%= text_field_tag :hotel, '', :class => "form-control", :id => "query" %>
+                  <div class="results"></div>
+                </div>
               </div>
               <br>
               <div class='form row'>
@@ -140,7 +149,7 @@
               <br>
               <div class='form group'>
                 <%= label_tag(:name, "Address:") %>
-                </label><%= text_field_tag :address, '', :class => "form-control" %>
+                </label><%= text_field_tag :address, '', :class => "form-control", :id => "hotel_address" %>
               </div>
               <div class='form group'>
                 <%= label_tag(:name, "Notes:") %>
@@ -206,12 +215,20 @@
               <div class='form row'>
                 <div class='form-group col-md-6'>
                   <%= label_tag(:name, "From:") %>
-                  <%= collection_select(:transportation, :origin_city_id, City.all, :id, :name, {:option_selected => "Select a City"}, {:class => 'form-control'})%>
+                  <div class="autocomplete" id="cities">
+                    </label><%= text_field_tag :origin_city, '', :class => "form-control", :id => "query" %>
+                    <div class="results"></div>
+                  </div>
                 </div>
                 <div class='form-group col-md-6'>
                   <%= label_tag(:end_time, "To:") %>
-                  <%= collection_select(:transportation, :destination_city_id, City.all, :id, :name, {:option_selected => "Select a City"}, {:class => 'form-control'})%>                    </div>
+                  <div class="autocomplete" id="cities">
+                    </label><%= text_field_tag :destination_city, '', :class => "form-control", :id => "query" %>
+                    <div class="results"></div>
+                  </div>
+                </div>
               </div>
+
               <div class='form row'>
                 <div class='form-group col-md-6'>
                   <%= label_tag(:name, "Departure:") %>
@@ -222,17 +239,21 @@
                   <%= time_field_tag :end_time, '', :class => "form-control" %>
                 </div>
               </div>
+
               <div class='form group'>
                 <%= label_tag(:name, "Transportation Type:") %>
                 </label><%= text_field_tag :transportation_type, '', :class => "form-control" %>
               </div>
+
               <div class='form group'>
                 <%= label_tag(:name, "Notes:") %>
                 </label><%= text_field_tag :notes, '', :class => "form-control" %>
               </div>
+
               <%= hidden_field_tag 'activity_type', "Transportation" %>
               <%= hidden_field_tag 'trip_id', @trip.id %>
               <br>
+
               <div class='form group float-right mb-4'>
                 <button type="button" class="btn btn-light" data-dismiss="modal">Discard</button>
                 <%= submit_tag("Add Transit", class: 'submitActivity btn btn-secondary') %>

@@ -4,7 +4,7 @@ class Api::V1::RestaurantsController < Api::V1::BaseController
 
   def index
     if params[:query]
-      @restaurants = policy_scope(Restaurant.where('lower(name) LIKE ?', "%#{params[:query]}%"))[0..5]
+      @restaurants = policy_scope(Restaurant.where('name ILIKE ?', "%#{params[:query]}%"))[0..5]
     else
       @restaurants = policy_scope(Restaurant)
     end

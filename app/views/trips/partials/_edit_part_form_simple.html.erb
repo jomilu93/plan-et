@@ -9,10 +9,9 @@
     <%= f.input :name, required: true %>
     <%= f.input :start_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
     <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
-    <div class="autocomplete">
+    <div class="autocomplete" id="cities">
       <%= f.input :city, input_html: { value: "#{Part.find(params[:part_id]).city.name}" }, class: "city-selection"%>
-      <div class="results">
-      </div>
+      <div class="results"></div>
     </div>
   </div>
   <div class="modal-footer">

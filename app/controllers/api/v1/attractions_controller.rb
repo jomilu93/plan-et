@@ -4,7 +4,7 @@ class Api::V1::AttractionsController < Api::V1::BaseController
 
   def index
     if params[:query]
-      @attractions = policy_scope(Attraction.where('lower(name) LIKE ?', "%#{params[:query]}%"))[0..5]
+      @attractions = policy_scope(Attraction.where('name ILIKE ?', "%#{params[:query]}%"))[0..5]
     else
       @attractions = policy_scope(Attraction)
     end

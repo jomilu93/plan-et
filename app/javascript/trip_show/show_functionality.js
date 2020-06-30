@@ -1,3 +1,6 @@
+require ("trip_show/autofill");
+import { autoFill } from '../trip_show/autofill'
+
 
 
 let changeActionPart = (id) => {
@@ -36,7 +39,7 @@ const initModifyURLs = () => {
       var tripId = item.getAttribute("data-trip-id");
       changeActionPart(item.getAttribute("data-part-id"));
       window.history.pushState('', 'Edit_Part', `${window.location.pathname}?part_id=${partId}`);
-      $("#editPartModal .modal-content").load(`/trips/${tripId}?part_id=${partId} #editPartModal .modal-content`)
+      $("#editPartModal .modal-content").load(`/trips/${tripId}?part_id=${partId} #editPartModal .modal-content`, autoFill);
       $('#editPartModal').modal('show');
     });
   });
@@ -47,7 +50,7 @@ const initModifyURLs = () => {
       $('#activityEditModal').modal('hide');
       var actId = item.getAttribute("data-act-id");
       var tripId = item.getAttribute("data-trip-id");
-      $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`);
+      $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`, autoFill);
       $('#activityEditModal').modal('show');
       console.log(`/trips/${tripId}?activity_id=${actId}`)
     });
