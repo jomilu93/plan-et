@@ -60,7 +60,7 @@ end
     @trip = Trip.find(params[:id])
     authorize @trip
     @trip_owner = @trip.user
-    @parts = @trip.parts
+    @parts = @trip.parts.sort_by { |p| [p.start_date] }
     @activities = []
     @parts.each do |part|
       part.activities.all.each do |activity|
