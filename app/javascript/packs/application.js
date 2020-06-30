@@ -8,8 +8,9 @@ require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
-
 require ("trip_show/show_functionality");
+require ("trip_show/autofill");
+
 
 //require date_wrapper
 
@@ -38,13 +39,13 @@ import { initMapbox } from '../plugins/init_mapbox';
 import { initModifyURLs } from '../trip_show/show_functionality'
 import { initHideModal } from '../trip_show/show_functionality'
 import { ajaxHomeScreen } from '../packs/home_screen'
-import { autoFill } from '../trip_show/autofill.js'
+import { autoFill } from '../trip_show/autofill'
 
 document.addEventListener('turbolinks:load', () => {
-  initMapbox();
+  autoFill();
   initHideModal();
   initModifyURLs();
   ajaxHomeScreen();
-  autoFill();
+  initMapbox();
 });
 
