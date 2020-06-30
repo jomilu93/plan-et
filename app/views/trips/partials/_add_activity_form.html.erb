@@ -57,12 +57,16 @@
               </div>
               <div class='form group'>
                 <%= label_tag(:restaurant, "Restaurant:") %>
-                <%= collection_select(:meal, :restaurant_id, Restaurant.all, :id, :name, {:option_selected => "Select a Restaurant"}, {:class => 'form-control'})%>
+                <div class="autocomplete" id="restaurants">
+                  </label><%= text_field_tag :restaurant, '', :class => "form-control", :id => "query" %>
+                  <div class="results">
+                  </div>
+                </div>
               </div>
               <br>
               <div class='form group'>
                 <%= label_tag(:name, "Address:") %>
-                </label><%= text_field_tag :address, '', :class => "form-control" %>
+                </label><%= text_field_tag :address, '', :class => "form-control", :id => "restaurant_address"%>
               </div>
               <div class='form group'>
                 <%= label_tag(:name, "Notes:") %>
@@ -88,7 +92,11 @@
             <%= form_with(url: "", method: "post", class: "activity_form") do %>
               <div class='form group'>
                 <%= label_tag(:attraction, "Attraction:") %>
-                <%= collection_select(:attraction, :attraction_id, Attraction.all, :id, :name,  {:option_selected => "Select an Attraction"}, {:class => 'form-control'})%>
+                <div class="autocomplete" id="attractions">
+                  </label><%= text_field_tag :attraction, '', :class => "form-control", :id => "query" %>
+                  <div class="results">
+                  </div>
+                </div>
               </div>
               <br>
               <div class='form row'>
@@ -124,7 +132,11 @@
             <%= form_with(url: "", method: "post", class: "activity_form") do %>
               <div class='form group'>
                 <%= label_tag(:hotel, "Hotel:") %>
-                <%= collection_select(:accomodation, :hotel_id, Hotel.all, :id, :name, {:option_selected => "Select a Hotel"}, {:class => 'form-control'})%>
+                <div class="autocomplete" id="hotels">
+                  </label><%= text_field_tag :hotel, '', :class => "form-control", :id => "query" %>
+                  <div class="results">
+                  </div>
+                </div>
               </div>
               <br>
               <div class='form row'>
@@ -140,7 +152,7 @@
               <br>
               <div class='form group'>
                 <%= label_tag(:name, "Address:") %>
-                </label><%= text_field_tag :address, '', :class => "form-control" %>
+                </label><%= text_field_tag :address, '', :class => "form-control", :id => "hotel_address" %>
               </div>
               <div class='form group'>
                 <%= label_tag(:name, "Notes:") %>

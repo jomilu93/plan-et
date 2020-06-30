@@ -11,8 +11,8 @@ class ActivitiesController < ApplicationController
     when 'Meal'
       @meal = Meal.new(meal_params)
       authorize @meal
-      @meal.restaurant_id = params[:meal][:restaurant_id]
-      @meal.city_id = @meal.restaurant.city_id
+      # @meal.restaurant_id = params[:meal]
+      # @meal.city_id = @meal.restaurant.city_id
       if @meal.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
@@ -157,6 +157,8 @@ class ActivitiesController < ApplicationController
   end
 
   def meal_params
+    params[:restaurant_id] = Restaurant.where(name:"#{params[:restaurant]}").ids[0]
+    params[:city_id] = Restaurant.where(name:"#{params[:restaurant]}")[0].city_id
     params.permit(:name, :address, :city_id, :restaurant_id)
   end
 
