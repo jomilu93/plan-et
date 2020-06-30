@@ -11,8 +11,7 @@
     <%= f.input :end_date, as: :date, html5: true, input_html: { min: @trip.start_date.strftime('%F'), max: @trip.end_date.strftime('%F') } %>
     <div class="autocomplete" id="cities">
       <%= f.input :city, id: "query" %>
-      <div class="results">
-      </div>
+      <div class="results"></div>
     </div>
   </div>
   <div class="modal-footer">

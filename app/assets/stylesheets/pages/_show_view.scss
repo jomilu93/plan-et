@@ -8,23 +8,27 @@
 
 .results {
   position: absolute;
-  top: 80%;
+  top: 87%;
   display: flex;
   flex-direction: column;
   background-color: white;
-  // border: 1px solid gray;
+  border: 0.5px solid $form-border-gray;
   // border-color: black;
   padding-top: 20px;
   padding: 10px;
-  // margin: 10px;
+  margin-left: 6.4px;
+  margin-right: 6.4px;
   // border-radius: 25px;
-  display: block;
   z-index: -1;
   width: 100%;
 }
 
+.results:empty {
+    display: none;
+}
+
 .result_item{
-  color: black;
+  color: gray;
   background: white;
   background-color: white;
   padding: 0px;
@@ -35,8 +39,9 @@
 
 .result_item:hover{
   // text-decoration: underline;
-  background: gray;
-  color: white;
+  background: white;
+  color: black;
+  font-weight: bold;
 }
 
 .page_container {
