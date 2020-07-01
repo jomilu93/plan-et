@@ -38,7 +38,7 @@ margin-bottom: 0px;
  }
 
 .info-container{
-// display: flex;
+
   justify-content: space-around;
   flex-direction: row;
   padding-top: 30px;
@@ -53,3 +53,26 @@ margin-bottom: 0px;
   margin-bottom: 30px;
   padding: 16px;
 }
+
+input {
+
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+}
+
+
+.form-control:valid, .form-control.is-valid {
+  border-color: #5A929E;
+  border-radius: 3px;
+  background-image:none;
+  }
+
+  .form-control:valid:focus, .form-control.is-valid:focus {
+    border-color: #5A929E;
+    box-shadow: 0 0 0 0.1rem #5A929E;
+    border-radius: 3px;
+
+}
+
+

@@ -11,8 +11,8 @@ class ActivitiesController < ApplicationController
     when 'Meal'
       @meal = Meal.new(meal_params)
       authorize @meal
-      @meal.restaurant_id = params[:meal][:restaurant_id]
-      @meal.city_id = @meal.restaurant.city_id
+      # @meal.restaurant_id = params[:meal]
+      # @meal.city_id = @meal.restaurant.city_id
       if @meal.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
@@ -23,7 +23,7 @@ class ActivitiesController < ApplicationController
       end
     when 'Attraction'
       @activity = Activity.new(activity_params)
-      @attraction = Attraction.find(params[:attraction][:attraction_id])
+      @attraction = Attraction.where(name: "#{params[:attraction]}")[0]
       @activity.activityable = @attraction
       authorize @activity
       if @activity.save!
@@ -34,8 +34,8 @@ class ActivitiesController < ApplicationController
     when 'Accomodation'
       @accomodation = Accomodation.new(accomodation_params)
       authorize @accomodation
-      @accomodation.hotel_id = params[:accomodation][:hotel_id]
-      @accomodation.city_id = @accomodation.hotel.city_id
+      # @accomodation.hotel_id = params[:accomodation][:hotel_id]
+      # @accomodation.city_id = @accomodation.hotel.city_id
       @accomodation.name = "Blank name"
       if @accomodation.save!
         @activity = Activity.new(activity_params)
@@ -60,8 +60,8 @@ class ActivitiesController < ApplicationController
     when 'Transportation'
       @transportation = Transportation.new(transportation_params)
       authorize @transportation
-      @transportation.origin_city_id = params[:transportation][:origin_city_id]
-      @transportation.destination_city_id = params[:transportation][:destination_city_id]
+      # @transportation.origin_city_id = params[:transportation][:origin_city_id]
+      # @transportation.destination_city_id = params[:transportation][:destination_city_id]
       if @transportation.save!
         @activity = Activity.new(activity_params)
         @activity.activityable = @transportation
@@ -80,8 +80,8 @@ class ActivitiesController < ApplicationController
       @meal = @activity.activityable
       authorize @activity
       authorize @meal
-      @meal.restaurant_id = params[:meal][:restaurant_id]
-      @meal.city_id = @meal.restaurant.city_id
+      # @meal.restaurant_id = params[:meal][:restaurant_id]
+      # @meal.city_id = @meal.restaurant.city_id
       if @meal.update(meal_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)
       else
@@ -89,7 +89,7 @@ class ActivitiesController < ApplicationController
       end
     when 'Attraction'
       @activity = Activity.find(params[:id])
-      @attraction = Attraction.find(params[:attraction][:attraction_id])
+      @attraction = Attraction.where(name: "#{params[:attraction]}")[0]
       authorize @activity
       @activity.activityable = @attraction
       if @activity.update(activity_params)
@@ -101,8 +101,8 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
       @accomodation = @activity.activityable
       authorize @activity
-      @accomodation.hotel_id = params[:accomodation][:hotel_id]
-      @accomodation.city_id = @accomodation.hotel.city_id
+      # @accomodation.hotel_id = params[:accomodation][:hotel_id]
+      # @accomodation.city_id = @accomodation.hotel.city_id
       if @accomodation.update(accomodation_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)
       else
@@ -112,6 +112,8 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
       @other = @activity.activityable
       authorize @other
+
+      @other.city_id = @activity.part.city_id
       if @other.update(other_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)
       else
@@ -121,8 +123,8 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
       @transportation = @activity.activityable
       authorize @transportation
-      @transportation.origin_city_id = params[:transportation][:origin_city_id]
-      @transportation.destination_city_id = params[:transportation][:destination_city_id]
+      # @transportation.origin_city_id = params[:transportation][:origin_city_id]
+      # @transportation.destination_city_id = params[:transportation][:destination_city_id]
       if @transportation.update(transportation_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)
       else
@@ -156,6 +158,8 @@ class ActivitiesController < ApplicationController
   end
 
   def meal_params
+    params[:restaurant_id] = Restaurant.where(name:"#{params[:restaurant]}").ids[0]
+    params[:city_id] = Restaurant.where(name:"#{params[:restaurant]}")[0].city_id
     params.permit(:name, :address, :city_id, :restaurant_id)
   end
 
@@ -164,6 +168,8 @@ class ActivitiesController < ApplicationController
   end
 
   def accomodation_params
+    params[:city_id] = Hotel.where(name: "#{params[:hotel]}")[0].city.id
+    params[:hotel_id] = Hotel.where(name: "#{params[:hotel]}")[0].id
     params.permit(:address, :city_id, :hotel_id)
   end
 
@@ -176,11 +182,14 @@ class ActivitiesController < ApplicationController
   end
 
   def other_params
+    # params[:city_id] = Part.find(params[:part_id]).city_id
     params.permit(:name, :address, :city_id)
   end
 
   def transportation_params
-    params.permit(:transportation, :transportation_type)
+    params[:origin_city_id] = City.where(name: "#{params[:origin_city]}")[0].id
+    params[:destination_city_id] = City.where(name: "#{params[:destination_city]}")[0].id
+    params.permit(:transportation, :transportation_type, :origin_city_id, :destination_city_id)
   end
 
 end

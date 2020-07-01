@@ -115,8 +115,13 @@ body, html {
 
 }
 
+
+.form-control:valid, .form-control.is-valid {
+    border: none;
+}
 .btn-info{
   margin-left:-25px;
+  width: 25%;
 }
 
  #input.search-bar.form-control{
@@ -124,6 +129,15 @@ body, html {
  }
 
 
+.btn-primary{
+ background-color:#86918E;
+ border:none;
+}
+
+.btn-primary:hover{
+ background-color:#5A929E;
+ border:none;
+}
 
 
 

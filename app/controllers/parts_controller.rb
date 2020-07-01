@@ -29,8 +29,9 @@ class PartsController < ApplicationController
   def destroy
     @part = Part.find(params[:id])
     authorize @part
+    trip = Trip.find(@part.trip.id)
     @part.destroy
-    redirect_to trip_path(@part)
+    redirect_to trip_path(trip)
   end
 
   private

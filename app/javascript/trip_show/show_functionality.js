@@ -1,3 +1,6 @@
+require ("trip_show/autofill");
+import { autoFill } from '../trip_show/autofill'
+
 
 
 let changeActionPart = (id) => {

@@ -4,7 +4,7 @@ class Api::V1::CitiesController < Api::V1::BaseController
 
   def index
     if params[:query]
-      @cities = policy_scope(City.where('lower(name) LIKE ?', "%#{params[:query]}%"))[0..5]
+      @cities = policy_scope(City.where('name ILIKE ?', "%#{params[:query]}%"))[0..5]
     else
       @cities = policy_scope(City)
     end

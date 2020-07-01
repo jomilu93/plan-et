@@ -10,9 +10,17 @@
     <%= f.input :description, required: true %>
     <%= f.input :start_date, required: true %>
     <%= f.input :end_date, required: true %>
+    <p>Would you like to keep your trip private?</p>
+    <%= f.input :private,:label => '' , as: :radio_buttons%>
+
   </div>
+
+
+
   <div class="modal-footer">
     <button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
     <%= f.button :submit, class: 'btn btn-primary' %>
   </div>
 <%end%>
+
+
