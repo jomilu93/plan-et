@@ -143,17 +143,6 @@
     <%end%>
 
 
-    <div class="checkbox">
-      <% if @trip.user == current_user %>
-        <p>Would you like to keep your trip private?</p>
-    <%= simple_form_for @trip, url: privatise_trip_path(@trip.id) do |f| %>
-      <%= f.input :private, as: :radio_buttons, :label => '' %>
-      <%= f.button :submit, "Change", class: 'btn btn-secondary' %>
-    <%end%>
-
-
-      <%end%>
-    </div>
 
   </div>
 
