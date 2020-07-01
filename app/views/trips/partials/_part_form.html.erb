@@ -1,4 +1,4 @@
-<%= simple_form_for([@trip, @part_new], remote: true) do |f| %>
+<%= simple_form_for([@trip, @part_new], remote: true, data: { 'turbolinks-scroll': false }) do |f| %>
   <div class="modal-header">
     <h5 class="modal-title" id="exampleModalCenterTitle">New Part</h5>
     <button type="button" class="close" data-dismiss="modal" aria-label="Close">

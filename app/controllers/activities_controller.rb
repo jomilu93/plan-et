@@ -112,6 +112,7 @@ class ActivitiesController < ApplicationController
       @activity = Activity.find(params[:id])
       @other = @activity.activityable
       authorize @other
+
       @other.city_id = @activity.part.city_id
       if @other.update(other_params) && @activity.update(activity_params)
         redirect_to trip_path(@activity.part.trip)

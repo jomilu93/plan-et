@@ -123,7 +123,7 @@
                                   <%= link_to "Delete",
                                       act,
                                       method: :delete,
-                                      data: {confirm: "Are you sure to delete this Activity?"},
+                                      data: {confirm: "Are you sure to delete this Activity?", 'turbolinks-scroll': false},
                                       remote: true %></b>
                                 </p>
                               </div>
@@ -188,11 +188,13 @@
     <div class="modal-content">
       <% if params[:activity_id] %>
         <%= render 'trips/partials/edit_activity_form' %>
+        <script>
+
+        </script>
       <% end %>
     </div>
   </div>
 </div>
-
 
 <!-- Trip modal -->
 <div class="modal fade" id="tripModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -202,7 +204,6 @@
     </div>
   </div>
 </div>
-
 
 <!--Modal: New Activity-->
 <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
