@@ -115,6 +115,10 @@ body, html {
 
 }
 
+
+.form-control:valid, .form-control.is-valid {
+    border: none;
+}
 .btn-info{
   margin-left:-25px;
   width: 25%;
