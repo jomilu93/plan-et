@@ -26,7 +26,7 @@ class PartPolicy < ApplicationPolicy
   end
 
   def destroy?
-    user == record.user
+    @user == user
   end
 
 end
