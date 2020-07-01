@@ -37,9 +37,18 @@
                 <button class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
                   <h5><%= part.name %><h5>
                 </button>
-                <% if part.trip.user == current_user %>
-                 <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", id: "edit_part_button", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data-part-id" => part.id, "data-trip-id" => part.trip.id %>
-                <% end %>
+                <div class="tile_div">
+                  <% if part.trip.user == current_user %>
+                    <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", id: "edit_part_button", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data-part-id" => part.id, "data-trip-id" => part.trip.id %>
+                    <%= link_to "",
+                      part,
+                      type: "button",
+                      class: "btn btn-delete fas fa-trash",
+                      method: :delete,
+                      data: {confirm: "Deleting a Part will delete all Activities in it. \nAre you sure to delete this Part?"},
+                      remote: true %>
+                  <% end %>
+                </div>
               </h5>
             </div>
 
