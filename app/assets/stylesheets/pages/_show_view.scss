@@ -227,7 +227,7 @@ color: white;
   color: white;
 }
 .btn-circle-btn-gray:hover{
-  background: #86918E;
+  background: #5A929E;
   color: white;
 }
 
@@ -282,6 +282,7 @@ font-weight: bold;
  font-weight: bold;
  margin-bottom: 0px;
 
+
 }
 
 input[type='radio']:after {
@@ -309,6 +310,17 @@ input[type='radio']:after {
         border: 5px solid #5A929E;
 
     }
+
+
+
+
+.form-check-input.is-valid ~ .form-check-label {
+    color: #5A929E;
+}
+
+
+
+
 
 
 
