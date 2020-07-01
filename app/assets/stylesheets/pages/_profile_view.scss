@@ -53,3 +53,12 @@ margin-bottom: 0px;
   margin-bottom: 30px;
   padding: 16px;
 }
+
+.username{
+  border-color: black!important;
+}
+
+
+.form-control:valid, .form-control.is-valid {
+    border-color: #5A929E;
+  }
