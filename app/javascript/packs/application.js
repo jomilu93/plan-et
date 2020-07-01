@@ -44,6 +44,7 @@ import { autoFill } from '../trip_show/autofill'
 Turbolinks.scroll = {};
 
 document.addEventListener('turbolinks:load', () => {
+  console.log("loaded");
   autoFill();
   initHideModal();
   initModifyURLs();
@@ -51,13 +52,17 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
 
   const elements = document.querySelectorAll("[data-turbolinks-scroll]");
-  elements.forEach(function(element){
+  //console.log(elements.length);
 
+  elements.forEach(function(element) {
+    //console.log(element);
     element.addEventListener("click", ()=> {
+      //console.log('element clicked');
       Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
     });
 
     element.addEventListener("submit", ()=> {
+      //console.log('element submitted');
       Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
     });
   });
@@ -68,4 +73,3 @@ document.addEventListener('turbolinks:load', () => {
 
   Turbolinks.scroll = {};
 });
-
