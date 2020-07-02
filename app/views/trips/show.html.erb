@@ -119,11 +119,11 @@
                               </h1>
                                 <div class="Row">
                                   <p>
-                                    <% if act.notes == "" || act.notes.nil? %>
-                                      <% %>
-                                    <%else %>
-                                      <span class="nobr" data-toggle="collapse" data-target=<%= "#notescollapse#{activity_card_index}" %> aria-expanded="false" aria-controls=<%= "notescollapse#{activity_card_index}" %>> > </span>
-                                    <% end %>
+                                      <% if act.notes == "" || act.notes.nil? %>
+                                        <% %>
+                                      <%else %>
+                                        <span class="nobr" data-toggle="collapse" data-target=<%= "#notescollapse#{activity_card_index}" %> aria-expanded="false" aria-controls=<%= "notescollapse#{activity_card_index}"%>> ▶ </span>
+                                      <% end %>
                                     <%= act.activityable_type %> -
                                     <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
                                     <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
@@ -135,7 +135,7 @@
                                       remote: true %></b>
                                   </p>
                                     <div id=<%= "notescollapse#{activity_card_index}" %> class="panel-collapse collapse" >
-                                      <div class="card card-body">
+                                      <div class="card-notes">
                                         <%= act.notes %>
                                       </div>
                                     </div>

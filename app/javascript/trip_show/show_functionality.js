@@ -82,4 +82,12 @@ const initHideModal =() => {
   });
 };
 
-export {initHideModal, initModifyURLs};
+
+$('[class="nobr"]').click(function() {
+  $(this).toggleClass( "active" );
+  if ($(this).hasClass("active")) {
+    $(this).text("▼");
+  } else {
+    $(this).text("▶");
+  }
+});
