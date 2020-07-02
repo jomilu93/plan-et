@@ -38,7 +38,7 @@ const initModifyURLs = () => {
       var tripId = item.getAttribute("data-trip-id");
       changeActionPart(item.getAttribute("data-part-id"));
       window.history.pushState('', 'Edit_Part', `${window.location.pathname}?part_id=${partId}`);
-      $("#editPartModal .modal-content").load(`/trips/${tripId}?part_id=${partId} #editPartModal .modal-content`)
+      $("#editPartModal .modal-content").load(`/trips/${tripId}?part_id=${partId} #editPartModal .modal-content`, autoFill)
       // following function is to ad the event listener for turbolinks behviour after the form is completelly loaded
       setTimeout(function () { // this is a supper shitty workaround but it will work for the demo. This should be refractored after that
         $('.simple_form.edit_part')[0].addEventListener("submit", () => {
