@@ -118,7 +118,7 @@
                               </h1>
                               <div class="Row">
                                 <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
-                                  <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
+                                  <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id, "data-part-id" => act.part.id%></b>
                                   <%= "|" %>
                                   <%= link_to "Delete",
                                       act,
