@@ -46,10 +46,10 @@ Turbolinks.scroll = {};
 document.addEventListener('turbolinks:load', () => {
   console.log("loaded");
   autoFill();
+  initMapbox();
   initHideModal();
   initModifyURLs();
   ajaxHomeScreen();
-  initMapbox();
 
   const elements = document.querySelectorAll("[data-turbolinks-scroll]");
   //console.log(elements.length);
