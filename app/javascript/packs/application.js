@@ -41,6 +41,7 @@ import { initHideModal } from '../trip_show/show_functionality'
 import { ajaxHomeScreen } from '../packs/home_screen'
 import { sloganEffect } from '../packs/home_screen'
 import { autoFill } from '../trip_show/autofill'
+import { initTScroll } from '../plugins/init_tscroll';
 
 Turbolinks.scroll = {};
 
@@ -52,6 +53,7 @@ document.addEventListener('turbolinks:load', () => {
   ajaxHomeScreen();
   initMapbox();
   sloganEffect();
+  initTScroll();
 
   const elements = document.querySelectorAll("[data-turbolinks-scroll]");
   //console.log(elements.length);

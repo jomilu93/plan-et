@@ -169,7 +169,6 @@ ActiveRecord::Schema.define(version: 2020_06_28_001904) do
     t.string "cities", default: [], array: true
     t.string "countries", default: [], array: true
     t.boolean "private"
-    t.boolean "public"
     t.index ["user_id"], name: "index_trips_on_user_id"
   end
 
