@@ -52,36 +52,36 @@ def variable_test
   end
 end
 
-# puts "Adding countries and cities..."
+# # puts "Adding countries and cities..."
 
-# CS.countries.each do |country|
-#   region = Restcountry::Country.find_by_name("#{country[1]}").region
-#   subregion = Restcountry::Country.find_by_name("#{country[1]}").subregion
-#   Pais.create!(
-#     name: "#{country[1]}",
-#     region: "#{region}",
-#     subregion: "#{subregion}"
-#     )
-#   puts "Country #{Pais.last.id} complete"
-#   CS.states(country[0]).each do |state|
-#     CS.cities(state[0], country[0]).each do |city|
-#       City.create!(
-#       name: "#{city}",
-#       pais_id: Pais.where(name: "#{country[1]}").ids[0]
-#       )
-#       puts "City #{City.last.id} complete"
-#     end
-#   end
-# end
+# # CS.countries.each do |country|
+# #   region = Restcountry::Country.find_by_name("#{country[1]}").region
+# #   subregion = Restcountry::Country.find_by_name("#{country[1]}").subregion
+# #   Pais.create!(
+# #     name: "#{country[1]}",
+# #     region: "#{region}",
+# #     subregion: "#{subregion}"
+# #     )
+# #   puts "Country #{Pais.last.id} complete"
+# #   CS.states(country[0]).each do |state|
+# #     CS.cities(state[0], country[0]).each do |city|
+# #       City.create!(
+# #       name: "#{city}",
+# #       pais_id: Pais.where(name: "#{country[1]}").ids[0]
+# #       )
+# #       puts "City #{City.last.id} complete"
+# #     end
+# #   end
+# # end
 
 
-# def variable_test
-#   begin
-#     yield
-#   rescue
-#     "No data"
-#   end
-# end
+# # def variable_test
+# #   begin
+# #     yield
+# #   rescue
+# #     "No data"
+# #   end
+# # end
 
 puts "Adding Mexico City hotels..."
 
@@ -111,7 +111,8 @@ html_doc.css("div.listing.collapsed").each do |listing|
     address:"#{address}",
     phone_number: "#{phone_number}",
     rating: rating,
-    city_id: "#{City.where(name:"Mexico City")[0].id}")
+    city_id: City.where(name:"Mexico City")[0].id
+    )
 
   puts "Hotel #{Hotel.last.id} complete"
   # #average_price
@@ -146,7 +147,8 @@ html_doc.css("div.listing.collapsed").each do |listing|
     address:"#{address}",
     phone_number: "#{phone_number}",
     rating: rating,
-    city_id: "#{City.where(name:"Paris")[0].id}")
+    city_id: City.where(name:"Paris")[0].id
+    )
 
   puts "Hotel #{Hotel.last.id} complete"
   # #average_price
@@ -181,7 +183,8 @@ html_doc.css("div.listing.collapsed").each do |listing|
     address:"#{address}",
     phone_number: "#{phone_number}",
     rating: rating,
-    city_id: "#{City.where(name:"Mazatlan")[0].id}")
+    city_id: City.where(name:"Mazatlan")[0].id
+    )
 
   puts "Hotel #{Hotel.last.id} complete"
   # #average_price
@@ -239,7 +242,7 @@ url = "http://www.tripadvisor.com/Attractions-g150800-Activities-a_allAttraction
 html_file = open(url).read
 html_doc = Nokogiri::HTML(html_file)
 
-html_doc.css("div.attractions-attraction-filtered-main-index__listItem--3trCl.attractions-attraction-filtered-main-index__paddingDesktop--2kSx8").each do |listing|
+html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
   name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
   attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
 
@@ -247,7 +250,7 @@ html_doc.css("div.attractions-attraction-filtered-main-index__listItem--3trCl.at
   html_file_sub = open(url_sub).read
   html_doc_sub = Nokogiri::HTML(html_file_sub)
 
-  address = variable_test {html_doc_sub.css(".attractions-contact-card-ContactCard__contactRow--3Ih6v").children[1].inner_html}
+  address = variable_test {html_doc_sub.css("div.LjCWTZdN").children[1].inner_html}
   #phone_number
   #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
 
@@ -255,74 +258,72 @@ html_doc.css("div.attractions-attraction-filtered-main-index__listItem--3trCl.at
         name: "#{name}",
         address:"#{address}",
         attraction_type: "#{attraction_type}",
-        city_id: 145)
+        city_id: City.where(name:"Mexico City")[0].id
+        )
 
   puts "Attraction #{Attraction.last.id} complete"
 
 end
 
-# puts "Adding Paris attractions..."
+puts "Adding Paris attractions..."
 
-# url = "http://www.tripadvisor.com/Attractions-g187147-Activities-Paris_Ile_de_France.html"
+url = "https://www.tripadvisor.com/Attractions-g187147-Activities-a_allAttractions.true-Paris_Ile_de_France.html"
 
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
 
-# puts html_doc.css("li.attractions-attraction-overview-pois-PoiCard__item--3UzYK")[0]
+html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
+  name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+  attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
 
-# html_doc.css("li.attractions-attraction-overview-pois-PoiCard__item--3UzYK").each do |listing|
+  url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
 
-#   url_sub = "http://www.tripadvisor.com.mx/#{listing.css("a.attractions-attraction-overview-pois-PoiInfo__name--SJ0a4")["href"]}"
-#   html_file_sub = open(url_sub).read
-#   html_doc_sub = Nokogiri::HTML(html_file_sub)
+  address = variable_test {html_doc_sub.css("div.LjCWTZdN").children[1].inner_html}
+  #phone_number
+  #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
 
-#   name = variable_test {html_doc_sub.css("h1.ui_header.h1").inner_html}
-#   p name
-#   attraction_type = variable_test {html_doc_sub.css("a.attractions-attraction-review-header-AttractionLinks__dotted_link--Pt2MP").inner_html}
-#   p attraction_type
-#   address = variable_test {html_doc_sub.css("div.attractions-contact-card-ContactCard__contactRow--3Ih6v").children[1].inner_html}
-#   p address
-#   #phone_number
-#   #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+  Attraction.create!(
+        name: "#{name}",
+        address:"#{address}",
+        attraction_type: "#{attraction_type}",
+        city_id: City.where(name:"Paris")[0].id
+        )
 
-#   Attraction.create!(
-#         name: "#{name}",
-#         address:"#{address}",
-#         attraction_type: "#{attraction_type}",
-#         city_id: 78)
+  puts "Attraction #{Attraction.last.id} complete"
 
-#   puts "Attraction #{Attraction.last.id} complete"
+end
 
-# end
+puts "Adding Mazatlán attractions..."
 
-# puts "Adding Mazatlán attractions..."
+url = "https://www.tripadvisor.com/Attractions-g150792-Activities-a_allAttractions.true-Mazatlan_Pacific_Coast.html"
 
-# url = "http://www.tripadvisor.com/Attractions-g150792-Activities-Mazatlan_Pacific_Coast.html"
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
 
-# html_file = open(url).read
-# html_doc = Nokogiri::HTML(html_file)
+html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
+  name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+  attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
 
-# html_doc.css("div.attractions-attraction-filtered-main-index__listItem--3trCl.attractions-attraction-filtered-main-index__paddingDesktop--2kSx8").each do |listing|
-#   name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
-#   attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
+  url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
 
-#   url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
-#   html_file_sub = open(url_sub).read
-#   html_doc_sub = Nokogiri::HTML(html_file_sub)
+  address = variable_test {html_doc_sub.css("div.LjCWTZdN").children[1].inner_html}
+  #phone_number
+  #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
 
-#   address = variable_test {html_doc_sub.css(".attractions-contact-card-ContactCard__contactRow--3Ih6v").children[1].inner_html}
-#   #phone_number
-#   #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+  Attraction.create!(
+        name: "#{name}",
+        address:"#{address}",
+        attraction_type: "#{attraction_type}",
+        city_id: City.where(name:"Mazatlan")[0].id
+        )
 
-#   Attraction.create!(
-#         name: "#{name}",
-#         address:"#{address}",
-#         attraction_type: "#{attraction_type}",
-#         city_id: City.last.id)
+  puts "Attraction #{Attraction.last.id} complete"
 
-#   puts "Attraction #{Attraction.last.id} complete"
-
-# end
+end
 
 # MULTI-PAGE SCRAPE
 # page_number = 30
@@ -399,7 +400,8 @@ html_doc.css("div._1llCuDZj").each do |listing|
     business_hours: "No data",
     address: "#{address}",
     phone_number: "#{phone_number}",
-    city_id: 145)
+    city_id: City.where(name:"Mexico City")[0].id
+    )
 
   puts "Restaurant #{Restaurant.last.id} complete"
 
@@ -433,7 +435,7 @@ html_doc.css("div._1llCuDZj").each do |listing|
     business_hours: "No data",
     address: "#{address}",
     phone_number: "#{phone_number}",
-    city_id: 78)
+    city_id: City.where(name:"Paris")[0].id)
 
   puts "Restaurant #{Restaurant.last.id} complete"
 
@@ -467,21 +469,21 @@ html_doc.css("div._1llCuDZj").each do |listing|
     business_hours: "No data",
     address: "#{address}",
     phone_number: "#{phone_number}",
-    city_id: City.last.id)
+    city_id: City.where(name:"Mazatlan")[0].id)
 
   puts "Restaurant #{Restaurant.last.id} complete"
 
 end
 
-# MULTI-PAGE SCRAPE
-# puts "Creating users..."
+# # MULTI-PAGE SCRAPE
+# # puts "Creating users..."
 
 User.create!(
       name: "David Osuna Azcona",
       email: "davidoad@gmail.com",
       password: "contrasena",
-      city_id: 246,
-      description: "I love travelling...especially to unknown places."
+      city_id: City.where(name:"Mazatlan")[0].id,
+      description: "I love travelling...especially to unknown places.",
       date_of_birth:'19/07/1990',
       phone_number: "4042633557"
       )
@@ -490,7 +492,7 @@ User.create!(
       name: "Luis César",
       email: "luis@gmail.com",
       password: "contrasena",
-      city_id: 140,
+      city_id: City.where(name:"Mexico City")[0].id,
       description: "I don't usually travelling, but when I do, I prefer Plan-et",
       date_of_birth:'20/02/1993',
       phone_number: "4047541122"
@@ -500,7 +502,7 @@ User.create!(
       name: "Lou Malta",
       email: "lou@loumalta.com",
       password: "contrasena",
-      city_id: 75,
+      city_id: City.where(name:"Paris")[0].id,
       description: "The world is my canvas and I bounce around painting.",
       date_of_birth:'10/03/1995',
       phone_number: "4047541122"
