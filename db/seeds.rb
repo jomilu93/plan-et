@@ -39,7 +39,7 @@ Restcountry::Country.all.each do |country|
 end
 
 City.create!(
-    name: "Mazatlán",
+    name: "Mazatlan",
     pais_id: Pais.where(name: "Mexico").ids[0]
     )
 
@@ -111,7 +111,7 @@ html_doc.css("div.listing.collapsed").each do |listing|
     address:"#{address}",
     phone_number: "#{phone_number}",
     rating: rating,
-    city_id: 145)
+    city_id: "#{City.where(name:"Mexico City")[0].id}")
 
   puts "Hotel #{Hotel.last.id} complete"
   # #average_price
@@ -146,7 +146,7 @@ html_doc.css("div.listing.collapsed").each do |listing|
     address:"#{address}",
     phone_number: "#{phone_number}",
     rating: rating,
-    city_id: 78)
+    city_id: "#{City.where(name:"Paris")[0].id}")
 
   puts "Hotel #{Hotel.last.id} complete"
   # #average_price
@@ -181,7 +181,7 @@ html_doc.css("div.listing.collapsed").each do |listing|
     address:"#{address}",
     phone_number: "#{phone_number}",
     rating: rating,
-    city_id: City.last.id)
+    city_id: "#{City.where(name:"Mazatlan")[0].id}")
 
   puts "Hotel #{Hotel.last.id} complete"
   # #average_price
@@ -480,21 +480,30 @@ User.create!(
       name: "David Osuna Azcona",
       email: "davidoad@gmail.com",
       password: "contrasena",
-      city_id: 246
+      city_id: 246,
+      description: "I love travelling...especially to unknown places."
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
       )
 
 User.create!(
       name: "Luis César",
       email: "luis@gmail.com",
       password: "contrasena",
-      city_id: 140
+      city_id: 140,
+      description: "I don't usually travelling, but when I do, I prefer Plan-et",
+      date_of_birth:'20/02/1993',
+      phone_number: "4047541122"
       )
 
 User.create!(
       name: "Lou Malta",
       email: "lou@loumalta.com",
       password: "contrasena",
-      city_id: 75
+      city_id: 75,
+      description: "The world is my canvas and I bounce around painting.",
+      date_of_birth:'10/03/1995',
+      phone_number: "4047541122"
       )
 
 user_photo = [

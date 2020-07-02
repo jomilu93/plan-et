@@ -30,7 +30,7 @@
           <div class="card">
             <div class="card-header" id="headingOne">
               <h5 class="d-flex flex-row justify-content-between align-items-center mb-0">
-                <button class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne">
+                <button id="part_accordion" class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne" data-part-id = <%= part.id %>>
                   <h5><%= part.name %><h5>
                 </button>
                 <div class="tile_div">
@@ -157,7 +157,7 @@
 
   <div id="map"
          style="width: 100%; height: 700px; padding-top:15px;"
-         data-markers="<%= @markers.to_json %>"
+         data-markers="<%= @part_markers.to_json %>"
          data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
 </div>

@@ -40,4 +40,11 @@ const initMapbox = () => {
   }
 };
 
+document.querySelectorAll("#part_accordion").forEach(part => {
+  part.addEventListener('click', () => {
+    var partId = part.getAttribute("data-part-id");
+    window.history.pushState('', 'Show_Part', `${window.location.pathname}?part_id=${partId}`);
+  });
+});
+
 export { initMapbox };

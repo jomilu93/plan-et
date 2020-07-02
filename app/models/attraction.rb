@@ -5,6 +5,9 @@ class Attraction < ApplicationRecord
 
   has_one_attached :photo
 
+  geocoded_by :address
+  after_validation :geocode
+
   validates :name, :address, :attraction_type, presence: true
 
 end
