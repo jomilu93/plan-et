@@ -25,8 +25,10 @@ let changeActionActivity = (id, date) => {
 const initModifyURLs = () => {
   // retireve part ID when clicking a '+' sign
   document.querySelectorAll('.plus-sign').forEach(item => {
+    var partId = item.getAttribute("data-part-id");
     item.addEventListener('click', () => {
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
+      window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
     });
   });
 

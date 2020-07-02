@@ -31,7 +31,7 @@ const autoFill = () => {
       if (query.value){
         console.log(query.value);
         results.innerHTML = '';
-        fetch(`/api/v1/${autocomplete.id}/?query=${query.value}`)
+        fetch(`/api/v1/${autocomplete.id}/?query=${query.value}&city=${}`)
           .then(response => response.json())
           .then(data => drawResponseList(data));
 
