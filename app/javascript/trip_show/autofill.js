@@ -28,10 +28,12 @@ const autoFill = () => {
     };
 
     const callAPI = () => {
+      var part_id = new RegExp('[\?&]' + "part_id" + '=([^&#]*)').exec(window.location.href);
+      console.log(part_id[1]);
       if (query.value){
         console.log(query.value);
         results.innerHTML = '';
-        fetch(`/api/v1/${autocomplete.id}/?query=${query.value}`)
+        fetch(`/api/v1/${autocomplete.id}/?query=${query.value}&part_id=${part_id[1]}`)
           .then(response => response.json())
           .then(data => drawResponseList(data));
 
