@@ -31,7 +31,7 @@
             <div class="card-header" id="headingOne">
               <h5 class="d-flex flex-row justify-content-between align-items-center mb-0">
                 <button id="part_accordion" class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne" data-part-id = <%= part.id %>>
-                  <h5><%= part.name %><h5>
+                  <h6><%= part.name %><h6>
                 </button>
                 <div class="tile_div">
                   <% if part.trip.user == current_user %>
