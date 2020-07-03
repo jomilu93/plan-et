@@ -40,6 +40,7 @@ import { initModifyURLs } from '../trip_show/show_functionality'
 import { initHideModal } from '../trip_show/show_functionality'
 import { ajaxHomeScreen } from '../packs/home_screen'
 import { autoFill } from '../trip_show/autofill'
+import { iconChange } from '../trip_show/show_functionality'
 
 Turbolinks.scroll = {};
 
@@ -50,6 +51,7 @@ document.addEventListener('turbolinks:load', () => {
   initModifyURLs();
   ajaxHomeScreen();
   initMapbox();
+  iconChange();
 
   const elements = document.querySelectorAll("[data-turbolinks-scroll]");
   //console.log(elements.length);
