@@ -58,6 +58,7 @@ const initModifyURLs = () => {
   document.querySelectorAll('#edit_activity_link').forEach(item => {
     var partId = item.getAttribute("data-part-id");
     item.addEventListener('click', () => {
+      console.log("click detected");
       let accordionCard = item.parentElement
                       .parentElement
                       .parentElement
@@ -71,6 +72,7 @@ const initModifyURLs = () => {
       $('#activityEditModal').modal('hide');
       var actId = item.getAttribute("data-act-id");
       var tripId = item.getAttribute("data-trip-id");
+      console.log(actId);
       //window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
       $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`, autoFill);
       setTimeout((accomodation_params) => ReloadActivitiesEdit(accordionCard), 1000);
@@ -117,10 +119,12 @@ const ReloadActivities = (accordionCard) => {
 
 const ReloadActivitiesEdit = (accordionCard) => {
   let activityArray = document.querySelectorAll('.activity_edit_form');
-  console.log(accordionCard);
   activityArray.forEach(form => {
     form.addEventListener('submit', () => {
-      setTimeout(function() {$(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);}, 1000);
+      setTimeout(function() {
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
+        setTimeout(initModifyURLs, 1000);
+      }, 1000);
       $('#activityEditModal').modal('hide');
     });
   });
