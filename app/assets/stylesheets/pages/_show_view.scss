@@ -336,7 +336,32 @@ input[type='radio']:after {
 
 
 
+.fa-edit {
+    color: #D3D3D3;
+}
+
+.fa-edit:hover {
+    color: #5A929E;
+}
+
+
+.fa-trash-alt {
+    color: #D3D3D3;
+}
+
+.fa-trash-alt:hover {
+    color: #F4796B;
+}
+
+.edit-trip{
+  font-size: 16px;
+  position: absolute;
+  right: 16px;
+}
 
 
 
+button#part_accordion.btn.btn-light.btn-lg.btn-block.m-0.p-2{
+  height: 60px;
+}
 
