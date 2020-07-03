@@ -8,7 +8,7 @@
 
 .results {
   position: absolute;
-  top: 87%;
+  top: 80%;
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -16,11 +16,12 @@
   // border-color: black;
   padding-top: 20px;
   padding: 10px;
-  margin-left: 6.4px;
+  margin-left: 0px;
   margin-right: 6.4px;
   // border-radius: 25px;
   z-index: -1;
   width: 100%;
+  cursor: default;
 }
 
 .results:empty {
@@ -336,7 +337,32 @@ input[type='radio']:after {
 
 
 
+.fa-edit {
+    color: #D3D3D3;
+}
+
+.fa-edit:hover {
+    color: #5A929E;
+}
+
+
+.fa-trash-alt {
+    color: #D3D3D3;
+}
+
+.fa-trash-alt:hover {
+    color: #F4796B;
+}
+
+.edit-trip{
+  font-size: 16px;
+  position: absolute;
+  right: 16px;
+}
 
 
 
+button#part_accordion.btn.btn-light.btn-lg.btn-block.m-0.p-2{
+  height: 60px;
+}
 
