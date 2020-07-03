@@ -53,26 +53,4 @@ document.addEventListener('turbolinks:load', () => {
   initMapbox();
   iconChange();
   initTScroll();
-
-  const elements = document.querySelectorAll("[data-turbolinks-scroll]");
-  //console.log(elements.length);
-
-  elements.forEach(function(element) {
-    //console.log(element);
-    element.addEventListener("click", ()=> {
-      //console.log('element clicked');
-      Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-    });
-
-    element.addEventListener("submit", ()=> {
-      //console.log('element submitted');
-      Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-    });
-  });
-
-  if (Turbolinks.scroll['top']) {
-    document.scrollingElement.scrollTo(0, Turbolinks.scroll['top']);
-  }
-
-  Turbolinks.scroll = {};
 });

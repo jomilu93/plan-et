@@ -17,7 +17,6 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         @activity.activityable = @meal
         @activity.save!
-        redirect_to trip_path(@activity.part.trip)
       else
         raise
       end
@@ -27,7 +26,7 @@ class ActivitiesController < ApplicationController
       @activity.activityable = @attraction
       authorize @activity
       if @activity.save!
-        #redirect_to trip_path(@activity.part.trip)
+        true
       else
         raise
       end
@@ -41,7 +40,6 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         @activity.activityable = @accomodation
         @activity.save!
-        redirect_to trip_path(@activity.part.trip)
       else
         raise
       end
@@ -53,7 +51,6 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         @activity.activityable = @other
         @activity.save!
-        redirect_to trip_path(@activity.part.trip)
       else
         raise
       end
@@ -66,7 +63,6 @@ class ActivitiesController < ApplicationController
         @activity = Activity.new(activity_params)
         @activity.activityable = @transportation
         @activity.save!
-        redirect_to trip_path(@activity.part.trip)
       else
         raise
       end

@@ -41,7 +41,7 @@
                       type: "button",
                       class: "btn btn-delete fas fa-trash",
                       method: :delete,
-                      data: {confirm: "Deleting a Part will delete all Activities in it. \nAre you sure to delete this Part?", 'turbolinks-scroll': false},
+                      data: {confirm: "Deleting a Part will delete all Activities in it. \nAre you sure to delete this Part?"},
                       remote: true %>
                   <% end %>
                 </div>
@@ -135,7 +135,7 @@
 
                                       act,
                                       method: :delete,
-                                      data: {confirm: "Are you sure to delete this Activity?", 'turbolinks-scroll': false},
+                                      data: {confirm: "Are you sure to delete this Activity?"},
                                       remote: true %></b>
                                   </p>
                                     <div id=<%= "notescollapse#{activity_card_index}" %> class="panel-collapse collapse" >
