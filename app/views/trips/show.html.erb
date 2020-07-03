@@ -26,31 +26,28 @@
       <div class="accordion" id="accordionExample">
         <% card_index = 1 %>
         <% @parts.each do |part|%>
-
           <div class="card">
-            <div class="card-header" id="headingOne">
-              <h5 class="d-flex flex-row justify-content-between align-items-center mb-0">
-                <button id="part_accordion" class="btn btn-light" type="button" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne" data-part-id = <%= part.id %>>
-                  <h6><%= part.name %><h6>
-                </button>
-                <div class="tile_div">
-                  <% if part.trip.user == current_user %>
-                    <%= link_to '',"" , type: "button", class: "btn btn-delete far fa-edit", id: "edit_part_button", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data-part-id" => part.id, "data-trip-id" => part.trip.id %>
-                    <%= link_to "",
-                      part,
-                      type: "button",
-                      class: "btn btn-delete far fa-trash-alt",
-                      method: :delete,
-                      data: {confirm: "Deleting a Part will delete all Activities in it. \nAre you sure to delete this Part?", 'turbolinks-scroll': false},
-                      remote: true %>
-                  <% end %>
-                </div>
-              </h5>
+            <div class="card-header m-b-0 p-0" id="headingOne">
+              <button id="part_accordion" type="button" class="btn btn-light btn-lg btn-block m-0 p-2" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne" data-part-id = <%= part.id %>>
+                  <div class="d-flex justify-content-between flex-row">
+                    <h6><%= part.name %></h6>
+                    <h6>
+                      <% if part.trip.user == current_user %>
+                        <%= link_to '',"" , class: "far fa-edit", id: "edit_part_button", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data-part-id" => part.id, "data-trip-id" => part.trip.id %>
+                        <%= link_to "",
+                          part,
+                          class: "far fa-trash-alt",
+                          method: :delete,
+                          data: {confirm: "Deleting a Part will delete all Activities in it. \nAre you sure to delete this Part?", 'turbolinks-scroll': false},
+                          remote: true %>
+                      <% end %>
+                    </h6>
+                  </div>
+                  <p class="text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
             </div>
 
             <div id=<%= "collapse#{card_index}" %> class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
               <div class="card-body">
-
                 <% part.part_dates_array.each do |date|%>
                   <h6><%= date.strftime("%A, %b %e") %></h6>
                   <% activity_index = 1 %>
