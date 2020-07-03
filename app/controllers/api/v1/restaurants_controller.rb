@@ -3,7 +3,10 @@ class Api::V1::RestaurantsController < Api::V1::BaseController
   before_action :set_restaurant, only: [ :show, :update]
 
   def index
-    if params[:query]
+    if params[:query] && params[:part_id]
+      @city = Part.find(params[:part_id]).city
+      @restaurants = policy_scope(@city.restaurants.where('name ILIKE ?', "%#{params[:query]}%"))[0..5]
+    elsif params[:query]
       @restaurants = policy_scope(Restaurant.where('name ILIKE ?', "%#{params[:query]}%"))[0..5]
     else
       @restaurants = policy_scope(Restaurant)

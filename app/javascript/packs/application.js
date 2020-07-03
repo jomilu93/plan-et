@@ -39,6 +39,7 @@ import { initMapbox } from '../plugins/init_mapbox';
 import { initModifyURLs } from '../trip_show/show_functionality'
 import { initHideModal } from '../trip_show/show_functionality'
 import { ajaxHomeScreen } from '../packs/home_screen'
+import { sloganEffect } from '../packs/home_screen'
 import { autoFill } from '../trip_show/autofill'
 import { iconChange } from '../trip_show/show_functionality'
 
@@ -52,6 +53,7 @@ document.addEventListener('turbolinks:load', () => {
   ajaxHomeScreen();
   initMapbox();
   iconChange();
+  sloganEffect();
 
   const elements = document.querySelectorAll("[data-turbolinks-scroll]");
   //console.log(elements.length);
