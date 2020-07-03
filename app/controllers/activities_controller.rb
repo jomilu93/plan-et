@@ -134,7 +134,6 @@ class ActivitiesController < ApplicationController
     authorize @activity
     @trip = @activity.part.trip
     @activity.destroy
-    redirect_to trip_path(trip)
   end
 
   private

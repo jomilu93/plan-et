@@ -79,6 +79,9 @@ const initModifyURLs = () => {
       $('#activityEditModal').modal('show');
     });
   });
+
+  deleteActivity();
+
 };
 
 const initHideModal =() => {
@@ -126,6 +129,25 @@ const ReloadActivitiesEdit = (accordionCard) => {
         setTimeout(initModifyURLs, 1000);
       }, 1000);
       $('#activityEditModal').modal('hide');
+    });
+  });
+};
+
+const deleteActivity = () => {
+  document.querySelectorAll('.delete-activity-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      let accordionCard = btn.parentElement
+                             .parentElement
+                             .parentElement
+                             .parentElement
+                             .parentElement
+                             .parentElement
+                             .parentElement
+                             .parentElement.getAttribute("class");
+
+      setTimeout(function() {
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
+      }, 1000);
     });
   });
 };
