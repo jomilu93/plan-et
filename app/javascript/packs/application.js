@@ -40,17 +40,15 @@ import { ajaxHomeScreen } from '../packs/home_screen';
 import { sloganEffect } from '../packs/home_screen';
 import { autoFill } from '../trip_show/autofill';
 import { initTScroll } from '../plugins/init_tscroll';
-import { iconChange, initModifyURLs, initHideModal } from '../trip_show/show_functionality';
+import { initShowJS } from '../trip_show/show_functionality';
 
 Turbolinks.scroll = {};
 
 document.addEventListener('turbolinks:load', () => {
   if (window.location.pathname == '/') { sloganEffect(); }
   autoFill();
-  initHideModal();
-  initModifyURLs();
+  initShowJS();
   ajaxHomeScreen();
   initMapbox();
-  iconChange();
   initTScroll();
 });
