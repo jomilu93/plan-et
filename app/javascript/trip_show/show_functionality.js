@@ -58,17 +58,22 @@ const initModifyURLs = () => {
   document.querySelectorAll('#edit_activity_link').forEach(item => {
     var partId = item.getAttribute("data-part-id");
     item.addEventListener('click', () => {
+      let accordionCard = item.parentElement
+                      .parentElement
+                      .parentElement
+                      .parentElement
+                      .parentElement
+                      .parentElement
+                      .parentElement
+                      .parentElement
+                      .parentElement.getAttribute("class");
+
       $('#activityEditModal').modal('hide');
       var actId = item.getAttribute("data-act-id");
       var tripId = item.getAttribute("data-trip-id");
-      window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
+      //window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
       $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`, autoFill);
-      // following function is to ad the event listener for turbolinks behviour after the form is completelly loaded
-      setTimeout(function () { // this is a supper shitty workaround but it will work for the demo. This should be refractored after that
-        $('.activity_edit_form')[0].addEventListener("submit", () => {
-          Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-        });
-      }, 1500);
+      setTimeout((accomodation_params) => ReloadActivitiesEdit(accordionCard), 1000);
       $('#activityEditModal').modal('show');
     });
   });
@@ -103,10 +108,20 @@ const iconChange = () => {
 
 const ReloadActivities = (accordionCard) => {
   let activityArray = document.querySelectorAll('.activity_form');
+  activityArray.forEach(form => {
+    form.addEventListener('submit', () => {
+      setTimeout(function() {$(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);}, 1000);
+    });
+  });
+};
+
+const ReloadActivitiesEdit = (accordionCard) => {
+  let activityArray = document.querySelectorAll('.activity_edit_form');
   console.log(accordionCard);
   activityArray.forEach(form => {
     form.addEventListener('submit', () => {
       setTimeout(function() {$(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);}, 1000);
+      $('#activityEditModal').modal('hide');
     });
   });
 };

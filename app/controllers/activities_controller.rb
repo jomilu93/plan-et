@@ -79,7 +79,7 @@ class ActivitiesController < ApplicationController
       # @meal.restaurant_id = params[:meal][:restaurant_id]
       # @meal.city_id = @meal.restaurant.city_id
       if @meal.update(meal_params) && @activity.update(activity_params)
-        redirect_to trip_path(@activity.part.trip)
+        true
       else
         raise
       end
@@ -89,7 +89,7 @@ class ActivitiesController < ApplicationController
       authorize @activity
       @activity.activityable = @attraction
       if @activity.update(activity_params)
-        redirect_to trip_path(@activity.part.trip)
+        true
       else
         raise
       end
@@ -100,7 +100,7 @@ class ActivitiesController < ApplicationController
       # @accomodation.hotel_id = params[:accomodation][:hotel_id]
       # @accomodation.city_id = @accomodation.hotel.city_id
       if @accomodation.update(accomodation_params) && @activity.update(activity_params)
-        redirect_to trip_path(@activity.part.trip)
+        true
       else
         raise
       end
@@ -111,7 +111,7 @@ class ActivitiesController < ApplicationController
 
       @other.city_id = @activity.part.city_id
       if @other.update(other_params) && @activity.update(activity_params)
-        redirect_to trip_path(@activity.part.trip)
+        true
       else
         raise
       end
@@ -122,7 +122,7 @@ class ActivitiesController < ApplicationController
       # @transportation.origin_city_id = params[:transportation][:origin_city_id]
       # @transportation.destination_city_id = params[:transportation][:destination_city_id]
       if @transportation.update(transportation_params) && @activity.update(activity_params)
-        redirect_to trip_path(@activity.part.trip)
+        true
       else
         raise
       end
