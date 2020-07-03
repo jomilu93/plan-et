@@ -35,7 +35,7 @@
                 </button>
                 <div class="tile_div">
                   <% if part.trip.user == current_user %>
-                    <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary", id: "edit_part_button", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data-part-id" => part.id, "data-trip-id" => part.trip.id %>
+                    <%= link_to 'Edit part',"" , type: "button", class: "btn btn-secondary far fa-edit", id: "edit_part_button", "data-toggle"=>"modal", "data-target"=> "#editPartModal", "data-part-id" => part.id, "data-trip-id" => part.trip.id %>
                     <%= link_to "",
                       part,
                       type: "button",
