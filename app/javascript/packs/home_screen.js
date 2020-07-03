@@ -9,6 +9,7 @@ const ajaxHomeScreen = () => {
 };
 
 const sloganEffect =() => {
+  if (document.querySelector('.ml2')) {
   var textWrapper = document.querySelector('.ml2');
   textWrapper.innerHTML = textWrapper.textContent.replace(/\S/g, "<span class='letter'>$&</span>");
 
@@ -22,6 +23,7 @@ const sloganEffect =() => {
       duration: 950,
       delay: (el, i) => 70*i
     });
+  }
 };
 
 export {ajaxHomeScreen, sloganEffect};
