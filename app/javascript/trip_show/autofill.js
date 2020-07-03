@@ -28,8 +28,8 @@ const autoFill = () => {
     };
 
     const callAPI = () => {
+
       var part_id = new RegExp('[\?&]' + "part_id" + '=([^&#]*)').exec(window.location.href);
-      console.log(part_id[1]);
       if (query.value){
         console.log(query.value);
         results.innerHTML = '';
