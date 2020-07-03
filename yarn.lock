@@ -1779,6 +1779,11 @@ chalk@^1.1.1:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
+checkbox-radio@^1.1.0:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/checkbox-radio/-/checkbox-radio-1.1.1.tgz#034cb9b5ec932b2e450a04a72f56a95b300dabd4"
+  integrity sha1-A0y5teyTKy5FCgSnL1apWzANq9Q=
+
 chokidar@^2.1.8:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-2.1.8.tgz#804b3a7b6a99358c3c5c61e71d8728f041cff917"
@@ -7098,6 +7103,13 @@ svgo@^1.0.0:
     stable "^0.1.8"
     unquote "~1.1.1"
     util.promisify "~1.0.0"
+
+t-scroll@^1.1.10:
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/t-scroll/-/t-scroll-1.1.10.tgz#cf85f6fb341650e71efa60cbd7c3d19800b582f0"
+  integrity sha512-XNE4IU8IIEsqhBXmfghtooW0+mbgzblQNrFaIrObSEFB52AaBiRmAF8DKD1TYn50Et9RkfQ53Sisjuksr6DVhw==
+  dependencies:
+    checkbox-radio "^1.1.0"
 
 tapable@^1.0.0, tapable@^1.1.3:
   version "1.1.3"
