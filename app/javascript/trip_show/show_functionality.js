@@ -86,4 +86,17 @@ const initHideModal =() => {
   });
 };
 
-export {initHideModal, initModifyURLs};
+
+const iconChange = () => {
+  $('[class="nobr"]').click(function() {
+    $(this).toggleClass( "active" );
+    if ($(this).hasClass("active")) {
+      $(this).text("▼");
+    } else {
+      $(this).text("▶");
+    }
+  });
+};
+
+export {initHideModal, initModifyURLs, iconChange};
+
