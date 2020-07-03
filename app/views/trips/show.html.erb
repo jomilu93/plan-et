@@ -8,12 +8,16 @@
    <%= cl_image_tag @trip.photos.first.key %>
   <div class="card-tripo-infos">
     <div>
-      <h2><%= @trip.name %></h2>
+      <h2><%= @trip.name %>
+         <% if @trip.user == current_user %>
+       <b class="edit-trip "><%= link_to '',"" , type: "button", class: "class: far fa-edit ", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %></b>
+      <% end %>
+
+      </h2>
+
+    </h2>
       <h3>From <%= @trip.start_date.strftime("%b %e") %> to <%= @trip.end_date.strftime("%b %e, %Y") %></h3>
       <p> <%= @trip.description %></p>
-      <% if @trip.user == current_user %>
-       <%= link_to 'Edit trip',"" , type: "button", class: "btn btn-secondary", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %>
-      <% end %>
     </div>
   </div>
  </div>
