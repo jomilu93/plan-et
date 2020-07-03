@@ -109,6 +109,18 @@
 
 }
 
+.card-notes {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  opacity: .7;
+  margin: 3;
+  padding-left: 10px;
+  padding-top: 4px;
+  font: italic;
+  color: #989898;
+}
+
 .delete {
   margin-left: 3px;
 
@@ -118,6 +130,10 @@
 .delete a {
   color: #5A929E;
 
+}
+
+.nobr {
+  color: #989898;
 }
 
 .card-tripo {

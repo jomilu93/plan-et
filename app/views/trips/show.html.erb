@@ -53,9 +53,10 @@
 
                 <% part.part_dates_array.each do |date|%>
                   <h6><%= date.strftime("%A, %b %e") %></h6>
+                  <% activity_index = 1 %>
+                  <% activity_card_index = date + activity_index %>
                   <% @activities.sort_by { |a| [a.start_time] }.each do |act| %>
                     <% if act.start_time.day == date.day %>
-
                       <div class='container'>
                         <div class="card-trip">
 
@@ -116,23 +117,39 @@
                                 <%= act.activityable.name %>
                               <% end %>
                               </h1>
-                              <div class="Row">
 
-                                <p><%= act.activityable_type %> - <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
+                          
 
-                                  <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id, "data-part-id" => act.part.id%></b>
-                                  <%= "|" %>
-                                  <%= link_to "Delete",
+                                <div class="Row">
+                                  <p>
+                                      <% if act.notes == "" || act.notes.nil? %>
+                                        <% %>
+                                      <%else %>
+                                        <span class="nobr" data-toggle="collapse" data-target=<%= "#notescollapse#{activity_card_index}" %> aria-expanded="false" aria-controls=<%= "notescollapse#{activity_card_index}"%>> ▶ </span>
+                                      <% end %>
+                                    <%= act.activityable_type %> -
+                                    <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
+                                    <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
+                                    <%= "|" %>
+                                    <%= link_to "Delete",
+
                                       act,
                                       method: :delete,
                                       data: {confirm: "Are you sure to delete this Activity?", 'turbolinks-scroll': false},
                                       remote: true %></b>
-                                </p>
-                              </div>
+                                  </p>
+                                    <div id=<%= "notescollapse#{activity_card_index}" %> class="panel-collapse collapse" >
+                                      <div class="card-notes">
+                                        <%= act.notes %>
+                                      </div>
+                                    </div>
+                                </div>
                             </div>
                           </div>
                         </div>
                       </div>
+                      <% activity_index += 1 %>
+                      <% activity_card_index = date + activity_index %>
                     <% end %>
                   <% end %>
                   <% if part.trip.user == current_user %>
