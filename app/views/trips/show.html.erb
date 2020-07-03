@@ -49,7 +49,7 @@
             </div>
 
             <div id=<%= "collapse#{card_index}" %> class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-              <div class="card-body">
+              <div class=<%="card-body#{card_index}"%>>
 
                 <% part.part_dates_array.each do |date|%>
                   <h6><%= date.strftime("%A, %b %e") %></h6>
@@ -118,7 +118,7 @@
                               <% end %>
                               </h1>
 
-                          
+
 
                                 <div class="Row">
                                   <p>

@@ -26,7 +26,10 @@ const initModifyURLs = () => {
   // retireve part ID when clicking a '+' sign
   document.querySelectorAll('.plus-sign').forEach(item => {
     var partId = item.getAttribute("data-part-id");
+
+
     item.addEventListener('click', () => {
+      ReloadActivities(item.parentElement.parentElement.getAttribute("class"));
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
       window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
     });
@@ -95,6 +98,16 @@ const iconChange = () => {
     } else {
       $(this).text("▶");
     }
+  });
+};
+
+const ReloadActivities = (accordionCard) => {
+  let activityArray = document.querySelectorAll('.activity_form');
+  console.log(accordionCard);
+  activityArray.forEach(form => {
+    form.addEventListener('submit', () => {
+      setTimeout(function() {$(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);}, 1000);
+    });
   });
 };
 

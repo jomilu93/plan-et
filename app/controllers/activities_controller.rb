@@ -27,7 +27,7 @@ class ActivitiesController < ApplicationController
       @activity.activityable = @attraction
       authorize @activity
       if @activity.save!
-        redirect_to trip_path(@activity.part.trip)
+        #redirect_to trip_path(@activity.part.trip)
       else
         raise
       end
