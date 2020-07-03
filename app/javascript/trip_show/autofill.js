@@ -28,17 +28,29 @@ const autoFill = () => {
     };
 
     const callAPI = () => {
+      if (/part_id/.test(window.location.href)) {
+        var part_id = new RegExp('[\?&]' + "part_id" + '=([^&#]*)').exec(window.location.href);
+        if (query.value){
+          console.log(query.value);
+          results.innerHTML = '';
+          fetch(`/api/v1/${autocomplete.id}/?query=${query.value}&part_id=${part_id[1]}`)
+            .then(response => response.json())
+            .then(data => drawResponseList(data));
 
-      var part_id = new RegExp('[\?&]' + "part_id" + '=([^&#]*)').exec(window.location.href);
-      if (query.value){
-        console.log(query.value);
-        results.innerHTML = '';
-        fetch(`/api/v1/${autocomplete.id}/?query=${query.value}&part_id=${part_id[1]}`)
-          .then(response => response.json())
-          .then(data => drawResponseList(data));
-
+        } else {
+          results.innerHTML = '';
+        }
       } else {
-        results.innerHTML = '';
+        if (query.value){
+          console.log(query.value);
+          results.innerHTML = '';
+          fetch(`/api/v1/${autocomplete.id}/?query=${query.value}`)
+            .then(response => response.json())
+            .then(data => drawResponseList(data));
+
+        } else {
+          results.innerHTML = '';
+        }
       }
     };
 
