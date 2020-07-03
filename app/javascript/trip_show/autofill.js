@@ -3,8 +3,6 @@ const autoFill = () => {
   document.querySelectorAll(".autocomplete").forEach(autocomplete => {
     var query = autocomplete.querySelector("div input");
     var results = autocomplete.querySelector(".results");
-    console.log(autocomplete);
-    console.log(query.value);
 
     const drawResponseList = (data) => {
       results.innerHTML = '';
@@ -13,7 +11,6 @@ const autoFill = () => {
       });
       autocomplete.querySelectorAll("p.result_item").forEach(result => {
         result.addEventListener('click', () => {
-            console.log("click detected");
             query.value = result.innerHTML;
             if (autocomplete.id == "restaurants") {
               document.querySelector("#restaurant_address").value = result.title;
