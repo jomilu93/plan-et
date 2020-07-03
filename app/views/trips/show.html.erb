@@ -117,6 +117,9 @@
                                 <%= act.activityable.name %>
                               <% end %>
                               </h1>
+
+                          
+
                                 <div class="Row">
                                   <p>
                                       <% if act.notes == "" || act.notes.nil? %>
@@ -129,6 +132,7 @@
                                     <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
                                     <%= "|" %>
                                     <%= link_to "Delete",
+
                                       act,
                                       method: :delete,
                                       data: {confirm: "Are you sure to delete this Activity?", 'turbolinks-scroll': false},
