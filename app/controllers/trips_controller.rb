@@ -46,15 +46,15 @@ class TripsController < ApplicationController
     @trips = @trips.reject do |trip|
     trip.private
     end
- end
+  end
 
-def privatise
-  @trip = Trip.find(params[:id])
-  authorize @trip
-  @trip.private = !@trip.private
-  @trip.save
-  redirect_to trip_path(@trip)
-end
+  def privatise
+    @trip = Trip.find(params[:id])
+    authorize @trip
+    @trip.private = !@trip.private
+    @trip.save
+    redirect_to trip_path(@trip)
+  end
 
   def show
     @trip = Trip.find(params[:id])
@@ -79,13 +79,21 @@ end
       @cities << part.city
     end
 
-    @markers = @parts.map do |part|
+    @part_markers = @parts.map do |part|
       {
         lat: part.city.latitude,
         lng: part.city.longitude,
         infoWindow: render_to_string(partial: "info_window", locals: { part: part })
       }
     end
+
+    # @activity_markers = Part.find(params[:part_id]).activities.map do |activity|
+    #   {
+    #     lat: activity.activityable.address.latitude,
+    #     lng: activity.activityable.address.longitude,
+    #     infoWindow: render_to_string(partial: "info_window", locals: { activity: activity })
+    #   }
+    # end
 
 
   end

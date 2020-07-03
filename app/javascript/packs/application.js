@@ -36,12 +36,13 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // Internal imports, e.g:
 import { initMapbox } from '../plugins/init_mapbox';
 // import { initSelect2 } from '../components/init_select2';
-import { initModifyURLs } from '../trip_show/show_functionality'
-import { initHideModal } from '../trip_show/show_functionality'
-import { ajaxHomeScreen } from '../packs/home_screen'
-import { sloganEffect } from '../packs/home_screen'
-import { autoFill } from '../trip_show/autofill'
+import { initModifyURLs } from '../trip_show/show_functionality';
+import { initHideModal } from '../trip_show/show_functionality';
+import { ajaxHomeScreen } from '../packs/home_screen';
+import { sloganEffect } from '../packs/home_screen';
+import { autoFill } from '../trip_show/autofill';
 import { initTScroll } from '../plugins/init_tscroll';
+import { iconChange } from '../trip_show/show_functionality';
 
 Turbolinks.scroll = {};
 
@@ -52,6 +53,7 @@ document.addEventListener('turbolinks:load', () => {
   initModifyURLs();
   ajaxHomeScreen();
   initMapbox();
+  iconChange();
   sloganEffect();
   initTScroll();
 

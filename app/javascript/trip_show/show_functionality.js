@@ -25,8 +25,10 @@ let changeActionActivity = (id, date) => {
 const initModifyURLs = () => {
   // retireve part ID when clicking a '+' sign
   document.querySelectorAll('.plus-sign').forEach(item => {
+    var partId = item.getAttribute("data-part-id");
     item.addEventListener('click', () => {
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
+      window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
     });
   });
 
@@ -51,11 +53,13 @@ const initModifyURLs = () => {
 
   // retireve activity ID when clicking a 'Edit Activity' link
   document.querySelectorAll('#edit_activity_link').forEach(item => {
+    var partId = item.getAttribute("data-part-id");
     item.addEventListener('click', () => {
       $('#activityEditModal').modal('hide');
       var actId = item.getAttribute("data-act-id");
       var tripId = item.getAttribute("data-trip-id");
-      $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`);
+      window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
+      $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`, autoFill);
       // following function is to ad the event listener for turbolinks behviour after the form is completelly loaded
       setTimeout(function () { // this is a supper shitty workaround but it will work for the demo. This should be refractored after that
         $('.activity_edit_form')[0].addEventListener("submit", () => {
@@ -82,4 +86,17 @@ const initHideModal =() => {
   });
 };
 
-export {initHideModal, initModifyURLs};
+
+const iconChange = () => {
+  $('[class="nobr"]').click(function() {
+    $(this).toggleClass( "active" );
+    if ($(this).hasClass("active")) {
+      $(this).text("▼");
+    } else {
+      $(this).text("▶");
+    }
+  });
+};
+
+export {initHideModal, initModifyURLs, iconChange};
+
