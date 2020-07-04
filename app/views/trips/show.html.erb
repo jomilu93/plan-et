@@ -74,9 +74,10 @@
 
                 <% part.part_dates_array.each do |date|%>
                   <h5><%= date.strftime("%A, %b %e") %></h5>
-                  <% activity_index = 1 %>
-                  <% activity_card_index = date + activity_index %>
+
+
                   <% @activities.sort_by { |a| [a.start_time] }.each do |act| %>
+                    <% activity_card_index = act.id %>
                     <% if act.start_time.day == date.day %>
                       <div class='container'>
                         <div class="card-trip">
@@ -202,8 +203,6 @@
                           </div>
                         </div>
                       </div>
-                      <% activity_index += 1 %>
-                      <% activity_card_index = date + activity_index %>
                     <% end %>
                   <% end %>
                   <% if part.trip.user == current_user %>
