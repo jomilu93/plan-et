@@ -74,13 +74,17 @@
   margin-bottom: 20px;
 }
 
+card-trip > img {
+
+  position: absolute;
+}
 
 .card-trip {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
   // margin-top: 5px;
-  height: 55px;
+  // height: 55px;
 }
 
 .card-trip h1 {

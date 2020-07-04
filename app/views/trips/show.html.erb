@@ -50,9 +50,10 @@
                   </div>
                   <% if @trip.user == current_user %>
                   <p class=" text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
+
                   <%else %>
                   <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> days)
-                    <% end %>
+                  <% end %>
                   </p>
             </div>
 
@@ -92,6 +93,7 @@
 
 
                           <div class="card-trip-infos">
+
                             <div>
                               <h1>
                               <% if act.activityable_type == "Meal"%>
