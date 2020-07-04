@@ -131,18 +131,29 @@
                               <% end %>
                               </h1>
 
-
-
                                 <div class="Row">
                                   <p>
+                                    <% if act.activityable_type == "Other" || act.activityable_type == "Transportation" %>
                                       <% if act.notes == "" || act.notes.nil? %>
                                         <% %>
                                       <%else %>
                                         <span class="nobr" data-toggle="collapse" data-target=<%= "#notescollapse#{activity_card_index}" %> aria-expanded="false" aria-controls=<%= "notescollapse#{activity_card_index}"%>> ▶ </span>
                                       <% end %>
+                                    <%else %>
+                                      <span class="nobr" data-toggle="collapse" data-target=<%= "#notescollapse#{activity_card_index}" %> aria-expanded="false" aria-controls=<%= "notescollapse#{activity_card_index}"%>> ▶ </span>
+                                    <% end %>
 
+                                    <% if act.activityable_type == "Meal" %>
+                                      At <%= act.activityable.restaurant.try(:name)%>
+                                        <% if act.activityable.restaurant.cuisine == " " || act.activityable.restaurant.cuisine.nil? %>
+                                          <%= %> -
+                                        <% else %>
+                                          (<%= act.activityable.restaurant.cuisine %> Food) -
+                                        <% end %>
+                                    <% else %>
+                                      <%= act.activityable_type %> -
+                                    <% end %>
 
-                                    <%= act.activityable_type %> -
                                     <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
                                     <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
                                     <%= "|" %>
@@ -157,7 +168,21 @@
 
                                     <div id=<%= "notescollapse#{activity_card_index}" %> class="panel-collapse collapse" >
                                       <div class="card-notes">
-                                        <%= act.notes %>
+                                        <% if act.activityable_type == "Meal" %>
+                                          <p>Rating: <%= act.activityable.restaurant.try(:rating)%> | Phone: <%=act.activityable.restaurant.try(:phone_number)%> </p>
+                                          <p><%= act.activityable.restaurant.try(:address)%> </p>
+                                          <br><%= act.try(:notes) %></br>
+                                        <% elsif act.activityable_type == "Accomodation" %>
+                                          <p>Rating: <%= act.activityable.hotel.try(:rating)%> | Phone: <%=act.activityable.hotel.try(:phone_number)%> </p>
+                                          <p><%= act.activityable.hotel.try(:address)%> </p>
+                                          <br><%= act.try(:notes) %></br>
+                                        <% elsif act.activityable_type == "Attraction" %>
+                                          <p>Rating: <%= act.activityable.attraction.try(:attraction_type)%></p>
+                                          <p><%= act.activityable.attraction.try(:address)%> </p>
+                                          <br><%= act.try(:notes) %></br>
+                                        <% else %>
+                                          <%= act.try(:notes) %>
+                                        <% end %>
                                       </div>
                                     </div>
                                 </div>
