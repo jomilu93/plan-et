@@ -2,7 +2,7 @@ const ajaxHomeScreen = () => {
 
   document.querySelectorAll('#search_button').forEach(item => {
     item.addEventListener('click', () => {
-      var search = document.querySelector('#search_bar').value;
+      var search = document.querySelector('#search-bar').value;
       $(".trip-card-container").load(`/?search=${search} .trip-card-container`);
     });
   });
@@ -26,7 +26,13 @@ const sloganEffect =() => {
   }
 };
 
-export {ajaxHomeScreen, sloganEffect};
+const searchScroll = () => {
+  document.querySelector('#search_button').addEventListener('click', () => {
+    document.querySelector('.trip-card-container').scrollIntoView();
+  });
+};
+
+export {ajaxHomeScreen, sloganEffect, searchScroll};
 
 
 
