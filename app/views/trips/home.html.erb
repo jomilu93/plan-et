@@ -38,7 +38,7 @@
     <% end %>
     <div class="card-img-overlay">
       <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "link-text"%></h5>
-
+      <h5 class="trip-card-text">by <%= trip.user.name%></h5>
     </div>
   </div>
   <%end%>

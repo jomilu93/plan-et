@@ -61,6 +61,14 @@ body, html {
   display:none;
   text-align: center;
   margin-top: 23%;
+  font-size: 12px;
+}
+
+.trip-card-texto {
+  display:none;
+text-align: center;
+color:white;
+// opacity:0;
 }
 
 .link-text {
@@ -73,6 +81,17 @@ body, html {
     }
 }
 
+// .trip-card-by-text {
+//   color: white;
+//   font-size: 30px;
+//   display:none;
+//   text-align: center;
+//   margin-top: 23%;
+// }
+
+.user{
+  margin-top:0px;
+}
 
 .search-button{
   border-radius: 2px;
