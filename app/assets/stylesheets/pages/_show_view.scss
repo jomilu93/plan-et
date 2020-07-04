@@ -74,13 +74,17 @@
   margin-bottom: 20px;
 }
 
+card-trip > img {
+
+  position: absolute;
+}
 
 .card-trip {
   display: flex;
   align-items: center;
   margin-bottom: 5px;
   // margin-top: 5px;
-  height: 55px;
+  // height: 55px;
 }
 
 .card-trip h1 {
@@ -154,7 +158,7 @@
 }
 
 .card-tripo h2 {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: bold;
   margin: 0;
   margin-bottom: 4px;
@@ -375,6 +379,8 @@ h6, .h6 {
    margin-top: 0px;
    padding-top: 0px;
    margin-left: 4px;
+   font-weight: bold;
+
 }
 
 .text-left {
@@ -383,4 +389,11 @@ h6, .h6 {
 
 }
 
+h5, .h5 {
+    font-size: 16px;
+        margin-left: 12px;
+    margin-top: 12px;
+    color:#86918E;
+
+}
 
