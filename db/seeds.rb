@@ -48,7 +48,7 @@ def variable_test
   begin
     yield
   rescue
-    ""
+    " "
   end
 end
 
@@ -596,7 +596,7 @@ html_doc.css("div._1llCuDZj").each do |listing|
     cuisine: "#{cuisine}",
     avg_price: avg_price,
     rating: rating,
-    business_hours: "No data",
+    business_hours: " ",
     address: "#{address}",
     phone_number: "#{phone_number}",
     city_id: City.where(name:"Mexico City")[0].id
@@ -631,7 +631,7 @@ html_doc.css("div._1llCuDZj").each do |listing|
     cuisine: "#{cuisine}",
     avg_price: avg_price,
     rating: rating,
-    business_hours: "",
+    business_hours: " ",
     address: "#{address}",
     phone_number: "#{phone_number}",
     city_id: City.where(name:"Paris")[0].id)
@@ -665,7 +665,7 @@ html_doc.css("div._1llCuDZj").each do |listing|
     cuisine: "#{cuisine}",
     avg_price: avg_price,
     rating: rating,
-    business_hours: "",
+    business_hours: " ",
     address: "#{address}",
     phone_number: "#{phone_number}",
     city_id: City.where(name:"Mazatlan")[0].id)
@@ -699,7 +699,7 @@ html_doc.css("div._1llCuDZj").each do |listing|
     cuisine: "#{cuisine}",
     avg_price: avg_price,
     rating: rating,
-    business_hours: "",
+    business_hours: " ",
     address: "#{address}",
     phone_number: "#{phone_number}",
     city_id: City.where(name:"Nassau")[0].id
@@ -734,7 +734,7 @@ html_doc.css("div._1llCuDZj").each do |listing|
     cuisine: "#{cuisine}",
     avg_price: avg_price,
     rating: rating,
-    business_hours: "",
+    business_hours: " ",
     address: "#{address}",
     phone_number: "#{phone_number}",
     city_id: City.where(name:"Kingston")[0].id
@@ -770,7 +770,7 @@ html_doc.css("div._1llCuDZj").each do |listing|
     cuisine: "#{cuisine}",
     avg_price: avg_price,
     rating: rating,
-    business_hours: "",
+    business_hours: " ",
     address: "#{address}",
     phone_number: "#{phone_number}",
     city_id: City.where(name:"Havana")[0].id
