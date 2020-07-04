@@ -91,6 +91,10 @@ const deleteActivity = () => {
   });
 };
 
+const resetForm = () => {
+  document.querySelectorAll('.activity_form').forEach(input => {input.reset();});
+};
+
 const initShowJS = () => {
   // retireve part ID when clicking a '+' sign
   document.querySelectorAll('.plus-sign').forEach(item => {
@@ -98,6 +102,7 @@ const initShowJS = () => {
 
 
     item.addEventListener('click', () => {
+      resetForm();
       ReloadActivities(item.parentElement.parentElement.getAttribute("class"));
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
       window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
