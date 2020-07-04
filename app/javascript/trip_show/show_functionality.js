@@ -51,7 +51,7 @@ const ReloadActivities = (accordionCard) => {
   activityArray.forEach(form => {
     form.addEventListener('submit', () => {
       setTimeout(function() {
-        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
         setTimeout(initShowJS, 1500);
       }, 1500);
     });
@@ -63,7 +63,7 @@ const ReloadActivitiesEdit = (accordionCard) => {
   activityArray.forEach(form => {
     form.addEventListener('submit', () => {
       setTimeout(function() {
-        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
         setTimeout(initShowJS, 1500);
       }, 1500);
       $('#activityEditModal').modal('hide');
@@ -84,7 +84,7 @@ const deleteActivity = () => {
                              .parentElement.getAttribute("class");
 
       setTimeout(function() {
-        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
         setTimeout(initShowJS, 1500);
       }, 1500);
     });
