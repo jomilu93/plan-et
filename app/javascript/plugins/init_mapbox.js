@@ -14,7 +14,7 @@ const addMarkersToMap = (map, markers) => {
     markers.forEach((marker) => {
       const popup = new mapboxgl.Popup().setHTML(marker.infoWindow);
 
-      new mapboxgl.Marker({color: '#5A929E'})
+      new mapboxgl.Marker({color: '#343a40'})
         .setLngLat([ marker.lng, marker.lat ])
         .setPopup(popup)
         .addTo(map);
@@ -37,7 +37,9 @@ const initMapbox = () => {
     const markers = JSON.parse(mapElement.dataset.markers);
     addMarkersToMap(map, markers);
     fitMapToMarkers(map, markers);
+    console.log("map zoom adjusted");
   }
+  // $(`#map`).load(`${window.location.pathname} #map`);
 };
 
 if (document.querySelectorAll("#part_accordion")) {

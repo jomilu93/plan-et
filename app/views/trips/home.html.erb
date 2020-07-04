@@ -6,23 +6,23 @@
 
   <div class="hero-image">
     <div class="hero-text">
-      <h1 class="ml2">You dream it...now Plan-et!</h1>
+      <h1 class="ml2" style="font-size: 70px;">You dreamt it...now Plan-et!</h1>
       </br>
       <div class="card-container-search">
-        <div class="align-items-center">
-          <%= form_tag root_path, method: :get, remote: true do %>
-          <%= text_field_tag :search, params[:search], placeholder: "Explore other people's trips to find inspiration for your own ones...", class:"form-control", id:"search_bar" %>
-        </div>
-        <div>
-          <%= submit_tag "Search", class: "btn btn-light mr-4 ml-2", id: "search_button"%>
+        <div class="search-bar-box">
+          <div class="align-items-center">
+            <%= form_tag root_path, method: :get, remote: true do %>
+            <%= text_field_tag :search, params[:search], placeholder: "Explore other people's trips to find inspiration for your own ones...", class: "form-control search-bar", id: "search-bar" %>
+          </div>
+            <%= submit_tag "Search", class: "btn btn-light search-btn", id: "search_button"%>
         </div>
 
-        <%= link_to "Plan Your Trip!", new_trip_path, class: "btn btn-info ml-2", id: "plan_trip_button" %>
+        <%= link_to "Plan Your Trip!", new_trip_path, class: "plan-btn", id: "plan_trip_button" %>
 
           <% end %>
       </div>
     </br>
-      <h4>Create, manage and share your travel itineraries from around the world.</h4>
+      <h4 style="font-size: 27px;">Create, manage and share your travel itineraries from around the world.</h4>
     </div>
 </div>
 

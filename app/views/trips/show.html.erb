@@ -49,10 +49,13 @@
                     </h6>
                   </div>
                   <% if @trip.user == current_user %>
-                  <p class=" text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
-
+                    <p class=" text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
                   <%else %>
-                  <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> days)
+                    <%if (@trip.end_date.to_date - @trip.start_date.to_date) == 1%>
+                      <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> day)
+                    <%else%>
+                      <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> days)
+                    <%end%>
                   <% end %>
                   </p>
             </div>
