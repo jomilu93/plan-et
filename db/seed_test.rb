@@ -57,3 +57,88 @@ html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
   p address
 
 end
+
+
+User.create!(
+      name: "Victor",
+      email: "victor@gmail.com",
+      password: "contrasena",
+      city_id: City.where(name:"Quito")[0].id,
+      description: "I love travel",
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
+      )
+
+User.create!(
+      name: "TJ",
+      email: "TJ@gmail.com",
+      password: "contrasena",
+      city_id: City.where(name:"Tegucigalpa")[0].id,
+      description: "I love travel",
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
+      )
+
+User.create!(
+      name: "Rodrigo",
+      email: "rodrigo@gmail.com",
+      password: "contrasena",
+      city_id: City.where(name:"Lima")[0].id,
+      description: "I love travel",
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
+      )
+
+User.create!(
+      name: "Rodolfo",
+      email: "rodolfo@gmail.com",
+      password: "contrasena",
+      city_id: City.where(name:"Quito")[0].id,
+      description: "I love travel",
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
+      )
+
+User.create!(
+      name: "Caio",
+      email: "caioa@gmail.com",
+      password: "contrasena",
+      city_id: City.where(name:"Beirut")[0].id,
+      description: "I love travel",
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
+      )
+
+User.create!(
+      name: "Benjamin",
+      email: "benja@gmail.com",
+      password: "contrasena",
+      city_id: City.where(name:"Quito")[0].id,
+      description: "I love travel",
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
+      )
+
+User.create!(
+      name: "Danko",
+      email: "dankoito@gmail.com",
+      password: "contrasena",
+      city_id: City.where(name:"Quito")[0].id,
+      description: "I love travel",
+      date_of_birth:'19/07/1990',
+      phone_number: "4042633557"
+      )
+
+Trip.all.each do |trip|
+  trip.user = User.all.sample
+  trip.save
+end
+
+@trip_1 = Trip.find(9)
+@trip_1.user = User.find(1)
+@trip_1.save
+
+@trip_2 = Trip.find(1)
+@trip_2.user = User.find(4)
+@trip_2.save
+
