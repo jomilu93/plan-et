@@ -10,14 +10,14 @@ class Part < ApplicationRecord
   pg_search_scope :search_for_parts,
     against: [ :name ],
 
-    associated_against: {
-      city: [ :name ],
-      trip: [ :name, :description],
-    },
+    # associated_against: {
+    #   city: [ :name ],
+    #   trip: [ :name, :description],
+    # },
 
-    using: [
-      :trigram
-    ]
+    using: {
+      :tsearch => {:prefix => true}
+    }
 
   #figure out how to ask user if they want to delete activities or not with part deletion.
 

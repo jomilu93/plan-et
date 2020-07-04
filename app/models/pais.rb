@@ -4,9 +4,9 @@ class Pais < ApplicationRecord
   include PgSearch::Model
 
   pg_search_scope :search_for_countries, :against => [:name, :region, :subregion],
-    using: [
-      :trigram
-    ]
+    using: {
+      :tsearch => {:prefix => true}
+    }
 
   validates :name, presence: true
 
