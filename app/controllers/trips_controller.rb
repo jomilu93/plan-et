@@ -103,6 +103,13 @@ class TripsController < ApplicationController
     authorize @trip
   end
 
+  def destroy
+    @trip = Trip.find(params[:id])
+    authorize @trip
+    @trip.destroy
+
+  end
+
   def create
     @trip = Trip.new(trip_params)
     authorize @trip

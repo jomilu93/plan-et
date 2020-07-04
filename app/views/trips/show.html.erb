@@ -10,8 +10,18 @@
     <div>
       <h2><%= @trip.name %>
          <% if @trip.user == current_user %>
+
        <b class="edit-trip "><%= link_to '',"" , type: "button", class: "class: far fa-edit ", "data-toggle"=>"modal", "data-target"=> "#tripModal", "data-part-id" => @trip.id %></b>
+       <b class="delete-trip "> <%= link_to'', "",
+                          class: "far fa-trash-alt",
+                          method: :delete,
+                          data: {confirm: "Are you sure to delete this Trip?", 'turbolinks-scroll': false},
+                          remote: true %>
+                          </b>
+
+
       <% end %>
+
 
       </h2>
 
