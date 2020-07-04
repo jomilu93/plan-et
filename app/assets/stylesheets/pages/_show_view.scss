@@ -79,6 +79,7 @@
   align-items: center;
   margin-bottom: 5px;
   // margin-top: 5px;
+  height: 55px;
 }
 
 .card-trip h1 {
@@ -347,6 +348,7 @@ input[type='radio']:after {
 
 .fa-trash-alt {
     color: #D3D3D3;
+    margin-right: 4px;
 }
 
 .fa-trash-alt:hover {
@@ -359,9 +361,25 @@ input[type='radio']:after {
   right: 16px;
 }
 
+button#part_accordion.btn.btn-light.btn-lg.btn-block.ml-1-mr-1.p-1{
+  height: 47px;
 
 
-button#part_accordion.btn.btn-light.btn-lg.btn-block.m-0.p-2{
-  height: 60px;
 }
+
+
+
+h6, .h6 {
+   margin-bottom: 2px;
+   margin-top: 0px;
+   padding-top: 0px;
+   margin-left: 4px;
+}
+
+.text-left {
+    text-align: left;
+    margin-left: 4px;
+
+}
+
 

@@ -32,7 +32,7 @@
         <% @parts.each do |part|%>
           <div class="card">
             <div class="card-header m-b-0 p-0" id="headingOne">
-              <button id="part_accordion" type="button" class="btn btn-light btn-lg btn-block m-0 p-2" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne" data-part-id = <%= part.id %>>
+              <button id="part_accordion" type="button" class="btn btn-light btn-lg btn-block  ml-1-mr-1 p-1" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne" data-part-id = <%= part.id %>>
                   <div class="d-flex justify-content-between flex-row">
                     <h6><%= part.name %></h6>
                     <h6>
@@ -48,7 +48,7 @@
                     </h6>
                   </div>
                   <% if @trip.user == current_user %>
-                  <p class="text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
+                  <p class=" text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
                   <%else %>
                   <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> days)
                     <% end %>
