@@ -51,9 +51,9 @@ const ReloadActivities = (accordionCard) => {
   activityArray.forEach(form => {
     form.addEventListener('submit', () => {
       setTimeout(function() {
-        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
-        setTimeout(initShowJS, 1000);
-      }, 1000);
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
+        setTimeout(initShowJS, 1500);
+      }, 1500);
     });
   });
 };
@@ -63,9 +63,9 @@ const ReloadActivitiesEdit = (accordionCard) => {
   activityArray.forEach(form => {
     form.addEventListener('submit', () => {
       setTimeout(function() {
-        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
-        setTimeout(initShowJS, 1000);
-      }, 1000);
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
+        setTimeout(initShowJS, 1500);
+      }, 1500);
       $('#activityEditModal').modal('hide');
     });
   });
@@ -84,11 +84,15 @@ const deleteActivity = () => {
                              .parentElement.getAttribute("class");
 
       setTimeout(function() {
-        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`, autoFill);
-        setTimeout(initShowJS, 1000);
-      }, 1000);
+        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
+        setTimeout(initShowJS, 1500);
+      }, 1500);
     });
   });
+};
+
+const resetForm = () => {
+  document.querySelectorAll('.activity_form').forEach(input => {input.reset();});
 };
 
 const initShowJS = () => {
@@ -98,6 +102,7 @@ const initShowJS = () => {
 
 
     item.addEventListener('click', () => {
+      resetForm();
       ReloadActivities(item.parentElement.parentElement.getAttribute("class"));
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
       window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
@@ -142,7 +147,7 @@ const initShowJS = () => {
       var tripId = item.getAttribute("data-trip-id");
       //window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
       $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`, autoFill);
-      setTimeout((accomodation_params) => ReloadActivitiesEdit(accordionCard), 1000);
+      setTimeout((accomodation_params) => ReloadActivitiesEdit(accordionCard), 1500);
       $('#activityEditModal').modal('show');
     });
   });

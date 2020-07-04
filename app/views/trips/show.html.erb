@@ -49,10 +49,14 @@
                     </h6>
                   </div>
                   <% if @trip.user == current_user %>
-                  <p class=" text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
+                    <p class=" text-left"><%= part.start_date.strftime("%b %e") %> to <%= part.end_date.strftime("%b %e")  %></p>
                   <%else %>
-                  <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> days)
-                    <% end %>
+                    <%if (@trip.end_date.to_date - @trip.start_date.to_date) == 1%>
+                      <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> day)
+                    <%else%>
+                      <p class="text-left"> (<%= (@trip.end_date.to_date - @trip.start_date.to_date).to_i %> days)
+                    <%end%>
+                  <% end %>
                   </p>
             </div>
 
@@ -60,7 +64,7 @@
               <div class=<%="card-body#{card_index}"%>>
 
                 <% part.part_dates_array.each do |date|%>
-                  <h6><%= date.strftime("%A, %b %e") %></h6>
+                  <h5><%= date.strftime("%A, %b %e") %></h5>
                   <% activity_index = 1 %>
                   <% activity_card_index = date + activity_index %>
                   <% @activities.sort_by { |a| [a.start_time] }.each do |act| %>
@@ -69,29 +73,30 @@
                         <div class="card-trip">
 
                           <% if act.activityable_type == "Meal"%>
-                           <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                           <img src="<%= image_url('resto.jpg')%>" class= "rounded-circle" alt=""  style="width:40px;height:40px;">
                           <% end %>
 
                           <% if act.activityable_type == "Other"%>
-                           <img src="<%= image_url('flower.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;" >
+                           <img src="<%= image_url('flower.jpg')%>" class= "rounded-circle " alt=""  style="width:40px;height:40px;" >
                           <% end %>
 
                           <% if act.activityable_type == "Accomodation"%>
-                           <img src="<%= image_url('hotel.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                           <img src="<%= image_url('hotel.jpg')%>" class= "rounded-circle " alt=""  style="width:40px;height:40px;">
                           <% end %>
 
                           <% if act.activityable_type == "Transportation"%>
-                           <img src="<%= image_url('plane.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                           <img src="<%= image_url('plane.jpg')%>" class= "rounded-circle " alt=""  style="width:40px;height:40px;">
                           <% end %>
 
                           <% if act.activityable_type == "Attraction"%>
-                           <img src="<%= image_url('louvre.jpg')%>" class= "rounded-circle m-1" alt=""  style="width:40px;height:40px;">
+                           <img src="<%= image_url('louvre.jpg')%>" class= "rounded-circle " alt=""  style="width:40px;height:40px;">
                           <% end %>
 
 
 
 
                           <div class="card-trip-infos">
+
                             <div>
                               <h1>
                               <% if act.activityable_type == "Meal"%>
