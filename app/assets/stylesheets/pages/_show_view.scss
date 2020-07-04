@@ -112,15 +112,17 @@
 }
 
 .card-notes {
-  display: flex;
   align-items: center;
   font-size: 12px;
   opacity: .7;
   margin: 3;
-  padding-left: 10px;
-  padding-top: 4px;
-  font: italic;
+  padding-left: 15px;
+  padding-top: 0px;
   color: #989898;
+}
+
+.card-notes p {
+  color: black;
 }
 
 .delete {
@@ -383,4 +385,6 @@ h6, .h6 {
 
 }
 
-
+.rara{
+  font-weight: bold;
+}
