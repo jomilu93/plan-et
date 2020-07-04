@@ -28,7 +28,7 @@ const sloganEffect =() => {
 
 const searchScroll = () => {
   document.querySelector('#search_button').addEventListener('click', () => {
-    setTimeout(() => {document.querySelector('.trip-card-container').scrollIntoView();}, 600);
+    setTimeout(() => {document.querySelector('.trip-card-container').scrollIntoView();}, 650);
   });
 };
 
