@@ -39,6 +39,7 @@ const initMapbox = () => {
     fitMapToMarkers(map, markers);
     console.log("map zoom adjusted");
   }
+  // $(`#map`).load(`${window.location.pathname} #map`);
 };
 
 if (document.querySelectorAll("#part_accordion")) {

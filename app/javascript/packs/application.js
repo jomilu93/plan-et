@@ -47,9 +47,10 @@ Turbolinks.scroll = {};
 document.addEventListener('turbolinks:load', () => {
   if (window.location.pathname == '/') { sloganEffect(); }
   autoFill();
+  initMapbox();
   initShowJS();
   ajaxHomeScreen();
-  initMapbox();
   initTScroll();
+  initMapbox();
 });
 
