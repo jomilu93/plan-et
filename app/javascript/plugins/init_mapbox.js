@@ -37,6 +37,7 @@ const initMapbox = () => {
     const markers = JSON.parse(mapElement.dataset.markers);
     addMarkersToMap(map, markers);
     fitMapToMarkers(map, markers);
+    console.log("map zoom adjusted");
   }
 };
 
