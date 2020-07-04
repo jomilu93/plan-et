@@ -75,13 +75,13 @@ end
 # # # end
 
 
-# # # def variable_test
-# # #   begin
-# # #     yield
-# # #   rescue
-# # #     "No data"
-# # #   end
-# # # end
+# # def variable_test
+# #   begin
+# #     yield
+# #   rescue
+# #     "No data"
+# #   end
+# # end
 
 puts "Adding Mexico City hotels..."
 
@@ -183,6 +183,114 @@ html_doc.css("div.listing.collapsed").each do |listing|
     phone_number: "#{phone_number}",
     rating: rating,
     city_id: City.where(name:"Mazatlan")[0].id
+    )
+
+  puts "Hotel #{Hotel.last.id} complete"
+#   # #average_price
+#   # puts listing.css("div.premium_offer_container")[0].children[0]["data-pernight"].to_i
+end
+
+puts "Adding Nassau hotels..."
+
+url = "http://www.tripadvisor.com/Hotels-g147416-Nassau_New_Providence_Island_Bahamas-Hotels.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+
+html_doc.css("div.listing.collapsed").each do |listing|
+
+  url_sub = "http://www.tripadvisor.com/#{listing.children[0]["data-url"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  name = variable_test {listing.css(".listing_title a").text}
+  address = variable_test {html_doc_sub.css("span._3ErVArsu.jke2_wbp")[0].inner_html}
+  phone_number = variable_test{html_doc_sub.css("span._1_CU9UZ6._3ErVArsu.jke2_wbp")[0].inner_html}
+  rating = variable_test{listing.css("span._3cjYfwwQ").inner_html.to_f}
+  # photo_url = variable_test {html_doc_sub.css("div.ZVAUHZqh")[0]["style"].to_s}
+  # photo_url = photo_url.scan(/((https).*(\\))/)
+  # p photo_url
+  # photo = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+
+  Hotel.create!(
+    name: "#{name}",
+    address:"#{address}",
+    phone_number: "#{phone_number}",
+    rating: rating,
+    city_id: City.where(name:"Nassau")[0].id
+    )
+
+  puts "Hotel #{Hotel.last.id} complete"
+#   # #average_price
+#   # puts listing.css("div.premium_offer_container")[0].children[0]["data-pernight"].to_i
+end
+
+puts "Adding Kingston hotels..."
+
+url = "http://www.tripadvisor.com/Hotels-g147310-Kingston_Kingston_Parish_Jamaica-Hotels.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+
+html_doc.css("div.listing.collapsed").each do |listing|
+
+  url_sub = "http://www.tripadvisor.com/#{listing.children[0]["data-url"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  name = variable_test {listing.css(".listing_title a").text}
+  address = variable_test {html_doc_sub.css("span._3ErVArsu.jke2_wbp")[0].inner_html}
+  phone_number = variable_test{html_doc_sub.css("span._1_CU9UZ6._3ErVArsu.jke2_wbp")[0].inner_html}
+  rating = variable_test{listing.css("span._3cjYfwwQ").inner_html.to_f}
+  # photo_url = variable_test {html_doc_sub.css("div.ZVAUHZqh")[0]["style"].to_s}
+  # photo_url = photo_url.scan(/((https).*(\\))/)
+  # p photo_url
+  # photo = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+
+  Hotel.create!(
+    name: "#{name}",
+    address:"#{address}",
+    phone_number: "#{phone_number}",
+    rating: rating,
+    city_id: City.where(name:"Kingston")[0].id
+    )
+
+  puts "Hotel #{Hotel.last.id} complete"
+#   # #average_price
+#   # puts listing.css("div.premium_offer_container")[0].children[0]["data-pernight"].to_i
+end
+
+puts "Adding La Habana hotels..."
+
+url = "http://www.tripadvisor.com/Hotels-g147271-Havana_Ciudad_de_la_Habana_Province_Cuba-Hotels.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+
+html_doc.css("div.listing.collapsed").each do |listing|
+
+  url_sub = "http://www.tripadvisor.com/#{listing.children[0]["data-url"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  name = variable_test {listing.css(".listing_title a").text}
+  address = variable_test {html_doc_sub.css("span._3ErVArsu.jke2_wbp")[0].inner_html}
+  phone_number = variable_test{html_doc_sub.css("span._1_CU9UZ6._3ErVArsu.jke2_wbp")[0].inner_html}
+  rating = variable_test{listing.css("span._3cjYfwwQ").inner_html.to_f}
+  # photo_url = variable_test {html_doc_sub.css("div.ZVAUHZqh")[0]["style"].to_s}
+  # photo_url = photo_url.scan(/((https).*(\\))/)
+  # p photo_url
+  # photo = URI.open('https://giantbomb1.cbsistatic.com/uploads/original/9/99864/2419866-nes_console_set.png')
+
+  Hotel.create!(
+    name: "#{name}",
+    address:"#{address}",
+    phone_number: "#{phone_number}",
+    rating: rating,
+    city_id: City.where(name:"Havana")[0].id
     )
 
   puts "Hotel #{Hotel.last.id} complete"
@@ -318,6 +426,98 @@ html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
         address:"#{address}",
         attraction_type: "#{attraction_type}",
         city_id: City.where(name:"Mazatlan")[0].id
+        )
+
+  puts "Attraction #{Attraction.last.id} complete"
+
+end
+
+puts "Adding Nassau attractions..."
+
+url = "https://www.tripadvisor.com/Attractions-g147416-Activities-a_allAttractions.true-Nassau_New_Providence_Island_Bahamas.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
+  name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+  attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
+
+  url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("div.LjCWTZdN").children[1].inner_html}
+  #phone_number
+  #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+
+  Attraction.create!(
+        name: "#{name}",
+        address:"#{address}",
+        attraction_type: "#{attraction_type}",
+        city_id: City.where(name:"Nassau")[0].id
+        )
+
+  puts "Attraction #{Attraction.last.id} complete"
+
+end
+
+
+puts "Adding Kingston attractions..."
+
+url = "https://www.tripadvisor.com/Attractions-g147310-Activities-a_allAttractions.true-Kingston_Kingston_Parish_Jamaica.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
+  name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+  attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
+
+  url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("div.LjCWTZdN").children[1].inner_html}
+  #phone_number
+  #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+
+  Attraction.create!(
+        name: "#{name}",
+        address:"#{address}",
+        attraction_type: "#{attraction_type}",
+        city_id: City.where(name:"Kingston")[0].id
+        )
+
+  puts "Attraction #{Attraction.last.id} complete"
+
+end
+
+
+puts "Adding La Habana attractions..."
+
+url = "https://www.tripadvisor.com/Attractions-g147271-Activities-a_allAttractions.true-Havana_Ciudad_de_la_Habana_Province_Cuba.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._25PvF8uO._2X44Y8hm").each do |listing|
+  name = variable_test {listing.children[0].children[1].children[1].children[0].inner_html}
+  attraction_type = variable_test {listing.children[0].children[1].children[0].children[0].children[0].children[0].inner_html}
+
+  url_sub = "http://www.tripadvisor.com.mx/#{listing.children[0].children[1].children[1]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("div.LjCWTZdN").children[1].inner_html}
+  #phone_number
+  #phone_number = variable_test {html_doc_sub.css("a.attractions-contact-card-ContactCard__link--2pCqu").children[0].inner_html}
+
+  Attraction.create!(
+        name: "#{name}",
+        address:"#{address}",
+        attraction_type: "#{attraction_type}",
+        city_id: City.where(name:"Havana")[0].id
         )
 
   puts "Attraction #{Attraction.last.id} complete"
@@ -469,6 +669,112 @@ html_doc.css("div._1llCuDZj").each do |listing|
     address: "#{address}",
     phone_number: "#{phone_number}",
     city_id: City.where(name:"Mazatlan")[0].id)
+
+  puts "Restaurant #{Restaurant.last.id} complete"
+
+end
+
+puts "Adding Nassau restaurants..."
+
+url = "http://www.tripadvisor.com/Restaurants-g147416-Nassau_New_Providence_Island_Bahamas.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._1llCuDZj").each do |listing|
+  name = variable_test { listing.css("a._15_ydu6b").inner_html.gsub(/[.!\d<>-]/, '').strip}
+  cuisine = variable_test {listing.css("span._1p0FLy4t")[2].inner_html}
+  avg_price = variable_test {listing.css("span._1p0FLy4t")[3].inner_html }
+
+  url_sub = "http://www.tripadvisor.com/#{listing.css("a._15_ydu6b")[0]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("a._15QfMZ2L")[1].inner_html.strip}
+  phone_number = variable_test {html_doc_sub.css("a._3S6pHEQs")[1].inner_html.strip}
+  rating = variable_test {html_doc_sub.css("span.r2Cf69qf").inner_html.gsub(/[!<>-]/, '').strip.to_f}
+
+  Restaurant.create!(
+    name: "#{name}",
+    cuisine: "#{cuisine}",
+    avg_price: avg_price,
+    rating: rating,
+    business_hours: "No data",
+    address: "#{address}",
+    phone_number: "#{phone_number}",
+    city_id: City.where(name:"Nassau")[0].id
+    )
+
+  puts "Restaurant #{Restaurant.last.id} complete"
+
+end
+
+puts "Adding Kingston restaurants..."
+
+url = "http://www.tripadvisor.com/Restaurants-g147310-Kingston_Kingston_Parish_Jamaica.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._1llCuDZj").each do |listing|
+  name = variable_test { listing.css("a._15_ydu6b").inner_html.gsub(/[.!\d<>-]/, '').strip}
+  cuisine = variable_test {listing.css("span._1p0FLy4t")[2].inner_html}
+  avg_price = variable_test {listing.css("span._1p0FLy4t")[3].inner_html }
+
+  url_sub = "http://www.tripadvisor.com/#{listing.css("a._15_ydu6b")[0]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("a._15QfMZ2L")[1].inner_html.strip}
+  phone_number = variable_test {html_doc_sub.css("a._3S6pHEQs")[1].inner_html.strip}
+  rating = variable_test {html_doc_sub.css("span.r2Cf69qf").inner_html.gsub(/[!<>-]/, '').strip.to_f}
+
+  Restaurant.create!(
+    name: "#{name}",
+    cuisine: "#{cuisine}",
+    avg_price: avg_price,
+    rating: rating,
+    business_hours: "No data",
+    address: "#{address}",
+    phone_number: "#{phone_number}",
+    city_id: City.where(name:"Kingston")[0].id
+    )
+
+  puts "Restaurant #{Restaurant.last.id} complete"
+
+end
+
+
+puts "Adding La Habana restaurants..."
+
+url = "http://www.tripadvisor.com/Restaurants-g147271-Havana_Ciudad_de_la_Habana_Province_Cuba.html"
+
+html_file = open(url).read
+html_doc = Nokogiri::HTML(html_file)
+
+html_doc.css("div._1llCuDZj").each do |listing|
+  name = variable_test { listing.css("a._15_ydu6b").inner_html.gsub(/[.!\d<>-]/, '').strip}
+  cuisine = variable_test {listing.css("span._1p0FLy4t")[2].inner_html}
+  avg_price = variable_test {listing.css("span._1p0FLy4t")[3].inner_html }
+
+  url_sub = "http://www.tripadvisor.com/#{listing.css("a._15_ydu6b")[0]["href"]}"
+  html_file_sub = open(url_sub).read
+  html_doc_sub = Nokogiri::HTML(html_file_sub)
+
+  address = variable_test {html_doc_sub.css("a._15QfMZ2L")[1].inner_html.strip}
+  phone_number = variable_test {html_doc_sub.css("a._3S6pHEQs")[1].inner_html.strip}
+  rating = variable_test {html_doc_sub.css("span.r2Cf69qf").inner_html.gsub(/[!<>-]/, '').strip.to_f}
+
+  Restaurant.create!(
+    name: "#{name}",
+    cuisine: "#{cuisine}",
+    avg_price: avg_price,
+    rating: rating,
+    business_hours: "No data",
+    address: "#{address}",
+    phone_number: "#{phone_number}",
+    city_id: City.where(name:"Havana")[0].id
+    )
 
   puts "Restaurant #{Restaurant.last.id} complete"
 
