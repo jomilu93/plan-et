@@ -31,6 +31,7 @@
         <% card_index = 1 %>
         <% @parts.each do |part|%>
           <div class="card">
+
             <div class="card-header m-b-0 p-0" id="headingOne">
               <button id="part_accordion" type="button" class="btn btn-light btn-lg btn-block  ml-1-mr-1 p-1" data-toggle="collapse" data-target=<%= "#collapse#{card_index}" %> aria-expanded="true" aria-controls="collapseOne" data-part-id = <%= part.id %>>
                   <div class="d-flex justify-content-between flex-row">
@@ -56,7 +57,8 @@
             </div>
 
             <div id=<%= "collapse#{card_index}" %> class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
-              <div class="card-body">
+              <div class=<%="card-body#{card_index}"%>>
+
                 <% part.part_dates_array.each do |date|%>
                   <h6><%= date.strftime("%A, %b %e") %></h6>
                   <% activity_index = 1 %>
@@ -136,22 +138,16 @@
 
 
                                     <%= act.activityable_type %> -
-                                    <b><%= act.start_time.strftime("%H:%M") %></b>
-                                    <% if @trip.user == current_user %>
-                                      <b class="delete">
-                                        <%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %>
-                                        <%= "|" %>
-                                        <%= link_to "Delete",
-                                          act,
-                                          method: :delete,
-                                          data: {confirm: "Are you sure to delete this Activity?", 'turbolinks-scroll': false},
-                                          remote: true %>
-                                      </b>
-                                    <% end %>
+                                    <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
+                                    <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
+                                    <%= "|" %>
+                                    <%= link_to "Delete",
 
-
-
-
+                                      act,
+                                      class: 'delete-activity-btn',
+                                      method: :delete,
+                                      data: {confirm: "Are you sure to delete this Activity?"},
+                                      remote: true %></b>
                                   </p>
 
                                     <div id=<%= "notescollapse#{activity_card_index}" %> class="panel-collapse collapse" >

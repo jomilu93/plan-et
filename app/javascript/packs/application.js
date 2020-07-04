@@ -36,46 +36,19 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 // Internal imports, e.g:
 import { initMapbox } from '../plugins/init_mapbox';
 // import { initSelect2 } from '../components/init_select2';
-import { initModifyURLs } from '../trip_show/show_functionality';
-import { initHideModal } from '../trip_show/show_functionality';
 import { ajaxHomeScreen } from '../packs/home_screen';
 import { sloganEffect } from '../packs/home_screen';
 import { autoFill } from '../trip_show/autofill';
 import { initTScroll } from '../plugins/init_tscroll';
-import { iconChange } from '../trip_show/show_functionality';
+import { initShowJS } from '../trip_show/show_functionality';
 
 Turbolinks.scroll = {};
 
 document.addEventListener('turbolinks:load', () => {
-  console.log("loaded");
+  if (window.location.pathname == '/') { sloganEffect(); }
   autoFill();
-  initHideModal();
-  initModifyURLs();
+  initShowJS();
   ajaxHomeScreen();
   initMapbox();
-  iconChange();
-  sloganEffect();
   initTScroll();
-
-  const elements = document.querySelectorAll("[data-turbolinks-scroll]");
-  //console.log(elements.length);
-
-  elements.forEach(function(element) {
-    //console.log(element);
-    element.addEventListener("click", ()=> {
-      //console.log('element clicked');
-      Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-    });
-
-    element.addEventListener("submit", ()=> {
-      //console.log('element submitted');
-      Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
-    });
-  });
-
-  if (Turbolinks.scroll['top']) {
-    document.scrollingElement.scrollTo(0, Turbolinks.scroll['top']);
-  }
-
-  Turbolinks.scroll = {};
 });
