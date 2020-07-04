@@ -365,11 +365,16 @@ input[type='radio']:after {
 .edit-trip{
   font-size: 16px;
   position: absolute;
-  right: 16px;
+  right: 40px;
 }
 
+.delete-trip{
+  font-size: 16px;
+  position: absolute;
+  right: 16px;
+}
 button#part_accordion.btn.btn-light.btn-lg.btn-block.ml-1-mr-1.p-1{
-  height: 47px;
+  height: 55px;
 
 
 }
@@ -378,16 +383,17 @@ button#part_accordion.btn.btn-light.btn-lg.btn-block.ml-1-mr-1.p-1{
 
 h6, .h6 {
    margin-bottom: 2px;
-   margin-top: 0px;
+   margin-top: 4px;
    padding-top: 0px;
-   margin-left: 4px;
+   margin-left: 8px;
    font-weight: bold;
 
 }
 
 .text-left {
     text-align: left;
-    margin-left: 4px;
+    margin-left: 8px;
+    margin-bottom:4px;
 
 }
 
