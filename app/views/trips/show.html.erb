@@ -65,9 +65,10 @@
 
                 <% part.part_dates_array.each do |date|%>
                   <h5><%= date.strftime("%A, %b %e") %></h5>
-                  <% activity_index = 1 %>
-                  <% activity_card_index = date + activity_index %>
+
+
                   <% @activities.sort_by { |a| [a.start_time] }.each do |act| %>
+                    <% activity_card_index = act.id %>
                     <% if act.start_time.day == date.day %>
                       <div class='container'>
                         <div class="card-trip">
@@ -154,16 +155,19 @@
                                       <%= act.activityable_type %> -
                                     <% end %>
 
-                                    <b><%= act.start_time.strftime("%H:%M") %></b><b class="delete">
-                                    <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
-                                    <%= "|" %>
-                                    <%= link_to "Delete",
-
-                                      act,
-                                      class: 'delete-activity-btn',
-                                      method: :delete,
-                                      data: {confirm: "Are you sure to delete this Activity?"},
-                                      remote: true %></b>
+                                    <b><%= act.start_time.strftime("%H:%M") %></b>
+                                    <% if part.trip.user == current_user %>
+                                      <b class="delete"><%= link_to 'Edit',"Edit" , class: "edit_activity_link", id: "edit_activity_link", "data-toggle"=>"modal", "data-target"=> "#activityEditModal", "data-act-id" => act.id , "data-trip-id" => act.part.trip.id %></b>
+                                      <%= "|" %>
+                                      <%= link_to "Delete",
+                                        act,
+                                        class: 'delete-activity-btn',
+                                        method: :delete,
+                                        data: {confirm: "Are you sure to delete this Activity?"},
+                                        remote: true %></b>
+                                    <% else %>
+                                      <% %>
+                                    <% end %>
                                   </p>
 
                                     <div id=<%= "notescollapse#{activity_card_index}" %> class="panel-collapse collapse" >
@@ -177,8 +181,8 @@
                                           <p><%= act.activityable.hotel.try(:address)%> </p>
                                           <br><%= act.try(:notes) %></br>
                                         <% elsif act.activityable_type == "Attraction" %>
-                                          <p>Rating: <%= act.activityable.attraction.try(:attraction_type)%></p>
-                                          <p><%= act.activityable.attraction.try(:address)%> </p>
+                                          <p>Rating: <%= act.activityable.try(:attraction_type)%></p>
+                                          <p><%= act.activityable.try(:address)%> </p>
                                           <br><%= act.try(:notes) %></br>
                                         <% else %>
                                           <%= act.try(:notes) %>
@@ -190,8 +194,6 @@
                           </div>
                         </div>
                       </div>
-                      <% activity_index += 1 %>
-                      <% activity_card_index = date + activity_index %>
                     <% end %>
                   <% end %>
                   <% if part.trip.user == current_user %>
