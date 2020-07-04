@@ -176,11 +176,11 @@
                                           <p><%= act.activityable.restaurant.try(:address)%> </p>
                                           <br><%= act.try(:notes) %></br>
                                         <% elsif act.activityable_type == "Accomodation" %>
-                                          <p>Rating: <%= act.activityable.hotel.try(:rating)%> | Phone: <%=act.activityable.hotel.try(:phone_number)%> </p>
+                                          <p>Phone: <%=act.activityable.hotel.try(:phone_number)%> </p>
                                           <p><%= act.activityable.hotel.try(:address)%> </p>
                                           <br><%= act.try(:notes) %></br>
                                         <% elsif act.activityable_type == "Attraction" %>
-                                          <p>Rating: <%= act.activityable.try(:attraction_type)%></p>
+                                          <p>Category: <%= act.activityable.try(:attraction_type)%></p>
                                           <p><%= act.activityable.try(:address)%> </p>
                                           <br><%= act.try(:notes) %></br>
                                         <% else %>
