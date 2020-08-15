@@ -139,8 +139,8 @@ const initShowJS = () => {
                       .parentElement
                       .parentElement
                       .parentElement
-                      .parentElement
                       .parentElement.getAttribute("class");
+                      console.log(accordionCard);
 
       $('#activityEditModal').modal('hide');
       var actId = item.getAttribute("data-act-id");
