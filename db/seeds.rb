@@ -794,11 +794,11 @@ User.create!(
 
 User.create!(
       name: "Luis César",
-      email: "luiscesar@gmail.com",
-      password: "contrasena",
+      email: "luis@gmail.com",
+      password: "contraseña",
       city_id: City.where(name:"Mexico City")[0].id,
       description: "I don't usually travelling, but when I do, I prefer Plan-et",
-      date_of_birth:'20/02/1993',
+      date_of_birth:'10/09/1993',
       phone_number: "4047541122"
       )
 
@@ -824,7 +824,7 @@ User.create!(
 
 user_photo = [
   'David_Osuna.jpeg',
-  'Luis_Cesar.png',
+  'luis.jpg',
   'Louise_Malta.png',
   'JML.jpeg'
 ]

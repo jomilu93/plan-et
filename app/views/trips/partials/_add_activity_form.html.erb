@@ -42,30 +42,30 @@
             <%= form_with(url: "", method: "post", class: "activity_form", remote: true) do %>
               <div class='form group'>
                 <%= label_tag(:name, "Title:") %>
-                </label><%= text_field_tag :name, '', :class => "form-control" %>
+                </label><%= text_field_tag :name, '', required: true, :class => "form-control" %>
               </div>
               <br>
               <div class='form row'>
                 <div class='form-group col-md-6'>
                   <%= label_tag(:name, "Start Time:") %>
-                  <%= time_field_tag :start_time, '', :class => "form-control" %>
+                  <%= time_field_tag :start_time, '', required: true, :class => "form-control" %>
                 </div>
                 <div class='form-group col-md-6'>
                   <%= label_tag(:end_time, "End Time:") %>
-                  <%= time_field_tag :end_time, '', :class => "form-control" %>
+                  <%= time_field_tag :end_time, '', required: true, :class => "form-control" %>
                 </div>
               </div>
               <div class='form group'>
                 <%= label_tag(:restaurant, "Restaurant:") %>
                 <div class="autocomplete" id="restaurants">
-                  </label><%= text_field_tag :restaurant, '', :class => "form-control", :id => "query" %>
+                  </label><%= text_field_tag :restaurant, '', required: true, :class => "form-control", :id => "query" %>
                   <div class="results"></div>
                 </div>
               </div>
               <br>
               <div class='form group'>
                 <%= label_tag(:name, "Address:") %>
-                </label><%= text_field_tag :address, '', :class => "form-control", :id => "restaurant_address"%>
+                </label><%= text_field_tag :address, '', required: true, :class => "form-control", :id => "restaurant_address"%>
               </div>
               <div class='form group'>
                 <%= label_tag(:name, "Notes:") %>
