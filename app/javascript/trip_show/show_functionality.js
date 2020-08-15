@@ -51,7 +51,7 @@ const ReloadActivities = (accordionCard) => {
   activityArray.forEach(form => {
     form.addEventListener('submit', () => {
       setTimeout(function() {
-        $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
+        $(`.collapse.show`).load(`${window.location.pathname} .${accordionCard}`);
         setTimeout(initShowJS, 1500);
       }, 1500);
     });
@@ -80,9 +80,8 @@ const deleteActivity = () => {
                              .parentElement
                              .parentElement
                              .parentElement
-                             .parentElement
                              .parentElement.getAttribute("class");
-
+                          
       setTimeout(function() {
         $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
         setTimeout(initShowJS, 1500);
@@ -103,6 +102,7 @@ const initShowJS = () => {
 
     item.addEventListener('click', () => {
       resetForm();
+      console.log(item.parentElement.parentElement.getAttribute("class"))
       ReloadActivities(item.parentElement.parentElement.getAttribute("class"));
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
       window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
