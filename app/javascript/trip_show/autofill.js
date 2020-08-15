@@ -28,7 +28,6 @@ const autoFill = () => {
       if (/part_id/.test(window.location.href)) {
         var part_id = new RegExp('[\?&]' + "part_id" + '=([^&#]*)').exec(window.location.href);
         if (query.value){
-          console.log(autocomplete.id);
           results.innerHTML = '';
           fetch(`/api/v1/${autocomplete.id}/?query=${query.value}&part_id=${part_id[1]}`)
             .then(response => response.json())
@@ -39,7 +38,6 @@ const autoFill = () => {
         }
       } else {
         if (query.value){
-          console.log(query.value);
           results.innerHTML = '';
           fetch(`/api/v1/${autocomplete.id}/?query=${query.value}`)
             .then(response => response.json())
