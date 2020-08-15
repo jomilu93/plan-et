@@ -1,7 +1,11 @@
 <div class="profile-container">
   <div class="info-container">
 
-       <%= cl_image_tag current_user.try(:photo)&.key, :width => 300, :height => 300 , :crop => :fill, class:"avatar-large" %>
+        <% if current_user.photo.attached? %>
+          <%= cl_image_tag current_user.photo.key, :width => 300, :height => 300 , :crop => :fill, class:"avatar-large" %>
+        <% else %>
+          <%= image_tag image_path('user.png'), :width => 300, :height => 300 , :crop => :fill, class:"avatar-large" %>
+        <% end %>
 
     <%= simple_form_for(@user, url: profile_path ) do |f| %>
 
