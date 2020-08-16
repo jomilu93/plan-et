@@ -47,12 +47,9 @@
 
 .page_container {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-direction: row;
-  // padding: 30px;
   padding-top: 30px;
-  // padding-left: 30px;
-  // padding-right: 30px;
 }
 
 .trip_title{

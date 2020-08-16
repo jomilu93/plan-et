@@ -36,7 +36,9 @@
 
     <div class='trip_container' style='list-style-type:none'>
 
-      <div class="accordion" id="accordionExample">
+    <div class='row'>
+      <div class="col-sm-12 col-md-6 mb-3">
+        <div class="accordion" id="accordionExample">
         <% card_index = 1 %>
         <% @parts.each do |part|%>
           <div class="card">
@@ -218,7 +220,7 @@
 
         <% end %>
 
-  </div>
+  
     <% if @trip.user == current_user %>
       <button type="button" class="btn-secondary" data-toggle="modal" data-target="#partModal">+ Part</button>
     <%end%>
@@ -226,13 +228,19 @@
 
 
   </div>
+      </div>
 
-  <div id="map"
-         style="width: 100%; height: 700px; padding-top:15px;"
-         data-markers="<%= @part_markers.to_json %>"
-         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      <div class="col-sm-12 col-md-6">
+        <div id="map"
+              style="width: 100%; height: 700px; padding-top:15px;"
+              data-markers="<%= @part_markers.to_json %>"
+              data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      </div>
+    </div>
 
-</div>
+      
+
+  </div>
 
 <!-- New part modal -->
 <div class="modal fade" id="partModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
