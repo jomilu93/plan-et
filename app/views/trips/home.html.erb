@@ -30,17 +30,17 @@
 
 <div class="trip-card-container">
   <% @trips.each do |trip| %>
-  <div class="card d-flex m-2 fadeUp">
-    <% if trip.photos.empty? %>
-      <h3>No Image</h3>
-    <% else %>
-      <%= cl_image_tag trip.photos.first.key, height: 250, width: 370, crop: :fill, class: "trip-img"%>
+
+    <%= link_to trip_path(trip) do %>
+      <div class="card d-flex m-2 fadeUp">
+        <%= cl_image_tag trip.photos.first.key, height: 250, width: 370, crop: :fill, class: "trip-img"%>
+        <div class="card-img-overlay">
+          <h5 class="trip-card-text link-text"><%= trip.name %></h5>
+          <h5 class="trip-card-text">by <%= trip.user.name%></h5>
+        </div>
+      </div>
     <% end %>
-    <div class="card-img-overlay">
-      <h5 class="trip-card-text"><%= link_to "#{trip.name}", trip_path(trip), class: "link-text"%></h5>
-      <h5 class="trip-card-text">by <%= trip.user.name%></h5>
-    </div>
-  </div>
+
   <%end%>
 </div>
 

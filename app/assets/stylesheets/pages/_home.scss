@@ -32,11 +32,8 @@ body, html {
   justify-content: center;
   align-items: center;
   padding: 8px;
-  // margin: 8px;
   margin-bottom: 200px;
   margin-top: 10px;
-  // margin-left: 8px;
-  // margin-right: 8px;
 }
 
 .trip-card{
@@ -45,39 +42,33 @@ body, html {
   background-color: dark;
 }
 
-.card:hover .trip-card-text{
+.card .trip-card-text{
   display:block;
 }
 
-.trip-img{
-  opacity:1;
-}
 
-.card:hover .trip-img{
-  filter: brightness(50%);
+.trip-img {
+  filter: brightness(75%);
+  &:hover {
+    filter: none;
+    display: none;
+  }
 }
 
 .trip-card-text {
-  display:none;
+  display: none;
   text-align: center;
   margin-top: 23%;
   font-size: 12px;
-}
-
-.trip-card-texto {
-  display:none;
-text-align: center;
-color:white;
-// opacity:0;
+  color: #fff;
 }
 
 .link-text {
   color: white;
-  font-size: 20px;
+  font-size: 24px;
     &:hover {
       color:white;
       text-decoration: none;
-      font-weight: bold;
     }
 }
 
