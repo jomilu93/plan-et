@@ -830,15 +830,15 @@ user_photo = [
 ]
 
 User.first.photo.attach(io: File.open('app/assets/images/David_Osuna.jpeg'), filename: 'user.png', content_type: 'image/png')
-User.second.photo.attach(io: File.open('app/assets/images/Luis_Cesar.png'), filename: 'user.png', content_type: 'image/png')
+User.second.photo.attach(io: File.open('app/assets/images/luis.jpg'), filename: 'user.png', content_type: 'image/png')
 User.third.photo.attach(io: File.open('app/assets/images/Louise_Malta.png'), filename: 'user.png', content_type: 'image/png')
 User.fourth.photo.attach(io: File.open('app/assets/images/JML.jpeg'), filename: 'user.png', content_type: 'image/png')
 
 
-User.all.each do |user|
-  file_path = "app/assets/images/#{user_photo[user.id - 1]}"
-  user.photo.attach(io: File.open(file_path), filename: 'user.png', content_type: 'image/png')
-end
+# User.all.each do |user|
+#   file_path = "app/assets/images/#{user_photo[user.id - 1]}"
+#   user.photo.attach(io: File.open(file_path), filename: 'user.png', content_type: 'image/png')
+# end
 
 puts "Creating trips..."
 
