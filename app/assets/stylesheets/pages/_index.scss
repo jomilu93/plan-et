@@ -4,24 +4,24 @@
 @import "profile_view";
 @import "new_trip_view";
 
-// h1{
-//   background-color: white;
-//   font-family: $headers-font;
-// }
-
 body{
   background-color: white;
   font-family: Roboto;
 }
 
+.trip-name {
+  color: black;
+}
+
+.card-link:hover {
+  text-decoration: none;
+}
 
 .text-title{
-  align-item: start;
   margin-left: 50px;
   margin-top: 40px;
   margin-bottom: 40px;
   text-decoration-line: underline;
-  text-decoration-thickness: 1px;
 }
 
 .hero-image-show{
@@ -53,10 +53,8 @@ body{
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   display: flex;
   align-items: center;
-  margin-bottom: 35px;
-  margin-right: 30px;
   width: 500px;
-
+  text-decoration: none;
 }
 
 .card-product h6 {
@@ -90,24 +88,7 @@ body{
   margin-bottom: 180px;
 }
 
-a#nav-home-tab.nav-item.nav-link.active.text-reset{
-  color: #86918E!important;
-}
-a#nav-home-tab.nav-item.nav-link.active.text-reset:hover{
-  color:#5A929E!important;
-}
-a#nav-profile-tab.nav-item.nav-link.text-reset:hover{
-  color: #5A929E !important;
-}
-a#nav-profile-tab.nav-item.nav-link.text-reset{
-  color: #86918E!important;
-}
-a#nav-contact-tab.nav-item.nav-link.text-reset:hover{
-  color: #5A929E !important;
-}
-a#nav-contact-tab.nav-item.nav-link.text-reset{
-  color: #86918E!important;
-}
+
 
 
 

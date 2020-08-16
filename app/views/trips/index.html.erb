@@ -25,7 +25,7 @@
           </div>
         </nav>
 
-        <div class="tab-content py-3 px-3 px-sm-0" id="nav-tabContent">
+        <div class="tab-content py-3 px-3 px-sm-0 d-flex justify-content-center" id="nav-tabContent">
 
           <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
             <div class="d-flex flex-row justify-content-start align-items-center flex-wrap">
@@ -33,28 +33,18 @@
               <!-- <div class="row"> -->
                 <% @trips.each do |trip| %>
                 <!-- <div class="col-sm-12 col-md-6"> -->
-                  <%if trip.start_date > Date.today %>
-                  <div class="card-product">
+                  <% if trip.start_date > Date.today %>
 
+                    <%= link_to trip_path(trip), class: "card-link" do %>
+                      <div class="card-product">
+                        <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-4 mr-3"%>
+                        <div class="card-product-infos">
+                          <h6 class="trip-name" ><%= trip.name %></h6>
+                          <p class="trip-name" ><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+                        </div>
+                      </div>
+                    <% end %>
 
-                    <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-4 mr-3"%>
-
-                    <div class="card-product-infos">
-
-
-
-                      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
-
-
-                      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
-                    </div>
-
-
-
-
-
-                  <!-- </div> -->
-                  </div>
                   <%end%>
                 <%end%>
               <!-- </div> -->
@@ -67,15 +57,16 @@
               <!-- <div class="row"> -->
                 <% @trips.each do |trip| %>
                 <!-- <div class="col-sm-12 col-md-6"> -->
-                  <%if trip.start_date < Date.today %>
-                  <div class="card-product">
-                    <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-                    <div class="card-product-infos">
-                      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
-                      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
-                    </div>
-                  <!-- </div> -->
-                  </div>
+                  <% if trip.start_date < Date.today %>
+                    <%= link_to trip_path(trip), class: "card-link" do %>
+                      <div class="card-product">
+                        <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-4 mr-3"%>
+                        <div class="card-product-infos">
+                          <h6 class="trip-name" ><%= trip.name %></h6>
+                          <p class="trip-name" ><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+                        </div>
+                      </div>
+                    <% end %>
                   <%end%>
                 <%end%>
               <!-- </div> -->
@@ -87,15 +78,16 @@
               <!-- <div class="row"> -->
                 <% @trips.each do |trip| %>
                 <!-- <div class="col-sm-12 col-md-6"> -->
-                  <%if trip.end_date >= Date.today and trip.start_date <= Date.today %>
-                  <div class="card-product">
-                    <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-5 mr-3"%>
-                    <div class="card-product-infos">
-                      <h6><%= link_to "#{trip.name}", trip_path(trip), class: "text-reset"%></h6>
-                      <p><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
-                    </div>
-                  <!-- </div> -->
-                  </div>
+                  <% if trip.end_date >= Date.today and trip.start_date <= Date.today %>
+                    <%= link_to trip_path(trip), class: "card-link" do %>
+                      <div class="card-product">
+                        <%= cl_image_tag trip.photos.first.key, height: 100, width: 100, class: "rounded-circle ml-4 mr-3"%>
+                        <div class="card-product-infos">
+                          <h6 class="trip-name" ><%= trip.name %></h6>
+                          <p class="trip-name" ><%= trip.start_date.to_time.strftime('%B %e')%> to <%= trip.end_date.strftime('%B %e, %Y')%></p>
+                        </div>
+                      </div>
+                    <% end %>
                   <%end%>
                 <%end%>
               <!-- </div> -->
