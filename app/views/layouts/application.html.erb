@@ -28,30 +28,33 @@
   </head>
 
   <body>
-    <!-- navbar -->
-      <%= render 'shared/navbar' %>
-    <!-- navbar -->
 
-
-    <!-- flash messages for authentication -->
+      <!-- flash messages for authentication -->
       <%= render 'shared/flashes' %>
-    <!-- flash messages for authentication -->
 
-    <%= yield %>
+      <div class="d-flex flex-column" style="min-height: 100vh; justify-content: space-between;">
+        <div>
+          <%= render 'shared/navbar' %>
+          <%= yield %>
+        </div>
+        <%= render 'shared/footer' %>
+      </div>
 
-    <% if notice %>
-      <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <%= notice %>
-      </div>
-    <% end %>
-    <% if alert %>
-      <div class="alert alert-warning alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <%= alert %>
-      </div>
-    <% end %>
-    <%= render 'shared/footer' %>
+      <% if notice %>
+        <div class="alert alert-info alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= notice %>
+        </div>
+      <% end %>
+
+      <% if alert %>
+        <div class="alert alert-warning alert-dismissible" role="alert">
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= alert %>
+        </div>
+      <% end %>
+
+    
   </body>
 
 </html>
