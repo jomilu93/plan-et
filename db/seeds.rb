@@ -794,11 +794,11 @@ User.create!(
 
 User.create!(
       name: "Luis César",
-      email: "luiscesar@gmail.com",
-      password: "contrasena",
+      email: "luis@gmail.com",
+      password: "contraseña",
       city_id: City.where(name:"Mexico City")[0].id,
       description: "I don't usually travelling, but when I do, I prefer Plan-et",
-      date_of_birth:'20/02/1993',
+      date_of_birth:'10/09/1993',
       phone_number: "4047541122"
       )
 
@@ -824,21 +824,21 @@ User.create!(
 
 user_photo = [
   'David_Osuna.jpeg',
-  'Luis_Cesar.png',
+  'luis.jpg',
   'Louise_Malta.png',
   'JML.jpeg'
 ]
 
 User.first.photo.attach(io: File.open('app/assets/images/David_Osuna.jpeg'), filename: 'user.png', content_type: 'image/png')
-User.second.photo.attach(io: File.open('app/assets/images/Luis_Cesar.png'), filename: 'user.png', content_type: 'image/png')
+User.second.photo.attach(io: File.open('app/assets/images/luis.jpg'), filename: 'user.png', content_type: 'image/png')
 User.third.photo.attach(io: File.open('app/assets/images/Louise_Malta.png'), filename: 'user.png', content_type: 'image/png')
 User.fourth.photo.attach(io: File.open('app/assets/images/JML.jpeg'), filename: 'user.png', content_type: 'image/png')
 
 
-User.all.each do |user|
-  file_path = "app/assets/images/#{user_photo[user.id - 1]}"
-  user.photo.attach(io: File.open(file_path), filename: 'user.png', content_type: 'image/png')
-end
+# User.all.each do |user|
+#   file_path = "app/assets/images/#{user_photo[user.id - 1]}"
+#   user.photo.attach(io: File.open(file_path), filename: 'user.png', content_type: 'image/png')
+# end
 
 puts "Creating trips..."
 

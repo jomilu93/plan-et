@@ -142,14 +142,14 @@ ActiveRecord::Schema.define(version: 2020_07_02_203056) do
     t.index ["trip_id"], name: "index_parts_on_trip_id"
   end
 
-  createg "business_hours"
-    t.string "address"
-    t.string "phone_number"_table "restaurants", force: :cascade do |t|
+  create_table "restaurants", force: :cascade do |t|
     t.string "name"
     t.string "cuisine"
     t.integer "rating"
     t.integer "avg_price"
-    t.strin
+    t.string "business_hours"
+    t.string "address"
+    t.string "phone_number"
     t.bigint "city_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
