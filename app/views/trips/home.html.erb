@@ -5,24 +5,19 @@
 
 
   <div class="hero-image">
-    <div class="hero-text">
+    <div class="hero-text container">
       <h1 class="ml2" style="font-size: 60px;">You dreamt it...now Plan-et!</h1>
+      </br>
+
+      <div class="card-container-search">
+          <%= form_tag root_path, method: :get, remote: true, class: "form-inline md-form search-form" do %>
+            <%= text_field_tag :search, params[:search], placeholder: "find awesome trips ...", class: "form-control mr-sm-2", style: "flex-grow: 1;" %>
+            <%= submit_tag "search", class: "btn btn-primary"%>
+          <% end %>
+        <%= link_to "Plan your trip!", new_trip_path, class: "plan-btn", id: "plan_trip_button" %>
+      </div>
 
       </br>
-      <div class="card-container-search">
-        <div class="search-bar-box">
-          <div class="align-items-center">
-            <%= form_tag root_path, method: :get, remote: true do %>
-            <%= text_field_tag :search, params[:search], placeholder: "Explore ...", class: "form-control search-bar", id: "search-bar" %>
-          </div>
-            <%= submit_tag "Search", class: "btn btn-light search-btn", id: "search_button"%>
-        </div>
-
-        <%= link_to "Plan your trip!", new_trip_path, class: "plan-btn", id: "plan_trip_button" %>
-
-          <% end %>
-      </div>
-    </br>
       <h4 style="font-size: 20px;">Create, manage and share your travel itineraries from around the world.</h4>
     </div>
 </div>
