@@ -52,8 +52,8 @@ const ReloadActivities = (accordionCard) => {
     form.addEventListener('submit', () => {
       setTimeout(function() {
         $(`.collapse.show`).load(`${window.location.pathname} .${accordionCard}`);
-        setTimeout(initShowJS, 1500);
-      }, 1500);
+        setTimeout(initShowJS, 850);
+      }, 850);
     });
   });
 };
@@ -64,8 +64,8 @@ const ReloadActivitiesEdit = (accordionCard) => {
     form.addEventListener('submit', () => {
       setTimeout(function() {
         $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
-        setTimeout(initShowJS, 1500);
-      }, 1500);
+        setTimeout(initShowJS, 850);
+      }, 850);
       $('#activityEditModal').modal('hide');
     });
   });
@@ -84,8 +84,8 @@ const deleteActivity = () => {
                           
       setTimeout(function() {
         $(`.${accordionCard}`).load(`${window.location.pathname} .${accordionCard}`);
-        setTimeout(initShowJS, 1500);
-      }, 1500);
+        setTimeout(initShowJS, 850);
+      }, 850);
     });
   });
 };
@@ -123,7 +123,7 @@ const initShowJS = () => {
         $('.simple_form.edit_part')[0].addEventListener("submit", () => {
           Turbolinks.scroll['top'] = document.scrollingElement.scrollTop;
         });
-      }, 1500);
+      }, 850);
       $('#editPartModal').modal('show');
     });
   });
@@ -147,7 +147,7 @@ const initShowJS = () => {
       var tripId = item.getAttribute("data-trip-id");
       //window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
       $("#activityEditModal .modal-content").load(`/trips/${tripId}?activity_id=${actId} #activityEditModal .modal-content`, autoFill);
-      setTimeout((accomodation_params) => ReloadActivitiesEdit(accordionCard), 1500);
+      setTimeout((accomodation_params) => ReloadActivitiesEdit(accordionCard), 850);
       $('#activityEditModal').modal('show');
     });
   });
