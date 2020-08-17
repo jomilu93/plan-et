@@ -11,8 +11,8 @@
 
       <div class="card-container-search">
           <%= form_tag root_path, method: :get, remote: true, class: "form-inline md-form search-form" do %>
-            <%= text_field_tag :search, params[:search], placeholder: "find awesome trips ...", class: "form-control mr-sm-2", style: "flex-grow: 1;" %>
-            <%= submit_tag "search", class: "btn btn-primary"%>
+            <%= text_field_tag :search, params[:search], placeholder: "find awesome trips ...", class: "form-control mr-sm-2", id:"search-bar", style: "flex-grow: 1;" %>
+            <%= submit_tag "search", class: "btn btn-primary", id: "search_button"%>
           <% end %>
         <%= link_to "Plan your trip!", new_trip_path, class: "plan-btn", id: "plan_trip_button" %>
       </div>
