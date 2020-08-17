@@ -102,7 +102,6 @@ const initShowJS = () => {
 
     item.addEventListener('click', () => {
       resetForm();
-      console.log(item.parentElement.parentElement.getAttribute("class"))
       ReloadActivities(item.parentElement.parentElement.getAttribute("class"));
       changeActionActivity(item.getAttribute("data-part-id"), item.getAttribute("data-date"));
       window.history.pushState('', 'Edit_Activity', `${window.location.pathname}?part_id=${partId}`);
